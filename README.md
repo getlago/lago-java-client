@@ -12,7 +12,11 @@ API documentation is available [here](https://lago.mintlify.app/api-reference/in
 Check out the [sample app](.sample-app/app.java) which consumes this SDK!
 
 ```java
-
+LagoApiClient lago =
+        new LagoApiClient(BearerAuth.of(System.getenv("LAGO_TOKEN")));
+Groups groups = lago.billableMetrics().findMetricGroups(FindMetricGroups.Request.builder()
+        .code("code")
+        .build());
 ```
 
 ## Beta status
