@@ -1,6 +1,6 @@
 # Lago Java Library
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.fern-api/{company})](https://central.sonatype.dev/artifact/io.github.fern-api/lago/0.0.7/versions) 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.fern-api/lago)](https://central.sonatype.com/artifact/io.github.fern-api/lago/0.0.9) 
 ![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.fern-api/lago?server=https%3A%2F%2Fs01.oss.sonatype.org)
 
 ## Documentation
