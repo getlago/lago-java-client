@@ -36,7 +36,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'io.github.fern-api'
             artifactId = 'lago'
-            version = '0.1.0'
+            version = 'v0.25.0-beta'
             from components.java
         }
     }

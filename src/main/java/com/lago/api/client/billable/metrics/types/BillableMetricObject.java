@@ -60,9 +60,6 @@ public final class BillableMetricObject {
     return lagoId;
   }
 
-  /**
-   * @return The name of the billable metric.
-   */
   @JsonProperty("name")
   public Optional<String> getName() {
     return name;
