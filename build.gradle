@@ -36,7 +36,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'io.github.lago-api'
             artifactId = 'lago'
-            version = 'v0.26.0-beta'
+            version = 'v0.27.0-beta'
             from components.java
         }
     }
