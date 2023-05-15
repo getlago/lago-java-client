@@ -1,1 +1,1 @@
-include 'sample-app'
+rootProject.name = "openapi-java-client"
