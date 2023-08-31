@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**customer** | [**CustomerObject**](CustomerObject.md) |  |  |
+|**customer** | [**CustomerObjectExtended**](CustomerObjectExtended.md) |  |  |
 
 
 

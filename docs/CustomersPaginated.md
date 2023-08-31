@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**customers** | [**List&lt;CustomerObject&gt;**](CustomerObject.md) |  |  |
+|**customers** | [**List&lt;CustomerObjectExtended&gt;**](CustomerObjectExtended.md) |  |  |
 |**meta** | [**PaginationMeta**](PaginationMeta.md) |  |  |
 
 

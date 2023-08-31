@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**invoice** | [**FeeUpdateInputInvoice**](FeeUpdateInputInvoice.md) |  |  |
+|**fee** | [**FeeUpdateInputFee**](FeeUpdateInputFee.md) |  |  |
 
 
 

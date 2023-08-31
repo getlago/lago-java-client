@@ -5,15 +5,16 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**applyAddOn**](AddOnsApi.md#applyAddOn) | **POST** /applied_add_ons | Apply an add-on to a customer |
-| [**createAddOn**](AddOnsApi.md#createAddOn) | **POST** /add_ons | Create a new add-on |
+| [**createAddOn**](AddOnsApi.md#createAddOn) | **POST** /add_ons | Create an add-on |
 | [**destroyAddOn**](AddOnsApi.md#destroyAddOn) | **DELETE** /add_ons/{code} | Delete an add-on |
-| [**findAddOn**](AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Find add-on by code |
-| [**findAllAddOns**](AddOnsApi.md#findAllAddOns) | **GET** /add_ons | Find add-ons |
-| [**updateAddOn**](AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an existing add-on |
+| [**findAddOn**](AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Retrieve an add-on |
+| [**findAllAddOns**](AddOnsApi.md#findAllAddOns) | **GET** /add_ons | List all add-ons |
+| [**updateAddOn**](AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an add-on |
 
 
-<a id="applyAddOn"></a>
-# **applyAddOn**
+
+## applyAddOn
+
 > AppliedAddOn applyAddOn(appliedAddOnInput)
 
 Apply an add-on to a customer
@@ -21,41 +22,43 @@ Apply an add-on to a customer
 Apply an add-on to a customer
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    AppliedAddOnInput appliedAddOnInput = new AppliedAddOnInput(); // AppliedAddOnInput | Apply add-on payload
-    try {
-      AppliedAddOn result = apiInstance.applyAddOn(appliedAddOnInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#applyAddOn");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        AppliedAddOnInput appliedAddOnInput = new AppliedAddOnInput(); // AppliedAddOnInput | Apply add-on payload
+        try {
+            AppliedAddOn result = apiInstance.applyAddOn(appliedAddOnInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#applyAddOn");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -71,66 +74,70 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on applied |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="createAddOn"></a>
-# **createAddOn**
-> AddOn createAddOn(addOnInput)
 
-Create a new add-on
+## createAddOn
 
-Create a new add-on
+> AddOn createAddOn(addOnCreateInput)
+
+Create an add-on
+
+This endpoint is used to create an add-on that can be then attached to a one-off invoice.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    AddOnInput addOnInput = new AddOnInput(); // AddOnInput | Add-on payload
-    try {
-      AddOn result = apiInstance.createAddOn(addOnInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#createAddOn");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        AddOnCreateInput addOnCreateInput = new AddOnCreateInput(); // AddOnCreateInput | Add-on payload
+        try {
+            AddOn result = apiInstance.createAddOn(addOnCreateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#createAddOn");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **addOnInput** | [**AddOnInput**](AddOnInput.md)| Add-on payload | |
+| **addOnCreateInput** | [**AddOnCreateInput**](AddOnCreateInput.md)| Add-on payload | |
 
 ### Return type
 
@@ -142,65 +149,69 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="destroyAddOn"></a>
-# **destroyAddOn**
+
+## destroyAddOn
+
 > AddOn destroyAddOn(code)
 
 Delete an add-on
 
-Delete an add-on
+This endpoint is used to delete an existing add-on.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
-    try {
-      AddOn result = apiInstance.destroyAddOn(code);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#destroyAddOn");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        String code = "setup_fee"; // String | Unique code used to identify the add-on.
+        try {
+            AddOn result = apiInstance.destroyAddOn(code);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#destroyAddOn");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
 
 ### Return type
 
@@ -212,64 +223,68 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on deleted |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findAddOn"></a>
-# **findAddOn**
+
+## findAddOn
+
 > AddOn findAddOn(code)
 
-Find add-on by code
+Retrieve an add-on
 
-Return a single add-on
+This endpoint is used to retrieve a specific add-on.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
-    try {
-      AddOn result = apiInstance.findAddOn(code);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#findAddOn");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        String code = "setup_fee"; // String | Unique code used to identify the add-on.
+        try {
+            AddOn result = apiInstance.findAddOn(code);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#findAddOn");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
 
 ### Return type
 
@@ -281,66 +296,70 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findAllAddOns"></a>
-# **findAllAddOns**
+
+## findAllAddOns
+
 > AddOnsPaginated findAllAddOns(page, perPage)
 
-Find add-ons
+List all add-ons
 
-Find all add-ons in certain organisation
+This endpoint is used to list all existing add-ons.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    try {
-      AddOnsPaginated result = apiInstance.findAllAddOns(page, perPage);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#findAllAddOns");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        try {
+            AddOnsPaginated result = apiInstance.findAllAddOns(page, perPage);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#findAllAddOns");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -352,65 +371,69 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-ons |  -  |
 | **401** | Unauthorized error |  -  |
 
-<a id="updateAddOn"></a>
-# **updateAddOn**
-> AddOn updateAddOn(code, addOnInput)
 
-Update an existing add-on
+## updateAddOn
 
-Update an existing add-on by code
+> AddOn updateAddOn(code, addOnUpdateInput)
+
+Update an add-on
+
+This endpoint is used to update an existing add-on.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AddOnsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AddOnsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
-    AddOnInput addOnInput = new AddOnInput(); // AddOnInput | Update an existing add-on
-    try {
-      AddOn result = apiInstance.updateAddOn(code, addOnInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AddOnsApi#updateAddOn");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
+        String code = "setup_fee"; // String | Unique code used to identify the add-on.
+        AddOnUpdateInput addOnUpdateInput = new AddOnUpdateInput(); // AddOnUpdateInput | Add-on payload
+        try {
+            AddOn result = apiInstance.updateAddOn(code, addOnUpdateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AddOnsApi#updateAddOn");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
-| **addOnInput** | [**AddOnInput**](AddOnInput.md)| Update an existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
+| **addOnUpdateInput** | [**AddOnUpdateInput**](AddOnUpdateInput.md)| Add-on payload | |
 
 ### Return type
 
@@ -422,13 +445,14 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

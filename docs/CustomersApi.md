@@ -5,62 +5,65 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createCustomer**](CustomersApi.md#createCustomer) | **POST** /customers | Create a customer |
-| [**deleteAppliedCoupon**](CustomersApi.md#deleteAppliedCoupon) | **DELETE** /customers/{customer_external_id}/applied_coupons/{applied_coupon_id} | Delete customer&#39;s appplied coupon |
+| [**deleteAppliedCoupon**](CustomersApi.md#deleteAppliedCoupon) | **DELETE** /customers/{external_customer_id}/applied_coupons/{applied_coupon_id} | Delete an applied coupon |
 | [**destroyCustomer**](CustomersApi.md#destroyCustomer) | **DELETE** /customers/{external_id} | Delete a customer |
-| [**findAllCustomers**](CustomersApi.md#findAllCustomers) | **GET** /customers | Find customers |
-| [**findCustomer**](CustomersApi.md#findCustomer) | **GET** /customers/{external_id} | Find customer by external ID |
-| [**findCustomerCurrentUsage**](CustomersApi.md#findCustomerCurrentUsage) | **GET** /customers/{customer_external_id}/current_usage | Find customer current usage |
-| [**getCustomerPortalUrl**](CustomersApi.md#getCustomerPortalUrl) | **GET** /customers/{customer_external_id}/portal_url | Get customer portal URL |
+| [**findAllCustomers**](CustomersApi.md#findAllCustomers) | **GET** /customers | List all customers |
+| [**findCustomer**](CustomersApi.md#findCustomer) | **GET** /customers/{external_id} | Retrieve a customer |
+| [**findCustomerCurrentUsage**](CustomersApi.md#findCustomerCurrentUsage) | **GET** /customers/{external_customer_id}/current_usage | Retrieve customer current usage |
+| [**getCustomerPortalUrl**](CustomersApi.md#getCustomerPortalUrl) | **GET** /customers/{external_customer_id}/portal_url | Get a customer portal URL |
 
 
-<a id="createCustomer"></a>
-# **createCustomer**
-> Customer createCustomer(customerInput)
+
+## createCustomer
+
+> Customer createCustomer(customerCreateInput)
 
 Create a customer
 
-Create a new customer
+This endpoint creates a new customer.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    CustomerInput customerInput = new CustomerInput(); // CustomerInput | Customer payload
-    try {
-      Customer result = apiInstance.createCustomer(customerInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#createCustomer");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        CustomerCreateInput customerCreateInput = new CustomerCreateInput(); // CustomerCreateInput | Customer payload
+        try {
+            Customer result = apiInstance.createCustomer(customerCreateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#createCustomer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **customerInput** | [**CustomerInput**](CustomerInput.md)| Customer payload | |
+| **customerCreateInput** | [**CustomerCreateInput**](CustomerCreateInput.md)| Customer payload | |
 
 ### Return type
 
@@ -72,67 +75,71 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Customer created or updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="deleteAppliedCoupon"></a>
-# **deleteAppliedCoupon**
-> AppliedCoupon deleteAppliedCoupon(customerExternalId, appliedCouponId)
 
-Delete customer&#39;s appplied coupon
+## deleteAppliedCoupon
 
-Delete customer&#39;s appplied coupon
+> AppliedCoupon deleteAppliedCoupon(externalCustomerId, appliedCouponId)
+
+Delete an applied coupon
+
+This endpoint is used to delete a specific coupon that has been applied to a customer.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    String customerExternalId = "12345"; // String | External ID of the existing customer
-    String appliedCouponId = "54321"; // String | Applied Coupon Lago ID
-    try {
-      AppliedCoupon result = apiInstance.deleteAppliedCoupon(customerExternalId, appliedCouponId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#deleteAppliedCoupon");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application)
+        UUID appliedCouponId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier of the applied coupon, created by Lago.
+        try {
+            AppliedCoupon result = apiInstance.deleteAppliedCoupon(externalCustomerId, appliedCouponId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#deleteAppliedCoupon");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **customerExternalId** | **String**| External ID of the existing customer | |
-| **appliedCouponId** | **String**| Applied Coupon Lago ID | |
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application) | |
+| **appliedCouponId** | **UUID**| Unique identifier of the applied coupon, created by Lago. | |
 
 ### Return type
 
@@ -144,8 +151,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -154,50 +162,53 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="destroyCustomer"></a>
-# **destroyCustomer**
+
+## destroyCustomer
+
 > Customer destroyCustomer(externalId)
 
 Delete a customer
 
-Return the deleted customer
+This endpoint deletes an existing customer.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    String externalId = "12345"; // String | External ID of the existing customer
-    try {
-      Customer result = apiInstance.destroyCustomer(externalId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#destroyCustomer");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | External ID of the existing customer
+        try {
+            Customer result = apiInstance.destroyCustomer(externalId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#destroyCustomer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -213,66 +224,70 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Customer deleted |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findAllCustomers"></a>
-# **findAllCustomers**
+
+## findAllCustomers
+
 > CustomersPaginated findAllCustomers(page, perPage)
 
-Find customers
+List all customers
 
-Find all customers in certain organisation
+This endpoint retrieves all existing customers.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    try {
-      CustomersPaginated result = apiInstance.findAllCustomers(page, perPage);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#findAllCustomers");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        try {
+            CustomersPaginated result = apiInstance.findAllCustomers(page, perPage);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#findAllCustomers");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -284,59 +299,63 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | List of customers |  -  |
 | **401** | Unauthorized error |  -  |
 
-<a id="findCustomer"></a>
-# **findCustomer**
+
+## findCustomer
+
 > Customer findCustomer(externalId)
 
-Find customer by external ID
+Retrieve a customer
 
-Return a single customer
+This endpoint retrieves an existing customer.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    String externalId = "12345"; // String | External ID of the existing customer
-    try {
-      Customer result = apiInstance.findCustomer(externalId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#findCustomer");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | External ID of the existing customer
+        try {
+            Customer result = apiInstance.findCustomer(externalId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#findCustomer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -352,66 +371,70 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Customer |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findCustomerCurrentUsage"></a>
-# **findCustomerCurrentUsage**
-> CustomerUsage findCustomerCurrentUsage(customerExternalId, externalSubscriptionId)
 
-Find customer current usage
+## findCustomerCurrentUsage
 
-Return a customer current usage
+> CustomerUsage findCustomerCurrentUsage(externalCustomerId, externalSubscriptionId)
+
+Retrieve customer current usage
+
+This endpoint enables the retrieval of the usage-based billing data for a customer within the current period.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    String customerExternalId = "12345"; // String | External ID of the existing customer
-    String externalSubscriptionId = "54321"; // String | External subscription ID
-    try {
-      CustomerUsage result = apiInstance.findCustomerCurrentUsage(customerExternalId, externalSubscriptionId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#findCustomerCurrentUsage");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
+        String externalSubscriptionId = "sub_1234567890"; // String | The unique identifier of the subscription within your application.
+        try {
+            CustomerUsage result = apiInstance.findCustomerCurrentUsage(externalCustomerId, externalSubscriptionId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#findCustomerCurrentUsage");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **customerExternalId** | **String**| External ID of the existing customer | |
-| **externalSubscriptionId** | **String**| External subscription ID | |
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application). | |
+| **externalSubscriptionId** | **String**| The unique identifier of the subscription within your application. | |
 
 ### Return type
 
@@ -423,64 +446,68 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Customer usage |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="getCustomerPortalUrl"></a>
-# **getCustomerPortalUrl**
-> GetCustomerPortalUrl200Response getCustomerPortalUrl(customerExternalId)
 
-Get customer portal URL
+## getCustomerPortalUrl
 
-Get customer portal URL
+> GetCustomerPortalUrl200Response getCustomerPortalUrl(externalCustomerId)
+
+Get a customer portal URL
+
+Retrieves an embeddable link for displaying a customer portal.  This endpoint allows you to fetch the URL that can be embedded to provide customers access to a dedicated portal
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.CustomersApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    CustomersApi apiInstance = new CustomersApi(defaultClient);
-    String customerExternalId = "12345"; // String | External ID of the existing customer
-    try {
-      GetCustomerPortalUrl200Response result = apiInstance.getCustomerPortalUrl(customerExternalId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling CustomersApi#getCustomerPortalUrl");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | External ID of the existing customer
+        try {
+            GetCustomerPortalUrl200Response result = apiInstance.getCustomerPortalUrl(externalCustomerId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#getCustomerPortalUrl");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
 
+
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **customerExternalId** | **String**| External ID of the existing customer | |
+| **externalCustomerId** | **String**| External ID of the existing customer | |
 
 ### Return type
 
@@ -492,13 +519,14 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Portal URL |  -  |
 | **401** | Unauthorized error |  -  |
 | **403** | Forbidden |  -  |
 | **404** | Not Found error |  -  |
