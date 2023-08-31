@@ -5,12 +5,13 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**applyCoupon**](CouponsApi.md#applyCoupon) | **POST** /applied_coupons | Apply a coupon to a customer |
-| [**createCoupon**](CouponsApi.md#createCoupon) | **POST** /coupons | Create a new coupon |
+| [**createCoupon**](CouponsApi.md#createCoupon) | **POST** /coupons | Create a coupon |
+| [**deleteAppliedCoupon**](CouponsApi.md#deleteAppliedCoupon) | **DELETE** /customers/{external_customer_id}/applied_coupons/{applied_coupon_id} | Delete an applied coupon |
 | [**destroyCoupon**](CouponsApi.md#destroyCoupon) | **DELETE** /coupons/{code} | Delete a coupon |
-| [**findAllAppliedCoupons**](CouponsApi.md#findAllAppliedCoupons) | **GET** /applied_coupons | Find Applied Coupons |
-| [**findAllCoupons**](CouponsApi.md#findAllCoupons) | **GET** /coupons | Find Coupons |
-| [**findCoupon**](CouponsApi.md#findCoupon) | **GET** /coupons/{code} | Find coupon by code |
-| [**updateCoupon**](CouponsApi.md#updateCoupon) | **PUT** /coupons/{code} | Update an existing coupon |
+| [**findAllAppliedCoupons**](CouponsApi.md#findAllAppliedCoupons) | **GET** /applied_coupons | List all applied coupons |
+| [**findAllCoupons**](CouponsApi.md#findAllCoupons) | **GET** /coupons | List all coupons |
+| [**findCoupon**](CouponsApi.md#findCoupon) | **GET** /coupons/{code} | Retrieve a coupon |
+| [**updateCoupon**](CouponsApi.md#updateCoupon) | **PUT** /coupons/{code} | Update a coupon |
 
 
 <a id="applyCoupon"></a>
@@ -19,7 +20,7 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 Apply a coupon to a customer
 
-Apply a coupon to a customer
+This endpoint is used to apply a specific coupon to a customer, before or during a subscription.
 
 ### Example
 ```java
@@ -78,7 +79,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupon applied |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
@@ -86,11 +87,11 @@ public class Example {
 
 <a id="createCoupon"></a>
 # **createCoupon**
-> Coupon createCoupon(couponInput)
+> Coupon createCoupon(couponCreateInput)
 
-Create a new coupon
+Create a coupon
 
-Create a new coupon
+This endpoint is used to create a coupon that can be then attached to a customer to create a discount.
 
 ### Example
 ```java
@@ -112,9 +113,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    CouponInput couponInput = new CouponInput(); // CouponInput | Coupon payload
+    CouponCreateInput couponCreateInput = new CouponCreateInput(); // CouponCreateInput | Coupon payload
     try {
-      Coupon result = apiInstance.createCoupon(couponInput);
+      Coupon result = apiInstance.createCoupon(couponCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CouponsApi#createCoupon");
@@ -131,7 +132,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **couponInput** | [**CouponInput**](CouponInput.md)| Coupon payload | |
+| **couponCreateInput** | [**CouponCreateInput**](CouponCreateInput.md)| Coupon payload | |
 
 ### Return type
 
@@ -149,18 +150,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupon created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="destroyCoupon"></a>
-# **destroyCoupon**
-> Coupon destroyCoupon(code)
+<a id="deleteAppliedCoupon"></a>
+# **deleteAppliedCoupon**
+> AppliedCoupon deleteAppliedCoupon(externalCustomerId, appliedCouponId)
 
-Delete a coupon
+Delete an applied coupon
 
-Delete a coupon
+This endpoint is used to delete a specific coupon that has been applied to a customer.
 
 ### Example
 ```java
@@ -182,7 +183,78 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing coupon
+    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application)
+    UUID appliedCouponId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier of the applied coupon, created by Lago.
+    try {
+      AppliedCoupon result = apiInstance.deleteAppliedCoupon(externalCustomerId, appliedCouponId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CouponsApi#deleteAppliedCoupon");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application) | |
+| **appliedCouponId** | **UUID**| Unique identifier of the applied coupon, created by Lago. | |
+
+### Return type
+
+[**AppliedCoupon**](AppliedCoupon.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful response |  -  |
+| **401** | Unauthorized error |  -  |
+| **404** | Not Found error |  -  |
+
+<a id="destroyCoupon"></a>
+# **destroyCoupon**
+> Coupon destroyCoupon(code)
+
+Delete a coupon
+
+This endpoint is used to delete a coupon.
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.CouponsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.getlago.com/api/v1");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    CouponsApi apiInstance = new CouponsApi(defaultClient);
+    String code = "startup_deal"; // String | Unique code used to identify the coupon.
     try {
       Coupon result = apiInstance.destroyCoupon(code);
       System.out.println(result);
@@ -201,7 +273,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing coupon | |
+| **code** | **String**| Unique code used to identify the coupon. | |
 
 ### Return type
 
@@ -219,7 +291,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupon deleted |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -227,9 +299,9 @@ public class Example {
 # **findAllAppliedCoupons**
 > AppliedCouponsPaginated findAllAppliedCoupons(page, perPage, status, externalCustomerId)
 
-Find Applied Coupons
+List all applied coupons
 
-Find all applied coupons
+This endpoint is used to list all applied coupons. You can filter by coupon status and by customer.
 
 ### Example
 ```java
@@ -251,10 +323,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    String status = "active"; // String | Applied coupon status
-    String externalCustomerId = "12345"; // String | External customer ID
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
+    String status = "active"; // String | The status of the coupon. Can be either `active` or `terminated`.
+    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application)
     try {
       AppliedCouponsPaginated result = apiInstance.findAllAppliedCoupons(page, perPage, status, externalCustomerId);
       System.out.println(result);
@@ -273,10 +345,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
-| **status** | **String**| Applied coupon status | [optional] [enum: active, terminated] |
-| **externalCustomerId** | **String**| External customer ID | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
+| **status** | **String**| The status of the coupon. Can be either &#x60;active&#x60; or &#x60;terminated&#x60;. | [optional] [enum: active, terminated] |
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application) | [optional] |
 
 ### Return type
 
@@ -294,16 +366,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Applied Coupons |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findAllCoupons"></a>
 # **findAllCoupons**
 > CouponsPaginated findAllCoupons(page, perPage)
 
-Find Coupons
+List all coupons
 
-Find all coupons in certain organisation
+This endpoint is used to list all existing coupons.
 
 ### Example
 ```java
@@ -325,8 +397,8 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
     try {
       CouponsPaginated result = apiInstance.findAllCoupons(page, perPage);
       System.out.println(result);
@@ -345,8 +417,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -364,16 +436,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupons |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findCoupon"></a>
 # **findCoupon**
 > Coupon findCoupon(code)
 
-Find coupon by code
+Retrieve a coupon
 
-Return a single coupon
+This endpoint is used to retrieve a specific coupon.
 
 ### Example
 ```java
@@ -395,7 +467,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing coupon
+    String code = "startup_deal"; // String | Unique code used to identify the coupon.
     try {
       Coupon result = apiInstance.findCoupon(code);
       System.out.println(result);
@@ -414,7 +486,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing coupon | |
+| **code** | **String**| Unique code used to identify the coupon. | |
 
 ### Return type
 
@@ -432,17 +504,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupon |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="updateCoupon"></a>
 # **updateCoupon**
-> Coupon updateCoupon(code, couponInput)
+> Coupon updateCoupon(code, couponUpdateInput)
 
-Update an existing coupon
+Update a coupon
 
-Update an existing coupon by code
+This endpoint is used to update a coupon that can be then attached to a customer to create a discount.
 
 ### Example
 ```java
@@ -464,10 +536,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CouponsApi apiInstance = new CouponsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing coupon
-    CouponInput couponInput = new CouponInput(); // CouponInput | Update an existing coupon
+    String code = "startup_deal"; // String | Unique code used to identify the coupon.
+    CouponUpdateInput couponUpdateInput = new CouponUpdateInput(); // CouponUpdateInput | Coupon payload
     try {
-      Coupon result = apiInstance.updateCoupon(code, couponInput);
+      Coupon result = apiInstance.updateCoupon(code, couponUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CouponsApi#updateCoupon");
@@ -484,8 +556,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing coupon | |
-| **couponInput** | [**CouponInput**](CouponInput.md)| Update an existing coupon | |
+| **code** | **String**| Unique code used to identify the coupon. | |
+| **couponUpdateInput** | [**CouponUpdateInput**](CouponUpdateInput.md)| Coupon payload | |
 
 ### Return type
 
@@ -503,7 +575,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Coupon updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

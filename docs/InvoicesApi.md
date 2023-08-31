@@ -4,23 +4,23 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createInvoice**](InvoicesApi.md#createInvoice) | **POST** /invoices | Create a new invoice |
-| [**downloadInvoice**](InvoicesApi.md#downloadInvoice) | **POST** /invoices/{id}/download | Download an existing invoice |
-| [**finalizeInvoice**](InvoicesApi.md#finalizeInvoice) | **PUT** /invoices/{id}/finalize | Finalize a draft invoice |
-| [**findAllInvoices**](InvoicesApi.md#findAllInvoices) | **GET** /invoices | Find all invoices |
-| [**findInvoice**](InvoicesApi.md#findInvoice) | **GET** /invoices/{id} | Find invoice by ID |
-| [**refreshInvoice**](InvoicesApi.md#refreshInvoice) | **PUT** /invoices/{id}/refresh | Refresh a draft invoice |
-| [**retryPayment**](InvoicesApi.md#retryPayment) | **POST** /invoices/{id}/retry_payment | Retry invoice payment |
-| [**updateInvoice**](InvoicesApi.md#updateInvoice) | **PUT** /invoices/{id} | Update an existing invoice status |
+| [**createInvoice**](InvoicesApi.md#createInvoice) | **POST** /invoices | Create a one-off invoice |
+| [**downloadInvoice**](InvoicesApi.md#downloadInvoice) | **POST** /invoices/{lago_id}/download | Download an invoice PDF |
+| [**finalizeInvoice**](InvoicesApi.md#finalizeInvoice) | **PUT** /invoices/{lago_id}/finalize | Finalize a draft invoice |
+| [**findAllInvoices**](InvoicesApi.md#findAllInvoices) | **GET** /invoices | List all invoices |
+| [**findInvoice**](InvoicesApi.md#findInvoice) | **GET** /invoices/{lago_id} | Retrieve an invoice |
+| [**refreshInvoice**](InvoicesApi.md#refreshInvoice) | **PUT** /invoices/{lago_id}/refresh | Refresh a draft invoice |
+| [**retryPayment**](InvoicesApi.md#retryPayment) | **POST** /invoices/{lago_id}/retry_payment | Retry an invoice payment |
+| [**updateInvoice**](InvoicesApi.md#updateInvoice) | **PUT** /invoices/{lago_id} | Update an invoice |
 
 
 <a id="createInvoice"></a>
 # **createInvoice**
-> Invoice createInvoice(invoiceOneOffInput)
+> Invoice createInvoice(invoiceOneOffCreateInput)
 
-Create a new invoice
+Create a one-off invoice
 
-Create a new one off Invoice
+This endpoint is used for issuing a one-off invoice.
 
 ### Example
 ```java
@@ -42,9 +42,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    InvoiceOneOffInput invoiceOneOffInput = new InvoiceOneOffInput(); // InvoiceOneOffInput | Invoice payload
+    InvoiceOneOffCreateInput invoiceOneOffCreateInput = new InvoiceOneOffCreateInput(); // InvoiceOneOffCreateInput | Invoice payload
     try {
-      Invoice result = apiInstance.createInvoice(invoiceOneOffInput);
+      Invoice result = apiInstance.createInvoice(invoiceOneOffCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#createInvoice");
@@ -61,7 +61,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **invoiceOneOffInput** | [**InvoiceOneOffInput**](InvoiceOneOffInput.md)| Invoice payload | |
+| **invoiceOneOffCreateInput** | [**InvoiceOneOffCreateInput**](InvoiceOneOffCreateInput.md)| Invoice payload | |
 
 ### Return type
 
@@ -79,18 +79,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
 <a id="downloadInvoice"></a>
 # **downloadInvoice**
-> Invoice downloadInvoice(id)
+> Invoice downloadInvoice(lagoId)
 
-Download an existing invoice
+Download an invoice PDF
 
-Download an existing invoice
+This endpoint is used for downloading a specific invoice PDF document.
 
 ### Example
 ```java
@@ -112,9 +112,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
     try {
-      Invoice result = apiInstance.downloadInvoice(id);
+      Invoice result = apiInstance.downloadInvoice(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#downloadInvoice");
@@ -131,7 +131,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
 
 ### Return type
 
@@ -149,17 +149,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice PDF |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="finalizeInvoice"></a>
 # **finalizeInvoice**
-> Invoice finalizeInvoice(id)
+> Invoice finalizeInvoice(lagoId)
 
 Finalize a draft invoice
 
-Finalize a draft invoice
+This endpoint is used for finalizing a draft invoice.
 
 ### Example
 ```java
@@ -181,9 +181,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the draft Lago Invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
     try {
-      Invoice result = apiInstance.finalizeInvoice(id);
+      Invoice result = apiInstance.finalizeInvoice(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#finalizeInvoice");
@@ -200,7 +200,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the draft Lago Invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
 
 ### Return type
 
@@ -218,17 +218,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice finalized |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="findAllInvoices"></a>
 # **findAllInvoices**
-> InvoicesPaginated findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status)
+> InvoicesPaginated findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status, paymentStatus)
 
-Find all invoices
+List all invoices
 
-Find all invoices in certain organisation
+This endpoint is used for retrievign all invoices.
 
 ### Example
 ```java
@@ -250,14 +250,15 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    String externalCustomerId = "12345"; // String | External customer ID
-    LocalDate issuingDateFrom = LocalDate.parse("Fri Jul 08 00:00:00 UTC 2022"); // LocalDate | Date from
-    LocalDate issuingDateTo = LocalDate.parse("Tue Aug 09 00:00:00 UTC 2022"); // LocalDate | Date to
-    String status = "draft"; // String | Status
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
+    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | Unique identifier assigned to the customer in your application.
+    LocalDate issuingDateFrom = LocalDate.parse("Fri Jul 08 00:00:00 UTC 2022"); // LocalDate | Filter invoices starting from a specific date.
+    LocalDate issuingDateTo = LocalDate.parse("Tue Aug 09 00:00:00 UTC 2022"); // LocalDate | Filter invoices up to a specific date.
+    String status = "draft"; // String | Filter invoices by status. Possible values are `draft` or `finalized`.
+    String paymentStatus = "pending"; // String | Filter invoices by payment status. Possible values are `pending`, `failed` or `succeeded`.
     try {
-      InvoicesPaginated result = apiInstance.findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status);
+      InvoicesPaginated result = apiInstance.findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status, paymentStatus);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#findAllInvoices");
@@ -274,12 +275,13 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
-| **externalCustomerId** | **String**| External customer ID | [optional] |
-| **issuingDateFrom** | **LocalDate**| Date from | [optional] |
-| **issuingDateTo** | **LocalDate**| Date to | [optional] |
-| **status** | **String**| Status | [optional] [enum: draft, finalized] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
+| **externalCustomerId** | **String**| Unique identifier assigned to the customer in your application. | [optional] |
+| **issuingDateFrom** | **LocalDate**| Filter invoices starting from a specific date. | [optional] |
+| **issuingDateTo** | **LocalDate**| Filter invoices up to a specific date. | [optional] |
+| **status** | **String**| Filter invoices by status. Possible values are &#x60;draft&#x60; or &#x60;finalized&#x60;. | [optional] [enum: draft, finalized] |
+| **paymentStatus** | **String**| Filter invoices by payment status. Possible values are &#x60;pending&#x60;, &#x60;failed&#x60; or &#x60;succeeded&#x60;. | [optional] [enum: pending, failed, succeeded] |
 
 ### Return type
 
@@ -297,16 +299,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoices |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findInvoice"></a>
 # **findInvoice**
-> Invoice findInvoice(id)
+> Invoice findInvoice(lagoId)
 
-Find invoice by ID
+Retrieve an invoice
 
-Return a single invoice
+This endpoint is used for retrieving a specific invoice that has been issued.
 
 ### Example
 ```java
@@ -328,9 +330,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
     try {
-      Invoice result = apiInstance.findInvoice(id);
+      Invoice result = apiInstance.findInvoice(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#findInvoice");
@@ -347,7 +349,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
 
 ### Return type
 
@@ -365,17 +367,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="refreshInvoice"></a>
 # **refreshInvoice**
-> Invoice refreshInvoice(id)
+> Invoice refreshInvoice(lagoId)
 
 Refresh a draft invoice
 
-Refresh a draft invoice
+This endpoint is used for refreshing a draft invoice.
 
 ### Example
 ```java
@@ -397,9 +399,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
     try {
-      Invoice result = apiInstance.refreshInvoice(id);
+      Invoice result = apiInstance.refreshInvoice(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#refreshInvoice");
@@ -416,7 +418,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
 
 ### Return type
 
@@ -434,17 +436,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice refreshed |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="retryPayment"></a>
 # **retryPayment**
-> retryPayment(id)
+> retryPayment(lagoId)
 
-Retry invoice payment
+Retry an invoice payment
 
-Retry invoice payment
+This endpoint resends an invoice for collection and retry a payment.
 
 ### Example
 ```java
@@ -466,9 +468,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
     try {
-      apiInstance.retryPayment(id);
+      apiInstance.retryPayment(lagoId);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#retryPayment");
       System.err.println("Status code: " + e.getCode());
@@ -484,7 +486,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
 
 ### Return type
 
@@ -502,18 +504,18 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice payment retried |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 | **405** | Not Allowed error |  -  |
 
 <a id="updateInvoice"></a>
 # **updateInvoice**
-> Invoice updateInvoice(id, invoiceInput)
+> Invoice updateInvoice(lagoId, invoiceUpdateInput)
 
-Update an existing invoice status
+Update an invoice
 
-Update an existing invoice
+This endpoint is used for updating an existing invoice.
 
 ### Example
 ```java
@@ -535,10 +537,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Invoice
-    InvoiceInput invoiceInput = new InvoiceInput(); // InvoiceInput | Update an existing invoice
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+    InvoiceUpdateInput invoiceUpdateInput = new InvoiceUpdateInput(); // InvoiceUpdateInput | Update an existing invoice
     try {
-      Invoice result = apiInstance.updateInvoice(id, invoiceInput);
+      Invoice result = apiInstance.updateInvoice(lagoId, invoiceUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling InvoicesApi#updateInvoice");
@@ -555,8 +557,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Invoice | |
-| **invoiceInput** | [**InvoiceInput**](InvoiceInput.md)| Update an existing invoice | |
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
+| **invoiceUpdateInput** | [**InvoiceUpdateInput**](InvoiceUpdateInput.md)| Update an existing invoice | |
 
 ### Return type
 
@@ -574,7 +576,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Invoice updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

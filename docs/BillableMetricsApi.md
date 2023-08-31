@@ -4,21 +4,21 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createBillableMetric**](BillableMetricsApi.md#createBillableMetric) | **POST** /billable_metrics | Create a new billable metric |
+| [**createBillableMetric**](BillableMetricsApi.md#createBillableMetric) | **POST** /billable_metrics | Create a billable metric |
 | [**destroyBillableMetric**](BillableMetricsApi.md#destroyBillableMetric) | **DELETE** /billable_metrics/{code} | Delete a billable metric |
-| [**findAllBillableMetricGroups**](BillableMetricsApi.md#findAllBillableMetricGroups) | **GET** /billable_metrics/{code}/groups | Find Billable metric groups |
-| [**findAllBillableMetrics**](BillableMetricsApi.md#findAllBillableMetrics) | **GET** /billable_metrics | Find Billable metrics |
-| [**findBillableMetric**](BillableMetricsApi.md#findBillableMetric) | **GET** /billable_metrics/{code} | Find billable metric by code |
-| [**updateBillableMetric**](BillableMetricsApi.md#updateBillableMetric) | **PUT** /billable_metrics/{code} | Update an existing billable metric |
+| [**findAllBillableMetricGroups**](BillableMetricsApi.md#findAllBillableMetricGroups) | **GET** /billable_metrics/{code}/groups | Find a billable metric&#39;s groups |
+| [**findAllBillableMetrics**](BillableMetricsApi.md#findAllBillableMetrics) | **GET** /billable_metrics | List all billable metrics |
+| [**findBillableMetric**](BillableMetricsApi.md#findBillableMetric) | **GET** /billable_metrics/{code} | Retrieve a billable metric |
+| [**updateBillableMetric**](BillableMetricsApi.md#updateBillableMetric) | **PUT** /billable_metrics/{code} | Update a billable metric |
 
 
 <a id="createBillableMetric"></a>
 # **createBillableMetric**
-> BillableMetric createBillableMetric(billableMetricInput)
+> BillableMetric createBillableMetric(billableMetricCreateInput)
 
-Create a new billable metric
+Create a billable metric
 
-Create a new billable metric
+This endpoint creates a new billable metric representing a pricing component of your application.
 
 ### Example
 ```java
@@ -40,9 +40,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    BillableMetricInput billableMetricInput = new BillableMetricInput(); // BillableMetricInput | Billable metric payload
+    BillableMetricCreateInput billableMetricCreateInput = new BillableMetricCreateInput(); // BillableMetricCreateInput | Billable metric payload
     try {
-      BillableMetric result = apiInstance.createBillableMetric(billableMetricInput);
+      BillableMetric result = apiInstance.createBillableMetric(billableMetricCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling BillableMetricsApi#createBillableMetric");
@@ -59,7 +59,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **billableMetricInput** | [**BillableMetricInput**](BillableMetricInput.md)| Billable metric payload | |
+| **billableMetricCreateInput** | [**BillableMetricCreateInput**](BillableMetricCreateInput.md)| Billable metric payload | |
 
 ### Return type
 
@@ -77,7 +77,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Billable metric created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
@@ -88,7 +88,7 @@ public class Example {
 
 Delete a billable metric
 
-Delete a billable metric
+This endpoint deletes an existing billable metric representing a pricing component of your application.
 
 ### Example
 ```java
@@ -110,7 +110,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing billable metric
+    String code = "storage"; // String | Code of the existing billable metric.
     try {
       BillableMetric result = apiInstance.destroyBillableMetric(code);
       System.out.println(result);
@@ -129,7 +129,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing billable metric | |
+| **code** | **String**| Code of the existing billable metric. | |
 
 ### Return type
 
@@ -147,7 +147,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Billable metric deleted |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -155,9 +155,9 @@ public class Example {
 # **findAllBillableMetricGroups**
 > GroupsPaginated findAllBillableMetricGroups(code, page, perPage)
 
-Find Billable metric groups
+Find a billable metric&#39;s groups
 
-Find all billable metric groups in certain organisation
+This endpoint retrieves all groups for a billable metric.
 
 ### Example
 ```java
@@ -179,9 +179,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing billable metric
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
+    String code = "example_code"; // String | Code of the existing billable metric.
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
     try {
       GroupsPaginated result = apiInstance.findAllBillableMetricGroups(code, page, perPage);
       System.out.println(result);
@@ -200,9 +200,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing billable metric | |
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **code** | **String**| Code of the existing billable metric. | |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -220,16 +220,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | List of billable metric&#39;s groups |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findAllBillableMetrics"></a>
 # **findAllBillableMetrics**
 > BillableMetricsPaginated findAllBillableMetrics(page, perPage)
 
-Find Billable metrics
+List all billable metrics
 
-Find all billable metrics in certain organisation
+This endpoint retrieves all existing billable metrics that represent pricing components of your application.
 
 ### Example
 ```java
@@ -251,8 +251,8 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
     try {
       BillableMetricsPaginated result = apiInstance.findAllBillableMetrics(page, perPage);
       System.out.println(result);
@@ -271,8 +271,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -290,16 +290,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | List of billable metrics |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findBillableMetric"></a>
 # **findBillableMetric**
 > BillableMetric findBillableMetric(code)
 
-Find billable metric by code
+Retrieve a billable metric
 
-Return a single billable metric
+This endpoint retrieves an existing billable metric that represents a pricing component of your application. The billable metric is identified by its unique code.
 
 ### Example
 ```java
@@ -321,7 +321,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing billable metric
+    String code = "storage"; // String | Code of the existing billable metric.
     try {
       BillableMetric result = apiInstance.findBillableMetric(code);
       System.out.println(result);
@@ -340,7 +340,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing billable metric | |
+| **code** | **String**| Code of the existing billable metric. | |
 
 ### Return type
 
@@ -358,17 +358,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Billable metric |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="updateBillableMetric"></a>
 # **updateBillableMetric**
-> BillableMetric updateBillableMetric(code, billableMetricInput)
+> BillableMetric updateBillableMetric(code, billableMetricUpdateInput)
 
-Update an existing billable metric
+Update a billable metric
 
-Update an existing billable metric by code
+This endpoint updates an existing billable metric representing a pricing component of your application.
 
 ### Example
 ```java
@@ -390,10 +390,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     BillableMetricsApi apiInstance = new BillableMetricsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing billable metric
-    BillableMetricInput billableMetricInput = new BillableMetricInput(); // BillableMetricInput | Update an existing billable metric
+    String code = "storage"; // String | Code of the existing billable metric.
+    BillableMetricUpdateInput billableMetricUpdateInput = new BillableMetricUpdateInput(); // BillableMetricUpdateInput | Billable metric payload
     try {
-      BillableMetric result = apiInstance.updateBillableMetric(code, billableMetricInput);
+      BillableMetric result = apiInstance.updateBillableMetric(code, billableMetricUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling BillableMetricsApi#updateBillableMetric");
@@ -410,8 +410,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing billable metric | |
-| **billableMetricInput** | [**BillableMetricInput**](BillableMetricInput.md)| Update an existing billable metric | |
+| **code** | **String**| Code of the existing billable metric. | |
+| **billableMetricUpdateInput** | [**BillableMetricUpdateInput**](BillableMetricUpdateInput.md)| Billable metric payload | |
 
 ### Return type
 
@@ -429,7 +429,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Billable metric updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

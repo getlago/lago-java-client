@@ -7,16 +7,14 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**fromDatetime** | **OffsetDateTime** |  |  |
-|**toDatetime** | **OffsetDateTime** |  |  |
-|**issuingDate** | **OffsetDateTime** |  |  |
-|**amountCents** | **Integer** |  |  |
-|**amountCurrency** | **String** |  |  |
-|**totalAmountCents** | **Integer** |  |  |
-|**totalAmountCurrency** | **String** |  |  |
-|**vatAmountCents** | **Integer** |  |  |
-|**vatAmountCurrency** | **String** |  |  |
-|**chargesUsage** | [**List&lt;ChargeUsageObject&gt;**](ChargeUsageObject.md) |  |  |
+|**fromDatetime** | **OffsetDateTime** | The lower bound of the billing period, expressed in the ISO 8601 datetime format in Coordinated Universal Time (UTC). |  |
+|**toDatetime** | **OffsetDateTime** | The upper bound of the billing period, expressed in the ISO 8601 datetime format in Coordinated Universal Time (UTC). |  |
+|**issuingDate** | **OffsetDateTime** | The date of creation of the invoice. |  |
+|**currency** | [**Currency**](Currency.md) |  |  [optional] |
+|**amountCents** | **Integer** | The amount in cents, tax excluded. |  |
+|**taxesAmountCents** | **Integer** | The tax amount in cents. |  |
+|**totalAmountCents** | **Integer** | The total amount in cents, tax included. |  |
+|**chargesUsage** | [**List&lt;CustomerChargeUsageObject&gt;**](CustomerChargeUsageObject.md) | Array of charges that comprise the current usage. It contains detailed information about individual charge items associated with the usage. |  |
 
 
 

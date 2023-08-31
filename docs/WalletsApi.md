@@ -4,22 +4,22 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createWallet**](WalletsApi.md#createWallet) | **POST** /wallets | Create a new wallet |
-| [**createWalletTransaction**](WalletsApi.md#createWalletTransaction) | **POST** /wallet_transactions | Create a new wallet transaction |
-| [**destroyWallet**](WalletsApi.md#destroyWallet) | **DELETE** /wallets/{id} | Delete a wallet |
-| [**findAllWalletTransactions**](WalletsApi.md#findAllWalletTransactions) | **GET** /wallets/{id}/wallet_transactions | Find wallet transactions |
-| [**findAllWallets**](WalletsApi.md#findAllWallets) | **GET** /wallets | Find wallets |
-| [**findWallet**](WalletsApi.md#findWallet) | **GET** /wallets/{id} | Find wallet |
-| [**updateWallet**](WalletsApi.md#updateWallet) | **PUT** /wallets/{id} | Update an existing wallet |
+| [**createWallet**](WalletsApi.md#createWallet) | **POST** /wallets | Create a wallet |
+| [**createWalletTransaction**](WalletsApi.md#createWalletTransaction) | **POST** /wallet_transactions | Top up a wallet |
+| [**destroyWallet**](WalletsApi.md#destroyWallet) | **DELETE** /wallets/{lago_id} | Terminate a wallet |
+| [**findAllWalletTransactions**](WalletsApi.md#findAllWalletTransactions) | **GET** /wallets/{lago_id}/wallet_transactions | List all wallet transactions |
+| [**findAllWallets**](WalletsApi.md#findAllWallets) | **GET** /wallets | List all wallets |
+| [**findWallet**](WalletsApi.md#findWallet) | **GET** /wallets/{lago_id} | Retrieve a wallet |
+| [**updateWallet**](WalletsApi.md#updateWallet) | **PUT** /wallets/{lago_id} | Update a wallet |
 
 
 <a id="createWallet"></a>
 # **createWallet**
-> Wallet createWallet(walletInput)
+> Wallet createWallet(walletCreateInput)
 
-Create a new wallet
+Create a wallet
 
-Create a new wallet
+This endpoint is used to create a wallet with prepaid credits.
 
 ### Example
 ```java
@@ -41,9 +41,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    WalletInput walletInput = new WalletInput(); // WalletInput | Wallet payload
+    WalletCreateInput walletCreateInput = new WalletCreateInput(); // WalletCreateInput | Wallet payload
     try {
-      Wallet result = apiInstance.createWallet(walletInput);
+      Wallet result = apiInstance.createWallet(walletCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#createWallet");
@@ -60,7 +60,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **walletInput** | [**WalletInput**](WalletInput.md)| Wallet payload | |
+| **walletCreateInput** | [**WalletCreateInput**](WalletCreateInput.md)| Wallet payload | |
 
 ### Return type
 
@@ -78,18 +78,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
 <a id="createWalletTransaction"></a>
 # **createWalletTransaction**
-> WalletTransactions createWalletTransaction(walletTransactionInput)
+> WalletTransactions createWalletTransaction(walletTransactionCreateInput)
 
-Create a new wallet transaction
+Top up a wallet
 
-Create a new wallet transaction
+This endpoint is used to top-up an active wallet.
 
 ### Example
 ```java
@@ -111,9 +111,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    WalletTransactionInput walletTransactionInput = new WalletTransactionInput(); // WalletTransactionInput | Wallet transaction payload
+    WalletTransactionCreateInput walletTransactionCreateInput = new WalletTransactionCreateInput(); // WalletTransactionCreateInput | Wallet transaction payload
     try {
-      WalletTransactions result = apiInstance.createWalletTransaction(walletTransactionInput);
+      WalletTransactions result = apiInstance.createWalletTransaction(walletTransactionCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#createWalletTransaction");
@@ -130,7 +130,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **walletTransactionInput** | [**WalletTransactionInput**](WalletTransactionInput.md)| Wallet transaction payload | |
+| **walletTransactionCreateInput** | [**WalletTransactionCreateInput**](WalletTransactionCreateInput.md)| Wallet transaction payload | |
 
 ### Return type
 
@@ -148,18 +148,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet transaction created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
 <a id="destroyWallet"></a>
 # **destroyWallet**
-> Wallet destroyWallet(id)
+> Wallet destroyWallet(lagoId)
 
-Delete a wallet
+Terminate a wallet
 
-Delete a wallet
+This endpoint is used to terminate an existing wallet with prepaid credits.
 
 ### Example
 ```java
@@ -181,9 +181,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Lago ID of the existing wallet
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
     try {
-      Wallet result = apiInstance.destroyWallet(id);
+      Wallet result = apiInstance.destroyWallet(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#destroyWallet");
@@ -200,7 +200,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| Lago ID of the existing wallet | |
+| **lagoId** | **UUID**| Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system. | |
 
 ### Return type
 
@@ -218,18 +218,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet terminated |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 | **405** | Not Allowed error |  -  |
 
 <a id="findAllWalletTransactions"></a>
 # **findAllWalletTransactions**
-> WalletTransactionsPaginated findAllWalletTransactions(id, page, perPage, status, transactionType)
+> WalletTransactionsPaginated findAllWalletTransactions(lagoId, page, perPage, status, transactionType)
 
-Find wallet transactions
+List all wallet transactions
 
-Find all wallet transactions for certain wallet
+This endpoint is used to list all wallet transactions.
 
 ### Example
 ```java
@@ -251,13 +251,13 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Lago ID of the existing wallet
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    String status = "pending"; // String | Status (pending or settled)
-    String transactionType = "inbound"; // String | Transaction Type (inbound or outbound)
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
+    String status = "pending"; // String | The status of the wallet transaction. Possible values are `pending` or `settled`.
+    String transactionType = "inbound"; // String | The transaction type of the wallet transaction. Possible values are `inbound` (increasing the wallet balance) or `outbound` (decreasing the wallet balance).
     try {
-      WalletTransactionsPaginated result = apiInstance.findAllWalletTransactions(id, page, perPage, status, transactionType);
+      WalletTransactionsPaginated result = apiInstance.findAllWalletTransactions(lagoId, page, perPage, status, transactionType);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#findAllWalletTransactions");
@@ -274,11 +274,11 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| Lago ID of the existing wallet | |
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
-| **status** | **String**| Status (pending or settled) | [optional] |
-| **transactionType** | **String**| Transaction Type (inbound or outbound) | [optional] |
+| **lagoId** | **UUID**| Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system. | |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
+| **status** | **String**| The status of the wallet transaction. Possible values are &#x60;pending&#x60; or &#x60;settled&#x60;. | [optional] |
+| **transactionType** | **String**| The transaction type of the wallet transaction. Possible values are &#x60;inbound&#x60; (increasing the wallet balance) or &#x60;outbound&#x60; (decreasing the wallet balance). | [optional] |
 
 ### Return type
 
@@ -296,7 +296,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet transactions |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -304,9 +304,9 @@ public class Example {
 # **findAllWallets**
 > WalletsPaginated findAllWallets(externalCustomerId, page, perPage)
 
-Find wallets
+List all wallets
 
-Find all wallets for certain customer
+This endpoint is used to list all wallets with prepaid credits.
 
 ### Example
 ```java
@@ -328,9 +328,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    String externalCustomerId = "12345"; // String | External customer ID
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
+    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
     try {
       WalletsPaginated result = apiInstance.findAllWallets(externalCustomerId, page, perPage);
       System.out.println(result);
@@ -349,9 +349,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **externalCustomerId** | **String**| External customer ID | |
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application). | |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -369,16 +369,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallets |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findWallet"></a>
 # **findWallet**
-> Wallet findWallet(id)
+> Wallet findWallet(lagoId)
 
-Find wallet
+Retrieve a wallet
 
-Return a wallet
+This endpoint is used to retrieve an existing wallet with prepaid credits.
 
 ### Example
 ```java
@@ -400,9 +400,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Lago ID of the existing wallet
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
     try {
-      Wallet result = apiInstance.findWallet(id);
+      Wallet result = apiInstance.findWallet(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#findWallet");
@@ -419,7 +419,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| Lago ID of the existing wallet | |
+| **lagoId** | **UUID**| Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system. | |
 
 ### Return type
 
@@ -437,17 +437,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="updateWallet"></a>
 # **updateWallet**
-> Wallet updateWallet(id, walletUpdateInput)
+> Wallet updateWallet(lagoId, walletUpdateInput)
 
-Update an existing wallet
+Update a wallet
 
-Update an existing wallet
+This endpoint is used to update an existing wallet with prepaid credits.
 
 ### Example
 ```java
@@ -469,10 +469,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Lago ID of the existing wallet
-    WalletUpdateInput walletUpdateInput = new WalletUpdateInput(); // WalletUpdateInput | Update an existing wallet
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+    WalletUpdateInput walletUpdateInput = new WalletUpdateInput(); // WalletUpdateInput | Wallet update payload
     try {
-      Wallet result = apiInstance.updateWallet(id, walletUpdateInput);
+      Wallet result = apiInstance.updateWallet(lagoId, walletUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling WalletsApi#updateWallet");
@@ -489,8 +489,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| Lago ID of the existing wallet | |
-| **walletUpdateInput** | [**WalletUpdateInput**](WalletUpdateInput.md)| Update an existing wallet | |
+| **lagoId** | **UUID**| Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system. | |
+| **walletUpdateInput** | [**WalletUpdateInput**](WalletUpdateInput.md)| Wallet update payload | |
 
 ### Return type
 
@@ -508,7 +508,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Wallet updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

@@ -4,16 +4,16 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**fetchPublicKey**](WebhooksApi.md#fetchPublicKey) | **GET** /webhooks/public_key | Fetch webhook public key |
+| [**fetchPublicKey**](WebhooksApi.md#fetchPublicKey) | **GET** /webhooks/public_key | Retrieve webhook public key |
 
 
 <a id="fetchPublicKey"></a>
 # **fetchPublicKey**
 > String fetchPublicKey()
 
-Fetch webhook public key
+Retrieve webhook public key
 
-Webhook public key
+This endpoint is used to retrieve the public key used to verify the webhooks signature
 
 ### Example
 ```java
@@ -68,6 +68,6 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Public key |  -  |
 | **401** | Unauthorized error |  -  |
 

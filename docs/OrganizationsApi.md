@@ -4,16 +4,16 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**updateOrganization**](OrganizationsApi.md#updateOrganization) | **PUT** /organizations | Update an existing Organization |
+| [**updateOrganization**](OrganizationsApi.md#updateOrganization) | **PUT** /organizations | Update your organization |
 
 
 <a id="updateOrganization"></a>
 # **updateOrganization**
-> Organization updateOrganization(organizationInput)
+> Organization updateOrganization(organizationUpdateInput)
 
-Update an existing Organization
+Update your organization
 
-Update an existing organization
+This endpoint is used to update your own organization&#39;s settings.
 
 ### Example
 ```java
@@ -35,9 +35,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
-    OrganizationInput organizationInput = new OrganizationInput(); // OrganizationInput | Update an existing organization
+    OrganizationUpdateInput organizationUpdateInput = new OrganizationUpdateInput(); // OrganizationUpdateInput | Update an existing organization
     try {
-      Organization result = apiInstance.updateOrganization(organizationInput);
+      Organization result = apiInstance.updateOrganization(organizationUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OrganizationsApi#updateOrganization");
@@ -54,7 +54,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **organizationInput** | [**OrganizationInput**](OrganizationInput.md)| Update an existing organization | |
+| **organizationUpdateInput** | [**OrganizationUpdateInput**](OrganizationUpdateInput.md)| Update an existing organization | |
 
 ### Return type
 

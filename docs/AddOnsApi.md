@@ -5,11 +5,11 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**applyAddOn**](AddOnsApi.md#applyAddOn) | **POST** /applied_add_ons | Apply an add-on to a customer |
-| [**createAddOn**](AddOnsApi.md#createAddOn) | **POST** /add_ons | Create a new add-on |
+| [**createAddOn**](AddOnsApi.md#createAddOn) | **POST** /add_ons | Create an add-on |
 | [**destroyAddOn**](AddOnsApi.md#destroyAddOn) | **DELETE** /add_ons/{code} | Delete an add-on |
-| [**findAddOn**](AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Find add-on by code |
-| [**findAllAddOns**](AddOnsApi.md#findAllAddOns) | **GET** /add_ons | Find add-ons |
-| [**updateAddOn**](AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an existing add-on |
+| [**findAddOn**](AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Retrieve an add-on |
+| [**findAllAddOns**](AddOnsApi.md#findAllAddOns) | **GET** /add_ons | List all add-ons |
+| [**updateAddOn**](AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an add-on |
 
 
 <a id="applyAddOn"></a>
@@ -77,7 +77,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on applied |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
@@ -85,11 +85,11 @@ public class Example {
 
 <a id="createAddOn"></a>
 # **createAddOn**
-> AddOn createAddOn(addOnInput)
+> AddOn createAddOn(addOnCreateInput)
 
-Create a new add-on
+Create an add-on
 
-Create a new add-on
+This endpoint is used to create an add-on that can be then attached to a one-off invoice.
 
 ### Example
 ```java
@@ -111,9 +111,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    AddOnInput addOnInput = new AddOnInput(); // AddOnInput | Add-on payload
+    AddOnCreateInput addOnCreateInput = new AddOnCreateInput(); // AddOnCreateInput | Add-on payload
     try {
-      AddOn result = apiInstance.createAddOn(addOnInput);
+      AddOn result = apiInstance.createAddOn(addOnCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AddOnsApi#createAddOn");
@@ -130,7 +130,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **addOnInput** | [**AddOnInput**](AddOnInput.md)| Add-on payload | |
+| **addOnCreateInput** | [**AddOnCreateInput**](AddOnCreateInput.md)| Add-on payload | |
 
 ### Return type
 
@@ -148,7 +148,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
@@ -159,7 +159,7 @@ public class Example {
 
 Delete an add-on
 
-Delete an add-on
+This endpoint is used to delete an existing add-on.
 
 ### Example
 ```java
@@ -181,7 +181,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
+    String code = "setup_fee"; // String | Unique code used to identify the add-on.
     try {
       AddOn result = apiInstance.destroyAddOn(code);
       System.out.println(result);
@@ -200,7 +200,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
 
 ### Return type
 
@@ -218,7 +218,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on deleted |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -226,9 +226,9 @@ public class Example {
 # **findAddOn**
 > AddOn findAddOn(code)
 
-Find add-on by code
+Retrieve an add-on
 
-Return a single add-on
+This endpoint is used to retrieve a specific add-on.
 
 ### Example
 ```java
@@ -250,7 +250,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
+    String code = "setup_fee"; // String | Unique code used to identify the add-on.
     try {
       AddOn result = apiInstance.findAddOn(code);
       System.out.println(result);
@@ -269,7 +269,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
 
 ### Return type
 
@@ -287,7 +287,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -295,9 +295,9 @@ public class Example {
 # **findAllAddOns**
 > AddOnsPaginated findAllAddOns(page, perPage)
 
-Find add-ons
+List all add-ons
 
-Find all add-ons in certain organisation
+This endpoint is used to list all existing add-ons.
 
 ### Example
 ```java
@@ -319,8 +319,8 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
     try {
       AddOnsPaginated result = apiInstance.findAllAddOns(page, perPage);
       System.out.println(result);
@@ -339,8 +339,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
 
 ### Return type
 
@@ -358,16 +358,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-ons |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="updateAddOn"></a>
 # **updateAddOn**
-> AddOn updateAddOn(code, addOnInput)
+> AddOn updateAddOn(code, addOnUpdateInput)
 
-Update an existing add-on
+Update an add-on
 
-Update an existing add-on by code
+This endpoint is used to update an existing add-on.
 
 ### Example
 ```java
@@ -389,10 +389,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-    String code = "example_code"; // String | Code of the existing add-on
-    AddOnInput addOnInput = new AddOnInput(); // AddOnInput | Update an existing add-on
+    String code = "setup_fee"; // String | Unique code used to identify the add-on.
+    AddOnUpdateInput addOnUpdateInput = new AddOnUpdateInput(); // AddOnUpdateInput | Add-on payload
     try {
-      AddOn result = apiInstance.updateAddOn(code, addOnInput);
+      AddOn result = apiInstance.updateAddOn(code, addOnUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AddOnsApi#updateAddOn");
@@ -409,8 +409,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **code** | **String**| Code of the existing add-on | |
-| **addOnInput** | [**AddOnInput**](AddOnInput.md)| Update an existing add-on | |
+| **code** | **String**| Unique code used to identify the add-on. | |
+| **addOnUpdateInput** | [**AddOnUpdateInput**](AddOnUpdateInput.md)| Add-on payload | |
 
 ### Return type
 
@@ -428,7 +428,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Add-on updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |

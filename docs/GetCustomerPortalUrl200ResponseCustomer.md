@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**portalUrl** | **String** |  |  |
+|**portalUrl** | **String** | An embeddable link for displaying a customer portal |  |
 
 
 

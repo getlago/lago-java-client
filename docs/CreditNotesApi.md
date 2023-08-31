@@ -4,21 +4,21 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createCreditNote**](CreditNotesApi.md#createCreditNote) | **POST** /credit_notes | Create a new Credit note |
-| [**downloadCreditNote**](CreditNotesApi.md#downloadCreditNote) | **POST** /credit_notes/{id}/download | Download an existing credit note |
-| [**findAllCreditNotes**](CreditNotesApi.md#findAllCreditNotes) | **GET** /credit_notes | Find Credit notes |
-| [**findCreditNote**](CreditNotesApi.md#findCreditNote) | **GET** /credit_notes/{id} | Find credit note |
-| [**updateCreditNote**](CreditNotesApi.md#updateCreditNote) | **PUT** /credit_notes/{id} | Update an existing credit note |
-| [**voidCreditNote**](CreditNotesApi.md#voidCreditNote) | **PUT** /credit_notes/{id}/void | Void existing credit note |
+| [**createCreditNote**](CreditNotesApi.md#createCreditNote) | **POST** /credit_notes | Create a credit note |
+| [**downloadCreditNote**](CreditNotesApi.md#downloadCreditNote) | **POST** /credit_notes/{lago_id}/download | Download a credit note PDF |
+| [**findAllCreditNotes**](CreditNotesApi.md#findAllCreditNotes) | **GET** /credit_notes | List all credit notes |
+| [**findCreditNote**](CreditNotesApi.md#findCreditNote) | **GET** /credit_notes/{lago_id} | Retrieve a credit note |
+| [**updateCreditNote**](CreditNotesApi.md#updateCreditNote) | **PUT** /credit_notes/{lago_id} | Update a credit note |
+| [**voidCreditNote**](CreditNotesApi.md#voidCreditNote) | **PUT** /credit_notes/{lago_id}/void | Void a credit note |
 
 
 <a id="createCreditNote"></a>
 # **createCreditNote**
-> CreditNote createCreditNote(creditNoteInput)
+> CreditNote createCreditNote(creditNoteCreateInput)
 
-Create a new Credit note
+Create a credit note
 
-Create a new credit note
+This endpoint creates a new credit note.
 
 ### Example
 ```java
@@ -40,9 +40,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    CreditNoteInput creditNoteInput = new CreditNoteInput(); // CreditNoteInput | Credit note payload
+    CreditNoteCreateInput creditNoteCreateInput = new CreditNoteCreateInput(); // CreditNoteCreateInput | Credit note payload
     try {
-      CreditNote result = apiInstance.createCreditNote(creditNoteInput);
+      CreditNote result = apiInstance.createCreditNote(creditNoteCreateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CreditNotesApi#createCreditNote");
@@ -59,7 +59,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **creditNoteInput** | [**CreditNoteInput**](CreditNoteInput.md)| Credit note payload | |
+| **creditNoteCreateInput** | [**CreditNoteCreateInput**](CreditNoteCreateInput.md)| Credit note payload | |
 
 ### Return type
 
@@ -77,18 +77,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit note created |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
 <a id="downloadCreditNote"></a>
 # **downloadCreditNote**
-> CreditNote downloadCreditNote(id)
+> CreditNote downloadCreditNote(lagoId)
 
-Download an existing credit note
+Download a credit note PDF
 
-Download an existing credit note
+This endpoint downloads the PDF of an existing credit note.
 
 ### Example
 ```java
@@ -110,9 +110,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Credit note
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | The credit note unique identifier, created by Lago.
     try {
-      CreditNote result = apiInstance.downloadCreditNote(id);
+      CreditNote result = apiInstance.downloadCreditNote(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CreditNotesApi#downloadCreditNote");
@@ -129,7 +129,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Credit note | |
+| **lagoId** | **UUID**| The credit note unique identifier, created by Lago. | |
 
 ### Return type
 
@@ -147,7 +147,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit note PDF |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
@@ -155,9 +155,9 @@ public class Example {
 # **findAllCreditNotes**
 > CreditNotes findAllCreditNotes(page, perPage, externalCustomerId)
 
-Find Credit notes
+List all credit notes
 
-Find all credit notes in certain organisation
+This endpoint list all existing credit notes.
 
 ### Example
 ```java
@@ -179,9 +179,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    Integer page = 2; // Integer | Number of page
-    Integer perPage = 20; // Integer | Number of records per page
-    String externalCustomerId = "12345"; // String | External customer ID
+    Integer page = 1; // Integer | Page number.
+    Integer perPage = 20; // Integer | Number of records per page.
+    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | Unique identifier assigned to the customer in your application.
     try {
       CreditNotes result = apiInstance.findAllCreditNotes(page, perPage, externalCustomerId);
       System.out.println(result);
@@ -200,9 +200,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | **Integer**| Number of page | [optional] |
-| **perPage** | **Integer**| Number of records per page | [optional] |
-| **externalCustomerId** | **String**| External customer ID | [optional] |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
+| **externalCustomerId** | **String**| Unique identifier assigned to the customer in your application. | [optional] |
 
 ### Return type
 
@@ -220,16 +220,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit notes |  -  |
 | **401** | Unauthorized error |  -  |
 
 <a id="findCreditNote"></a>
 # **findCreditNote**
-> CreditNote findCreditNote(id)
+> CreditNote findCreditNote(lagoId)
 
-Find credit note
+Retrieve a credit note
 
-Return a single credit note
+This endpoint retrieves an existing credit note.
 
 ### Example
 ```java
@@ -251,9 +251,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    String id = "12345"; // String | Id of the existing credit note
+    String lagoId = "12345"; // String | The credit note unique identifier, created by Lago.
     try {
-      CreditNote result = apiInstance.findCreditNote(id);
+      CreditNote result = apiInstance.findCreditNote(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CreditNotesApi#findCreditNote");
@@ -270,7 +270,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Id of the existing credit note | |
+| **lagoId** | **String**| The credit note unique identifier, created by Lago. | |
 
 ### Return type
 
@@ -288,17 +288,17 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit note |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
 <a id="updateCreditNote"></a>
 # **updateCreditNote**
-> CreditNote updateCreditNote(id, creditNoteUpdateInput)
+> CreditNote updateCreditNote(lagoId, creditNoteUpdateInput)
 
-Update an existing credit note
+Update a credit note
 
-Update an existing credit note
+This endpoint updates an existing credit note.
 
 ### Example
 ```java
@@ -320,10 +320,10 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    String id = "12345"; // String | Id of the existing credit note
-    CreditNoteUpdateInput creditNoteUpdateInput = new CreditNoteUpdateInput(); // CreditNoteUpdateInput | Update an existing credit note
+    String lagoId = "12345"; // String | The credit note unique identifier, created by Lago.
+    CreditNoteUpdateInput creditNoteUpdateInput = new CreditNoteUpdateInput(); // CreditNoteUpdateInput | Credit note update payload
     try {
-      CreditNote result = apiInstance.updateCreditNote(id, creditNoteUpdateInput);
+      CreditNote result = apiInstance.updateCreditNote(lagoId, creditNoteUpdateInput);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CreditNotesApi#updateCreditNote");
@@ -340,8 +340,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Id of the existing credit note | |
-| **creditNoteUpdateInput** | [**CreditNoteUpdateInput**](CreditNoteUpdateInput.md)| Update an existing credit note | |
+| **lagoId** | **String**| The credit note unique identifier, created by Lago. | |
+| **creditNoteUpdateInput** | [**CreditNoteUpdateInput**](CreditNoteUpdateInput.md)| Credit note update payload | |
 
 ### Return type
 
@@ -359,7 +359,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit note updated |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
@@ -367,11 +367,11 @@ public class Example {
 
 <a id="voidCreditNote"></a>
 # **voidCreditNote**
-> CreditNote voidCreditNote(id)
+> CreditNote voidCreditNote(lagoId)
 
-Void existing credit note
+Void a credit note
 
-Void an existing credit note
+This endpoint voids an existing credit note.
 
 ### Example
 ```java
@@ -393,9 +393,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
-    UUID id = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | ID of the existing Lago Credit note
+    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | The credit note unique identifier, created by Lago.
     try {
-      CreditNote result = apiInstance.voidCreditNote(id);
+      CreditNote result = apiInstance.voidCreditNote(lagoId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CreditNotesApi#voidCreditNote");
@@ -412,7 +412,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **UUID**| ID of the existing Lago Credit note | |
+| **lagoId** | **UUID**| The credit note unique identifier, created by Lago. | |
 
 ### Return type
 
@@ -430,7 +430,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Credit note voided |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 | **405** | Not Allowed error |  -  |
