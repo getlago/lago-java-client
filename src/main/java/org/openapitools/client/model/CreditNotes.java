@@ -53,7 +53,7 @@ import org.openapitools.client.JSON;
 /**
  * CreditNotes
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:20:28.589842Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
 public class CreditNotes {
   public static final String SERIALIZED_NAME_CREDIT_NOTES = "credit_notes";
   @SerializedName(SERIALIZED_NAME_CREDIT_NOTES)

@@ -53,7 +53,7 @@ import org.openapitools.client.JSON;
 /**
  * Configuration specific to the payment provider, utilized for billing the customer. This object contains settings and parameters necessary for processing payments and invoicing the customer.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:20:28.589842Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
 public class CustomerBillingConfiguration {
   public static final String SERIALIZED_NAME_INVOICE_GRACE_PERIOD = "invoice_grace_period";
   @SerializedName(SERIALIZED_NAME_INVOICE_GRACE_PERIOD)

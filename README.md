@@ -2,7 +2,7 @@
 
 Lago API documentation
 - API version: 0.46.0-beta
-  - Build date: 2023-08-31T09:20:28.589842Z[Etc/UTC]
+  - Build date: 2023-08-31T09:24:39.843670Z[Etc/UTC]
 
 Lago API allows your application to push customer information and metrics (events) from your application to the billing application.
 

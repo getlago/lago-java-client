@@ -62,7 +62,7 @@ import org.openapitools.client.JSON;
 /**
  * InvoiceObjectExtended
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:20:28.589842Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
 public class InvoiceObjectExtended {
   public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
   @SerializedName(SERIALIZED_NAME_LAGO_ID)

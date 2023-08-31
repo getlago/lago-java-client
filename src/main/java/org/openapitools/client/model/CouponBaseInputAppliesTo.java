@@ -53,7 +53,7 @@ import org.openapitools.client.JSON;
 /**
  * Set coupon limitations to plans or specific metrics.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:20:28.589842Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
 public class CouponBaseInputAppliesTo {
   public static final String SERIALIZED_NAME_PLAN_CODES = "plan_codes";
   @SerializedName(SERIALIZED_NAME_PLAN_CODES)
