@@ -15,47 +15,26 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * FeeUpdateInputFee
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  FeeUpdateInputFee.JSON_PROPERTY_PAYMENT_STATUS
+})
+@JsonTypeName("FeeUpdateInput_fee")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class FeeUpdateInputFee {
   /**
    * The payment status of the fee. Possible values are &#x60;pending&#x60;, &#x60;succeeded&#x60;, &#x60;failed&#x60; or &#x60;refunded&#x60;.
    */
-  @JsonAdapter(PaymentStatusEnum.Adapter.class)
   public enum PaymentStatusEnum {
     PENDING("pending"),
     
@@ -71,6 +50,7 @@ public class FeeUpdateInputFee {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -80,6 +60,7 @@ public class FeeUpdateInputFee {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static PaymentStatusEnum fromValue(String value) {
       for (PaymentStatusEnum b : PaymentStatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -88,23 +69,9 @@ public class FeeUpdateInputFee {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<PaymentStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PaymentStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PaymentStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PaymentStatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_PAYMENT_STATUS = "payment_status";
-  @SerializedName(SERIALIZED_NAME_PAYMENT_STATUS)
+  public static final String JSON_PROPERTY_PAYMENT_STATUS = "payment_status";
   private PaymentStatusEnum paymentStatus;
 
   public FeeUpdateInputFee() {
@@ -121,16 +88,19 @@ public class FeeUpdateInputFee {
    * @return paymentStatus
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaymentStatusEnum getPaymentStatus() {
     return paymentStatus;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
     this.paymentStatus = paymentStatus;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -169,100 +139,5 @@ public class FeeUpdateInputFee {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("payment_status");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("payment_status");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to FeeUpdateInputFee
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!FeeUpdateInputFee.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in FeeUpdateInputFee is not found in the empty JSON string", FeeUpdateInputFee.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!FeeUpdateInputFee.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FeeUpdateInputFee` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : FeeUpdateInputFee.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("payment_status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `payment_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_status").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!FeeUpdateInputFee.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'FeeUpdateInputFee' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<FeeUpdateInputFee> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(FeeUpdateInputFee.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<FeeUpdateInputFee>() {
-           @Override
-           public void write(JsonWriter out, FeeUpdateInputFee value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public FeeUpdateInputFee read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of FeeUpdateInputFee given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of FeeUpdateInputFee
-  * @throws IOException if the JSON string is invalid with respect to FeeUpdateInputFee
-  */
-  public static FeeUpdateInputFee fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, FeeUpdateInputFee.class);
-  }
-
- /**
-  * Convert an instance of FeeUpdateInputFee to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

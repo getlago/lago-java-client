@@ -15,66 +15,45 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.client.model.EventBatchInputEventProperties;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * EventInputEvent
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  EventInputEvent.JSON_PROPERTY_TRANSACTION_ID,
+  EventInputEvent.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  EventInputEvent.JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID,
+  EventInputEvent.JSON_PROPERTY_CODE,
+  EventInputEvent.JSON_PROPERTY_TIMESTAMP,
+  EventInputEvent.JSON_PROPERTY_PROPERTIES
+})
+@JsonTypeName("EventInput_event")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class EventInputEvent {
-  public static final String SERIALIZED_NAME_TRANSACTION_ID = "transaction_id";
-  @SerializedName(SERIALIZED_NAME_TRANSACTION_ID)
+  public static final String JSON_PROPERTY_TRANSACTION_ID = "transaction_id";
   private String transactionId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_SUBSCRIPTION_ID = "external_subscription_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_SUBSCRIPTION_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID = "external_subscription_id";
   private String externalSubscriptionId;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
-  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
+  public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
   private Integer timestamp;
 
-  public static final String SERIALIZED_NAME_PROPERTIES = "properties";
-  @SerializedName(SERIALIZED_NAME_PROPERTIES)
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
   private EventBatchInputEventProperties properties;
 
   public EventInputEvent() {
@@ -91,11 +70,16 @@ public class EventInputEvent {
    * @return transactionId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getTransactionId() {
     return transactionId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTransactionId(String transactionId) {
     this.transactionId = transactionId;
   }
@@ -112,11 +96,16 @@ public class EventInputEvent {
    * @return externalCustomerId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -133,11 +122,16 @@ public class EventInputEvent {
    * @return externalSubscriptionId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getExternalSubscriptionId() {
     return externalSubscriptionId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setExternalSubscriptionId(String externalSubscriptionId) {
     this.externalSubscriptionId = externalSubscriptionId;
   }
@@ -154,11 +148,16 @@ public class EventInputEvent {
    * @return code
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCode(String code) {
     this.code = code;
   }
@@ -175,11 +174,16 @@ public class EventInputEvent {
    * @return timestamp
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getTimestamp() {
     return timestamp;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimestamp(Integer timestamp) {
     this.timestamp = timestamp;
   }
@@ -196,16 +200,19 @@ public class EventInputEvent {
    * @return properties
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public EventBatchInputEventProperties getProperties() {
     return properties;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProperties(EventBatchInputEventProperties properties) {
     this.properties = properties;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -254,115 +261,5 @@ public class EventInputEvent {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("transaction_id");
-    openapiFields.add("external_customer_id");
-    openapiFields.add("external_subscription_id");
-    openapiFields.add("code");
-    openapiFields.add("timestamp");
-    openapiFields.add("properties");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("transaction_id");
-    openapiRequiredFields.add("code");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to EventInputEvent
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!EventInputEvent.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in EventInputEvent is not found in the empty JSON string", EventInputEvent.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!EventInputEvent.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `EventInputEvent` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : EventInputEvent.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("transaction_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `transaction_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("transaction_id").toString()));
-      }
-      if ((jsonObj.get("external_customer_id") != null && !jsonObj.get("external_customer_id").isJsonNull()) && !jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if ((jsonObj.get("external_subscription_id") != null && !jsonObj.get("external_subscription_id").isJsonNull()) && !jsonObj.get("external_subscription_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_subscription_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_subscription_id").toString()));
-      }
-      if (!jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!EventInputEvent.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'EventInputEvent' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<EventInputEvent> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(EventInputEvent.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<EventInputEvent>() {
-           @Override
-           public void write(JsonWriter out, EventInputEvent value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public EventInputEvent read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of EventInputEvent given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of EventInputEvent
-  * @throws IOException if the JSON string is invalid with respect to EventInputEvent
-  */
-  public static EventInputEvent fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, EventInputEvent.class);
-  }
-
- /**
-  * Convert an instance of EventInputEvent to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

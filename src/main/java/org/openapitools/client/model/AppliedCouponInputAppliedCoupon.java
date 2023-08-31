@@ -15,57 +15,43 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.client.model.Currency;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * AppliedCouponInputAppliedCoupon
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_COUPON_CODE,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_FREQUENCY,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_FREQUENCY_DURATION,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_AMOUNT_CENTS,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_AMOUNT_CURRENCY,
+  AppliedCouponInputAppliedCoupon.JSON_PROPERTY_PERCENTAGE_RATE
+})
+@JsonTypeName("AppliedCouponInput_applied_coupon")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class AppliedCouponInputAppliedCoupon {
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
-  public static final String SERIALIZED_NAME_COUPON_CODE = "coupon_code";
-  @SerializedName(SERIALIZED_NAME_COUPON_CODE)
+  public static final String JSON_PROPERTY_COUPON_CODE = "coupon_code";
   private String couponCode;
 
   /**
    * The type of frequency for the coupon. It can have three possible values: &#x60;once&#x60;, &#x60;recurring&#x60; or &#x60;forever&#x60;.  - If set to &#x60;once&#x60;, the coupon is applicable only for a single use. - If set to &#x60;recurring&#x60;, the coupon can be used multiple times for recurring billing periods. - If set to &#x60;forever&#x60;, the coupon has unlimited usage and can be applied indefinitely.
    */
-  @JsonAdapter(FrequencyEnum.Adapter.class)
   public enum FrequencyEnum {
     ONCE("once"),
     
@@ -77,6 +63,7 @@ public class AppliedCouponInputAppliedCoupon {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -86,6 +73,7 @@ public class AppliedCouponInputAppliedCoupon {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static FrequencyEnum fromValue(String value) {
       for (FrequencyEnum b : FrequencyEnum.values()) {
         if (b.value.equals(value)) {
@@ -94,40 +82,22 @@ public class AppliedCouponInputAppliedCoupon {
       }
       return null;
     }
-
-    public static class Adapter extends TypeAdapter<FrequencyEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FrequencyEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FrequencyEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FrequencyEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_FREQUENCY = "frequency";
-  @SerializedName(SERIALIZED_NAME_FREQUENCY)
-  private FrequencyEnum frequency;
+  public static final String JSON_PROPERTY_FREQUENCY = "frequency";
+  private JsonNullable<FrequencyEnum> frequency = JsonNullable.<FrequencyEnum>undefined();
 
-  public static final String SERIALIZED_NAME_FREQUENCY_DURATION = "frequency_duration";
-  @SerializedName(SERIALIZED_NAME_FREQUENCY_DURATION)
-  private Integer frequencyDuration;
+  public static final String JSON_PROPERTY_FREQUENCY_DURATION = "frequency_duration";
+  private JsonNullable<Integer> frequencyDuration = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
-  private Integer amountCents;
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
+  private JsonNullable<Integer> amountCents = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_PERCENTAGE_RATE = "percentage_rate";
-  @SerializedName(SERIALIZED_NAME_PERCENTAGE_RATE)
-  private String percentageRate;
+  public static final String JSON_PROPERTY_PERCENTAGE_RATE = "percentage_rate";
+  private JsonNullable<String> percentageRate = JsonNullable.<String>undefined();
 
   public AppliedCouponInputAppliedCoupon() {
   }
@@ -143,11 +113,16 @@ public class AppliedCouponInputAppliedCoupon {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -164,19 +139,24 @@ public class AppliedCouponInputAppliedCoupon {
    * @return couponCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_COUPON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCouponCode() {
     return couponCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_COUPON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCouponCode(String couponCode) {
     this.couponCode = couponCode;
   }
 
 
   public AppliedCouponInputAppliedCoupon frequency(FrequencyEnum frequency) {
+    this.frequency = JsonNullable.<FrequencyEnum>of(frequency);
     
-    this.frequency = frequency;
     return this;
   }
 
@@ -185,19 +165,32 @@ public class AppliedCouponInputAppliedCoupon {
    * @return frequency
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public FrequencyEnum getFrequency() {
-    return frequency;
+        return frequency.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FREQUENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<FrequencyEnum> getFrequency_JsonNullable() {
+    return frequency;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FREQUENCY)
+  public void setFrequency_JsonNullable(JsonNullable<FrequencyEnum> frequency) {
+    this.frequency = frequency;
+  }
 
   public void setFrequency(FrequencyEnum frequency) {
-    this.frequency = frequency;
+    this.frequency = JsonNullable.<FrequencyEnum>of(frequency);
   }
 
 
   public AppliedCouponInputAppliedCoupon frequencyDuration(Integer frequencyDuration) {
+    this.frequencyDuration = JsonNullable.<Integer>of(frequencyDuration);
     
-    this.frequencyDuration = frequencyDuration;
     return this;
   }
 
@@ -206,19 +199,32 @@ public class AppliedCouponInputAppliedCoupon {
    * @return frequencyDuration
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getFrequencyDuration() {
-    return frequencyDuration;
+        return frequencyDuration.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FREQUENCY_DURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getFrequencyDuration_JsonNullable() {
+    return frequencyDuration;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FREQUENCY_DURATION)
+  public void setFrequencyDuration_JsonNullable(JsonNullable<Integer> frequencyDuration) {
+    this.frequencyDuration = frequencyDuration;
+  }
 
   public void setFrequencyDuration(Integer frequencyDuration) {
-    this.frequencyDuration = frequencyDuration;
+    this.frequencyDuration = JsonNullable.<Integer>of(frequencyDuration);
   }
 
 
   public AppliedCouponInputAppliedCoupon amountCents(Integer amountCents) {
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
     
-    this.amountCents = amountCents;
     return this;
   }
 
@@ -227,13 +233,26 @@ public class AppliedCouponInputAppliedCoupon {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getAmountCents() {
-    return amountCents;
+        return amountCents.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getAmountCents_JsonNullable() {
+    return amountCents;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  public void setAmountCents_JsonNullable(JsonNullable<Integer> amountCents) {
+    this.amountCents = amountCents;
+  }
 
   public void setAmountCents(Integer amountCents) {
-    this.amountCents = amountCents;
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
   }
 
 
@@ -248,19 +267,24 @@ public class AppliedCouponInputAppliedCoupon {
    * @return amountCurrency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
 
 
   public AppliedCouponInputAppliedCoupon percentageRate(String percentageRate) {
+    this.percentageRate = JsonNullable.<String>of(percentageRate);
     
-    this.percentageRate = percentageRate;
     return this;
   }
 
@@ -269,16 +293,27 @@ public class AppliedCouponInputAppliedCoupon {
    * @return percentageRate
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPercentageRate() {
-    return percentageRate;
+        return percentageRate.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PERCENTAGE_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setPercentageRate(String percentageRate) {
+  public JsonNullable<String> getPercentageRate_JsonNullable() {
+    return percentageRate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PERCENTAGE_RATE)
+  public void setPercentageRate_JsonNullable(JsonNullable<String> percentageRate) {
     this.percentageRate = percentageRate;
   }
 
-
+  public void setPercentageRate(String percentageRate) {
+    this.percentageRate = JsonNullable.<String>of(percentageRate);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -291,11 +326,11 @@ public class AppliedCouponInputAppliedCoupon {
     AppliedCouponInputAppliedCoupon appliedCouponInputAppliedCoupon = (AppliedCouponInputAppliedCoupon) o;
     return Objects.equals(this.externalCustomerId, appliedCouponInputAppliedCoupon.externalCustomerId) &&
         Objects.equals(this.couponCode, appliedCouponInputAppliedCoupon.couponCode) &&
-        Objects.equals(this.frequency, appliedCouponInputAppliedCoupon.frequency) &&
-        Objects.equals(this.frequencyDuration, appliedCouponInputAppliedCoupon.frequencyDuration) &&
-        Objects.equals(this.amountCents, appliedCouponInputAppliedCoupon.amountCents) &&
+        equalsNullable(this.frequency, appliedCouponInputAppliedCoupon.frequency) &&
+        equalsNullable(this.frequencyDuration, appliedCouponInputAppliedCoupon.frequencyDuration) &&
+        equalsNullable(this.amountCents, appliedCouponInputAppliedCoupon.amountCents) &&
         Objects.equals(this.amountCurrency, appliedCouponInputAppliedCoupon.amountCurrency) &&
-        Objects.equals(this.percentageRate, appliedCouponInputAppliedCoupon.percentageRate);
+        equalsNullable(this.percentageRate, appliedCouponInputAppliedCoupon.percentageRate);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -304,7 +339,7 @@ public class AppliedCouponInputAppliedCoupon {
 
   @Override
   public int hashCode() {
-    return Objects.hash(externalCustomerId, couponCode, frequency, frequencyDuration, amountCents, amountCurrency, percentageRate);
+    return Objects.hash(externalCustomerId, couponCode, hashCodeNullable(frequency), hashCodeNullable(frequencyDuration), hashCodeNullable(amountCents), amountCurrency, hashCodeNullable(percentageRate));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -340,120 +375,5 @@ public class AppliedCouponInputAppliedCoupon {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("external_customer_id");
-    openapiFields.add("coupon_code");
-    openapiFields.add("frequency");
-    openapiFields.add("frequency_duration");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("percentage_rate");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("coupon_code");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AppliedCouponInputAppliedCoupon
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AppliedCouponInputAppliedCoupon.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AppliedCouponInputAppliedCoupon is not found in the empty JSON string", AppliedCouponInputAppliedCoupon.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!AppliedCouponInputAppliedCoupon.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AppliedCouponInputAppliedCoupon` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : AppliedCouponInputAppliedCoupon.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if (!jsonObj.get("coupon_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `coupon_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("coupon_code").toString()));
-      }
-      if ((jsonObj.get("frequency") != null && !jsonObj.get("frequency").isJsonNull()) && !jsonObj.get("frequency").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `frequency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("frequency").toString()));
-      }
-      // validate the optional field `amount_currency`
-      if (jsonObj.get("amount_currency") != null && !jsonObj.get("amount_currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      }
-      if ((jsonObj.get("percentage_rate") != null && !jsonObj.get("percentage_rate").isJsonNull()) && !jsonObj.get("percentage_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `percentage_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("percentage_rate").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AppliedCouponInputAppliedCoupon.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AppliedCouponInputAppliedCoupon' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AppliedCouponInputAppliedCoupon> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AppliedCouponInputAppliedCoupon.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AppliedCouponInputAppliedCoupon>() {
-           @Override
-           public void write(JsonWriter out, AppliedCouponInputAppliedCoupon value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AppliedCouponInputAppliedCoupon read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of AppliedCouponInputAppliedCoupon given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AppliedCouponInputAppliedCoupon
-  * @throws IOException if the JSON string is invalid with respect to AppliedCouponInputAppliedCoupon
-  */
-  public static AppliedCouponInputAppliedCoupon fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AppliedCouponInputAppliedCoupon.class);
-  }
-
- /**
-  * Convert an instance of AppliedCouponInputAppliedCoupon to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

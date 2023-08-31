@@ -15,54 +15,40 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Configuration specific to the payment provider, utilized for billing the customer. This object contains settings and parameters necessary for processing payments and invoicing the customer.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomerBillingConfiguration.JSON_PROPERTY_INVOICE_GRACE_PERIOD,
+  CustomerBillingConfiguration.JSON_PROPERTY_PAYMENT_PROVIDER,
+  CustomerBillingConfiguration.JSON_PROPERTY_PROVIDER_CUSTOMER_ID,
+  CustomerBillingConfiguration.JSON_PROPERTY_SYNC,
+  CustomerBillingConfiguration.JSON_PROPERTY_SYNC_WITH_PROVIDER,
+  CustomerBillingConfiguration.JSON_PROPERTY_DOCUMENT_LOCALE,
+  CustomerBillingConfiguration.JSON_PROPERTY_PROVIDER_PAYMENT_METHODS
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomerBillingConfiguration {
-  public static final String SERIALIZED_NAME_INVOICE_GRACE_PERIOD = "invoice_grace_period";
-  @SerializedName(SERIALIZED_NAME_INVOICE_GRACE_PERIOD)
+  public static final String JSON_PROPERTY_INVOICE_GRACE_PERIOD = "invoice_grace_period";
   private Integer invoiceGracePeriod;
 
   /**
    * The payment provider utilized to initiate payments for invoices issued by Lago. Accepted values: &#x60;stripe&#x60;, &#x60;adyen&#x60;, &#x60;gocardless&#x60; or null. This field is required if you intend to assign a &#x60;provider_customer_id&#x60;.
    */
-  @JsonAdapter(PaymentProviderEnum.Adapter.class)
   public enum PaymentProviderEnum {
     STRIPE("stripe"),
     
@@ -76,6 +62,7 @@ public class CustomerBillingConfiguration {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -85,6 +72,7 @@ public class CustomerBillingConfiguration {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static PaymentProviderEnum fromValue(String value) {
       for (PaymentProviderEnum b : PaymentProviderEnum.values()) {
         if (b.value.equals(value)) {
@@ -93,44 +81,25 @@ public class CustomerBillingConfiguration {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<PaymentProviderEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PaymentProviderEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PaymentProviderEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PaymentProviderEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_PAYMENT_PROVIDER = "payment_provider";
-  @SerializedName(SERIALIZED_NAME_PAYMENT_PROVIDER)
+  public static final String JSON_PROPERTY_PAYMENT_PROVIDER = "payment_provider";
   private PaymentProviderEnum paymentProvider;
 
-  public static final String SERIALIZED_NAME_PROVIDER_CUSTOMER_ID = "provider_customer_id";
-  @SerializedName(SERIALIZED_NAME_PROVIDER_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_PROVIDER_CUSTOMER_ID = "provider_customer_id";
   private String providerCustomerId;
 
-  public static final String SERIALIZED_NAME_SYNC = "sync";
-  @SerializedName(SERIALIZED_NAME_SYNC)
+  public static final String JSON_PROPERTY_SYNC = "sync";
   private Boolean sync;
 
-  public static final String SERIALIZED_NAME_SYNC_WITH_PROVIDER = "sync_with_provider";
-  @SerializedName(SERIALIZED_NAME_SYNC_WITH_PROVIDER)
+  public static final String JSON_PROPERTY_SYNC_WITH_PROVIDER = "sync_with_provider";
   private Boolean syncWithProvider;
 
-  public static final String SERIALIZED_NAME_DOCUMENT_LOCALE = "document_locale";
-  @SerializedName(SERIALIZED_NAME_DOCUMENT_LOCALE)
+  public static final String JSON_PROPERTY_DOCUMENT_LOCALE = "document_locale";
   private String documentLocale;
 
-  public static final String SERIALIZED_NAME_PROVIDER_PAYMENT_METHODS = "provider_payment_methods";
-  @SerializedName(SERIALIZED_NAME_PROVIDER_PAYMENT_METHODS)
-  private List<String> providerPaymentMethods;
+  public static final String JSON_PROPERTY_PROVIDER_PAYMENT_METHODS = "provider_payment_methods";
+  private JsonNullable<List<String>> providerPaymentMethods = JsonNullable.<List<String>>undefined();
 
   public CustomerBillingConfiguration() {
   }
@@ -146,11 +115,16 @@ public class CustomerBillingConfiguration {
    * @return invoiceGracePeriod
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_INVOICE_GRACE_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getInvoiceGracePeriod() {
     return invoiceGracePeriod;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICE_GRACE_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setInvoiceGracePeriod(Integer invoiceGracePeriod) {
     this.invoiceGracePeriod = invoiceGracePeriod;
   }
@@ -167,11 +141,16 @@ public class CustomerBillingConfiguration {
    * @return paymentProvider
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PROVIDER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public PaymentProviderEnum getPaymentProvider() {
     return paymentProvider;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PROVIDER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPaymentProvider(PaymentProviderEnum paymentProvider) {
     this.paymentProvider = paymentProvider;
   }
@@ -188,11 +167,16 @@ public class CustomerBillingConfiguration {
    * @return providerCustomerId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PROVIDER_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getProviderCustomerId() {
     return providerCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PROVIDER_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProviderCustomerId(String providerCustomerId) {
     this.providerCustomerId = providerCustomerId;
   }
@@ -209,11 +193,16 @@ public class CustomerBillingConfiguration {
    * @return sync
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SYNC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getSync() {
     return sync;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SYNC)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSync(Boolean sync) {
     this.sync = sync;
   }
@@ -230,11 +219,16 @@ public class CustomerBillingConfiguration {
    * @return syncWithProvider
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SYNC_WITH_PROVIDER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getSyncWithProvider() {
     return syncWithProvider;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SYNC_WITH_PROVIDER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSyncWithProvider(Boolean syncWithProvider) {
     this.syncWithProvider = syncWithProvider;
   }
@@ -251,27 +245,36 @@ public class CustomerBillingConfiguration {
    * @return documentLocale
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_LOCALE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getDocumentLocale() {
     return documentLocale;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_LOCALE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDocumentLocale(String documentLocale) {
     this.documentLocale = documentLocale;
   }
 
 
   public CustomerBillingConfiguration providerPaymentMethods(List<String> providerPaymentMethods) {
+    this.providerPaymentMethods = JsonNullable.<List<String>>of(providerPaymentMethods);
     
-    this.providerPaymentMethods = providerPaymentMethods;
     return this;
   }
 
   public CustomerBillingConfiguration addProviderPaymentMethodsItem(String providerPaymentMethodsItem) {
-    if (this.providerPaymentMethods == null) {
-      this.providerPaymentMethods = new ArrayList<>();
+    if (this.providerPaymentMethods == null || !this.providerPaymentMethods.isPresent()) {
+      this.providerPaymentMethods = JsonNullable.<List<String>>of(new ArrayList<>());
     }
-    this.providerPaymentMethods.add(providerPaymentMethodsItem);
+    try {
+      this.providerPaymentMethods.get().add(providerPaymentMethodsItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -280,16 +283,27 @@ public class CustomerBillingConfiguration {
    * @return providerPaymentMethods
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public List<String> getProviderPaymentMethods() {
-    return providerPaymentMethods;
+        return providerPaymentMethods.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PROVIDER_PAYMENT_METHODS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setProviderPaymentMethods(List<String> providerPaymentMethods) {
+  public JsonNullable<List<String>> getProviderPaymentMethods_JsonNullable() {
+    return providerPaymentMethods;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PROVIDER_PAYMENT_METHODS)
+  public void setProviderPaymentMethods_JsonNullable(JsonNullable<List<String>> providerPaymentMethods) {
     this.providerPaymentMethods = providerPaymentMethods;
   }
 
-
+  public void setProviderPaymentMethods(List<String> providerPaymentMethods) {
+    this.providerPaymentMethods = JsonNullable.<List<String>>of(providerPaymentMethods);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -306,7 +320,7 @@ public class CustomerBillingConfiguration {
         Objects.equals(this.sync, customerBillingConfiguration.sync) &&
         Objects.equals(this.syncWithProvider, customerBillingConfiguration.syncWithProvider) &&
         Objects.equals(this.documentLocale, customerBillingConfiguration.documentLocale) &&
-        Objects.equals(this.providerPaymentMethods, customerBillingConfiguration.providerPaymentMethods);
+        equalsNullable(this.providerPaymentMethods, customerBillingConfiguration.providerPaymentMethods);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -315,7 +329,7 @@ public class CustomerBillingConfiguration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(invoiceGracePeriod, paymentProvider, providerCustomerId, sync, syncWithProvider, documentLocale, providerPaymentMethods);
+    return Objects.hash(invoiceGracePeriod, paymentProvider, providerCustomerId, sync, syncWithProvider, documentLocale, hashCodeNullable(providerPaymentMethods));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -351,108 +365,5 @@ public class CustomerBillingConfiguration {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("invoice_grace_period");
-    openapiFields.add("payment_provider");
-    openapiFields.add("provider_customer_id");
-    openapiFields.add("sync");
-    openapiFields.add("sync_with_provider");
-    openapiFields.add("document_locale");
-    openapiFields.add("provider_payment_methods");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomerBillingConfiguration
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomerBillingConfiguration.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomerBillingConfiguration is not found in the empty JSON string", CustomerBillingConfiguration.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomerBillingConfiguration.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomerBillingConfiguration` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("payment_provider") != null && !jsonObj.get("payment_provider").isJsonNull()) && !jsonObj.get("payment_provider").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `payment_provider` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_provider").toString()));
-      }
-      if ((jsonObj.get("provider_customer_id") != null && !jsonObj.get("provider_customer_id").isJsonNull()) && !jsonObj.get("provider_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `provider_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("provider_customer_id").toString()));
-      }
-      if ((jsonObj.get("document_locale") != null && !jsonObj.get("document_locale").isJsonNull()) && !jsonObj.get("document_locale").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `document_locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("document_locale").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("provider_payment_methods") != null && !jsonObj.get("provider_payment_methods").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `provider_payment_methods` to be an array in the JSON string but got `%s`", jsonObj.get("provider_payment_methods").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomerBillingConfiguration.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomerBillingConfiguration' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomerBillingConfiguration> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomerBillingConfiguration.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomerBillingConfiguration>() {
-           @Override
-           public void write(JsonWriter out, CustomerBillingConfiguration value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomerBillingConfiguration read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomerBillingConfiguration given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomerBillingConfiguration
-  * @throws IOException if the JSON string is invalid with respect to CustomerBillingConfiguration
-  */
-  public static CustomerBillingConfiguration fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomerBillingConfiguration.class);
-  }
-
- /**
-  * Convert an instance of CustomerBillingConfiguration to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

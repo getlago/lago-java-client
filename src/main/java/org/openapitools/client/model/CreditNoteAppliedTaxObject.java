@@ -15,89 +15,67 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.client.model.Currency;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreditNoteAppliedTaxObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_LAGO_CREDIT_NOTE_ID,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_BASE_AMOUNT_CENTS,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_LAGO_ID,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_LAGO_TAX_ID,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_TAX_NAME,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_TAX_CODE,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_TAX_RATE,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_TAX_DESCRIPTION,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_AMOUNT_CENTS,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_AMOUNT_CURRENCY,
+  CreditNoteAppliedTaxObject.JSON_PROPERTY_CREATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreditNoteAppliedTaxObject {
-  public static final String SERIALIZED_NAME_LAGO_CREDIT_NOTE_ID = "lago_credit_note_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_CREDIT_NOTE_ID)
+  public static final String JSON_PROPERTY_LAGO_CREDIT_NOTE_ID = "lago_credit_note_id";
   private UUID lagoCreditNoteId;
 
-  public static final String SERIALIZED_NAME_BASE_AMOUNT_CENTS = "base_amount_cents";
-  @SerializedName(SERIALIZED_NAME_BASE_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_BASE_AMOUNT_CENTS = "base_amount_cents";
   private Integer baseAmountCents;
 
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_LAGO_TAX_ID = "lago_tax_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_TAX_ID)
+  public static final String JSON_PROPERTY_LAGO_TAX_ID = "lago_tax_id";
   private UUID lagoTaxId;
 
-  public static final String SERIALIZED_NAME_TAX_NAME = "tax_name";
-  @SerializedName(SERIALIZED_NAME_TAX_NAME)
+  public static final String JSON_PROPERTY_TAX_NAME = "tax_name";
   private String taxName;
 
-  public static final String SERIALIZED_NAME_TAX_CODE = "tax_code";
-  @SerializedName(SERIALIZED_NAME_TAX_CODE)
+  public static final String JSON_PROPERTY_TAX_CODE = "tax_code";
   private String taxCode;
 
-  public static final String SERIALIZED_NAME_TAX_RATE = "tax_rate";
-  @SerializedName(SERIALIZED_NAME_TAX_RATE)
+  public static final String JSON_PROPERTY_TAX_RATE = "tax_rate";
   private BigDecimal taxRate;
 
-  public static final String SERIALIZED_NAME_TAX_DESCRIPTION = "tax_description";
-  @SerializedName(SERIALIZED_NAME_TAX_DESCRIPTION)
+  public static final String JSON_PROPERTY_TAX_DESCRIPTION = "tax_description";
   private String taxDescription;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   public CreditNoteAppliedTaxObject() {
@@ -114,11 +92,16 @@ public class CreditNoteAppliedTaxObject {
    * @return lagoCreditNoteId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LAGO_CREDIT_NOTE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public UUID getLagoCreditNoteId() {
     return lagoCreditNoteId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_CREDIT_NOTE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLagoCreditNoteId(UUID lagoCreditNoteId) {
     this.lagoCreditNoteId = lagoCreditNoteId;
   }
@@ -135,11 +118,16 @@ public class CreditNoteAppliedTaxObject {
    * @return baseAmountCents
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BASE_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getBaseAmountCents() {
     return baseAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BASE_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBaseAmountCents(Integer baseAmountCents) {
     this.baseAmountCents = baseAmountCents;
   }
@@ -156,11 +144,16 @@ public class CreditNoteAppliedTaxObject {
    * @return lagoId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -177,11 +170,16 @@ public class CreditNoteAppliedTaxObject {
    * @return lagoTaxId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LAGO_TAX_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public UUID getLagoTaxId() {
     return lagoTaxId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_TAX_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLagoTaxId(UUID lagoTaxId) {
     this.lagoTaxId = lagoTaxId;
   }
@@ -198,11 +196,16 @@ public class CreditNoteAppliedTaxObject {
    * @return taxName
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getTaxName() {
     return taxName;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxName(String taxName) {
     this.taxName = taxName;
   }
@@ -219,11 +222,16 @@ public class CreditNoteAppliedTaxObject {
    * @return taxCode
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getTaxCode() {
     return taxCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxCode(String taxCode) {
     this.taxCode = taxCode;
   }
@@ -240,11 +248,16 @@ public class CreditNoteAppliedTaxObject {
    * @return taxRate
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public BigDecimal getTaxRate() {
     return taxRate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxRate(BigDecimal taxRate) {
     this.taxRate = taxRate;
   }
@@ -261,11 +274,16 @@ public class CreditNoteAppliedTaxObject {
    * @return taxDescription
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getTaxDescription() {
     return taxDescription;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxDescription(String taxDescription) {
     this.taxDescription = taxDescription;
   }
@@ -282,11 +300,16 @@ public class CreditNoteAppliedTaxObject {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -303,11 +326,16 @@ public class CreditNoteAppliedTaxObject {
    * @return amountCurrency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -324,16 +352,19 @@ public class CreditNoteAppliedTaxObject {
    * @return createdAt
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -392,119 +423,5 @@ public class CreditNoteAppliedTaxObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_tax_id");
-    openapiFields.add("tax_name");
-    openapiFields.add("tax_code");
-    openapiFields.add("tax_rate");
-    openapiFields.add("tax_description");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("created_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreditNoteAppliedTaxObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreditNoteAppliedTaxObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreditNoteAppliedTaxObject is not found in the empty JSON string", CreditNoteAppliedTaxObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreditNoteAppliedTaxObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreditNoteAppliedTaxObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("lago_credit_note_id") != null && !jsonObj.get("lago_credit_note_id").isJsonNull()) && !jsonObj.get("lago_credit_note_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_credit_note_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_credit_note_id").toString()));
-      }
-      if ((jsonObj.get("lago_id") != null && !jsonObj.get("lago_id").isJsonNull()) && !jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if ((jsonObj.get("lago_tax_id") != null && !jsonObj.get("lago_tax_id").isJsonNull()) && !jsonObj.get("lago_tax_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_tax_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_tax_id").toString()));
-      }
-      if ((jsonObj.get("tax_name") != null && !jsonObj.get("tax_name").isJsonNull()) && !jsonObj.get("tax_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_name").toString()));
-      }
-      if ((jsonObj.get("tax_code") != null && !jsonObj.get("tax_code").isJsonNull()) && !jsonObj.get("tax_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_code").toString()));
-      }
-      if ((jsonObj.get("tax_description") != null && !jsonObj.get("tax_description").isJsonNull()) && !jsonObj.get("tax_description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_description").toString()));
-      }
-      // validate the optional field `amount_currency`
-      if (jsonObj.get("amount_currency") != null && !jsonObj.get("amount_currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreditNoteAppliedTaxObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreditNoteAppliedTaxObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreditNoteAppliedTaxObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreditNoteAppliedTaxObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreditNoteAppliedTaxObject>() {
-           @Override
-           public void write(JsonWriter out, CreditNoteAppliedTaxObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreditNoteAppliedTaxObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreditNoteAppliedTaxObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreditNoteAppliedTaxObject
-  * @throws IOException if the JSON string is invalid with respect to CreditNoteAppliedTaxObject
-  */
-  public static CreditNoteAppliedTaxObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreditNoteAppliedTaxObject.class);
-  }
-
- /**
-  * Convert an instance of CreditNoteAppliedTaxObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

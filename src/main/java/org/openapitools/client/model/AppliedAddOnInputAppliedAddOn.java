@@ -15,59 +15,41 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.client.model.Currency;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * AppliedAddOnInputAppliedAddOn
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  AppliedAddOnInputAppliedAddOn.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  AppliedAddOnInputAppliedAddOn.JSON_PROPERTY_ADD_ON_CODE,
+  AppliedAddOnInputAppliedAddOn.JSON_PROPERTY_AMOUNT_CENTS,
+  AppliedAddOnInputAppliedAddOn.JSON_PROPERTY_AMOUNT_CURRENCY
+})
+@JsonTypeName("AppliedAddOnInput_applied_add_on")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class AppliedAddOnInputAppliedAddOn {
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
-  public static final String SERIALIZED_NAME_ADD_ON_CODE = "add_on_code";
-  @SerializedName(SERIALIZED_NAME_ADD_ON_CODE)
+  public static final String JSON_PROPERTY_ADD_ON_CODE = "add_on_code";
   private String addOnCode;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
-  private Integer amountCents;
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
+  private JsonNullable<Integer> amountCents = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
   public AppliedAddOnInputAppliedAddOn() {
@@ -84,11 +66,16 @@ public class AppliedAddOnInputAppliedAddOn {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -105,19 +92,24 @@ public class AppliedAddOnInputAppliedAddOn {
    * @return addOnCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddOnCode() {
     return addOnCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddOnCode(String addOnCode) {
     this.addOnCode = addOnCode;
   }
 
 
   public AppliedAddOnInputAppliedAddOn amountCents(Integer amountCents) {
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
     
-    this.amountCents = amountCents;
     return this;
   }
 
@@ -126,13 +118,26 @@ public class AppliedAddOnInputAppliedAddOn {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getAmountCents() {
-    return amountCents;
+        return amountCents.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getAmountCents_JsonNullable() {
+    return amountCents;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  public void setAmountCents_JsonNullable(JsonNullable<Integer> amountCents) {
+    this.amountCents = amountCents;
+  }
 
   public void setAmountCents(Integer amountCents) {
-    this.amountCents = amountCents;
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
   }
 
 
@@ -147,16 +152,19 @@ public class AppliedAddOnInputAppliedAddOn {
    * @return amountCurrency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -169,7 +177,7 @@ public class AppliedAddOnInputAppliedAddOn {
     AppliedAddOnInputAppliedAddOn appliedAddOnInputAppliedAddOn = (AppliedAddOnInputAppliedAddOn) o;
     return Objects.equals(this.externalCustomerId, appliedAddOnInputAppliedAddOn.externalCustomerId) &&
         Objects.equals(this.addOnCode, appliedAddOnInputAppliedAddOn.addOnCode) &&
-        Objects.equals(this.amountCents, appliedAddOnInputAppliedAddOn.amountCents) &&
+        equalsNullable(this.amountCents, appliedAddOnInputAppliedAddOn.amountCents) &&
         Objects.equals(this.amountCurrency, appliedAddOnInputAppliedAddOn.amountCurrency);
   }
 
@@ -179,7 +187,7 @@ public class AppliedAddOnInputAppliedAddOn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(externalCustomerId, addOnCode, amountCents, amountCurrency);
+    return Objects.hash(externalCustomerId, addOnCode, hashCodeNullable(amountCents), amountCurrency);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -212,111 +220,5 @@ public class AppliedAddOnInputAppliedAddOn {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("external_customer_id");
-    openapiFields.add("add_on_code");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("add_on_code");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AppliedAddOnInputAppliedAddOn
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AppliedAddOnInputAppliedAddOn.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AppliedAddOnInputAppliedAddOn is not found in the empty JSON string", AppliedAddOnInputAppliedAddOn.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!AppliedAddOnInputAppliedAddOn.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AppliedAddOnInputAppliedAddOn` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : AppliedAddOnInputAppliedAddOn.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if (!jsonObj.get("add_on_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `add_on_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("add_on_code").toString()));
-      }
-      // validate the optional field `amount_currency`
-      if (jsonObj.get("amount_currency") != null && !jsonObj.get("amount_currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AppliedAddOnInputAppliedAddOn.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AppliedAddOnInputAppliedAddOn' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AppliedAddOnInputAppliedAddOn> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AppliedAddOnInputAppliedAddOn.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AppliedAddOnInputAppliedAddOn>() {
-           @Override
-           public void write(JsonWriter out, AppliedAddOnInputAppliedAddOn value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AppliedAddOnInputAppliedAddOn read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of AppliedAddOnInputAppliedAddOn given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AppliedAddOnInputAppliedAddOn
-  * @throws IOException if the JSON string is invalid with respect to AppliedAddOnInputAppliedAddOn
-  */
-  public static AppliedAddOnInputAppliedAddOn fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AppliedAddOnInputAppliedAddOn.class);
-  }
-
- /**
-  * Convert an instance of AppliedAddOnInputAppliedAddOn to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

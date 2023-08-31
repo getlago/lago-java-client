@@ -15,53 +15,31 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.PaginationMeta;
 import org.openapitools.client.model.WalletObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * WalletsPaginated
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  WalletsPaginated.JSON_PROPERTY_WALLETS,
+  WalletsPaginated.JSON_PROPERTY_META
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class WalletsPaginated {
-  public static final String SERIALIZED_NAME_WALLETS = "wallets";
-  @SerializedName(SERIALIZED_NAME_WALLETS)
+  public static final String JSON_PROPERTY_WALLETS = "wallets";
   private List<WalletObject> wallets = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_META = "meta";
-  @SerializedName(SERIALIZED_NAME_META)
+  public static final String JSON_PROPERTY_META = "meta";
   private PaginationMeta meta;
 
   public WalletsPaginated() {
@@ -86,11 +64,16 @@ public class WalletsPaginated {
    * @return wallets
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_WALLETS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<WalletObject> getWallets() {
     return wallets;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_WALLETS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setWallets(List<WalletObject> wallets) {
     this.wallets = wallets;
   }
@@ -107,16 +90,19 @@ public class WalletsPaginated {
    * @return meta
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_META)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaginationMeta getMeta() {
     return meta;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_META)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMeta(PaginationMeta meta) {
     this.meta = meta;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -157,111 +143,5 @@ public class WalletsPaginated {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("wallets");
-    openapiFields.add("meta");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("wallets");
-    openapiRequiredFields.add("meta");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to WalletsPaginated
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!WalletsPaginated.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in WalletsPaginated is not found in the empty JSON string", WalletsPaginated.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!WalletsPaginated.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `WalletsPaginated` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : WalletsPaginated.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the json data is an array
-      if (!jsonObj.get("wallets").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `wallets` to be an array in the JSON string but got `%s`", jsonObj.get("wallets").toString()));
-      }
-
-      JsonArray jsonArraywallets = jsonObj.getAsJsonArray("wallets");
-      // validate the required field `wallets` (array)
-      for (int i = 0; i < jsonArraywallets.size(); i++) {
-        WalletObject.validateJsonElement(jsonArraywallets.get(i));
-      };
-      // validate the required field `meta`
-      PaginationMeta.validateJsonElement(jsonObj.get("meta"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!WalletsPaginated.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'WalletsPaginated' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<WalletsPaginated> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(WalletsPaginated.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<WalletsPaginated>() {
-           @Override
-           public void write(JsonWriter out, WalletsPaginated value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public WalletsPaginated read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of WalletsPaginated given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of WalletsPaginated
-  * @throws IOException if the JSON string is invalid with respect to WalletsPaginated
-  */
-  public static WalletsPaginated fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, WalletsPaginated.class);
-  }
-
- /**
-  * Convert an instance of WalletsPaginated to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

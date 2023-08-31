@@ -15,46 +15,24 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.client.model.AppliedAddOnObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * AppliedAddOn
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  AppliedAddOn.JSON_PROPERTY_APPLIED_ADD_ON
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class AppliedAddOn {
-  public static final String SERIALIZED_NAME_APPLIED_ADD_ON = "applied_add_on";
-  @SerializedName(SERIALIZED_NAME_APPLIED_ADD_ON)
+  public static final String JSON_PROPERTY_APPLIED_ADD_ON = "applied_add_on";
   private AppliedAddOnObject appliedAddOn;
 
   public AppliedAddOn() {
@@ -71,16 +49,19 @@ public class AppliedAddOn {
    * @return appliedAddOn
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_APPLIED_ADD_ON)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public AppliedAddOnObject getAppliedAddOn() {
     return appliedAddOn;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_APPLIED_ADD_ON)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAppliedAddOn(AppliedAddOnObject appliedAddOn) {
     this.appliedAddOn = appliedAddOn;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -119,99 +100,5 @@ public class AppliedAddOn {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("applied_add_on");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("applied_add_on");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AppliedAddOn
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AppliedAddOn.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AppliedAddOn is not found in the empty JSON string", AppliedAddOn.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!AppliedAddOn.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AppliedAddOn` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : AppliedAddOn.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `applied_add_on`
-      AppliedAddOnObject.validateJsonElement(jsonObj.get("applied_add_on"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AppliedAddOn.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AppliedAddOn' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AppliedAddOn> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AppliedAddOn.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AppliedAddOn>() {
-           @Override
-           public void write(JsonWriter out, AppliedAddOn value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AppliedAddOn read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of AppliedAddOn given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AppliedAddOn
-  * @throws IOException if the JSON string is invalid with respect to AppliedAddOn
-  */
-  public static AppliedAddOn fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AppliedAddOn.class);
-  }
-
- /**
-  * Convert an instance of AppliedAddOn to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

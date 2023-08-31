@@ -15,12 +15,11 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,139 +30,121 @@ import org.openapitools.client.model.CustomerBillingConfiguration;
 import org.openapitools.client.model.CustomerMetadata;
 import org.openapitools.client.model.Timezone;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CustomerObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomerObject.JSON_PROPERTY_LAGO_ID,
+  CustomerObject.JSON_PROPERTY_SEQUENTIAL_ID,
+  CustomerObject.JSON_PROPERTY_SLUG,
+  CustomerObject.JSON_PROPERTY_EXTERNAL_ID,
+  CustomerObject.JSON_PROPERTY_ADDRESS_LINE1,
+  CustomerObject.JSON_PROPERTY_ADDRESS_LINE2,
+  CustomerObject.JSON_PROPERTY_APPLICABLE_TIMEZONE,
+  CustomerObject.JSON_PROPERTY_CITY,
+  CustomerObject.JSON_PROPERTY_COUNTRY,
+  CustomerObject.JSON_PROPERTY_CURRENCY,
+  CustomerObject.JSON_PROPERTY_EMAIL,
+  CustomerObject.JSON_PROPERTY_LEGAL_NAME,
+  CustomerObject.JSON_PROPERTY_LEGAL_NUMBER,
+  CustomerObject.JSON_PROPERTY_LOGO_URL,
+  CustomerObject.JSON_PROPERTY_NAME,
+  CustomerObject.JSON_PROPERTY_PHONE,
+  CustomerObject.JSON_PROPERTY_STATE,
+  CustomerObject.JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER,
+  CustomerObject.JSON_PROPERTY_TIMEZONE,
+  CustomerObject.JSON_PROPERTY_URL,
+  CustomerObject.JSON_PROPERTY_ZIPCODE,
+  CustomerObject.JSON_PROPERTY_NET_PAYMENT_TERM,
+  CustomerObject.JSON_PROPERTY_CREATED_AT,
+  CustomerObject.JSON_PROPERTY_UPDATED_AT,
+  CustomerObject.JSON_PROPERTY_BILLING_CONFIGURATION,
+  CustomerObject.JSON_PROPERTY_METADATA
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomerObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_SEQUENTIAL_ID = "sequential_id";
-  @SerializedName(SERIALIZED_NAME_SEQUENTIAL_ID)
+  public static final String JSON_PROPERTY_SEQUENTIAL_ID = "sequential_id";
   private Integer sequentialId;
 
-  public static final String SERIALIZED_NAME_SLUG = "slug";
-  @SerializedName(SERIALIZED_NAME_SLUG)
+  public static final String JSON_PROPERTY_SLUG = "slug";
   private String slug;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_ID = "external_id";
   private String externalId;
 
-  public static final String SERIALIZED_NAME_ADDRESS_LINE1 = "address_line1";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE1)
-  private String addressLine1;
+  public static final String JSON_PROPERTY_ADDRESS_LINE1 = "address_line1";
+  private JsonNullable<String> addressLine1 = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_ADDRESS_LINE2 = "address_line2";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE2)
-  private String addressLine2;
+  public static final String JSON_PROPERTY_ADDRESS_LINE2 = "address_line2";
+  private JsonNullable<String> addressLine2 = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_APPLICABLE_TIMEZONE = "applicable_timezone";
-  @SerializedName(SERIALIZED_NAME_APPLICABLE_TIMEZONE)
+  public static final String JSON_PROPERTY_APPLICABLE_TIMEZONE = "applicable_timezone";
   private Timezone applicableTimezone;
 
-  public static final String SERIALIZED_NAME_CITY = "city";
-  @SerializedName(SERIALIZED_NAME_CITY)
-  private String city;
+  public static final String JSON_PROPERTY_CITY = "city";
+  private JsonNullable<String> city = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_COUNTRY = "country";
-  @SerializedName(SERIALIZED_NAME_COUNTRY)
+  public static final String JSON_PROPERTY_COUNTRY = "country";
   private Country country;
 
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
   private Currency currency;
 
-  public static final String SERIALIZED_NAME_EMAIL = "email";
-  @SerializedName(SERIALIZED_NAME_EMAIL)
-  private String email;
+  public static final String JSON_PROPERTY_EMAIL = "email";
+  private JsonNullable<String> email = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_LEGAL_NAME = "legal_name";
-  @SerializedName(SERIALIZED_NAME_LEGAL_NAME)
-  private String legalName;
+  public static final String JSON_PROPERTY_LEGAL_NAME = "legal_name";
+  private JsonNullable<String> legalName = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_LEGAL_NUMBER = "legal_number";
-  @SerializedName(SERIALIZED_NAME_LEGAL_NUMBER)
-  private String legalNumber;
+  public static final String JSON_PROPERTY_LEGAL_NUMBER = "legal_number";
+  private JsonNullable<String> legalNumber = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_LOGO_URL = "logo_url";
-  @SerializedName(SERIALIZED_NAME_LOGO_URL)
-  private String logoUrl;
+  public static final String JSON_PROPERTY_LOGO_URL = "logo_url";
+  private JsonNullable<String> logoUrl = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String JSON_PROPERTY_NAME = "name";
+  private JsonNullable<String> name = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_PHONE = "phone";
-  @SerializedName(SERIALIZED_NAME_PHONE)
-  private String phone;
+  public static final String JSON_PROPERTY_PHONE = "phone";
+  private JsonNullable<String> phone = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_STATE = "state";
-  @SerializedName(SERIALIZED_NAME_STATE)
-  private String state;
+  public static final String JSON_PROPERTY_STATE = "state";
+  private JsonNullable<String> state = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_TAX_IDENTIFICATION_NUMBER = "tax_identification_number";
-  @SerializedName(SERIALIZED_NAME_TAX_IDENTIFICATION_NUMBER)
-  private String taxIdentificationNumber;
+  public static final String JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER = "tax_identification_number";
+  private JsonNullable<String> taxIdentificationNumber = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_TIMEZONE = "timezone";
-  @SerializedName(SERIALIZED_NAME_TIMEZONE)
+  public static final String JSON_PROPERTY_TIMEZONE = "timezone";
   private Timezone timezone;
 
-  public static final String SERIALIZED_NAME_URL = "url";
-  @SerializedName(SERIALIZED_NAME_URL)
-  private String url;
+  public static final String JSON_PROPERTY_URL = "url";
+  private JsonNullable<String> url = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_ZIPCODE = "zipcode";
-  @SerializedName(SERIALIZED_NAME_ZIPCODE)
-  private String zipcode;
+  public static final String JSON_PROPERTY_ZIPCODE = "zipcode";
+  private JsonNullable<String> zipcode = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_NET_PAYMENT_TERM = "net_payment_term";
-  @SerializedName(SERIALIZED_NAME_NET_PAYMENT_TERM)
-  private Integer netPaymentTerm;
+  public static final String JSON_PROPERTY_NET_PAYMENT_TERM = "net_payment_term";
+  private JsonNullable<Integer> netPaymentTerm = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
-  public static final String SERIALIZED_NAME_UPDATED_AT = "updated_at";
-  @SerializedName(SERIALIZED_NAME_UPDATED_AT)
+  public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
   private OffsetDateTime updatedAt;
 
-  public static final String SERIALIZED_NAME_BILLING_CONFIGURATION = "billing_configuration";
-  @SerializedName(SERIALIZED_NAME_BILLING_CONFIGURATION)
+  public static final String JSON_PROPERTY_BILLING_CONFIGURATION = "billing_configuration";
   private CustomerBillingConfiguration billingConfiguration;
 
-  public static final String SERIALIZED_NAME_METADATA = "metadata";
-  @SerializedName(SERIALIZED_NAME_METADATA)
+  public static final String JSON_PROPERTY_METADATA = "metadata";
   private List<CustomerMetadata> metadata;
 
   public CustomerObject() {
@@ -180,11 +161,16 @@ public class CustomerObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -201,11 +187,16 @@ public class CustomerObject {
    * @return sequentialId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SEQUENTIAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getSequentialId() {
     return sequentialId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SEQUENTIAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSequentialId(Integer sequentialId) {
     this.sequentialId = sequentialId;
   }
@@ -222,11 +213,16 @@ public class CustomerObject {
    * @return slug
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SLUG)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getSlug() {
     return slug;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SLUG)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSlug(String slug) {
     this.slug = slug;
   }
@@ -243,19 +239,24 @@ public class CustomerObject {
    * @return externalId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalId() {
     return externalId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalId(String externalId) {
     this.externalId = externalId;
   }
 
 
   public CustomerObject addressLine1(String addressLine1) {
+    this.addressLine1 = JsonNullable.<String>of(addressLine1);
     
-    this.addressLine1 = addressLine1;
     return this;
   }
 
@@ -264,19 +265,32 @@ public class CustomerObject {
    * @return addressLine1
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getAddressLine1() {
-    return addressLine1;
+        return addressLine1.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getAddressLine1_JsonNullable() {
+    return addressLine1;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  public void setAddressLine1_JsonNullable(JsonNullable<String> addressLine1) {
+    this.addressLine1 = addressLine1;
+  }
 
   public void setAddressLine1(String addressLine1) {
-    this.addressLine1 = addressLine1;
+    this.addressLine1 = JsonNullable.<String>of(addressLine1);
   }
 
 
   public CustomerObject addressLine2(String addressLine2) {
+    this.addressLine2 = JsonNullable.<String>of(addressLine2);
     
-    this.addressLine2 = addressLine2;
     return this;
   }
 
@@ -285,13 +299,26 @@ public class CustomerObject {
    * @return addressLine2
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getAddressLine2() {
-    return addressLine2;
+        return addressLine2.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getAddressLine2_JsonNullable() {
+    return addressLine2;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  public void setAddressLine2_JsonNullable(JsonNullable<String> addressLine2) {
+    this.addressLine2 = addressLine2;
+  }
 
   public void setAddressLine2(String addressLine2) {
-    this.addressLine2 = addressLine2;
+    this.addressLine2 = JsonNullable.<String>of(addressLine2);
   }
 
 
@@ -306,19 +333,24 @@ public class CustomerObject {
    * @return applicableTimezone
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_APPLICABLE_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Timezone getApplicableTimezone() {
     return applicableTimezone;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_APPLICABLE_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setApplicableTimezone(Timezone applicableTimezone) {
     this.applicableTimezone = applicableTimezone;
   }
 
 
   public CustomerObject city(String city) {
+    this.city = JsonNullable.<String>of(city);
     
-    this.city = city;
     return this;
   }
 
@@ -327,13 +359,26 @@ public class CustomerObject {
    * @return city
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getCity() {
-    return city;
+        return city.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getCity_JsonNullable() {
+    return city;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CITY)
+  public void setCity_JsonNullable(JsonNullable<String> city) {
+    this.city = city;
+  }
 
   public void setCity(String city) {
-    this.city = city;
+    this.city = JsonNullable.<String>of(city);
   }
 
 
@@ -348,11 +393,16 @@ public class CustomerObject {
    * @return country
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Country getCountry() {
     return country;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCountry(Country country) {
     this.country = country;
   }
@@ -369,19 +419,24 @@ public class CustomerObject {
    * @return currency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getCurrency() {
     return currency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCurrency(Currency currency) {
     this.currency = currency;
   }
 
 
   public CustomerObject email(String email) {
+    this.email = JsonNullable.<String>of(email);
     
-    this.email = email;
     return this;
   }
 
@@ -390,19 +445,32 @@ public class CustomerObject {
    * @return email
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getEmail() {
-    return email;
+        return email.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EMAIL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getEmail_JsonNullable() {
+    return email;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EMAIL)
+  public void setEmail_JsonNullable(JsonNullable<String> email) {
+    this.email = email;
+  }
 
   public void setEmail(String email) {
-    this.email = email;
+    this.email = JsonNullable.<String>of(email);
   }
 
 
   public CustomerObject legalName(String legalName) {
+    this.legalName = JsonNullable.<String>of(legalName);
     
-    this.legalName = legalName;
     return this;
   }
 
@@ -411,19 +479,32 @@ public class CustomerObject {
    * @return legalName
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getLegalName() {
-    return legalName;
+        return legalName.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LEGAL_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getLegalName_JsonNullable() {
+    return legalName;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LEGAL_NAME)
+  public void setLegalName_JsonNullable(JsonNullable<String> legalName) {
+    this.legalName = legalName;
+  }
 
   public void setLegalName(String legalName) {
-    this.legalName = legalName;
+    this.legalName = JsonNullable.<String>of(legalName);
   }
 
 
   public CustomerObject legalNumber(String legalNumber) {
+    this.legalNumber = JsonNullable.<String>of(legalNumber);
     
-    this.legalNumber = legalNumber;
     return this;
   }
 
@@ -432,19 +513,32 @@ public class CustomerObject {
    * @return legalNumber
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getLegalNumber() {
-    return legalNumber;
+        return legalNumber.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LEGAL_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getLegalNumber_JsonNullable() {
+    return legalNumber;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LEGAL_NUMBER)
+  public void setLegalNumber_JsonNullable(JsonNullable<String> legalNumber) {
+    this.legalNumber = legalNumber;
+  }
 
   public void setLegalNumber(String legalNumber) {
-    this.legalNumber = legalNumber;
+    this.legalNumber = JsonNullable.<String>of(legalNumber);
   }
 
 
   public CustomerObject logoUrl(String logoUrl) {
+    this.logoUrl = JsonNullable.<String>of(logoUrl);
     
-    this.logoUrl = logoUrl;
     return this;
   }
 
@@ -453,19 +547,32 @@ public class CustomerObject {
    * @return logoUrl
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getLogoUrl() {
-    return logoUrl;
+        return logoUrl.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LOGO_URL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getLogoUrl_JsonNullable() {
+    return logoUrl;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LOGO_URL)
+  public void setLogoUrl_JsonNullable(JsonNullable<String> logoUrl) {
+    this.logoUrl = logoUrl;
+  }
 
   public void setLogoUrl(String logoUrl) {
-    this.logoUrl = logoUrl;
+    this.logoUrl = JsonNullable.<String>of(logoUrl);
   }
 
 
   public CustomerObject name(String name) {
+    this.name = JsonNullable.<String>of(name);
     
-    this.name = name;
     return this;
   }
 
@@ -474,19 +581,32 @@ public class CustomerObject {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getName() {
-    return name;
+        return name.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getName_JsonNullable() {
+    return name;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NAME)
+  public void setName_JsonNullable(JsonNullable<String> name) {
+    this.name = name;
+  }
 
   public void setName(String name) {
-    this.name = name;
+    this.name = JsonNullable.<String>of(name);
   }
 
 
   public CustomerObject phone(String phone) {
+    this.phone = JsonNullable.<String>of(phone);
     
-    this.phone = phone;
     return this;
   }
 
@@ -495,19 +615,32 @@ public class CustomerObject {
    * @return phone
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPhone() {
-    return phone;
+        return phone.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PHONE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getPhone_JsonNullable() {
+    return phone;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PHONE)
+  public void setPhone_JsonNullable(JsonNullable<String> phone) {
+    this.phone = phone;
+  }
 
   public void setPhone(String phone) {
-    this.phone = phone;
+    this.phone = JsonNullable.<String>of(phone);
   }
 
 
   public CustomerObject state(String state) {
+    this.state = JsonNullable.<String>of(state);
     
-    this.state = state;
     return this;
   }
 
@@ -516,19 +649,32 @@ public class CustomerObject {
    * @return state
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getState() {
-    return state;
+        return state.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getState_JsonNullable() {
+    return state;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_STATE)
+  public void setState_JsonNullable(JsonNullable<String> state) {
+    this.state = state;
+  }
 
   public void setState(String state) {
-    this.state = state;
+    this.state = JsonNullable.<String>of(state);
   }
 
 
   public CustomerObject taxIdentificationNumber(String taxIdentificationNumber) {
+    this.taxIdentificationNumber = JsonNullable.<String>of(taxIdentificationNumber);
     
-    this.taxIdentificationNumber = taxIdentificationNumber;
     return this;
   }
 
@@ -537,13 +683,26 @@ public class CustomerObject {
    * @return taxIdentificationNumber
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getTaxIdentificationNumber() {
-    return taxIdentificationNumber;
+        return taxIdentificationNumber.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getTaxIdentificationNumber_JsonNullable() {
+    return taxIdentificationNumber;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER)
+  public void setTaxIdentificationNumber_JsonNullable(JsonNullable<String> taxIdentificationNumber) {
+    this.taxIdentificationNumber = taxIdentificationNumber;
+  }
 
   public void setTaxIdentificationNumber(String taxIdentificationNumber) {
-    this.taxIdentificationNumber = taxIdentificationNumber;
+    this.taxIdentificationNumber = JsonNullable.<String>of(taxIdentificationNumber);
   }
 
 
@@ -558,19 +717,24 @@ public class CustomerObject {
    * @return timezone
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Timezone getTimezone() {
     return timezone;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimezone(Timezone timezone) {
     this.timezone = timezone;
   }
 
 
   public CustomerObject url(String url) {
+    this.url = JsonNullable.<String>of(url);
     
-    this.url = url;
     return this;
   }
 
@@ -579,19 +743,32 @@ public class CustomerObject {
    * @return url
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getUrl() {
-    return url;
+        return url.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_URL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getUrl_JsonNullable() {
+    return url;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_URL)
+  public void setUrl_JsonNullable(JsonNullable<String> url) {
+    this.url = url;
+  }
 
   public void setUrl(String url) {
-    this.url = url;
+    this.url = JsonNullable.<String>of(url);
   }
 
 
   public CustomerObject zipcode(String zipcode) {
+    this.zipcode = JsonNullable.<String>of(zipcode);
     
-    this.zipcode = zipcode;
     return this;
   }
 
@@ -600,19 +777,32 @@ public class CustomerObject {
    * @return zipcode
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getZipcode() {
-    return zipcode;
+        return zipcode.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ZIPCODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getZipcode_JsonNullable() {
+    return zipcode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ZIPCODE)
+  public void setZipcode_JsonNullable(JsonNullable<String> zipcode) {
+    this.zipcode = zipcode;
+  }
 
   public void setZipcode(String zipcode) {
-    this.zipcode = zipcode;
+    this.zipcode = JsonNullable.<String>of(zipcode);
   }
 
 
   public CustomerObject netPaymentTerm(Integer netPaymentTerm) {
+    this.netPaymentTerm = JsonNullable.<Integer>of(netPaymentTerm);
     
-    this.netPaymentTerm = netPaymentTerm;
     return this;
   }
 
@@ -621,13 +811,26 @@ public class CustomerObject {
    * @return netPaymentTerm
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getNetPaymentTerm() {
-    return netPaymentTerm;
+        return netPaymentTerm.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getNetPaymentTerm_JsonNullable() {
+    return netPaymentTerm;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  public void setNetPaymentTerm_JsonNullable(JsonNullable<Integer> netPaymentTerm) {
+    this.netPaymentTerm = netPaymentTerm;
+  }
 
   public void setNetPaymentTerm(Integer netPaymentTerm) {
-    this.netPaymentTerm = netPaymentTerm;
+    this.netPaymentTerm = JsonNullable.<Integer>of(netPaymentTerm);
   }
 
 
@@ -642,11 +845,16 @@ public class CustomerObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
@@ -663,11 +871,16 @@ public class CustomerObject {
    * @return updatedAt
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_UPDATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public OffsetDateTime getUpdatedAt() {
     return updatedAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_UPDATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setUpdatedAt(OffsetDateTime updatedAt) {
     this.updatedAt = updatedAt;
   }
@@ -684,11 +897,16 @@ public class CustomerObject {
    * @return billingConfiguration
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BILLING_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public CustomerBillingConfiguration getBillingConfiguration() {
     return billingConfiguration;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLING_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBillingConfiguration(CustomerBillingConfiguration billingConfiguration) {
     this.billingConfiguration = billingConfiguration;
   }
@@ -713,16 +931,19 @@ public class CustomerObject {
    * @return metadata
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<CustomerMetadata> getMetadata() {
     return metadata;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMetadata(List<CustomerMetadata> metadata) {
     this.metadata = metadata;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -737,24 +958,24 @@ public class CustomerObject {
         Objects.equals(this.sequentialId, customerObject.sequentialId) &&
         Objects.equals(this.slug, customerObject.slug) &&
         Objects.equals(this.externalId, customerObject.externalId) &&
-        Objects.equals(this.addressLine1, customerObject.addressLine1) &&
-        Objects.equals(this.addressLine2, customerObject.addressLine2) &&
+        equalsNullable(this.addressLine1, customerObject.addressLine1) &&
+        equalsNullable(this.addressLine2, customerObject.addressLine2) &&
         Objects.equals(this.applicableTimezone, customerObject.applicableTimezone) &&
-        Objects.equals(this.city, customerObject.city) &&
+        equalsNullable(this.city, customerObject.city) &&
         Objects.equals(this.country, customerObject.country) &&
         Objects.equals(this.currency, customerObject.currency) &&
-        Objects.equals(this.email, customerObject.email) &&
-        Objects.equals(this.legalName, customerObject.legalName) &&
-        Objects.equals(this.legalNumber, customerObject.legalNumber) &&
-        Objects.equals(this.logoUrl, customerObject.logoUrl) &&
-        Objects.equals(this.name, customerObject.name) &&
-        Objects.equals(this.phone, customerObject.phone) &&
-        Objects.equals(this.state, customerObject.state) &&
-        Objects.equals(this.taxIdentificationNumber, customerObject.taxIdentificationNumber) &&
+        equalsNullable(this.email, customerObject.email) &&
+        equalsNullable(this.legalName, customerObject.legalName) &&
+        equalsNullable(this.legalNumber, customerObject.legalNumber) &&
+        equalsNullable(this.logoUrl, customerObject.logoUrl) &&
+        equalsNullable(this.name, customerObject.name) &&
+        equalsNullable(this.phone, customerObject.phone) &&
+        equalsNullable(this.state, customerObject.state) &&
+        equalsNullable(this.taxIdentificationNumber, customerObject.taxIdentificationNumber) &&
         Objects.equals(this.timezone, customerObject.timezone) &&
-        Objects.equals(this.url, customerObject.url) &&
-        Objects.equals(this.zipcode, customerObject.zipcode) &&
-        Objects.equals(this.netPaymentTerm, customerObject.netPaymentTerm) &&
+        equalsNullable(this.url, customerObject.url) &&
+        equalsNullable(this.zipcode, customerObject.zipcode) &&
+        equalsNullable(this.netPaymentTerm, customerObject.netPaymentTerm) &&
         Objects.equals(this.createdAt, customerObject.createdAt) &&
         Objects.equals(this.updatedAt, customerObject.updatedAt) &&
         Objects.equals(this.billingConfiguration, customerObject.billingConfiguration) &&
@@ -767,7 +988,7 @@ public class CustomerObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, sequentialId, slug, externalId, addressLine1, addressLine2, applicableTimezone, city, country, currency, email, legalName, legalNumber, logoUrl, name, phone, state, taxIdentificationNumber, timezone, url, zipcode, netPaymentTerm, createdAt, updatedAt, billingConfiguration, metadata);
+    return Objects.hash(lagoId, sequentialId, slug, externalId, hashCodeNullable(addressLine1), hashCodeNullable(addressLine2), applicableTimezone, hashCodeNullable(city), country, currency, hashCodeNullable(email), hashCodeNullable(legalName), hashCodeNullable(legalNumber), hashCodeNullable(logoUrl), hashCodeNullable(name), hashCodeNullable(phone), hashCodeNullable(state), hashCodeNullable(taxIdentificationNumber), timezone, hashCodeNullable(url), hashCodeNullable(zipcode), hashCodeNullable(netPaymentTerm), createdAt, updatedAt, billingConfiguration, metadata);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -822,207 +1043,5 @@ public class CustomerObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("sequential_id");
-    openapiFields.add("slug");
-    openapiFields.add("external_id");
-    openapiFields.add("address_line1");
-    openapiFields.add("address_line2");
-    openapiFields.add("applicable_timezone");
-    openapiFields.add("city");
-    openapiFields.add("country");
-    openapiFields.add("currency");
-    openapiFields.add("email");
-    openapiFields.add("legal_name");
-    openapiFields.add("legal_number");
-    openapiFields.add("logo_url");
-    openapiFields.add("name");
-    openapiFields.add("phone");
-    openapiFields.add("state");
-    openapiFields.add("tax_identification_number");
-    openapiFields.add("timezone");
-    openapiFields.add("url");
-    openapiFields.add("zipcode");
-    openapiFields.add("net_payment_term");
-    openapiFields.add("created_at");
-    openapiFields.add("updated_at");
-    openapiFields.add("billing_configuration");
-    openapiFields.add("metadata");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("sequential_id");
-    openapiRequiredFields.add("slug");
-    openapiRequiredFields.add("external_id");
-    openapiRequiredFields.add("applicable_timezone");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomerObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomerObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomerObject is not found in the empty JSON string", CustomerObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomerObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomerObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CustomerObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("slug").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `slug` to be a primitive type in the JSON string but got `%s`", jsonObj.get("slug").toString()));
-      }
-      if (!jsonObj.get("external_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
-      }
-      if ((jsonObj.get("address_line1") != null && !jsonObj.get("address_line1").isJsonNull()) && !jsonObj.get("address_line1").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `address_line1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address_line1").toString()));
-      }
-      if ((jsonObj.get("address_line2") != null && !jsonObj.get("address_line2").isJsonNull()) && !jsonObj.get("address_line2").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `address_line2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address_line2").toString()));
-      }
-      // validate the required field `applicable_timezone`
-      Timezone.validateJsonElement(jsonObj.get("applicable_timezone"));
-      if ((jsonObj.get("city") != null && !jsonObj.get("city").isJsonNull()) && !jsonObj.get("city").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `city` to be a primitive type in the JSON string but got `%s`", jsonObj.get("city").toString()));
-      }
-      // validate the optional field `country`
-      if (jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) {
-        Country.validateJsonElement(jsonObj.get("country"));
-      }
-      // validate the optional field `currency`
-      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("currency"));
-      }
-      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
-      }
-      if ((jsonObj.get("legal_name") != null && !jsonObj.get("legal_name").isJsonNull()) && !jsonObj.get("legal_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `legal_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legal_name").toString()));
-      }
-      if ((jsonObj.get("legal_number") != null && !jsonObj.get("legal_number").isJsonNull()) && !jsonObj.get("legal_number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `legal_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legal_number").toString()));
-      }
-      if ((jsonObj.get("logo_url") != null && !jsonObj.get("logo_url").isJsonNull()) && !jsonObj.get("logo_url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `logo_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_url").toString()));
-      }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if ((jsonObj.get("phone") != null && !jsonObj.get("phone").isJsonNull()) && !jsonObj.get("phone").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `phone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("phone").toString()));
-      }
-      if ((jsonObj.get("state") != null && !jsonObj.get("state").isJsonNull()) && !jsonObj.get("state").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `state` to be a primitive type in the JSON string but got `%s`", jsonObj.get("state").toString()));
-      }
-      if ((jsonObj.get("tax_identification_number") != null && !jsonObj.get("tax_identification_number").isJsonNull()) && !jsonObj.get("tax_identification_number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_identification_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_identification_number").toString()));
-      }
-      // validate the optional field `timezone`
-      if (jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) {
-        Timezone.validateJsonElement(jsonObj.get("timezone"));
-      }
-      if ((jsonObj.get("url") != null && !jsonObj.get("url").isJsonNull()) && !jsonObj.get("url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
-      }
-      if ((jsonObj.get("zipcode") != null && !jsonObj.get("zipcode").isJsonNull()) && !jsonObj.get("zipcode").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `zipcode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("zipcode").toString()));
-      }
-      // validate the optional field `billing_configuration`
-      if (jsonObj.get("billing_configuration") != null && !jsonObj.get("billing_configuration").isJsonNull()) {
-        CustomerBillingConfiguration.validateJsonElement(jsonObj.get("billing_configuration"));
-      }
-      if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
-        JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
-        if (jsonArraymetadata != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("metadata").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `metadata` to be an array in the JSON string but got `%s`", jsonObj.get("metadata").toString()));
-          }
-
-          // validate the optional field `metadata` (array)
-          for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            CustomerMetadata.validateJsonElement(jsonArraymetadata.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomerObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomerObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomerObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomerObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomerObject>() {
-           @Override
-           public void write(JsonWriter out, CustomerObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomerObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomerObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomerObject
-  * @throws IOException if the JSON string is invalid with respect to CustomerObject
-  */
-  public static CustomerObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomerObject.class);
-  }
-
- /**
-  * Convert an instance of CustomerObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

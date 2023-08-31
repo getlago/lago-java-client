@@ -15,12 +15,11 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,57 +27,43 @@ import java.util.UUID;
 import org.openapitools.client.model.ChargeObjectProperties;
 import org.openapitools.client.model.GroupPropertiesObject;
 import org.openapitools.client.model.TaxObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * ChargeObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  ChargeObject.JSON_PROPERTY_LAGO_ID,
+  ChargeObject.JSON_PROPERTY_LAGO_BILLABLE_METRIC_ID,
+  ChargeObject.JSON_PROPERTY_BILLABLE_METRIC_CODE,
+  ChargeObject.JSON_PROPERTY_CREATED_AT,
+  ChargeObject.JSON_PROPERTY_CHARGE_MODEL,
+  ChargeObject.JSON_PROPERTY_PAY_IN_ADVANCE,
+  ChargeObject.JSON_PROPERTY_INVOICEABLE,
+  ChargeObject.JSON_PROPERTY_PRORATED,
+  ChargeObject.JSON_PROPERTY_MIN_AMOUNT_CENTS,
+  ChargeObject.JSON_PROPERTY_PROPERTIES,
+  ChargeObject.JSON_PROPERTY_GROUP_PROPERTIES,
+  ChargeObject.JSON_PROPERTY_TAXES
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class ChargeObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_LAGO_BILLABLE_METRIC_ID = "lago_billable_metric_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_BILLABLE_METRIC_ID)
+  public static final String JSON_PROPERTY_LAGO_BILLABLE_METRIC_ID = "lago_billable_metric_id";
   private UUID lagoBillableMetricId;
 
-  public static final String SERIALIZED_NAME_BILLABLE_METRIC_CODE = "billable_metric_code";
-  @SerializedName(SERIALIZED_NAME_BILLABLE_METRIC_CODE)
+  public static final String JSON_PROPERTY_BILLABLE_METRIC_CODE = "billable_metric_code";
   private String billableMetricCode;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   /**
    * Specifies the pricing model used for the calculation of the final fee. It can be &#x60;standard&#x60;, &#x60;graduated&#x60;, &#x60;graduated_percentage&#x60;, &#x60;package&#x60;, &#x60;percentage&#x60; or &#x60;volume&#x60;.
    */
-  @JsonAdapter(ChargeModelEnum.Adapter.class)
   public enum ChargeModelEnum {
     STANDARD("standard"),
     
@@ -98,6 +83,7 @@ public class ChargeObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -107,6 +93,7 @@ public class ChargeObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static ChargeModelEnum fromValue(String value) {
       for (ChargeModelEnum b : ChargeModelEnum.values()) {
         if (b.value.equals(value)) {
@@ -115,51 +102,30 @@ public class ChargeObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<ChargeModelEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ChargeModelEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ChargeModelEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ChargeModelEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_CHARGE_MODEL = "charge_model";
-  @SerializedName(SERIALIZED_NAME_CHARGE_MODEL)
+  public static final String JSON_PROPERTY_CHARGE_MODEL = "charge_model";
   private ChargeModelEnum chargeModel;
 
-  public static final String SERIALIZED_NAME_PAY_IN_ADVANCE = "pay_in_advance";
-  @SerializedName(SERIALIZED_NAME_PAY_IN_ADVANCE)
+  public static final String JSON_PROPERTY_PAY_IN_ADVANCE = "pay_in_advance";
   private Boolean payInAdvance;
 
-  public static final String SERIALIZED_NAME_INVOICEABLE = "invoiceable";
-  @SerializedName(SERIALIZED_NAME_INVOICEABLE)
+  public static final String JSON_PROPERTY_INVOICEABLE = "invoiceable";
   private Boolean invoiceable;
 
-  public static final String SERIALIZED_NAME_PRORATED = "prorated";
-  @SerializedName(SERIALIZED_NAME_PRORATED)
+  public static final String JSON_PROPERTY_PRORATED = "prorated";
   private Boolean prorated;
 
-  public static final String SERIALIZED_NAME_MIN_AMOUNT_CENTS = "min_amount_cents";
-  @SerializedName(SERIALIZED_NAME_MIN_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_MIN_AMOUNT_CENTS = "min_amount_cents";
   private Integer minAmountCents;
 
-  public static final String SERIALIZED_NAME_PROPERTIES = "properties";
-  @SerializedName(SERIALIZED_NAME_PROPERTIES)
+  public static final String JSON_PROPERTY_PROPERTIES = "properties";
   private ChargeObjectProperties properties;
 
-  public static final String SERIALIZED_NAME_GROUP_PROPERTIES = "group_properties";
-  @SerializedName(SERIALIZED_NAME_GROUP_PROPERTIES)
+  public static final String JSON_PROPERTY_GROUP_PROPERTIES = "group_properties";
   private List<GroupPropertiesObject> groupProperties;
 
-  public static final String SERIALIZED_NAME_TAXES = "taxes";
-  @SerializedName(SERIALIZED_NAME_TAXES)
+  public static final String JSON_PROPERTY_TAXES = "taxes";
   private List<TaxObject> taxes;
 
   public ChargeObject() {
@@ -176,11 +142,16 @@ public class ChargeObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -197,11 +168,16 @@ public class ChargeObject {
    * @return lagoBillableMetricId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_BILLABLE_METRIC_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoBillableMetricId() {
     return lagoBillableMetricId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_BILLABLE_METRIC_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoBillableMetricId(UUID lagoBillableMetricId) {
     this.lagoBillableMetricId = lagoBillableMetricId;
   }
@@ -218,11 +194,16 @@ public class ChargeObject {
    * @return billableMetricCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getBillableMetricCode() {
     return billableMetricCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setBillableMetricCode(String billableMetricCode) {
     this.billableMetricCode = billableMetricCode;
   }
@@ -239,11 +220,16 @@ public class ChargeObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
@@ -260,11 +246,16 @@ public class ChargeObject {
    * @return chargeModel
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CHARGE_MODEL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ChargeModelEnum getChargeModel() {
     return chargeModel;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CHARGE_MODEL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setChargeModel(ChargeModelEnum chargeModel) {
     this.chargeModel = chargeModel;
   }
@@ -281,11 +272,16 @@ public class ChargeObject {
    * @return payInAdvance
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getPayInAdvance() {
     return payInAdvance;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPayInAdvance(Boolean payInAdvance) {
     this.payInAdvance = payInAdvance;
   }
@@ -302,11 +298,16 @@ public class ChargeObject {
    * @return invoiceable
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_INVOICEABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getInvoiceable() {
     return invoiceable;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICEABLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setInvoiceable(Boolean invoiceable) {
     this.invoiceable = invoiceable;
   }
@@ -323,11 +324,16 @@ public class ChargeObject {
    * @return prorated
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PRORATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getProrated() {
     return prorated;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PRORATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProrated(Boolean prorated) {
     this.prorated = prorated;
   }
@@ -344,11 +350,16 @@ public class ChargeObject {
    * @return minAmountCents
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_MIN_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getMinAmountCents() {
     return minAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_MIN_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMinAmountCents(Integer minAmountCents) {
     this.minAmountCents = minAmountCents;
   }
@@ -365,11 +376,16 @@ public class ChargeObject {
    * @return properties
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public ChargeObjectProperties getProperties() {
     return properties;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProperties(ChargeObjectProperties properties) {
     this.properties = properties;
   }
@@ -394,11 +410,16 @@ public class ChargeObject {
    * @return groupProperties
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_GROUP_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<GroupPropertiesObject> getGroupProperties() {
     return groupProperties;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_GROUP_PROPERTIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroupProperties(List<GroupPropertiesObject> groupProperties) {
     this.groupProperties = groupProperties;
   }
@@ -423,16 +444,19 @@ public class ChargeObject {
    * @return taxes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<TaxObject> getTaxes() {
     return taxes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxes(List<TaxObject> taxes) {
     this.taxes = taxes;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -493,156 +517,5 @@ public class ChargeObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_billable_metric_id");
-    openapiFields.add("billable_metric_code");
-    openapiFields.add("created_at");
-    openapiFields.add("charge_model");
-    openapiFields.add("pay_in_advance");
-    openapiFields.add("invoiceable");
-    openapiFields.add("prorated");
-    openapiFields.add("min_amount_cents");
-    openapiFields.add("properties");
-    openapiFields.add("group_properties");
-    openapiFields.add("taxes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("lago_billable_metric_id");
-    openapiRequiredFields.add("billable_metric_code");
-    openapiRequiredFields.add("created_at");
-    openapiRequiredFields.add("charge_model");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to ChargeObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ChargeObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in ChargeObject is not found in the empty JSON string", ChargeObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!ChargeObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ChargeObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : ChargeObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("lago_billable_metric_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_billable_metric_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_billable_metric_id").toString()));
-      }
-      if (!jsonObj.get("billable_metric_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `billable_metric_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("billable_metric_code").toString()));
-      }
-      if (!jsonObj.get("charge_model").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `charge_model` to be a primitive type in the JSON string but got `%s`", jsonObj.get("charge_model").toString()));
-      }
-      // validate the optional field `properties`
-      if (jsonObj.get("properties") != null && !jsonObj.get("properties").isJsonNull()) {
-        ChargeObjectProperties.validateJsonElement(jsonObj.get("properties"));
-      }
-      if (jsonObj.get("group_properties") != null && !jsonObj.get("group_properties").isJsonNull()) {
-        JsonArray jsonArraygroupProperties = jsonObj.getAsJsonArray("group_properties");
-        if (jsonArraygroupProperties != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("group_properties").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `group_properties` to be an array in the JSON string but got `%s`", jsonObj.get("group_properties").toString()));
-          }
-
-          // validate the optional field `group_properties` (array)
-          for (int i = 0; i < jsonArraygroupProperties.size(); i++) {
-            GroupPropertiesObject.validateJsonElement(jsonArraygroupProperties.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("taxes") != null && !jsonObj.get("taxes").isJsonNull()) {
-        JsonArray jsonArraytaxes = jsonObj.getAsJsonArray("taxes");
-        if (jsonArraytaxes != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("taxes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `taxes` to be an array in the JSON string but got `%s`", jsonObj.get("taxes").toString()));
-          }
-
-          // validate the optional field `taxes` (array)
-          for (int i = 0; i < jsonArraytaxes.size(); i++) {
-            TaxObject.validateJsonElement(jsonArraytaxes.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ChargeObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ChargeObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ChargeObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ChargeObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ChargeObject>() {
-           @Override
-           public void write(JsonWriter out, ChargeObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ChargeObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of ChargeObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ChargeObject
-  * @throws IOException if the JSON string is invalid with respect to ChargeObject
-  */
-  public static ChargeObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ChargeObject.class);
-  }
-
- /**
-  * Convert an instance of ChargeObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -15,69 +15,50 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.Currency;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * AddOnBaseInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  AddOnBaseInput.JSON_PROPERTY_NAME,
+  AddOnBaseInput.JSON_PROPERTY_CODE,
+  AddOnBaseInput.JSON_PROPERTY_AMOUNT_CENTS,
+  AddOnBaseInput.JSON_PROPERTY_AMOUNT_CURRENCY,
+  AddOnBaseInput.JSON_PROPERTY_DESCRIPTION,
+  AddOnBaseInput.JSON_PROPERTY_TAX_CODES
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class AddOnBaseInput {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  private JsonNullable<String> description = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_TAX_CODES = "tax_codes";
-  @SerializedName(SERIALIZED_NAME_TAX_CODES)
+  public static final String JSON_PROPERTY_TAX_CODES = "tax_codes";
   private List<String> taxCodes;
 
   public AddOnBaseInput() {
@@ -94,11 +75,16 @@ public class AddOnBaseInput {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -115,11 +101,16 @@ public class AddOnBaseInput {
    * @return code
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCode(String code) {
     this.code = code;
   }
@@ -136,11 +127,16 @@ public class AddOnBaseInput {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -157,19 +153,24 @@ public class AddOnBaseInput {
    * @return amountCurrency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
 
 
   public AddOnBaseInput description(String description) {
+    this.description = JsonNullable.<String>of(description);
     
-    this.description = description;
     return this;
   }
 
@@ -178,13 +179,26 @@ public class AddOnBaseInput {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getDescription() {
-    return description;
+        return description.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getDescription_JsonNullable() {
+    return description;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  public void setDescription_JsonNullable(JsonNullable<String> description) {
+    this.description = description;
+  }
 
   public void setDescription(String description) {
-    this.description = description;
+    this.description = JsonNullable.<String>of(description);
   }
 
 
@@ -207,16 +221,19 @@ public class AddOnBaseInput {
    * @return taxCodes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<String> getTaxCodes() {
     return taxCodes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxCodes(List<String> taxCodes) {
     this.taxCodes = taxCodes;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -231,7 +248,7 @@ public class AddOnBaseInput {
         Objects.equals(this.code, addOnBaseInput.code) &&
         Objects.equals(this.amountCents, addOnBaseInput.amountCents) &&
         Objects.equals(this.amountCurrency, addOnBaseInput.amountCurrency) &&
-        Objects.equals(this.description, addOnBaseInput.description) &&
+        equalsNullable(this.description, addOnBaseInput.description) &&
         Objects.equals(this.taxCodes, addOnBaseInput.taxCodes);
   }
 
@@ -241,7 +258,7 @@ public class AddOnBaseInput {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, code, amountCents, amountCurrency, description, taxCodes);
+    return Objects.hash(name, code, amountCents, amountCurrency, hashCodeNullable(description), taxCodes);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -276,111 +293,5 @@ public class AddOnBaseInput {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("name");
-    openapiFields.add("code");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("description");
-    openapiFields.add("tax_codes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AddOnBaseInput
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AddOnBaseInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AddOnBaseInput is not found in the empty JSON string", AddOnBaseInput.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!AddOnBaseInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AddOnBaseInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if ((jsonObj.get("code") != null && !jsonObj.get("code").isJsonNull()) && !jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      // validate the optional field `amount_currency`
-      if (jsonObj.get("amount_currency") != null && !jsonObj.get("amount_currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("tax_codes") != null && !jsonObj.get("tax_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_codes` to be an array in the JSON string but got `%s`", jsonObj.get("tax_codes").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AddOnBaseInput.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AddOnBaseInput' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AddOnBaseInput> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AddOnBaseInput.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AddOnBaseInput>() {
-           @Override
-           public void write(JsonWriter out, AddOnBaseInput value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AddOnBaseInput read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of AddOnBaseInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AddOnBaseInput
-  * @throws IOException if the JSON string is invalid with respect to AddOnBaseInput
-  */
-  public static AddOnBaseInput fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AddOnBaseInput.class);
-  }
-
- /**
-  * Convert an instance of AddOnBaseInput to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

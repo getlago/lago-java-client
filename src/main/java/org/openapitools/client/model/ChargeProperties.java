@@ -15,95 +15,76 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.ChargePropertiesGraduatedPercentageRangesInner;
 import org.openapitools.client.model.ChargePropertiesGraduatedRangesInner;
 import org.openapitools.client.model.ChargePropertiesVolumeRangesInner;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * ChargeProperties
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  ChargeProperties.JSON_PROPERTY_GRADUATED_RANGES,
+  ChargeProperties.JSON_PROPERTY_GRADUATED_PERCENTAGE_RANGES,
+  ChargeProperties.JSON_PROPERTY_AMOUNT,
+  ChargeProperties.JSON_PROPERTY_FREE_UNITS,
+  ChargeProperties.JSON_PROPERTY_PACKAGE_SIZE,
+  ChargeProperties.JSON_PROPERTY_RATE,
+  ChargeProperties.JSON_PROPERTY_FIXED_AMOUNT,
+  ChargeProperties.JSON_PROPERTY_FREE_UNITS_PER_EVENTS,
+  ChargeProperties.JSON_PROPERTY_FREE_UNITS_PER_TOTAL_AGGREGATION,
+  ChargeProperties.JSON_PROPERTY_PER_TRANSACTION_MAX_AMOUNT,
+  ChargeProperties.JSON_PROPERTY_PER_TRANSACTION_MIN_AMOUNT,
+  ChargeProperties.JSON_PROPERTY_VOLUME_RANGES
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class ChargeProperties {
-  public static final String SERIALIZED_NAME_GRADUATED_RANGES = "graduated_ranges";
-  @SerializedName(SERIALIZED_NAME_GRADUATED_RANGES)
+  public static final String JSON_PROPERTY_GRADUATED_RANGES = "graduated_ranges";
   private List<ChargePropertiesGraduatedRangesInner> graduatedRanges;
 
-  public static final String SERIALIZED_NAME_GRADUATED_PERCENTAGE_RANGES = "graduated_percentage_ranges";
-  @SerializedName(SERIALIZED_NAME_GRADUATED_PERCENTAGE_RANGES)
+  public static final String JSON_PROPERTY_GRADUATED_PERCENTAGE_RANGES = "graduated_percentage_ranges";
   private List<ChargePropertiesGraduatedPercentageRangesInner> graduatedPercentageRanges;
 
-  public static final String SERIALIZED_NAME_AMOUNT = "amount";
-  @SerializedName(SERIALIZED_NAME_AMOUNT)
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
   private String amount;
 
-  public static final String SERIALIZED_NAME_FREE_UNITS = "free_units";
-  @SerializedName(SERIALIZED_NAME_FREE_UNITS)
+  public static final String JSON_PROPERTY_FREE_UNITS = "free_units";
   private Integer freeUnits;
 
-  public static final String SERIALIZED_NAME_PACKAGE_SIZE = "package_size";
-  @SerializedName(SERIALIZED_NAME_PACKAGE_SIZE)
+  public static final String JSON_PROPERTY_PACKAGE_SIZE = "package_size";
   private Integer packageSize;
 
-  public static final String SERIALIZED_NAME_RATE = "rate";
-  @SerializedName(SERIALIZED_NAME_RATE)
+  public static final String JSON_PROPERTY_RATE = "rate";
   private String rate;
 
-  public static final String SERIALIZED_NAME_FIXED_AMOUNT = "fixed_amount";
-  @SerializedName(SERIALIZED_NAME_FIXED_AMOUNT)
+  public static final String JSON_PROPERTY_FIXED_AMOUNT = "fixed_amount";
   private String fixedAmount;
 
-  public static final String SERIALIZED_NAME_FREE_UNITS_PER_EVENTS = "free_units_per_events";
-  @SerializedName(SERIALIZED_NAME_FREE_UNITS_PER_EVENTS)
-  private Integer freeUnitsPerEvents;
+  public static final String JSON_PROPERTY_FREE_UNITS_PER_EVENTS = "free_units_per_events";
+  private JsonNullable<Integer> freeUnitsPerEvents = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_FREE_UNITS_PER_TOTAL_AGGREGATION = "free_units_per_total_aggregation";
-  @SerializedName(SERIALIZED_NAME_FREE_UNITS_PER_TOTAL_AGGREGATION)
-  private String freeUnitsPerTotalAggregation;
+  public static final String JSON_PROPERTY_FREE_UNITS_PER_TOTAL_AGGREGATION = "free_units_per_total_aggregation";
+  private JsonNullable<String> freeUnitsPerTotalAggregation = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_PER_TRANSACTION_MAX_AMOUNT = "per_transaction_max_amount";
-  @SerializedName(SERIALIZED_NAME_PER_TRANSACTION_MAX_AMOUNT)
-  private String perTransactionMaxAmount;
+  public static final String JSON_PROPERTY_PER_TRANSACTION_MAX_AMOUNT = "per_transaction_max_amount";
+  private JsonNullable<String> perTransactionMaxAmount = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_PER_TRANSACTION_MIN_AMOUNT = "per_transaction_min_amount";
-  @SerializedName(SERIALIZED_NAME_PER_TRANSACTION_MIN_AMOUNT)
-  private String perTransactionMinAmount;
+  public static final String JSON_PROPERTY_PER_TRANSACTION_MIN_AMOUNT = "per_transaction_min_amount";
+  private JsonNullable<String> perTransactionMinAmount = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_VOLUME_RANGES = "volume_ranges";
-  @SerializedName(SERIALIZED_NAME_VOLUME_RANGES)
+  public static final String JSON_PROPERTY_VOLUME_RANGES = "volume_ranges";
   private List<ChargePropertiesVolumeRangesInner> volumeRanges;
 
   public ChargeProperties() {
@@ -128,11 +109,16 @@ public class ChargeProperties {
    * @return graduatedRanges
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_GRADUATED_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ChargePropertiesGraduatedRangesInner> getGraduatedRanges() {
     return graduatedRanges;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_GRADUATED_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGraduatedRanges(List<ChargePropertiesGraduatedRangesInner> graduatedRanges) {
     this.graduatedRanges = graduatedRanges;
   }
@@ -157,11 +143,16 @@ public class ChargeProperties {
    * @return graduatedPercentageRanges
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_GRADUATED_PERCENTAGE_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ChargePropertiesGraduatedPercentageRangesInner> getGraduatedPercentageRanges() {
     return graduatedPercentageRanges;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_GRADUATED_PERCENTAGE_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGraduatedPercentageRanges(List<ChargePropertiesGraduatedPercentageRangesInner> graduatedPercentageRanges) {
     this.graduatedPercentageRanges = graduatedPercentageRanges;
   }
@@ -178,11 +169,16 @@ public class ChargeProperties {
    * @return amount
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getAmount() {
     return amount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmount(String amount) {
     this.amount = amount;
   }
@@ -199,11 +195,16 @@ public class ChargeProperties {
    * @return freeUnits
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getFreeUnits() {
     return freeUnits;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFreeUnits(Integer freeUnits) {
     this.freeUnits = freeUnits;
   }
@@ -220,11 +221,16 @@ public class ChargeProperties {
    * @return packageSize
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PACKAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getPackageSize() {
     return packageSize;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PACKAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPackageSize(Integer packageSize) {
     this.packageSize = packageSize;
   }
@@ -241,11 +247,16 @@ public class ChargeProperties {
    * @return rate
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getRate() {
     return rate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRate(String rate) {
     this.rate = rate;
   }
@@ -262,19 +273,24 @@ public class ChargeProperties {
    * @return fixedAmount
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_FIXED_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getFixedAmount() {
     return fixedAmount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FIXED_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFixedAmount(String fixedAmount) {
     this.fixedAmount = fixedAmount;
   }
 
 
   public ChargeProperties freeUnitsPerEvents(Integer freeUnitsPerEvents) {
+    this.freeUnitsPerEvents = JsonNullable.<Integer>of(freeUnitsPerEvents);
     
-    this.freeUnitsPerEvents = freeUnitsPerEvents;
     return this;
   }
 
@@ -283,19 +299,32 @@ public class ChargeProperties {
    * @return freeUnitsPerEvents
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getFreeUnitsPerEvents() {
-    return freeUnitsPerEvents;
+        return freeUnitsPerEvents.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS_PER_EVENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getFreeUnitsPerEvents_JsonNullable() {
+    return freeUnitsPerEvents;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS_PER_EVENTS)
+  public void setFreeUnitsPerEvents_JsonNullable(JsonNullable<Integer> freeUnitsPerEvents) {
+    this.freeUnitsPerEvents = freeUnitsPerEvents;
+  }
 
   public void setFreeUnitsPerEvents(Integer freeUnitsPerEvents) {
-    this.freeUnitsPerEvents = freeUnitsPerEvents;
+    this.freeUnitsPerEvents = JsonNullable.<Integer>of(freeUnitsPerEvents);
   }
 
 
   public ChargeProperties freeUnitsPerTotalAggregation(String freeUnitsPerTotalAggregation) {
+    this.freeUnitsPerTotalAggregation = JsonNullable.<String>of(freeUnitsPerTotalAggregation);
     
-    this.freeUnitsPerTotalAggregation = freeUnitsPerTotalAggregation;
     return this;
   }
 
@@ -304,19 +333,32 @@ public class ChargeProperties {
    * @return freeUnitsPerTotalAggregation
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getFreeUnitsPerTotalAggregation() {
-    return freeUnitsPerTotalAggregation;
+        return freeUnitsPerTotalAggregation.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS_PER_TOTAL_AGGREGATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getFreeUnitsPerTotalAggregation_JsonNullable() {
+    return freeUnitsPerTotalAggregation;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FREE_UNITS_PER_TOTAL_AGGREGATION)
+  public void setFreeUnitsPerTotalAggregation_JsonNullable(JsonNullable<String> freeUnitsPerTotalAggregation) {
+    this.freeUnitsPerTotalAggregation = freeUnitsPerTotalAggregation;
+  }
 
   public void setFreeUnitsPerTotalAggregation(String freeUnitsPerTotalAggregation) {
-    this.freeUnitsPerTotalAggregation = freeUnitsPerTotalAggregation;
+    this.freeUnitsPerTotalAggregation = JsonNullable.<String>of(freeUnitsPerTotalAggregation);
   }
 
 
   public ChargeProperties perTransactionMaxAmount(String perTransactionMaxAmount) {
+    this.perTransactionMaxAmount = JsonNullable.<String>of(perTransactionMaxAmount);
     
-    this.perTransactionMaxAmount = perTransactionMaxAmount;
     return this;
   }
 
@@ -325,19 +367,32 @@ public class ChargeProperties {
    * @return perTransactionMaxAmount
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPerTransactionMaxAmount() {
-    return perTransactionMaxAmount;
+        return perTransactionMaxAmount.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PER_TRANSACTION_MAX_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getPerTransactionMaxAmount_JsonNullable() {
+    return perTransactionMaxAmount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PER_TRANSACTION_MAX_AMOUNT)
+  public void setPerTransactionMaxAmount_JsonNullable(JsonNullable<String> perTransactionMaxAmount) {
+    this.perTransactionMaxAmount = perTransactionMaxAmount;
+  }
 
   public void setPerTransactionMaxAmount(String perTransactionMaxAmount) {
-    this.perTransactionMaxAmount = perTransactionMaxAmount;
+    this.perTransactionMaxAmount = JsonNullable.<String>of(perTransactionMaxAmount);
   }
 
 
   public ChargeProperties perTransactionMinAmount(String perTransactionMinAmount) {
+    this.perTransactionMinAmount = JsonNullable.<String>of(perTransactionMinAmount);
     
-    this.perTransactionMinAmount = perTransactionMinAmount;
     return this;
   }
 
@@ -346,13 +401,26 @@ public class ChargeProperties {
    * @return perTransactionMinAmount
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPerTransactionMinAmount() {
-    return perTransactionMinAmount;
+        return perTransactionMinAmount.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PER_TRANSACTION_MIN_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getPerTransactionMinAmount_JsonNullable() {
+    return perTransactionMinAmount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PER_TRANSACTION_MIN_AMOUNT)
+  public void setPerTransactionMinAmount_JsonNullable(JsonNullable<String> perTransactionMinAmount) {
+    this.perTransactionMinAmount = perTransactionMinAmount;
+  }
 
   public void setPerTransactionMinAmount(String perTransactionMinAmount) {
-    this.perTransactionMinAmount = perTransactionMinAmount;
+    this.perTransactionMinAmount = JsonNullable.<String>of(perTransactionMinAmount);
   }
 
 
@@ -375,16 +443,19 @@ public class ChargeProperties {
    * @return volumeRanges
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_VOLUME_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ChargePropertiesVolumeRangesInner> getVolumeRanges() {
     return volumeRanges;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_VOLUME_RANGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVolumeRanges(List<ChargePropertiesVolumeRangesInner> volumeRanges) {
     this.volumeRanges = volumeRanges;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -402,10 +473,10 @@ public class ChargeProperties {
         Objects.equals(this.packageSize, chargeProperties.packageSize) &&
         Objects.equals(this.rate, chargeProperties.rate) &&
         Objects.equals(this.fixedAmount, chargeProperties.fixedAmount) &&
-        Objects.equals(this.freeUnitsPerEvents, chargeProperties.freeUnitsPerEvents) &&
-        Objects.equals(this.freeUnitsPerTotalAggregation, chargeProperties.freeUnitsPerTotalAggregation) &&
-        Objects.equals(this.perTransactionMaxAmount, chargeProperties.perTransactionMaxAmount) &&
-        Objects.equals(this.perTransactionMinAmount, chargeProperties.perTransactionMinAmount) &&
+        equalsNullable(this.freeUnitsPerEvents, chargeProperties.freeUnitsPerEvents) &&
+        equalsNullable(this.freeUnitsPerTotalAggregation, chargeProperties.freeUnitsPerTotalAggregation) &&
+        equalsNullable(this.perTransactionMaxAmount, chargeProperties.perTransactionMaxAmount) &&
+        equalsNullable(this.perTransactionMinAmount, chargeProperties.perTransactionMinAmount) &&
         Objects.equals(this.volumeRanges, chargeProperties.volumeRanges);
   }
 
@@ -415,7 +486,7 @@ public class ChargeProperties {
 
   @Override
   public int hashCode() {
-    return Objects.hash(graduatedRanges, graduatedPercentageRanges, amount, freeUnits, packageSize, rate, fixedAmount, freeUnitsPerEvents, freeUnitsPerTotalAggregation, perTransactionMaxAmount, perTransactionMinAmount, volumeRanges);
+    return Objects.hash(graduatedRanges, graduatedPercentageRanges, amount, freeUnits, packageSize, rate, fixedAmount, hashCodeNullable(freeUnitsPerEvents), hashCodeNullable(freeUnitsPerTotalAggregation), hashCodeNullable(perTransactionMaxAmount), hashCodeNullable(perTransactionMinAmount), volumeRanges);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -456,160 +527,5 @@ public class ChargeProperties {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("graduated_ranges");
-    openapiFields.add("graduated_percentage_ranges");
-    openapiFields.add("amount");
-    openapiFields.add("free_units");
-    openapiFields.add("package_size");
-    openapiFields.add("rate");
-    openapiFields.add("fixed_amount");
-    openapiFields.add("free_units_per_events");
-    openapiFields.add("free_units_per_total_aggregation");
-    openapiFields.add("per_transaction_max_amount");
-    openapiFields.add("per_transaction_min_amount");
-    openapiFields.add("volume_ranges");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to ChargeProperties
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ChargeProperties.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in ChargeProperties is not found in the empty JSON string", ChargeProperties.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!ChargeProperties.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ChargeProperties` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (jsonObj.get("graduated_ranges") != null && !jsonObj.get("graduated_ranges").isJsonNull()) {
-        JsonArray jsonArraygraduatedRanges = jsonObj.getAsJsonArray("graduated_ranges");
-        if (jsonArraygraduatedRanges != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("graduated_ranges").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `graduated_ranges` to be an array in the JSON string but got `%s`", jsonObj.get("graduated_ranges").toString()));
-          }
-
-          // validate the optional field `graduated_ranges` (array)
-          for (int i = 0; i < jsonArraygraduatedRanges.size(); i++) {
-            ChargePropertiesGraduatedRangesInner.validateJsonElement(jsonArraygraduatedRanges.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("graduated_percentage_ranges") != null && !jsonObj.get("graduated_percentage_ranges").isJsonNull()) {
-        JsonArray jsonArraygraduatedPercentageRanges = jsonObj.getAsJsonArray("graduated_percentage_ranges");
-        if (jsonArraygraduatedPercentageRanges != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("graduated_percentage_ranges").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `graduated_percentage_ranges` to be an array in the JSON string but got `%s`", jsonObj.get("graduated_percentage_ranges").toString()));
-          }
-
-          // validate the optional field `graduated_percentage_ranges` (array)
-          for (int i = 0; i < jsonArraygraduatedPercentageRanges.size(); i++) {
-            ChargePropertiesGraduatedPercentageRangesInner.validateJsonElement(jsonArraygraduatedPercentageRanges.get(i));
-          };
-        }
-      }
-      if ((jsonObj.get("amount") != null && !jsonObj.get("amount").isJsonNull()) && !jsonObj.get("amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));
-      }
-      if ((jsonObj.get("rate") != null && !jsonObj.get("rate").isJsonNull()) && !jsonObj.get("rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rate").toString()));
-      }
-      if ((jsonObj.get("fixed_amount") != null && !jsonObj.get("fixed_amount").isJsonNull()) && !jsonObj.get("fixed_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `fixed_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fixed_amount").toString()));
-      }
-      if ((jsonObj.get("free_units_per_total_aggregation") != null && !jsonObj.get("free_units_per_total_aggregation").isJsonNull()) && !jsonObj.get("free_units_per_total_aggregation").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `free_units_per_total_aggregation` to be a primitive type in the JSON string but got `%s`", jsonObj.get("free_units_per_total_aggregation").toString()));
-      }
-      if ((jsonObj.get("per_transaction_max_amount") != null && !jsonObj.get("per_transaction_max_amount").isJsonNull()) && !jsonObj.get("per_transaction_max_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `per_transaction_max_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("per_transaction_max_amount").toString()));
-      }
-      if ((jsonObj.get("per_transaction_min_amount") != null && !jsonObj.get("per_transaction_min_amount").isJsonNull()) && !jsonObj.get("per_transaction_min_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `per_transaction_min_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("per_transaction_min_amount").toString()));
-      }
-      if (jsonObj.get("volume_ranges") != null && !jsonObj.get("volume_ranges").isJsonNull()) {
-        JsonArray jsonArrayvolumeRanges = jsonObj.getAsJsonArray("volume_ranges");
-        if (jsonArrayvolumeRanges != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("volume_ranges").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `volume_ranges` to be an array in the JSON string but got `%s`", jsonObj.get("volume_ranges").toString()));
-          }
-
-          // validate the optional field `volume_ranges` (array)
-          for (int i = 0; i < jsonArrayvolumeRanges.size(); i++) {
-            ChargePropertiesVolumeRangesInner.validateJsonElement(jsonArrayvolumeRanges.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ChargeProperties.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ChargeProperties' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ChargeProperties> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ChargeProperties.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ChargeProperties>() {
-           @Override
-           public void write(JsonWriter out, ChargeProperties value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ChargeProperties read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of ChargeProperties given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ChargeProperties
-  * @throws IOException if the JSON string is invalid with respect to ChargeProperties
-  */
-  public static ChargeProperties fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ChargeProperties.class);
-  }
-
- /**
-  * Convert an instance of ChargeProperties to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

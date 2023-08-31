@@ -15,68 +15,54 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Set coupon limitations to plans or specific metrics.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CouponBaseInputAppliesTo.JSON_PROPERTY_PLAN_CODES,
+  CouponBaseInputAppliesTo.JSON_PROPERTY_BILLABLE_METRIC_CODES
+})
+@JsonTypeName("CouponBaseInput_applies_to")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CouponBaseInputAppliesTo {
-  public static final String SERIALIZED_NAME_PLAN_CODES = "plan_codes";
-  @SerializedName(SERIALIZED_NAME_PLAN_CODES)
-  private List<String> planCodes;
+  public static final String JSON_PROPERTY_PLAN_CODES = "plan_codes";
+  private JsonNullable<List<String>> planCodes = JsonNullable.<List<String>>undefined();
 
-  public static final String SERIALIZED_NAME_BILLABLE_METRIC_CODES = "billable_metric_codes";
-  @SerializedName(SERIALIZED_NAME_BILLABLE_METRIC_CODES)
-  private List<String> billableMetricCodes;
+  public static final String JSON_PROPERTY_BILLABLE_METRIC_CODES = "billable_metric_codes";
+  private JsonNullable<List<String>> billableMetricCodes = JsonNullable.<List<String>>undefined();
 
   public CouponBaseInputAppliesTo() {
   }
 
   public CouponBaseInputAppliesTo planCodes(List<String> planCodes) {
+    this.planCodes = JsonNullable.<List<String>>of(planCodes);
     
-    this.planCodes = planCodes;
     return this;
   }
 
   public CouponBaseInputAppliesTo addPlanCodesItem(String planCodesItem) {
-    if (this.planCodes == null) {
-      this.planCodes = new ArrayList<>();
+    if (this.planCodes == null || !this.planCodes.isPresent()) {
+      this.planCodes = JsonNullable.<List<String>>of(new ArrayList<>());
     }
-    this.planCodes.add(planCodesItem);
+    try {
+      this.planCodes.get().add(planCodesItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -85,27 +71,44 @@ public class CouponBaseInputAppliesTo {
    * @return planCodes
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public List<String> getPlanCodes() {
-    return planCodes;
+        return planCodes.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PLAN_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<List<String>> getPlanCodes_JsonNullable() {
+    return planCodes;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PLAN_CODES)
+  public void setPlanCodes_JsonNullable(JsonNullable<List<String>> planCodes) {
+    this.planCodes = planCodes;
+  }
 
   public void setPlanCodes(List<String> planCodes) {
-    this.planCodes = planCodes;
+    this.planCodes = JsonNullable.<List<String>>of(planCodes);
   }
 
 
   public CouponBaseInputAppliesTo billableMetricCodes(List<String> billableMetricCodes) {
+    this.billableMetricCodes = JsonNullable.<List<String>>of(billableMetricCodes);
     
-    this.billableMetricCodes = billableMetricCodes;
     return this;
   }
 
   public CouponBaseInputAppliesTo addBillableMetricCodesItem(String billableMetricCodesItem) {
-    if (this.billableMetricCodes == null) {
-      this.billableMetricCodes = new ArrayList<>();
+    if (this.billableMetricCodes == null || !this.billableMetricCodes.isPresent()) {
+      this.billableMetricCodes = JsonNullable.<List<String>>of(new ArrayList<>());
     }
-    this.billableMetricCodes.add(billableMetricCodesItem);
+    try {
+      this.billableMetricCodes.get().add(billableMetricCodesItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -114,16 +117,27 @@ public class CouponBaseInputAppliesTo {
    * @return billableMetricCodes
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public List<String> getBillableMetricCodes() {
-    return billableMetricCodes;
+        return billableMetricCodes.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setBillableMetricCodes(List<String> billableMetricCodes) {
+  public JsonNullable<List<String>> getBillableMetricCodes_JsonNullable() {
+    return billableMetricCodes;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODES)
+  public void setBillableMetricCodes_JsonNullable(JsonNullable<List<String>> billableMetricCodes) {
     this.billableMetricCodes = billableMetricCodes;
   }
 
-
+  public void setBillableMetricCodes(List<String> billableMetricCodes) {
+    this.billableMetricCodes = JsonNullable.<List<String>>of(billableMetricCodes);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -134,8 +148,8 @@ public class CouponBaseInputAppliesTo {
       return false;
     }
     CouponBaseInputAppliesTo couponBaseInputAppliesTo = (CouponBaseInputAppliesTo) o;
-    return Objects.equals(this.planCodes, couponBaseInputAppliesTo.planCodes) &&
-        Objects.equals(this.billableMetricCodes, couponBaseInputAppliesTo.billableMetricCodes);
+    return equalsNullable(this.planCodes, couponBaseInputAppliesTo.planCodes) &&
+        equalsNullable(this.billableMetricCodes, couponBaseInputAppliesTo.billableMetricCodes);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -144,7 +158,7 @@ public class CouponBaseInputAppliesTo {
 
   @Override
   public int hashCode() {
-    return Objects.hash(planCodes, billableMetricCodes);
+    return Objects.hash(hashCodeNullable(planCodes), hashCodeNullable(billableMetricCodes));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -175,98 +189,5 @@ public class CouponBaseInputAppliesTo {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("plan_codes");
-    openapiFields.add("billable_metric_codes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CouponBaseInputAppliesTo
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CouponBaseInputAppliesTo.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CouponBaseInputAppliesTo is not found in the empty JSON string", CouponBaseInputAppliesTo.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CouponBaseInputAppliesTo.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CouponBaseInputAppliesTo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("plan_codes") != null && !jsonObj.get("plan_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `plan_codes` to be an array in the JSON string but got `%s`", jsonObj.get("plan_codes").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("billable_metric_codes") != null && !jsonObj.get("billable_metric_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `billable_metric_codes` to be an array in the JSON string but got `%s`", jsonObj.get("billable_metric_codes").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CouponBaseInputAppliesTo.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CouponBaseInputAppliesTo' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CouponBaseInputAppliesTo> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CouponBaseInputAppliesTo.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CouponBaseInputAppliesTo>() {
-           @Override
-           public void write(JsonWriter out, CouponBaseInputAppliesTo value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CouponBaseInputAppliesTo read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CouponBaseInputAppliesTo given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CouponBaseInputAppliesTo
-  * @throws IOException if the JSON string is invalid with respect to CouponBaseInputAppliesTo
-  */
-  public static CouponBaseInputAppliesTo fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CouponBaseInputAppliesTo.class);
-  }
-
- /**
-  * Convert an instance of CouponBaseInputAppliesTo to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -15,64 +15,46 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * InvoiceOneOffCreateInputInvoiceFeesInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_ADD_ON_CODE,
+  InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_UNIT_AMOUNT_CENTS,
+  InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_UNITS,
+  InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_DESCRIPTION,
+  InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_TAX_CODES
+})
+@JsonTypeName("InvoiceOneOffCreateInput_invoice_fees_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class InvoiceOneOffCreateInputInvoiceFeesInner {
-  public static final String SERIALIZED_NAME_ADD_ON_CODE = "add_on_code";
-  @SerializedName(SERIALIZED_NAME_ADD_ON_CODE)
+  public static final String JSON_PROPERTY_ADD_ON_CODE = "add_on_code";
   private String addOnCode;
 
-  public static final String SERIALIZED_NAME_UNIT_AMOUNT_CENTS = "unit_amount_cents";
-  @SerializedName(SERIALIZED_NAME_UNIT_AMOUNT_CENTS)
-  private Integer unitAmountCents;
+  public static final String JSON_PROPERTY_UNIT_AMOUNT_CENTS = "unit_amount_cents";
+  private JsonNullable<Integer> unitAmountCents = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_UNITS = "units";
-  @SerializedName(SERIALIZED_NAME_UNITS)
-  private String units;
+  public static final String JSON_PROPERTY_UNITS = "units";
+  private JsonNullable<String> units = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  private JsonNullable<String> description = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_TAX_CODES = "tax_codes";
-  @SerializedName(SERIALIZED_NAME_TAX_CODES)
+  public static final String JSON_PROPERTY_TAX_CODES = "tax_codes";
   private List<String> taxCodes;
 
   public InvoiceOneOffCreateInputInvoiceFeesInner() {
@@ -89,19 +71,24 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
    * @return addOnCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddOnCode() {
     return addOnCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddOnCode(String addOnCode) {
     this.addOnCode = addOnCode;
   }
 
 
   public InvoiceOneOffCreateInputInvoiceFeesInner unitAmountCents(Integer unitAmountCents) {
+    this.unitAmountCents = JsonNullable.<Integer>of(unitAmountCents);
     
-    this.unitAmountCents = unitAmountCents;
     return this;
   }
 
@@ -110,19 +97,32 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
    * @return unitAmountCents
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getUnitAmountCents() {
-    return unitAmountCents;
+        return unitAmountCents.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_UNIT_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getUnitAmountCents_JsonNullable() {
+    return unitAmountCents;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_UNIT_AMOUNT_CENTS)
+  public void setUnitAmountCents_JsonNullable(JsonNullable<Integer> unitAmountCents) {
+    this.unitAmountCents = unitAmountCents;
+  }
 
   public void setUnitAmountCents(Integer unitAmountCents) {
-    this.unitAmountCents = unitAmountCents;
+    this.unitAmountCents = JsonNullable.<Integer>of(unitAmountCents);
   }
 
 
   public InvoiceOneOffCreateInputInvoiceFeesInner units(String units) {
+    this.units = JsonNullable.<String>of(units);
     
-    this.units = units;
     return this;
   }
 
@@ -131,19 +131,32 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
    * @return units
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getUnits() {
-    return units;
+        return units.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getUnits_JsonNullable() {
+    return units;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  public void setUnits_JsonNullable(JsonNullable<String> units) {
+    this.units = units;
+  }
 
   public void setUnits(String units) {
-    this.units = units;
+    this.units = JsonNullable.<String>of(units);
   }
 
 
   public InvoiceOneOffCreateInputInvoiceFeesInner description(String description) {
+    this.description = JsonNullable.<String>of(description);
     
-    this.description = description;
     return this;
   }
 
@@ -152,13 +165,26 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getDescription() {
-    return description;
+        return description.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getDescription_JsonNullable() {
+    return description;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  public void setDescription_JsonNullable(JsonNullable<String> description) {
+    this.description = description;
+  }
 
   public void setDescription(String description) {
-    this.description = description;
+    this.description = JsonNullable.<String>of(description);
   }
 
 
@@ -181,16 +207,19 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
    * @return taxCodes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAX_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<String> getTaxCodes() {
     return taxCodes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAX_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxCodes(List<String> taxCodes) {
     this.taxCodes = taxCodes;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -202,9 +231,9 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
     }
     InvoiceOneOffCreateInputInvoiceFeesInner invoiceOneOffCreateInputInvoiceFeesInner = (InvoiceOneOffCreateInputInvoiceFeesInner) o;
     return Objects.equals(this.addOnCode, invoiceOneOffCreateInputInvoiceFeesInner.addOnCode) &&
-        Objects.equals(this.unitAmountCents, invoiceOneOffCreateInputInvoiceFeesInner.unitAmountCents) &&
-        Objects.equals(this.units, invoiceOneOffCreateInputInvoiceFeesInner.units) &&
-        Objects.equals(this.description, invoiceOneOffCreateInputInvoiceFeesInner.description) &&
+        equalsNullable(this.unitAmountCents, invoiceOneOffCreateInputInvoiceFeesInner.unitAmountCents) &&
+        equalsNullable(this.units, invoiceOneOffCreateInputInvoiceFeesInner.units) &&
+        equalsNullable(this.description, invoiceOneOffCreateInputInvoiceFeesInner.description) &&
         Objects.equals(this.taxCodes, invoiceOneOffCreateInputInvoiceFeesInner.taxCodes);
   }
 
@@ -214,7 +243,7 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
 
   @Override
   public int hashCode() {
-    return Objects.hash(addOnCode, unitAmountCents, units, description, taxCodes);
+    return Objects.hash(addOnCode, hashCodeNullable(unitAmountCents), hashCodeNullable(units), hashCodeNullable(description), taxCodes);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -248,114 +277,5 @@ public class InvoiceOneOffCreateInputInvoiceFeesInner {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("add_on_code");
-    openapiFields.add("unit_amount_cents");
-    openapiFields.add("units");
-    openapiFields.add("description");
-    openapiFields.add("tax_codes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("add_on_code");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to InvoiceOneOffCreateInputInvoiceFeesInner
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!InvoiceOneOffCreateInputInvoiceFeesInner.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in InvoiceOneOffCreateInputInvoiceFeesInner is not found in the empty JSON string", InvoiceOneOffCreateInputInvoiceFeesInner.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!InvoiceOneOffCreateInputInvoiceFeesInner.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `InvoiceOneOffCreateInputInvoiceFeesInner` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : InvoiceOneOffCreateInputInvoiceFeesInner.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("add_on_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `add_on_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("add_on_code").toString()));
-      }
-      if ((jsonObj.get("units") != null && !jsonObj.get("units").isJsonNull()) && !jsonObj.get("units").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `units` to be a primitive type in the JSON string but got `%s`", jsonObj.get("units").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("tax_codes") != null && !jsonObj.get("tax_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_codes` to be an array in the JSON string but got `%s`", jsonObj.get("tax_codes").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!InvoiceOneOffCreateInputInvoiceFeesInner.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'InvoiceOneOffCreateInputInvoiceFeesInner' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<InvoiceOneOffCreateInputInvoiceFeesInner> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(InvoiceOneOffCreateInputInvoiceFeesInner.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<InvoiceOneOffCreateInputInvoiceFeesInner>() {
-           @Override
-           public void write(JsonWriter out, InvoiceOneOffCreateInputInvoiceFeesInner value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public InvoiceOneOffCreateInputInvoiceFeesInner read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of InvoiceOneOffCreateInputInvoiceFeesInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of InvoiceOneOffCreateInputInvoiceFeesInner
-  * @throws IOException if the JSON string is invalid with respect to InvoiceOneOffCreateInputInvoiceFeesInner
-  */
-  public static InvoiceOneOffCreateInputInvoiceFeesInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, InvoiceOneOffCreateInputInvoiceFeesInner.class);
-  }
-
- /**
-  * Convert an instance of InvoiceOneOffCreateInputInvoiceFeesInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

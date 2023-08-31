@@ -15,53 +15,31 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.CustomerObjectExtended;
 import org.openapitools.client.model.PaginationMeta;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CustomersPaginated
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomersPaginated.JSON_PROPERTY_CUSTOMERS,
+  CustomersPaginated.JSON_PROPERTY_META
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomersPaginated {
-  public static final String SERIALIZED_NAME_CUSTOMERS = "customers";
-  @SerializedName(SERIALIZED_NAME_CUSTOMERS)
+  public static final String JSON_PROPERTY_CUSTOMERS = "customers";
   private List<CustomerObjectExtended> customers = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_META = "meta";
-  @SerializedName(SERIALIZED_NAME_META)
+  public static final String JSON_PROPERTY_META = "meta";
   private PaginationMeta meta;
 
   public CustomersPaginated() {
@@ -86,11 +64,16 @@ public class CustomersPaginated {
    * @return customers
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CUSTOMERS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<CustomerObjectExtended> getCustomers() {
     return customers;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CUSTOMERS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCustomers(List<CustomerObjectExtended> customers) {
     this.customers = customers;
   }
@@ -107,16 +90,19 @@ public class CustomersPaginated {
    * @return meta
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_META)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaginationMeta getMeta() {
     return meta;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_META)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMeta(PaginationMeta meta) {
     this.meta = meta;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -157,111 +143,5 @@ public class CustomersPaginated {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("customers");
-    openapiFields.add("meta");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("customers");
-    openapiRequiredFields.add("meta");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomersPaginated
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomersPaginated.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomersPaginated is not found in the empty JSON string", CustomersPaginated.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomersPaginated.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomersPaginated` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CustomersPaginated.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the json data is an array
-      if (!jsonObj.get("customers").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `customers` to be an array in the JSON string but got `%s`", jsonObj.get("customers").toString()));
-      }
-
-      JsonArray jsonArraycustomers = jsonObj.getAsJsonArray("customers");
-      // validate the required field `customers` (array)
-      for (int i = 0; i < jsonArraycustomers.size(); i++) {
-        CustomerObjectExtended.validateJsonElement(jsonArraycustomers.get(i));
-      };
-      // validate the required field `meta`
-      PaginationMeta.validateJsonElement(jsonObj.get("meta"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomersPaginated.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomersPaginated' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomersPaginated> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomersPaginated.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomersPaginated>() {
-           @Override
-           public void write(JsonWriter out, CustomersPaginated value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomersPaginated read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomersPaginated given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomersPaginated
-  * @throws IOException if the JSON string is invalid with respect to CustomersPaginated
-  */
-  public static CustomersPaginated fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomersPaginated.class);
-  }
-
- /**
-  * Convert an instance of CustomersPaginated to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

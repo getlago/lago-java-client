@@ -15,47 +15,26 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreditNoteUpdateInputCreditNote
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreditNoteUpdateInputCreditNote.JSON_PROPERTY_REFUND_STATUS
+})
+@JsonTypeName("CreditNoteUpdateInput_credit_note")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreditNoteUpdateInputCreditNote {
   /**
    * The status of the refund portion of the credit note. It indicates the current state or condition of the refund associated with the credit note. The possible values for this field are:  - &#x60;pending&#x60;: this status indicates that the refund is pending execution. The refund request has been initiated but has not been processed or completed yet. - &#x60;succeeded&#x60;: this status indicates that the refund has been successfully executed. The refund amount has been processed and returned to the customer or the designated recipient. - &#x60;failed&#x60;: this status indicates that the refund failed to execute. The refund request encountered an error or unsuccessful processing, and the refund amount could not be returned.
    */
-  @JsonAdapter(RefundStatusEnum.Adapter.class)
   public enum RefundStatusEnum {
     PENDING("pending"),
     
@@ -69,6 +48,7 @@ public class CreditNoteUpdateInputCreditNote {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -78,6 +58,7 @@ public class CreditNoteUpdateInputCreditNote {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static RefundStatusEnum fromValue(String value) {
       for (RefundStatusEnum b : RefundStatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -86,23 +67,9 @@ public class CreditNoteUpdateInputCreditNote {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<RefundStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RefundStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RefundStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RefundStatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_REFUND_STATUS = "refund_status";
-  @SerializedName(SERIALIZED_NAME_REFUND_STATUS)
+  public static final String JSON_PROPERTY_REFUND_STATUS = "refund_status";
   private RefundStatusEnum refundStatus;
 
   public CreditNoteUpdateInputCreditNote() {
@@ -119,16 +86,19 @@ public class CreditNoteUpdateInputCreditNote {
    * @return refundStatus
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_REFUND_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public RefundStatusEnum getRefundStatus() {
     return refundStatus;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_REFUND_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRefundStatus(RefundStatusEnum refundStatus) {
     this.refundStatus = refundStatus;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -167,100 +137,5 @@ public class CreditNoteUpdateInputCreditNote {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("refund_status");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("refund_status");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreditNoteUpdateInputCreditNote
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreditNoteUpdateInputCreditNote.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreditNoteUpdateInputCreditNote is not found in the empty JSON string", CreditNoteUpdateInputCreditNote.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreditNoteUpdateInputCreditNote.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreditNoteUpdateInputCreditNote` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreditNoteUpdateInputCreditNote.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("refund_status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `refund_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("refund_status").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreditNoteUpdateInputCreditNote.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreditNoteUpdateInputCreditNote' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreditNoteUpdateInputCreditNote> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreditNoteUpdateInputCreditNote.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreditNoteUpdateInputCreditNote>() {
-           @Override
-           public void write(JsonWriter out, CreditNoteUpdateInputCreditNote value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreditNoteUpdateInputCreditNote read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreditNoteUpdateInputCreditNote given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreditNoteUpdateInputCreditNote
-  * @throws IOException if the JSON string is invalid with respect to CreditNoteUpdateInputCreditNote
-  */
-  public static CreditNoteUpdateInputCreditNote fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreditNoteUpdateInputCreditNote.class);
-  }
-
- /**
-  * Convert an instance of CreditNoteUpdateInputCreditNote to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

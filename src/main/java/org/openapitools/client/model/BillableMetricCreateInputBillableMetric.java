@@ -15,69 +15,52 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.client.model.BillableMetricGroup;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * BillableMetricCreateInputBillableMetric
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_NAME,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_CODE,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_DESCRIPTION,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_RECURRING,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_FIELD_NAME,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_AGGREGATION_TYPE,
+  BillableMetricCreateInputBillableMetric.JSON_PROPERTY_GROUP
+})
+@JsonTypeName("BillableMetricCreateInput_billable_metric")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class BillableMetricCreateInputBillableMetric {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  private JsonNullable<String> description = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_RECURRING = "recurring";
-  @SerializedName(SERIALIZED_NAME_RECURRING)
+  public static final String JSON_PROPERTY_RECURRING = "recurring";
   private Boolean recurring;
 
-  public static final String SERIALIZED_NAME_FIELD_NAME = "field_name";
-  @SerializedName(SERIALIZED_NAME_FIELD_NAME)
-  private String fieldName;
+  public static final String JSON_PROPERTY_FIELD_NAME = "field_name";
+  private JsonNullable<String> fieldName = JsonNullable.<String>undefined();
 
   /**
    * Aggregation method used to compute usage for this billable metric. Possible values are &#x60;count_agg&#x60;, &#x60;sum_agg&#x60;, &#x60;max_agg&#x60; or &#x60;unique_count_agg&#x60;.
    */
-  @JsonAdapter(AggregationTypeEnum.Adapter.class)
   public enum AggregationTypeEnum {
     COUNT_AGG("count_agg"),
     
@@ -93,6 +76,7 @@ public class BillableMetricCreateInputBillableMetric {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -102,6 +86,7 @@ public class BillableMetricCreateInputBillableMetric {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static AggregationTypeEnum fromValue(String value) {
       for (AggregationTypeEnum b : AggregationTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -110,27 +95,12 @@ public class BillableMetricCreateInputBillableMetric {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<AggregationTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AggregationTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AggregationTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AggregationTypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_AGGREGATION_TYPE = "aggregation_type";
-  @SerializedName(SERIALIZED_NAME_AGGREGATION_TYPE)
+  public static final String JSON_PROPERTY_AGGREGATION_TYPE = "aggregation_type";
   private AggregationTypeEnum aggregationType;
 
-  public static final String SERIALIZED_NAME_GROUP = "group";
-  @SerializedName(SERIALIZED_NAME_GROUP)
+  public static final String JSON_PROPERTY_GROUP = "group";
   private BillableMetricGroup group;
 
   public BillableMetricCreateInputBillableMetric() {
@@ -147,11 +117,16 @@ public class BillableMetricCreateInputBillableMetric {
    * @return name
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
@@ -168,19 +143,24 @@ public class BillableMetricCreateInputBillableMetric {
    * @return code
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCode(String code) {
     this.code = code;
   }
 
 
   public BillableMetricCreateInputBillableMetric description(String description) {
+    this.description = JsonNullable.<String>of(description);
     
-    this.description = description;
     return this;
   }
 
@@ -189,13 +169,26 @@ public class BillableMetricCreateInputBillableMetric {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getDescription() {
-    return description;
+        return description.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getDescription_JsonNullable() {
+    return description;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  public void setDescription_JsonNullable(JsonNullable<String> description) {
+    this.description = description;
+  }
 
   public void setDescription(String description) {
-    this.description = description;
+    this.description = JsonNullable.<String>of(description);
   }
 
 
@@ -210,19 +203,24 @@ public class BillableMetricCreateInputBillableMetric {
    * @return recurring
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_RECURRING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getRecurring() {
     return recurring;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_RECURRING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRecurring(Boolean recurring) {
     this.recurring = recurring;
   }
 
 
   public BillableMetricCreateInputBillableMetric fieldName(String fieldName) {
+    this.fieldName = JsonNullable.<String>of(fieldName);
     
-    this.fieldName = fieldName;
     return this;
   }
 
@@ -231,13 +229,26 @@ public class BillableMetricCreateInputBillableMetric {
    * @return fieldName
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getFieldName() {
-    return fieldName;
+        return fieldName.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FIELD_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getFieldName_JsonNullable() {
+    return fieldName;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FIELD_NAME)
+  public void setFieldName_JsonNullable(JsonNullable<String> fieldName) {
+    this.fieldName = fieldName;
+  }
 
   public void setFieldName(String fieldName) {
-    this.fieldName = fieldName;
+    this.fieldName = JsonNullable.<String>of(fieldName);
   }
 
 
@@ -252,11 +263,16 @@ public class BillableMetricCreateInputBillableMetric {
    * @return aggregationType
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AGGREGATION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public AggregationTypeEnum getAggregationType() {
     return aggregationType;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AGGREGATION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAggregationType(AggregationTypeEnum aggregationType) {
     this.aggregationType = aggregationType;
   }
@@ -273,16 +289,19 @@ public class BillableMetricCreateInputBillableMetric {
    * @return group
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_GROUP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public BillableMetricGroup getGroup() {
     return group;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_GROUP)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroup(BillableMetricGroup group) {
     this.group = group;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -295,9 +314,9 @@ public class BillableMetricCreateInputBillableMetric {
     BillableMetricCreateInputBillableMetric billableMetricCreateInputBillableMetric = (BillableMetricCreateInputBillableMetric) o;
     return Objects.equals(this.name, billableMetricCreateInputBillableMetric.name) &&
         Objects.equals(this.code, billableMetricCreateInputBillableMetric.code) &&
-        Objects.equals(this.description, billableMetricCreateInputBillableMetric.description) &&
+        equalsNullable(this.description, billableMetricCreateInputBillableMetric.description) &&
         Objects.equals(this.recurring, billableMetricCreateInputBillableMetric.recurring) &&
-        Objects.equals(this.fieldName, billableMetricCreateInputBillableMetric.fieldName) &&
+        equalsNullable(this.fieldName, billableMetricCreateInputBillableMetric.fieldName) &&
         Objects.equals(this.aggregationType, billableMetricCreateInputBillableMetric.aggregationType) &&
         Objects.equals(this.group, billableMetricCreateInputBillableMetric.group);
   }
@@ -308,7 +327,7 @@ public class BillableMetricCreateInputBillableMetric {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, code, description, recurring, fieldName, aggregationType, group);
+    return Objects.hash(name, code, hashCodeNullable(description), recurring, hashCodeNullable(fieldName), aggregationType, group);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -344,124 +363,5 @@ public class BillableMetricCreateInputBillableMetric {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("name");
-    openapiFields.add("code");
-    openapiFields.add("description");
-    openapiFields.add("recurring");
-    openapiFields.add("field_name");
-    openapiFields.add("aggregation_type");
-    openapiFields.add("group");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("name");
-    openapiRequiredFields.add("code");
-    openapiRequiredFields.add("aggregation_type");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to BillableMetricCreateInputBillableMetric
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!BillableMetricCreateInputBillableMetric.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in BillableMetricCreateInputBillableMetric is not found in the empty JSON string", BillableMetricCreateInputBillableMetric.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!BillableMetricCreateInputBillableMetric.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `BillableMetricCreateInputBillableMetric` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : BillableMetricCreateInputBillableMetric.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-      if ((jsonObj.get("field_name") != null && !jsonObj.get("field_name").isJsonNull()) && !jsonObj.get("field_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `field_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("field_name").toString()));
-      }
-      if (!jsonObj.get("aggregation_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `aggregation_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("aggregation_type").toString()));
-      }
-      // validate the optional field `group`
-      if (jsonObj.get("group") != null && !jsonObj.get("group").isJsonNull()) {
-        BillableMetricGroup.validateJsonElement(jsonObj.get("group"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!BillableMetricCreateInputBillableMetric.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'BillableMetricCreateInputBillableMetric' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<BillableMetricCreateInputBillableMetric> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(BillableMetricCreateInputBillableMetric.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<BillableMetricCreateInputBillableMetric>() {
-           @Override
-           public void write(JsonWriter out, BillableMetricCreateInputBillableMetric value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public BillableMetricCreateInputBillableMetric read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of BillableMetricCreateInputBillableMetric given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of BillableMetricCreateInputBillableMetric
-  * @throws IOException if the JSON string is invalid with respect to BillableMetricCreateInputBillableMetric
-  */
-  public static BillableMetricCreateInputBillableMetric fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, BillableMetricCreateInputBillableMetric.class);
-  }
-
- /**
-  * Convert an instance of BillableMetricCreateInputBillableMetric to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

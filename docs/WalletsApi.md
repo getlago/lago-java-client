@@ -13,8 +13,9 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | [**updateWallet**](WalletsApi.md#updateWallet) | **PUT** /wallets/{lago_id} | Update a wallet |
 
 
-<a id="createWallet"></a>
-# **createWallet**
+
+## createWallet
+
 > Wallet createWallet(walletCreateInput)
 
 Create a wallet
@@ -22,41 +23,43 @@ Create a wallet
 This endpoint is used to create a wallet with prepaid credits.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    WalletCreateInput walletCreateInput = new WalletCreateInput(); // WalletCreateInput | Wallet payload
-    try {
-      Wallet result = apiInstance.createWallet(walletCreateInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#createWallet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        WalletCreateInput walletCreateInput = new WalletCreateInput(); // WalletCreateInput | Wallet payload
+        try {
+            Wallet result = apiInstance.createWallet(walletCreateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#createWallet");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -72,8 +75,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -83,8 +87,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="createWalletTransaction"></a>
-# **createWalletTransaction**
+
+## createWalletTransaction
+
 > WalletTransactions createWalletTransaction(walletTransactionCreateInput)
 
 Top up a wallet
@@ -92,41 +97,43 @@ Top up a wallet
 This endpoint is used to top-up an active wallet.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    WalletTransactionCreateInput walletTransactionCreateInput = new WalletTransactionCreateInput(); // WalletTransactionCreateInput | Wallet transaction payload
-    try {
-      WalletTransactions result = apiInstance.createWalletTransaction(walletTransactionCreateInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#createWalletTransaction");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        WalletTransactionCreateInput walletTransactionCreateInput = new WalletTransactionCreateInput(); // WalletTransactionCreateInput | Wallet transaction payload
+        try {
+            WalletTransactions result = apiInstance.createWalletTransaction(walletTransactionCreateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#createWalletTransaction");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -142,8 +149,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -153,8 +161,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="destroyWallet"></a>
-# **destroyWallet**
+
+## destroyWallet
+
 > Wallet destroyWallet(lagoId)
 
 Terminate a wallet
@@ -162,41 +171,43 @@ Terminate a wallet
 This endpoint is used to terminate an existing wallet with prepaid credits.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
-    try {
-      Wallet result = apiInstance.destroyWallet(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#destroyWallet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+        try {
+            Wallet result = apiInstance.destroyWallet(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#destroyWallet");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -212,8 +223,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -223,8 +235,9 @@ public class Example {
 | **404** | Not Found error |  -  |
 | **405** | Not Allowed error |  -  |
 
-<a id="findAllWalletTransactions"></a>
-# **findAllWalletTransactions**
+
+## findAllWalletTransactions
+
 > WalletTransactionsPaginated findAllWalletTransactions(lagoId, page, perPage, status, transactionType)
 
 List all wallet transactions
@@ -232,45 +245,47 @@ List all wallet transactions
 This endpoint is used to list all wallet transactions.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
-    Integer page = 1; // Integer | Page number.
-    Integer perPage = 20; // Integer | Number of records per page.
-    String status = "pending"; // String | The status of the wallet transaction. Possible values are `pending` or `settled`.
-    String transactionType = "inbound"; // String | The transaction type of the wallet transaction. Possible values are `inbound` (increasing the wallet balance) or `outbound` (decreasing the wallet balance).
-    try {
-      WalletTransactionsPaginated result = apiInstance.findAllWalletTransactions(lagoId, page, perPage, status, transactionType);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#findAllWalletTransactions");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        String status = "pending"; // String | The status of the wallet transaction. Possible values are `pending` or `settled`.
+        String transactionType = "inbound"; // String | The transaction type of the wallet transaction. Possible values are `inbound` (increasing the wallet balance) or `outbound` (decreasing the wallet balance).
+        try {
+            WalletTransactionsPaginated result = apiInstance.findAllWalletTransactions(lagoId, page, perPage, status, transactionType);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#findAllWalletTransactions");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -290,8 +305,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -300,8 +316,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findAllWallets"></a>
-# **findAllWallets**
+
+## findAllWallets
+
 > WalletsPaginated findAllWallets(externalCustomerId, page, perPage)
 
 List all wallets
@@ -309,43 +326,45 @@ List all wallets
 This endpoint is used to list all wallets with prepaid credits.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
-    Integer page = 1; // Integer | Page number.
-    Integer perPage = 20; // Integer | Number of records per page.
-    try {
-      WalletsPaginated result = apiInstance.findAllWallets(externalCustomerId, page, perPage);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#findAllWallets");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        try {
+            WalletsPaginated result = apiInstance.findAllWallets(externalCustomerId, page, perPage);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#findAllWallets");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -363,8 +382,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -372,8 +392,9 @@ public class Example {
 | **200** | Wallets |  -  |
 | **401** | Unauthorized error |  -  |
 
-<a id="findWallet"></a>
-# **findWallet**
+
+## findWallet
+
 > Wallet findWallet(lagoId)
 
 Retrieve a wallet
@@ -381,41 +402,43 @@ Retrieve a wallet
 This endpoint is used to retrieve an existing wallet with prepaid credits.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
-    try {
-      Wallet result = apiInstance.findWallet(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#findWallet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+        try {
+            Wallet result = apiInstance.findWallet(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#findWallet");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -431,8 +454,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -441,8 +465,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="updateWallet"></a>
-# **updateWallet**
+
+## updateWallet
+
 > Wallet updateWallet(lagoId, walletUpdateInput)
 
 Update a wallet
@@ -450,42 +475,44 @@ Update a wallet
 This endpoint is used to update an existing wallet with prepaid credits.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.WalletsApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.WalletsApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    WalletsApi apiInstance = new WalletsApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
-    WalletUpdateInput walletUpdateInput = new WalletUpdateInput(); // WalletUpdateInput | Wallet update payload
-    try {
-      Wallet result = apiInstance.updateWallet(lagoId, walletUpdateInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling WalletsApi#updateWallet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        WalletsApi apiInstance = new WalletsApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the wallet within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the wallet’s record within the Lago system.
+        WalletUpdateInput walletUpdateInput = new WalletUpdateInput(); // WalletUpdateInput | Wallet update payload
+        try {
+            Wallet result = apiInstance.updateWallet(lagoId, walletUpdateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WalletsApi#updateWallet");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -502,8 +529,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

@@ -15,64 +15,44 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * SubscriptionCreateInputSubscription
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_PLAN_CODE,
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_NAME,
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_EXTERNAL_ID,
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_BILLING_TIME,
+  SubscriptionCreateInputSubscription.JSON_PROPERTY_SUBSCRIPTION_AT
+})
+@JsonTypeName("SubscriptionCreateInput_subscription")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class SubscriptionCreateInputSubscription {
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
-  public static final String SERIALIZED_NAME_PLAN_CODE = "plan_code";
-  @SerializedName(SERIALIZED_NAME_PLAN_CODE)
+  public static final String JSON_PROPERTY_PLAN_CODE = "plan_code";
   private String planCode;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_ID = "external_id";
   private String externalId;
 
   /**
    * The billing time for the subscription, which can be set as either &#x60;anniversary&#x60; or &#x60;calendar&#x60;. If not explicitly provided, it will default to &#x60;calendar&#x60;. The billing time determines the timing of recurring billing cycles for the subscription. By specifying &#x60;anniversary&#x60;, the billing cycle will be based on the specific date the subscription started (billed fully), while &#x60;calendar&#x60; sets the billing cycle at the first day of the week/month/year (billed with proration).
    */
-  @JsonAdapter(BillingTimeEnum.Adapter.class)
   public enum BillingTimeEnum {
     CALENDAR("calendar"),
     
@@ -84,6 +64,7 @@ public class SubscriptionCreateInputSubscription {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -93,6 +74,7 @@ public class SubscriptionCreateInputSubscription {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static BillingTimeEnum fromValue(String value) {
       for (BillingTimeEnum b : BillingTimeEnum.values()) {
         if (b.value.equals(value)) {
@@ -101,27 +83,12 @@ public class SubscriptionCreateInputSubscription {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<BillingTimeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BillingTimeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BillingTimeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BillingTimeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_BILLING_TIME = "billing_time";
-  @SerializedName(SERIALIZED_NAME_BILLING_TIME)
+  public static final String JSON_PROPERTY_BILLING_TIME = "billing_time";
   private BillingTimeEnum billingTime;
 
-  public static final String SERIALIZED_NAME_SUBSCRIPTION_AT = "subscription_at";
-  @SerializedName(SERIALIZED_NAME_SUBSCRIPTION_AT)
+  public static final String JSON_PROPERTY_SUBSCRIPTION_AT = "subscription_at";
   private OffsetDateTime subscriptionAt;
 
   public SubscriptionCreateInputSubscription() {
@@ -138,11 +105,16 @@ public class SubscriptionCreateInputSubscription {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -159,11 +131,16 @@ public class SubscriptionCreateInputSubscription {
    * @return planCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getPlanCode() {
     return planCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPlanCode(String planCode) {
     this.planCode = planCode;
   }
@@ -180,11 +157,16 @@ public class SubscriptionCreateInputSubscription {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -201,11 +183,16 @@ public class SubscriptionCreateInputSubscription {
    * @return externalId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalId() {
     return externalId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalId(String externalId) {
     this.externalId = externalId;
   }
@@ -222,11 +209,16 @@ public class SubscriptionCreateInputSubscription {
    * @return billingTime
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BILLING_TIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public BillingTimeEnum getBillingTime() {
     return billingTime;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLING_TIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBillingTime(BillingTimeEnum billingTime) {
     this.billingTime = billingTime;
   }
@@ -243,16 +235,19 @@ public class SubscriptionCreateInputSubscription {
    * @return subscriptionAt
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTION_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public OffsetDateTime getSubscriptionAt() {
     return subscriptionAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTION_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSubscriptionAt(OffsetDateTime subscriptionAt) {
     this.subscriptionAt = subscriptionAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -301,119 +296,5 @@ public class SubscriptionCreateInputSubscription {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("external_customer_id");
-    openapiFields.add("plan_code");
-    openapiFields.add("name");
-    openapiFields.add("external_id");
-    openapiFields.add("billing_time");
-    openapiFields.add("subscription_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("plan_code");
-    openapiRequiredFields.add("external_id");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to SubscriptionCreateInputSubscription
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!SubscriptionCreateInputSubscription.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in SubscriptionCreateInputSubscription is not found in the empty JSON string", SubscriptionCreateInputSubscription.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!SubscriptionCreateInputSubscription.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SubscriptionCreateInputSubscription` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SubscriptionCreateInputSubscription.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if (!jsonObj.get("plan_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `plan_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("plan_code").toString()));
-      }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("external_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
-      }
-      if ((jsonObj.get("billing_time") != null && !jsonObj.get("billing_time").isJsonNull()) && !jsonObj.get("billing_time").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `billing_time` to be a primitive type in the JSON string but got `%s`", jsonObj.get("billing_time").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SubscriptionCreateInputSubscription.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SubscriptionCreateInputSubscription' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SubscriptionCreateInputSubscription> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SubscriptionCreateInputSubscription.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<SubscriptionCreateInputSubscription>() {
-           @Override
-           public void write(JsonWriter out, SubscriptionCreateInputSubscription value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public SubscriptionCreateInputSubscription read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of SubscriptionCreateInputSubscription given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SubscriptionCreateInputSubscription
-  * @throws IOException if the JSON string is invalid with respect to SubscriptionCreateInputSubscription
-  */
-  public static SubscriptionCreateInputSubscription fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SubscriptionCreateInputSubscription.class);
-  }
-
- /**
-  * Convert an instance of SubscriptionCreateInputSubscription to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

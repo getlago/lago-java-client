@@ -15,57 +15,36 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * ChargePropertiesGraduatedRangesInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  ChargePropertiesGraduatedRangesInner.JSON_PROPERTY_FROM_VALUE,
+  ChargePropertiesGraduatedRangesInner.JSON_PROPERTY_TO_VALUE,
+  ChargePropertiesGraduatedRangesInner.JSON_PROPERTY_FLAT_AMOUNT,
+  ChargePropertiesGraduatedRangesInner.JSON_PROPERTY_PER_UNIT_AMOUNT
+})
+@JsonTypeName("ChargeProperties_graduated_ranges_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class ChargePropertiesGraduatedRangesInner {
-  public static final String SERIALIZED_NAME_FROM_VALUE = "from_value";
-  @SerializedName(SERIALIZED_NAME_FROM_VALUE)
+  public static final String JSON_PROPERTY_FROM_VALUE = "from_value";
   private Integer fromValue;
 
-  public static final String SERIALIZED_NAME_TO_VALUE = "to_value";
-  @SerializedName(SERIALIZED_NAME_TO_VALUE)
+  public static final String JSON_PROPERTY_TO_VALUE = "to_value";
   private Integer toValue;
 
-  public static final String SERIALIZED_NAME_FLAT_AMOUNT = "flat_amount";
-  @SerializedName(SERIALIZED_NAME_FLAT_AMOUNT)
+  public static final String JSON_PROPERTY_FLAT_AMOUNT = "flat_amount";
   private String flatAmount;
 
-  public static final String SERIALIZED_NAME_PER_UNIT_AMOUNT = "per_unit_amount";
-  @SerializedName(SERIALIZED_NAME_PER_UNIT_AMOUNT)
+  public static final String JSON_PROPERTY_PER_UNIT_AMOUNT = "per_unit_amount";
   private String perUnitAmount;
 
   public ChargePropertiesGraduatedRangesInner() {
@@ -82,11 +61,16 @@ public class ChargePropertiesGraduatedRangesInner {
    * @return fromValue
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FROM_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getFromValue() {
     return fromValue;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FROM_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFromValue(Integer fromValue) {
     this.fromValue = fromValue;
   }
@@ -103,11 +87,16 @@ public class ChargePropertiesGraduatedRangesInner {
    * @return toValue
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TO_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getToValue() {
     return toValue;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TO_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToValue(Integer toValue) {
     this.toValue = toValue;
   }
@@ -124,11 +113,16 @@ public class ChargePropertiesGraduatedRangesInner {
    * @return flatAmount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FLAT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getFlatAmount() {
     return flatAmount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FLAT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFlatAmount(String flatAmount) {
     this.flatAmount = flatAmount;
   }
@@ -145,16 +139,19 @@ public class ChargePropertiesGraduatedRangesInner {
    * @return perUnitAmount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PER_UNIT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getPerUnitAmount() {
     return perUnitAmount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PER_UNIT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPerUnitAmount(String perUnitAmount) {
     this.perUnitAmount = perUnitAmount;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -199,109 +196,5 @@ public class ChargePropertiesGraduatedRangesInner {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("from_value");
-    openapiFields.add("to_value");
-    openapiFields.add("flat_amount");
-    openapiFields.add("per_unit_amount");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("from_value");
-    openapiRequiredFields.add("to_value");
-    openapiRequiredFields.add("flat_amount");
-    openapiRequiredFields.add("per_unit_amount");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to ChargePropertiesGraduatedRangesInner
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ChargePropertiesGraduatedRangesInner.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in ChargePropertiesGraduatedRangesInner is not found in the empty JSON string", ChargePropertiesGraduatedRangesInner.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!ChargePropertiesGraduatedRangesInner.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ChargePropertiesGraduatedRangesInner` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : ChargePropertiesGraduatedRangesInner.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("flat_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `flat_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("flat_amount").toString()));
-      }
-      if (!jsonObj.get("per_unit_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `per_unit_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("per_unit_amount").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ChargePropertiesGraduatedRangesInner.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ChargePropertiesGraduatedRangesInner' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ChargePropertiesGraduatedRangesInner> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ChargePropertiesGraduatedRangesInner.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ChargePropertiesGraduatedRangesInner>() {
-           @Override
-           public void write(JsonWriter out, ChargePropertiesGraduatedRangesInner value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ChargePropertiesGraduatedRangesInner read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of ChargePropertiesGraduatedRangesInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ChargePropertiesGraduatedRangesInner
-  * @throws IOException if the JSON string is invalid with respect to ChargePropertiesGraduatedRangesInner
-  */
-  public static ChargePropertiesGraduatedRangesInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ChargePropertiesGraduatedRangesInner.class);
-  }
-
- /**
-  * Convert an instance of ChargePropertiesGraduatedRangesInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

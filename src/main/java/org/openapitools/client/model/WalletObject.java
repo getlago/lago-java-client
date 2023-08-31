@@ -15,63 +15,55 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.client.model.Currency;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * WalletObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  WalletObject.JSON_PROPERTY_LAGO_ID,
+  WalletObject.JSON_PROPERTY_LAGO_CUSTOMER_ID,
+  WalletObject.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  WalletObject.JSON_PROPERTY_STATUS,
+  WalletObject.JSON_PROPERTY_CURRENCY,
+  WalletObject.JSON_PROPERTY_NAME,
+  WalletObject.JSON_PROPERTY_RATE_AMOUNT,
+  WalletObject.JSON_PROPERTY_CREDITS_BALANCE,
+  WalletObject.JSON_PROPERTY_BALANCE_CENTS,
+  WalletObject.JSON_PROPERTY_CONSUMED_CREDITS,
+  WalletObject.JSON_PROPERTY_CREATED_AT,
+  WalletObject.JSON_PROPERTY_EXPIRATION_AT,
+  WalletObject.JSON_PROPERTY_LAST_BALANCE_SYNC_AT,
+  WalletObject.JSON_PROPERTY_LAST_CONSUMED_CREDIT_AT,
+  WalletObject.JSON_PROPERTY_TERMINATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class WalletObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_LAGO_CUSTOMER_ID = "lago_customer_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_LAGO_CUSTOMER_ID = "lago_customer_id";
   private UUID lagoCustomerId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
   /**
    * The status of the wallet. Possible values are &#x60;active&#x60; or &#x60;terminated&#x60;.
    */
-  @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
     ACTIVE("active"),
     
@@ -83,6 +75,7 @@ public class WalletObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -92,6 +85,7 @@ public class WalletObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static StatusEnum fromValue(String value) {
       for (StatusEnum b : StatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -100,68 +94,43 @@ public class WalletObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   private StatusEnum status;
 
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
   private Currency currency;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_RATE_AMOUNT = "rate_amount";
-  @SerializedName(SERIALIZED_NAME_RATE_AMOUNT)
+  public static final String JSON_PROPERTY_RATE_AMOUNT = "rate_amount";
   private String rateAmount;
 
-  public static final String SERIALIZED_NAME_CREDITS_BALANCE = "credits_balance";
-  @SerializedName(SERIALIZED_NAME_CREDITS_BALANCE)
+  public static final String JSON_PROPERTY_CREDITS_BALANCE = "credits_balance";
   private String creditsBalance;
 
-  public static final String SERIALIZED_NAME_BALANCE_CENTS = "balance_cents";
-  @SerializedName(SERIALIZED_NAME_BALANCE_CENTS)
+  public static final String JSON_PROPERTY_BALANCE_CENTS = "balance_cents";
   private Integer balanceCents;
 
-  public static final String SERIALIZED_NAME_CONSUMED_CREDITS = "consumed_credits";
-  @SerializedName(SERIALIZED_NAME_CONSUMED_CREDITS)
+  public static final String JSON_PROPERTY_CONSUMED_CREDITS = "consumed_credits";
   private String consumedCredits;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
-  public static final String SERIALIZED_NAME_EXPIRATION_AT = "expiration_at";
-  @SerializedName(SERIALIZED_NAME_EXPIRATION_AT)
-  private OffsetDateTime expirationAt;
+  public static final String JSON_PROPERTY_EXPIRATION_AT = "expiration_at";
+  private JsonNullable<OffsetDateTime> expirationAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_LAST_BALANCE_SYNC_AT = "last_balance_sync_at";
-  @SerializedName(SERIALIZED_NAME_LAST_BALANCE_SYNC_AT)
-  private OffsetDateTime lastBalanceSyncAt;
+  public static final String JSON_PROPERTY_LAST_BALANCE_SYNC_AT = "last_balance_sync_at";
+  private JsonNullable<OffsetDateTime> lastBalanceSyncAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_LAST_CONSUMED_CREDIT_AT = "last_consumed_credit_at";
-  @SerializedName(SERIALIZED_NAME_LAST_CONSUMED_CREDIT_AT)
-  private OffsetDateTime lastConsumedCreditAt;
+  public static final String JSON_PROPERTY_LAST_CONSUMED_CREDIT_AT = "last_consumed_credit_at";
+  private JsonNullable<OffsetDateTime> lastConsumedCreditAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_TERMINATED_AT = "terminated_at";
-  @SerializedName(SERIALIZED_NAME_TERMINATED_AT)
-  private OffsetDateTime terminatedAt;
+  public static final String JSON_PROPERTY_TERMINATED_AT = "terminated_at";
+  private JsonNullable<OffsetDateTime> terminatedAt = JsonNullable.<OffsetDateTime>undefined();
 
   public WalletObject() {
   }
@@ -177,11 +146,16 @@ public class WalletObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -198,11 +172,16 @@ public class WalletObject {
    * @return lagoCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoCustomerId() {
     return lagoCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoCustomerId(UUID lagoCustomerId) {
     this.lagoCustomerId = lagoCustomerId;
   }
@@ -219,11 +198,16 @@ public class WalletObject {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -240,11 +224,16 @@ public class WalletObject {
    * @return status
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public StatusEnum getStatus() {
     return status;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -261,11 +250,16 @@ public class WalletObject {
    * @return currency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getCurrency() {
     return currency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCurrency(Currency currency) {
     this.currency = currency;
   }
@@ -282,11 +276,16 @@ public class WalletObject {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -303,11 +302,16 @@ public class WalletObject {
    * @return rateAmount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_RATE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getRateAmount() {
     return rateAmount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_RATE_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRateAmount(String rateAmount) {
     this.rateAmount = rateAmount;
   }
@@ -324,11 +328,16 @@ public class WalletObject {
    * @return creditsBalance
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREDITS_BALANCE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCreditsBalance() {
     return creditsBalance;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREDITS_BALANCE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreditsBalance(String creditsBalance) {
     this.creditsBalance = creditsBalance;
   }
@@ -345,11 +354,16 @@ public class WalletObject {
    * @return balanceCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_BALANCE_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getBalanceCents() {
     return balanceCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BALANCE_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setBalanceCents(Integer balanceCents) {
     this.balanceCents = balanceCents;
   }
@@ -366,11 +380,16 @@ public class WalletObject {
    * @return consumedCredits
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CONSUMED_CREDITS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getConsumedCredits() {
     return consumedCredits;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CONSUMED_CREDITS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setConsumedCredits(String consumedCredits) {
     this.consumedCredits = consumedCredits;
   }
@@ -387,19 +406,24 @@ public class WalletObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
 
 
   public WalletObject expirationAt(OffsetDateTime expirationAt) {
+    this.expirationAt = JsonNullable.<OffsetDateTime>of(expirationAt);
     
-    this.expirationAt = expirationAt;
     return this;
   }
 
@@ -408,19 +432,32 @@ public class WalletObject {
    * @return expirationAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getExpirationAt() {
-    return expirationAt;
+        return expirationAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EXPIRATION_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getExpirationAt_JsonNullable() {
+    return expirationAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXPIRATION_AT)
+  public void setExpirationAt_JsonNullable(JsonNullable<OffsetDateTime> expirationAt) {
+    this.expirationAt = expirationAt;
+  }
 
   public void setExpirationAt(OffsetDateTime expirationAt) {
-    this.expirationAt = expirationAt;
+    this.expirationAt = JsonNullable.<OffsetDateTime>of(expirationAt);
   }
 
 
   public WalletObject lastBalanceSyncAt(OffsetDateTime lastBalanceSyncAt) {
+    this.lastBalanceSyncAt = JsonNullable.<OffsetDateTime>of(lastBalanceSyncAt);
     
-    this.lastBalanceSyncAt = lastBalanceSyncAt;
     return this;
   }
 
@@ -429,19 +466,32 @@ public class WalletObject {
    * @return lastBalanceSyncAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getLastBalanceSyncAt() {
-    return lastBalanceSyncAt;
+        return lastBalanceSyncAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAST_BALANCE_SYNC_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getLastBalanceSyncAt_JsonNullable() {
+    return lastBalanceSyncAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAST_BALANCE_SYNC_AT)
+  public void setLastBalanceSyncAt_JsonNullable(JsonNullable<OffsetDateTime> lastBalanceSyncAt) {
+    this.lastBalanceSyncAt = lastBalanceSyncAt;
+  }
 
   public void setLastBalanceSyncAt(OffsetDateTime lastBalanceSyncAt) {
-    this.lastBalanceSyncAt = lastBalanceSyncAt;
+    this.lastBalanceSyncAt = JsonNullable.<OffsetDateTime>of(lastBalanceSyncAt);
   }
 
 
   public WalletObject lastConsumedCreditAt(OffsetDateTime lastConsumedCreditAt) {
+    this.lastConsumedCreditAt = JsonNullable.<OffsetDateTime>of(lastConsumedCreditAt);
     
-    this.lastConsumedCreditAt = lastConsumedCreditAt;
     return this;
   }
 
@@ -450,19 +500,32 @@ public class WalletObject {
    * @return lastConsumedCreditAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getLastConsumedCreditAt() {
-    return lastConsumedCreditAt;
+        return lastConsumedCreditAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAST_CONSUMED_CREDIT_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getLastConsumedCreditAt_JsonNullable() {
+    return lastConsumedCreditAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAST_CONSUMED_CREDIT_AT)
+  public void setLastConsumedCreditAt_JsonNullable(JsonNullable<OffsetDateTime> lastConsumedCreditAt) {
+    this.lastConsumedCreditAt = lastConsumedCreditAt;
+  }
 
   public void setLastConsumedCreditAt(OffsetDateTime lastConsumedCreditAt) {
-    this.lastConsumedCreditAt = lastConsumedCreditAt;
+    this.lastConsumedCreditAt = JsonNullable.<OffsetDateTime>of(lastConsumedCreditAt);
   }
 
 
   public WalletObject terminatedAt(OffsetDateTime terminatedAt) {
+    this.terminatedAt = JsonNullable.<OffsetDateTime>of(terminatedAt);
     
-    this.terminatedAt = terminatedAt;
     return this;
   }
 
@@ -471,16 +534,27 @@ public class WalletObject {
    * @return terminatedAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getTerminatedAt() {
-    return terminatedAt;
+        return terminatedAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_TERMINATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setTerminatedAt(OffsetDateTime terminatedAt) {
+  public JsonNullable<OffsetDateTime> getTerminatedAt_JsonNullable() {
+    return terminatedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TERMINATED_AT)
+  public void setTerminatedAt_JsonNullable(JsonNullable<OffsetDateTime> terminatedAt) {
     this.terminatedAt = terminatedAt;
   }
 
-
+  public void setTerminatedAt(OffsetDateTime terminatedAt) {
+    this.terminatedAt = JsonNullable.<OffsetDateTime>of(terminatedAt);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -502,10 +576,10 @@ public class WalletObject {
         Objects.equals(this.balanceCents, walletObject.balanceCents) &&
         Objects.equals(this.consumedCredits, walletObject.consumedCredits) &&
         Objects.equals(this.createdAt, walletObject.createdAt) &&
-        Objects.equals(this.expirationAt, walletObject.expirationAt) &&
-        Objects.equals(this.lastBalanceSyncAt, walletObject.lastBalanceSyncAt) &&
-        Objects.equals(this.lastConsumedCreditAt, walletObject.lastConsumedCreditAt) &&
-        Objects.equals(this.terminatedAt, walletObject.terminatedAt);
+        equalsNullable(this.expirationAt, walletObject.expirationAt) &&
+        equalsNullable(this.lastBalanceSyncAt, walletObject.lastBalanceSyncAt) &&
+        equalsNullable(this.lastConsumedCreditAt, walletObject.lastConsumedCreditAt) &&
+        equalsNullable(this.terminatedAt, walletObject.terminatedAt);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -514,7 +588,7 @@ public class WalletObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, lagoCustomerId, externalCustomerId, status, currency, name, rateAmount, creditsBalance, balanceCents, consumedCredits, createdAt, expirationAt, lastBalanceSyncAt, lastConsumedCreditAt, terminatedAt);
+    return Objects.hash(lagoId, lagoCustomerId, externalCustomerId, status, currency, name, rateAmount, creditsBalance, balanceCents, consumedCredits, createdAt, hashCodeNullable(expirationAt), hashCodeNullable(lastBalanceSyncAt), hashCodeNullable(lastConsumedCreditAt), hashCodeNullable(terminatedAt));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -558,146 +632,5 @@ public class WalletObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_customer_id");
-    openapiFields.add("external_customer_id");
-    openapiFields.add("status");
-    openapiFields.add("currency");
-    openapiFields.add("name");
-    openapiFields.add("rate_amount");
-    openapiFields.add("credits_balance");
-    openapiFields.add("balance_cents");
-    openapiFields.add("consumed_credits");
-    openapiFields.add("created_at");
-    openapiFields.add("expiration_at");
-    openapiFields.add("last_balance_sync_at");
-    openapiFields.add("last_consumed_credit_at");
-    openapiFields.add("terminated_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("lago_customer_id");
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("status");
-    openapiRequiredFields.add("currency");
-    openapiRequiredFields.add("rate_amount");
-    openapiRequiredFields.add("credits_balance");
-    openapiRequiredFields.add("balance_cents");
-    openapiRequiredFields.add("consumed_credits");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to WalletObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!WalletObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in WalletObject is not found in the empty JSON string", WalletObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!WalletObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `WalletObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : WalletObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("lago_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_customer_id").toString()));
-      }
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if (!jsonObj.get("status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the required field `currency`
-      Currency.validateJsonElement(jsonObj.get("currency"));
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("rate_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `rate_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rate_amount").toString()));
-      }
-      if (!jsonObj.get("credits_balance").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `credits_balance` to be a primitive type in the JSON string but got `%s`", jsonObj.get("credits_balance").toString()));
-      }
-      if (!jsonObj.get("consumed_credits").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `consumed_credits` to be a primitive type in the JSON string but got `%s`", jsonObj.get("consumed_credits").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!WalletObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'WalletObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<WalletObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(WalletObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<WalletObject>() {
-           @Override
-           public void write(JsonWriter out, WalletObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public WalletObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of WalletObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of WalletObject
-  * @throws IOException if the JSON string is invalid with respect to WalletObject
-  */
-  public static WalletObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, WalletObject.class);
-  }
-
- /**
-  * Convert an instance of WalletObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

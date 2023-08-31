@@ -15,57 +15,40 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * WalletTransactionObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  WalletTransactionObject.JSON_PROPERTY_LAGO_ID,
+  WalletTransactionObject.JSON_PROPERTY_LAGO_WALLET_ID,
+  WalletTransactionObject.JSON_PROPERTY_STATUS,
+  WalletTransactionObject.JSON_PROPERTY_TRANSACTION_TYPE,
+  WalletTransactionObject.JSON_PROPERTY_AMOUNT,
+  WalletTransactionObject.JSON_PROPERTY_CREDIT_AMOUNT,
+  WalletTransactionObject.JSON_PROPERTY_SETTLED_AT,
+  WalletTransactionObject.JSON_PROPERTY_CREATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class WalletTransactionObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_LAGO_WALLET_ID = "lago_wallet_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_WALLET_ID)
+  public static final String JSON_PROPERTY_LAGO_WALLET_ID = "lago_wallet_id";
   private UUID lagoWalletId;
 
   /**
    * The status of the wallet transaction. Possible values are &#x60;pending&#x60; or &#x60;settled&#x60;.
    */
-  @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
     PENDING("pending"),
     
@@ -77,6 +60,7 @@ public class WalletTransactionObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -86,6 +70,7 @@ public class WalletTransactionObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static StatusEnum fromValue(String value) {
       for (StatusEnum b : StatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -94,29 +79,14 @@ public class WalletTransactionObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   private StatusEnum status;
 
   /**
    * The type of transaction. Possible values are &#x60;inbound&#x60; (increasing the balance) or &#x60;outbound&#x60; (decreasing the balance).
    */
-  @JsonAdapter(TransactionTypeEnum.Adapter.class)
   public enum TransactionTypeEnum {
     INBOUND("inbound"),
     
@@ -128,6 +98,7 @@ public class WalletTransactionObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -137,6 +108,7 @@ public class WalletTransactionObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static TransactionTypeEnum fromValue(String value) {
       for (TransactionTypeEnum b : TransactionTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -145,39 +117,21 @@ public class WalletTransactionObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<TransactionTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TransactionTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TransactionTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TransactionTypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_TRANSACTION_TYPE = "transaction_type";
-  @SerializedName(SERIALIZED_NAME_TRANSACTION_TYPE)
+  public static final String JSON_PROPERTY_TRANSACTION_TYPE = "transaction_type";
   private TransactionTypeEnum transactionType;
 
-  public static final String SERIALIZED_NAME_AMOUNT = "amount";
-  @SerializedName(SERIALIZED_NAME_AMOUNT)
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
   private String amount;
 
-  public static final String SERIALIZED_NAME_CREDIT_AMOUNT = "credit_amount";
-  @SerializedName(SERIALIZED_NAME_CREDIT_AMOUNT)
+  public static final String JSON_PROPERTY_CREDIT_AMOUNT = "credit_amount";
   private String creditAmount;
 
-  public static final String SERIALIZED_NAME_SETTLED_AT = "settled_at";
-  @SerializedName(SERIALIZED_NAME_SETTLED_AT)
+  public static final String JSON_PROPERTY_SETTLED_AT = "settled_at";
   private OffsetDateTime settledAt;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   public WalletTransactionObject() {
@@ -194,11 +148,16 @@ public class WalletTransactionObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -215,11 +174,16 @@ public class WalletTransactionObject {
    * @return lagoWalletId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_WALLET_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoWalletId() {
     return lagoWalletId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_WALLET_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoWalletId(UUID lagoWalletId) {
     this.lagoWalletId = lagoWalletId;
   }
@@ -236,11 +200,16 @@ public class WalletTransactionObject {
    * @return status
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public StatusEnum getStatus() {
     return status;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -257,11 +226,16 @@ public class WalletTransactionObject {
    * @return transactionType
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public TransactionTypeEnum getTransactionType() {
     return transactionType;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TRANSACTION_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTransactionType(TransactionTypeEnum transactionType) {
     this.transactionType = transactionType;
   }
@@ -278,11 +252,16 @@ public class WalletTransactionObject {
    * @return amount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAmount() {
     return amount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmount(String amount) {
     this.amount = amount;
   }
@@ -299,11 +278,16 @@ public class WalletTransactionObject {
    * @return creditAmount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREDIT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCreditAmount() {
     return creditAmount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREDIT_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreditAmount(String creditAmount) {
     this.creditAmount = creditAmount;
   }
@@ -320,11 +304,16 @@ public class WalletTransactionObject {
    * @return settledAt
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SETTLED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public OffsetDateTime getSettledAt() {
     return settledAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SETTLED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSettledAt(OffsetDateTime settledAt) {
     this.settledAt = settledAt;
   }
@@ -341,16 +330,19 @@ public class WalletTransactionObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -403,128 +395,5 @@ public class WalletTransactionObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_wallet_id");
-    openapiFields.add("status");
-    openapiFields.add("transaction_type");
-    openapiFields.add("amount");
-    openapiFields.add("credit_amount");
-    openapiFields.add("settled_at");
-    openapiFields.add("created_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("lago_wallet_id");
-    openapiRequiredFields.add("status");
-    openapiRequiredFields.add("transaction_type");
-    openapiRequiredFields.add("amount");
-    openapiRequiredFields.add("credit_amount");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to WalletTransactionObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!WalletTransactionObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in WalletTransactionObject is not found in the empty JSON string", WalletTransactionObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!WalletTransactionObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `WalletTransactionObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : WalletTransactionObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("lago_wallet_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_wallet_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_wallet_id").toString()));
-      }
-      if (!jsonObj.get("status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      if (!jsonObj.get("transaction_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `transaction_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("transaction_type").toString()));
-      }
-      if (!jsonObj.get("amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));
-      }
-      if (!jsonObj.get("credit_amount").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `credit_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("credit_amount").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!WalletTransactionObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'WalletTransactionObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<WalletTransactionObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(WalletTransactionObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<WalletTransactionObject>() {
-           @Override
-           public void write(JsonWriter out, WalletTransactionObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public WalletTransactionObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of WalletTransactionObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of WalletTransactionObject
-  * @throws IOException if the JSON string is invalid with respect to WalletTransactionObject
-  */
-  public static WalletTransactionObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, WalletTransactionObject.class);
-  }
-
- /**
-  * Convert an instance of WalletTransactionObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

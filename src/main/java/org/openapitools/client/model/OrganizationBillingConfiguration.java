@@ -15,62 +15,43 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * The custom billing settings for your organization.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  OrganizationBillingConfiguration.JSON_PROPERTY_INVOICE_FOOTER,
+  OrganizationBillingConfiguration.JSON_PROPERTY_INVOICE_GRACE_PERIOD,
+  OrganizationBillingConfiguration.JSON_PROPERTY_DOCUMENT_LOCALE
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class OrganizationBillingConfiguration {
-  public static final String SERIALIZED_NAME_INVOICE_FOOTER = "invoice_footer";
-  @SerializedName(SERIALIZED_NAME_INVOICE_FOOTER)
-  private String invoiceFooter;
+  public static final String JSON_PROPERTY_INVOICE_FOOTER = "invoice_footer";
+  private JsonNullable<String> invoiceFooter = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_INVOICE_GRACE_PERIOD = "invoice_grace_period";
-  @SerializedName(SERIALIZED_NAME_INVOICE_GRACE_PERIOD)
+  public static final String JSON_PROPERTY_INVOICE_GRACE_PERIOD = "invoice_grace_period";
   private Integer invoiceGracePeriod;
 
-  public static final String SERIALIZED_NAME_DOCUMENT_LOCALE = "document_locale";
-  @SerializedName(SERIALIZED_NAME_DOCUMENT_LOCALE)
+  public static final String JSON_PROPERTY_DOCUMENT_LOCALE = "document_locale";
   private String documentLocale;
 
   public OrganizationBillingConfiguration() {
   }
 
   public OrganizationBillingConfiguration invoiceFooter(String invoiceFooter) {
+    this.invoiceFooter = JsonNullable.<String>of(invoiceFooter);
     
-    this.invoiceFooter = invoiceFooter;
     return this;
   }
 
@@ -79,13 +60,26 @@ public class OrganizationBillingConfiguration {
    * @return invoiceFooter
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getInvoiceFooter() {
-    return invoiceFooter;
+        return invoiceFooter.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_INVOICE_FOOTER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getInvoiceFooter_JsonNullable() {
+    return invoiceFooter;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_INVOICE_FOOTER)
+  public void setInvoiceFooter_JsonNullable(JsonNullable<String> invoiceFooter) {
+    this.invoiceFooter = invoiceFooter;
+  }
 
   public void setInvoiceFooter(String invoiceFooter) {
-    this.invoiceFooter = invoiceFooter;
+    this.invoiceFooter = JsonNullable.<String>of(invoiceFooter);
   }
 
 
@@ -100,11 +94,16 @@ public class OrganizationBillingConfiguration {
    * @return invoiceGracePeriod
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_INVOICE_GRACE_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getInvoiceGracePeriod() {
     return invoiceGracePeriod;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICE_GRACE_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setInvoiceGracePeriod(Integer invoiceGracePeriod) {
     this.invoiceGracePeriod = invoiceGracePeriod;
   }
@@ -121,16 +120,19 @@ public class OrganizationBillingConfiguration {
    * @return documentLocale
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_LOCALE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getDocumentLocale() {
     return documentLocale;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_LOCALE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDocumentLocale(String documentLocale) {
     this.documentLocale = documentLocale;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -141,7 +143,7 @@ public class OrganizationBillingConfiguration {
       return false;
     }
     OrganizationBillingConfiguration organizationBillingConfiguration = (OrganizationBillingConfiguration) o;
-    return Objects.equals(this.invoiceFooter, organizationBillingConfiguration.invoiceFooter) &&
+    return equalsNullable(this.invoiceFooter, organizationBillingConfiguration.invoiceFooter) &&
         Objects.equals(this.invoiceGracePeriod, organizationBillingConfiguration.invoiceGracePeriod) &&
         Objects.equals(this.documentLocale, organizationBillingConfiguration.documentLocale);
   }
@@ -152,7 +154,7 @@ public class OrganizationBillingConfiguration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(invoiceFooter, invoiceGracePeriod, documentLocale);
+    return Objects.hash(hashCodeNullable(invoiceFooter), invoiceGracePeriod, documentLocale);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -184,97 +186,5 @@ public class OrganizationBillingConfiguration {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("invoice_footer");
-    openapiFields.add("invoice_grace_period");
-    openapiFields.add("document_locale");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to OrganizationBillingConfiguration
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!OrganizationBillingConfiguration.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in OrganizationBillingConfiguration is not found in the empty JSON string", OrganizationBillingConfiguration.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!OrganizationBillingConfiguration.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `OrganizationBillingConfiguration` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("invoice_footer") != null && !jsonObj.get("invoice_footer").isJsonNull()) && !jsonObj.get("invoice_footer").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `invoice_footer` to be a primitive type in the JSON string but got `%s`", jsonObj.get("invoice_footer").toString()));
-      }
-      if ((jsonObj.get("document_locale") != null && !jsonObj.get("document_locale").isJsonNull()) && !jsonObj.get("document_locale").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `document_locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("document_locale").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!OrganizationBillingConfiguration.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'OrganizationBillingConfiguration' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<OrganizationBillingConfiguration> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(OrganizationBillingConfiguration.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<OrganizationBillingConfiguration>() {
-           @Override
-           public void write(JsonWriter out, OrganizationBillingConfiguration value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public OrganizationBillingConfiguration read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of OrganizationBillingConfiguration given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of OrganizationBillingConfiguration
-  * @throws IOException if the JSON string is invalid with respect to OrganizationBillingConfiguration
-  */
-  public static OrganizationBillingConfiguration fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, OrganizationBillingConfiguration.class);
-  }
-
- /**
-  * Convert an instance of OrganizationBillingConfiguration to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

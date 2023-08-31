@@ -15,12 +15,11 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -30,57 +29,49 @@ import org.openapitools.client.model.ChargeObject;
 import org.openapitools.client.model.Currency;
 import org.openapitools.client.model.TaxObject;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * PlanObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  PlanObject.JSON_PROPERTY_LAGO_ID,
+  PlanObject.JSON_PROPERTY_NAME,
+  PlanObject.JSON_PROPERTY_CREATED_AT,
+  PlanObject.JSON_PROPERTY_CODE,
+  PlanObject.JSON_PROPERTY_INTERVAL,
+  PlanObject.JSON_PROPERTY_DESCRIPTION,
+  PlanObject.JSON_PROPERTY_AMOUNT_CENTS,
+  PlanObject.JSON_PROPERTY_AMOUNT_CURRENCY,
+  PlanObject.JSON_PROPERTY_TRIAL_PERIOD,
+  PlanObject.JSON_PROPERTY_PAY_IN_ADVANCE,
+  PlanObject.JSON_PROPERTY_BILL_CHARGES_MONTHLY,
+  PlanObject.JSON_PROPERTY_ACTIVE_SUBSCRIPTIONS_COUNT,
+  PlanObject.JSON_PROPERTY_DRAFT_INVOICES_COUNT,
+  PlanObject.JSON_PROPERTY_CHARGES,
+  PlanObject.JSON_PROPERTY_TAXES
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class PlanObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
   /**
    * The interval used for recurring billing. It represents the frequency at which subscription billing occurs. The interval can be one of the following values: &#x60;yearly&#x60;, &#x60;quarterly&#x60;, &#x60;monthly&#x60; or &#x60;weekly&#x60;.
    */
-  @JsonAdapter(IntervalEnum.Adapter.class)
   public enum IntervalEnum {
     WEEKLY("weekly"),
     
@@ -96,6 +87,7 @@ public class PlanObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -105,6 +97,7 @@ public class PlanObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static IntervalEnum fromValue(String value) {
       for (IntervalEnum b : IntervalEnum.values()) {
         if (b.value.equals(value)) {
@@ -113,63 +106,39 @@ public class PlanObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<IntervalEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final IntervalEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public IntervalEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return IntervalEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_INTERVAL = "interval";
-  @SerializedName(SERIALIZED_NAME_INTERVAL)
+  public static final String JSON_PROPERTY_INTERVAL = "interval";
   private IntervalEnum interval;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
   private String description;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_TRIAL_PERIOD = "trial_period";
-  @SerializedName(SERIALIZED_NAME_TRIAL_PERIOD)
+  public static final String JSON_PROPERTY_TRIAL_PERIOD = "trial_period";
   private BigDecimal trialPeriod;
 
-  public static final String SERIALIZED_NAME_PAY_IN_ADVANCE = "pay_in_advance";
-  @SerializedName(SERIALIZED_NAME_PAY_IN_ADVANCE)
+  public static final String JSON_PROPERTY_PAY_IN_ADVANCE = "pay_in_advance";
   private Boolean payInAdvance;
 
-  public static final String SERIALIZED_NAME_BILL_CHARGES_MONTHLY = "bill_charges_monthly";
-  @SerializedName(SERIALIZED_NAME_BILL_CHARGES_MONTHLY)
-  private Boolean billChargesMonthly;
+  public static final String JSON_PROPERTY_BILL_CHARGES_MONTHLY = "bill_charges_monthly";
+  private JsonNullable<Boolean> billChargesMonthly = JsonNullable.<Boolean>undefined();
 
-  public static final String SERIALIZED_NAME_ACTIVE_SUBSCRIPTIONS_COUNT = "active_subscriptions_count";
-  @SerializedName(SERIALIZED_NAME_ACTIVE_SUBSCRIPTIONS_COUNT)
+  public static final String JSON_PROPERTY_ACTIVE_SUBSCRIPTIONS_COUNT = "active_subscriptions_count";
   private Integer activeSubscriptionsCount;
 
-  public static final String SERIALIZED_NAME_DRAFT_INVOICES_COUNT = "draft_invoices_count";
-  @SerializedName(SERIALIZED_NAME_DRAFT_INVOICES_COUNT)
+  public static final String JSON_PROPERTY_DRAFT_INVOICES_COUNT = "draft_invoices_count";
   private Integer draftInvoicesCount;
 
-  public static final String SERIALIZED_NAME_CHARGES = "charges";
-  @SerializedName(SERIALIZED_NAME_CHARGES)
+  public static final String JSON_PROPERTY_CHARGES = "charges";
   private List<ChargeObject> charges;
 
-  public static final String SERIALIZED_NAME_TAXES = "taxes";
-  @SerializedName(SERIALIZED_NAME_TAXES)
+  public static final String JSON_PROPERTY_TAXES = "taxes";
   private List<TaxObject> taxes;
 
   public PlanObject() {
@@ -186,11 +155,16 @@ public class PlanObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -207,11 +181,16 @@ public class PlanObject {
    * @return name
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
@@ -228,11 +207,16 @@ public class PlanObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
@@ -249,11 +233,16 @@ public class PlanObject {
    * @return code
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCode(String code) {
     this.code = code;
   }
@@ -270,11 +259,16 @@ public class PlanObject {
    * @return interval
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_INTERVAL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public IntervalEnum getInterval() {
     return interval;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INTERVAL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setInterval(IntervalEnum interval) {
     this.interval = interval;
   }
@@ -291,11 +285,16 @@ public class PlanObject {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getDescription() {
     return description;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDescription(String description) {
     this.description = description;
   }
@@ -312,11 +311,16 @@ public class PlanObject {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -333,11 +337,16 @@ public class PlanObject {
    * @return amountCurrency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -354,11 +363,16 @@ public class PlanObject {
    * @return trialPeriod
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TRIAL_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public BigDecimal getTrialPeriod() {
     return trialPeriod;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TRIAL_PERIOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTrialPeriod(BigDecimal trialPeriod) {
     this.trialPeriod = trialPeriod;
   }
@@ -375,19 +389,24 @@ public class PlanObject {
    * @return payInAdvance
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getPayInAdvance() {
     return payInAdvance;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPayInAdvance(Boolean payInAdvance) {
     this.payInAdvance = payInAdvance;
   }
 
 
   public PlanObject billChargesMonthly(Boolean billChargesMonthly) {
+    this.billChargesMonthly = JsonNullable.<Boolean>of(billChargesMonthly);
     
-    this.billChargesMonthly = billChargesMonthly;
     return this;
   }
 
@@ -396,13 +415,26 @@ public class PlanObject {
    * @return billChargesMonthly
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Boolean getBillChargesMonthly() {
-    return billChargesMonthly;
+        return billChargesMonthly.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_BILL_CHARGES_MONTHLY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Boolean> getBillChargesMonthly_JsonNullable() {
+    return billChargesMonthly;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BILL_CHARGES_MONTHLY)
+  public void setBillChargesMonthly_JsonNullable(JsonNullable<Boolean> billChargesMonthly) {
+    this.billChargesMonthly = billChargesMonthly;
+  }
 
   public void setBillChargesMonthly(Boolean billChargesMonthly) {
-    this.billChargesMonthly = billChargesMonthly;
+    this.billChargesMonthly = JsonNullable.<Boolean>of(billChargesMonthly);
   }
 
 
@@ -417,11 +449,16 @@ public class PlanObject {
    * @return activeSubscriptionsCount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ACTIVE_SUBSCRIPTIONS_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getActiveSubscriptionsCount() {
     return activeSubscriptionsCount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ACTIVE_SUBSCRIPTIONS_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setActiveSubscriptionsCount(Integer activeSubscriptionsCount) {
     this.activeSubscriptionsCount = activeSubscriptionsCount;
   }
@@ -438,11 +475,16 @@ public class PlanObject {
    * @return draftInvoicesCount
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_DRAFT_INVOICES_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getDraftInvoicesCount() {
     return draftInvoicesCount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_DRAFT_INVOICES_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setDraftInvoicesCount(Integer draftInvoicesCount) {
     this.draftInvoicesCount = draftInvoicesCount;
   }
@@ -467,11 +509,16 @@ public class PlanObject {
    * @return charges
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CHARGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ChargeObject> getCharges() {
     return charges;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CHARGES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCharges(List<ChargeObject> charges) {
     this.charges = charges;
   }
@@ -496,16 +543,19 @@ public class PlanObject {
    * @return taxes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<TaxObject> getTaxes() {
     return taxes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTaxes(List<TaxObject> taxes) {
     this.taxes = taxes;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -526,7 +576,7 @@ public class PlanObject {
         Objects.equals(this.amountCurrency, planObject.amountCurrency) &&
         Objects.equals(this.trialPeriod, planObject.trialPeriod) &&
         Objects.equals(this.payInAdvance, planObject.payInAdvance) &&
-        Objects.equals(this.billChargesMonthly, planObject.billChargesMonthly) &&
+        equalsNullable(this.billChargesMonthly, planObject.billChargesMonthly) &&
         Objects.equals(this.activeSubscriptionsCount, planObject.activeSubscriptionsCount) &&
         Objects.equals(this.draftInvoicesCount, planObject.draftInvoicesCount) &&
         Objects.equals(this.charges, planObject.charges) &&
@@ -539,7 +589,7 @@ public class PlanObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, name, createdAt, code, interval, description, amountCents, amountCurrency, trialPeriod, payInAdvance, billChargesMonthly, activeSubscriptionsCount, draftInvoicesCount, charges, taxes);
+    return Objects.hash(lagoId, name, createdAt, code, interval, description, amountCents, amountCurrency, trialPeriod, payInAdvance, hashCodeNullable(billChargesMonthly), activeSubscriptionsCount, draftInvoicesCount, charges, taxes);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -583,164 +633,5 @@ public class PlanObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("name");
-    openapiFields.add("created_at");
-    openapiFields.add("code");
-    openapiFields.add("interval");
-    openapiFields.add("description");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("trial_period");
-    openapiFields.add("pay_in_advance");
-    openapiFields.add("bill_charges_monthly");
-    openapiFields.add("active_subscriptions_count");
-    openapiFields.add("draft_invoices_count");
-    openapiFields.add("charges");
-    openapiFields.add("taxes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("name");
-    openapiRequiredFields.add("created_at");
-    openapiRequiredFields.add("code");
-    openapiRequiredFields.add("interval");
-    openapiRequiredFields.add("amount_cents");
-    openapiRequiredFields.add("amount_currency");
-    openapiRequiredFields.add("active_subscriptions_count");
-    openapiRequiredFields.add("draft_invoices_count");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PlanObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PlanObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PlanObject is not found in the empty JSON string", PlanObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!PlanObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PlanObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PlanObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if (!jsonObj.get("interval").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `interval` to be a primitive type in the JSON string but got `%s`", jsonObj.get("interval").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-      // validate the required field `amount_currency`
-      Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      if (jsonObj.get("charges") != null && !jsonObj.get("charges").isJsonNull()) {
-        JsonArray jsonArraycharges = jsonObj.getAsJsonArray("charges");
-        if (jsonArraycharges != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("charges").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `charges` to be an array in the JSON string but got `%s`", jsonObj.get("charges").toString()));
-          }
-
-          // validate the optional field `charges` (array)
-          for (int i = 0; i < jsonArraycharges.size(); i++) {
-            ChargeObject.validateJsonElement(jsonArraycharges.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("taxes") != null && !jsonObj.get("taxes").isJsonNull()) {
-        JsonArray jsonArraytaxes = jsonObj.getAsJsonArray("taxes");
-        if (jsonArraytaxes != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("taxes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `taxes` to be an array in the JSON string but got `%s`", jsonObj.get("taxes").toString()));
-          }
-
-          // validate the optional field `taxes` (array)
-          for (int i = 0; i < jsonArraytaxes.size(); i++) {
-            TaxObject.validateJsonElement(jsonArraytaxes.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PlanObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PlanObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PlanObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PlanObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PlanObject>() {
-           @Override
-           public void write(JsonWriter out, PlanObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PlanObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of PlanObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of PlanObject
-  * @throws IOException if the JSON string is invalid with respect to PlanObject
-  */
-  public static PlanObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PlanObject.class);
-  }
-
- /**
-  * Convert an instance of PlanObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

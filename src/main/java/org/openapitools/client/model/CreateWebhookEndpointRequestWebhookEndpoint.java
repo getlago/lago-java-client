@@ -15,52 +15,34 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreateWebhookEndpointRequestWebhookEndpoint
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreateWebhookEndpointRequestWebhookEndpoint.JSON_PROPERTY_WEBHOOK_URL,
+  CreateWebhookEndpointRequestWebhookEndpoint.JSON_PROPERTY_SIGNATURE_ALGO
+})
+@JsonTypeName("createWebhookEndpoint_request_webhook_endpoint")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreateWebhookEndpointRequestWebhookEndpoint {
-  public static final String SERIALIZED_NAME_WEBHOOK_URL = "webhook_url";
-  @SerializedName(SERIALIZED_NAME_WEBHOOK_URL)
+  public static final String JSON_PROPERTY_WEBHOOK_URL = "webhook_url";
   private String webhookUrl;
 
   /**
    * The signature used for the webhook. If no value is passed,
    */
-  @JsonAdapter(SignatureAlgoEnum.Adapter.class)
   public enum SignatureAlgoEnum {
     JWT("jwt"),
     
@@ -72,6 +54,7 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -81,6 +64,7 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static SignatureAlgoEnum fromValue(String value) {
       for (SignatureAlgoEnum b : SignatureAlgoEnum.values()) {
         if (b.value.equals(value)) {
@@ -89,24 +73,10 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
       }
       return null;
     }
-
-    public static class Adapter extends TypeAdapter<SignatureAlgoEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SignatureAlgoEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SignatureAlgoEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SignatureAlgoEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_SIGNATURE_ALGO = "signature_algo";
-  @SerializedName(SERIALIZED_NAME_SIGNATURE_ALGO)
-  private SignatureAlgoEnum signatureAlgo;
+  public static final String JSON_PROPERTY_SIGNATURE_ALGO = "signature_algo";
+  private JsonNullable<SignatureAlgoEnum> signatureAlgo = JsonNullable.<SignatureAlgoEnum>undefined();
 
   public CreateWebhookEndpointRequestWebhookEndpoint() {
   }
@@ -122,19 +92,24 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
    * @return webhookUrl
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_WEBHOOK_URL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getWebhookUrl() {
     return webhookUrl;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_WEBHOOK_URL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setWebhookUrl(String webhookUrl) {
     this.webhookUrl = webhookUrl;
   }
 
 
   public CreateWebhookEndpointRequestWebhookEndpoint signatureAlgo(SignatureAlgoEnum signatureAlgo) {
+    this.signatureAlgo = JsonNullable.<SignatureAlgoEnum>of(signatureAlgo);
     
-    this.signatureAlgo = signatureAlgo;
     return this;
   }
 
@@ -143,16 +118,27 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
    * @return signatureAlgo
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public SignatureAlgoEnum getSignatureAlgo() {
-    return signatureAlgo;
+        return signatureAlgo.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_SIGNATURE_ALGO)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setSignatureAlgo(SignatureAlgoEnum signatureAlgo) {
+  public JsonNullable<SignatureAlgoEnum> getSignatureAlgo_JsonNullable() {
+    return signatureAlgo;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SIGNATURE_ALGO)
+  public void setSignatureAlgo_JsonNullable(JsonNullable<SignatureAlgoEnum> signatureAlgo) {
     this.signatureAlgo = signatureAlgo;
   }
 
-
+  public void setSignatureAlgo(SignatureAlgoEnum signatureAlgo) {
+    this.signatureAlgo = JsonNullable.<SignatureAlgoEnum>of(signatureAlgo);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -164,7 +150,7 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
     }
     CreateWebhookEndpointRequestWebhookEndpoint createWebhookEndpointRequestWebhookEndpoint = (CreateWebhookEndpointRequestWebhookEndpoint) o;
     return Objects.equals(this.webhookUrl, createWebhookEndpointRequestWebhookEndpoint.webhookUrl) &&
-        Objects.equals(this.signatureAlgo, createWebhookEndpointRequestWebhookEndpoint.signatureAlgo);
+        equalsNullable(this.signatureAlgo, createWebhookEndpointRequestWebhookEndpoint.signatureAlgo);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -173,7 +159,7 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
 
   @Override
   public int hashCode() {
-    return Objects.hash(webhookUrl, signatureAlgo);
+    return Objects.hash(webhookUrl, hashCodeNullable(signatureAlgo));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -204,104 +190,5 @@ public class CreateWebhookEndpointRequestWebhookEndpoint {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("webhook_url");
-    openapiFields.add("signature_algo");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("webhook_url");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreateWebhookEndpointRequestWebhookEndpoint
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreateWebhookEndpointRequestWebhookEndpoint.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreateWebhookEndpointRequestWebhookEndpoint is not found in the empty JSON string", CreateWebhookEndpointRequestWebhookEndpoint.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreateWebhookEndpointRequestWebhookEndpoint.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateWebhookEndpointRequestWebhookEndpoint` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreateWebhookEndpointRequestWebhookEndpoint.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("webhook_url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `webhook_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("webhook_url").toString()));
-      }
-      if ((jsonObj.get("signature_algo") != null && !jsonObj.get("signature_algo").isJsonNull()) && !jsonObj.get("signature_algo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `signature_algo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("signature_algo").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreateWebhookEndpointRequestWebhookEndpoint.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreateWebhookEndpointRequestWebhookEndpoint' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreateWebhookEndpointRequestWebhookEndpoint> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreateWebhookEndpointRequestWebhookEndpoint.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreateWebhookEndpointRequestWebhookEndpoint>() {
-           @Override
-           public void write(JsonWriter out, CreateWebhookEndpointRequestWebhookEndpoint value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreateWebhookEndpointRequestWebhookEndpoint read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreateWebhookEndpointRequestWebhookEndpoint given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreateWebhookEndpointRequestWebhookEndpoint
-  * @throws IOException if the JSON string is invalid with respect to CreateWebhookEndpointRequestWebhookEndpoint
-  */
-  public static CreateWebhookEndpointRequestWebhookEndpoint fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreateWebhookEndpointRequestWebhookEndpoint.class);
-  }
-
- /**
-  * Convert an instance of CreateWebhookEndpointRequestWebhookEndpoint to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

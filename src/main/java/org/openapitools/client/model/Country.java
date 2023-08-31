@@ -15,18 +15,15 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.io.IOException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Gets or Sets Country
  */
-@JsonAdapter(Country.Adapter.class)
 public enum Country {
   
   AD("AD"),
@@ -533,6 +530,7 @@ public enum Country {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -542,6 +540,7 @@ public enum Country {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static Country fromValue(String value) {
     for (Country b : Country.values()) {
       if (b.value.equals(value)) {
@@ -549,19 +548,6 @@ public enum Country {
       }
     }
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
-  }
-
-  public static class Adapter extends TypeAdapter<Country> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final Country enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public Country read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return Country.fromValue(value);
-    }
   }
 }
 

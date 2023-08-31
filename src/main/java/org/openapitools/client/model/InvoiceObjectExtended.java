@@ -15,12 +15,11 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,65 +32,63 @@ import org.openapitools.client.model.InvoiceAppliedTaxObject;
 import org.openapitools.client.model.InvoiceMetadataObject;
 import org.openapitools.client.model.InvoiceObjectCustomer;
 import org.openapitools.client.model.SubscriptionObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * InvoiceObjectExtended
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  InvoiceObjectExtended.JSON_PROPERTY_LAGO_ID,
+  InvoiceObjectExtended.JSON_PROPERTY_SEQUENTIAL_ID,
+  InvoiceObjectExtended.JSON_PROPERTY_NUMBER,
+  InvoiceObjectExtended.JSON_PROPERTY_ISSUING_DATE,
+  InvoiceObjectExtended.JSON_PROPERTY_PAYMENT_DUE_DATE,
+  InvoiceObjectExtended.JSON_PROPERTY_NET_PAYMENT_TERM,
+  InvoiceObjectExtended.JSON_PROPERTY_INVOICE_TYPE,
+  InvoiceObjectExtended.JSON_PROPERTY_STATUS,
+  InvoiceObjectExtended.JSON_PROPERTY_PAYMENT_STATUS,
+  InvoiceObjectExtended.JSON_PROPERTY_CURRENCY,
+  InvoiceObjectExtended.JSON_PROPERTY_FEES_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_COUPONS_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_CREDIT_NOTES_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_TAXES_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_PREPAID_CREDIT_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_TOTAL_AMOUNT_CENTS,
+  InvoiceObjectExtended.JSON_PROPERTY_VERSION_NUMBER,
+  InvoiceObjectExtended.JSON_PROPERTY_FILE_URL,
+  InvoiceObjectExtended.JSON_PROPERTY_CUSTOMER,
+  InvoiceObjectExtended.JSON_PROPERTY_METADATA,
+  InvoiceObjectExtended.JSON_PROPERTY_APPLIED_TAXES,
+  InvoiceObjectExtended.JSON_PROPERTY_CREDITS,
+  InvoiceObjectExtended.JSON_PROPERTY_FEES,
+  InvoiceObjectExtended.JSON_PROPERTY_SUBSCRIPTIONS
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class InvoiceObjectExtended {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_SEQUENTIAL_ID = "sequential_id";
-  @SerializedName(SERIALIZED_NAME_SEQUENTIAL_ID)
+  public static final String JSON_PROPERTY_SEQUENTIAL_ID = "sequential_id";
   private Integer sequentialId;
 
-  public static final String SERIALIZED_NAME_NUMBER = "number";
-  @SerializedName(SERIALIZED_NAME_NUMBER)
+  public static final String JSON_PROPERTY_NUMBER = "number";
   private String number;
 
-  public static final String SERIALIZED_NAME_ISSUING_DATE = "issuing_date";
-  @SerializedName(SERIALIZED_NAME_ISSUING_DATE)
+  public static final String JSON_PROPERTY_ISSUING_DATE = "issuing_date";
   private LocalDate issuingDate;
 
-  public static final String SERIALIZED_NAME_PAYMENT_DUE_DATE = "payment_due_date";
-  @SerializedName(SERIALIZED_NAME_PAYMENT_DUE_DATE)
+  public static final String JSON_PROPERTY_PAYMENT_DUE_DATE = "payment_due_date";
   private LocalDate paymentDueDate;
 
-  public static final String SERIALIZED_NAME_NET_PAYMENT_TERM = "net_payment_term";
-  @SerializedName(SERIALIZED_NAME_NET_PAYMENT_TERM)
+  public static final String JSON_PROPERTY_NET_PAYMENT_TERM = "net_payment_term";
   private Integer netPaymentTerm;
 
   /**
    * The type of invoice issued. Possible values are &#x60;subscription&#x60;, &#x60;one-off&#x60; or &#x60;credit&#x60;.
    */
-  @JsonAdapter(InvoiceTypeEnum.Adapter.class)
   public enum InvoiceTypeEnum {
     SUBSCRIPTION("subscription"),
     
@@ -107,6 +104,7 @@ public class InvoiceObjectExtended {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -116,6 +114,7 @@ public class InvoiceObjectExtended {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static InvoiceTypeEnum fromValue(String value) {
       for (InvoiceTypeEnum b : InvoiceTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -124,29 +123,14 @@ public class InvoiceObjectExtended {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<InvoiceTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InvoiceTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InvoiceTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return InvoiceTypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_INVOICE_TYPE = "invoice_type";
-  @SerializedName(SERIALIZED_NAME_INVOICE_TYPE)
+  public static final String JSON_PROPERTY_INVOICE_TYPE = "invoice_type";
   private InvoiceTypeEnum invoiceType;
 
   /**
    * The status of the invoice. It indicates the current state of the invoice and can have two possible values: - &#x60;draft&#x60;: the invoice is in the draft state, waiting for the end of the grace period to be finalized. During this period, events can still be ingested and added to the invoice. - &#x60;finalized&#x60;: the invoice has been issued and finalized. In this state, events cannot be ingested or added to the invoice anymore.
    */
-  @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
     DRAFT("draft"),
     
@@ -158,6 +142,7 @@ public class InvoiceObjectExtended {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -167,6 +152,7 @@ public class InvoiceObjectExtended {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static StatusEnum fromValue(String value) {
       for (StatusEnum b : StatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -175,29 +161,14 @@ public class InvoiceObjectExtended {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   private StatusEnum status;
 
   /**
    * The status of the payment associated with the invoice. It can have one of the following values: - &#x60;pending&#x60;: the payment is pending, waiting for payment processing in Stripe or when the invoice is emitted but users have not updated the payment status through the endpoint. - &#x60;succeeded&#x60;: the payment of the invoice has been successfully processed. - &#x60;failed&#x60;: the payment of the invoice has failed or encountered an error during processing.
    */
-  @JsonAdapter(PaymentStatusEnum.Adapter.class)
   public enum PaymentStatusEnum {
     PENDING("pending"),
     
@@ -211,6 +182,7 @@ public class InvoiceObjectExtended {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -220,6 +192,7 @@ public class InvoiceObjectExtended {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static PaymentStatusEnum fromValue(String value) {
       for (PaymentStatusEnum b : PaymentStatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -228,91 +201,60 @@ public class InvoiceObjectExtended {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<PaymentStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PaymentStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PaymentStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PaymentStatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_PAYMENT_STATUS = "payment_status";
-  @SerializedName(SERIALIZED_NAME_PAYMENT_STATUS)
+  public static final String JSON_PROPERTY_PAYMENT_STATUS = "payment_status";
   private PaymentStatusEnum paymentStatus;
 
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
   private Currency currency;
 
-  public static final String SERIALIZED_NAME_FEES_AMOUNT_CENTS = "fees_amount_cents";
-  @SerializedName(SERIALIZED_NAME_FEES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_FEES_AMOUNT_CENTS = "fees_amount_cents";
   private Integer feesAmountCents;
 
-  public static final String SERIALIZED_NAME_COUPONS_AMOUNT_CENTS = "coupons_amount_cents";
-  @SerializedName(SERIALIZED_NAME_COUPONS_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_COUPONS_AMOUNT_CENTS = "coupons_amount_cents";
   private Integer couponsAmountCents;
 
-  public static final String SERIALIZED_NAME_CREDIT_NOTES_AMOUNT_CENTS = "credit_notes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_CREDIT_NOTES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_CREDIT_NOTES_AMOUNT_CENTS = "credit_notes_amount_cents";
   private Integer creditNotesAmountCents;
 
-  public static final String SERIALIZED_NAME_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS = "sub_total_excluding_taxes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS = "sub_total_excluding_taxes_amount_cents";
   private Integer subTotalExcludingTaxesAmountCents;
 
-  public static final String SERIALIZED_NAME_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TAXES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
   private Integer taxesAmountCents;
 
-  public static final String SERIALIZED_NAME_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS = "sub_total_including_taxes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS = "sub_total_including_taxes_amount_cents";
   private Integer subTotalIncludingTaxesAmountCents;
 
-  public static final String SERIALIZED_NAME_PREPAID_CREDIT_AMOUNT_CENTS = "prepaid_credit_amount_cents";
-  @SerializedName(SERIALIZED_NAME_PREPAID_CREDIT_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_PREPAID_CREDIT_AMOUNT_CENTS = "prepaid_credit_amount_cents";
   private Integer prepaidCreditAmountCents;
 
-  public static final String SERIALIZED_NAME_TOTAL_AMOUNT_CENTS = "total_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TOTAL_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TOTAL_AMOUNT_CENTS = "total_amount_cents";
   private Integer totalAmountCents;
 
-  public static final String SERIALIZED_NAME_VERSION_NUMBER = "version_number";
-  @SerializedName(SERIALIZED_NAME_VERSION_NUMBER)
+  public static final String JSON_PROPERTY_VERSION_NUMBER = "version_number";
   private Integer versionNumber;
 
-  public static final String SERIALIZED_NAME_FILE_URL = "file_url";
-  @SerializedName(SERIALIZED_NAME_FILE_URL)
+  public static final String JSON_PROPERTY_FILE_URL = "file_url";
   private URI fileUrl;
 
-  public static final String SERIALIZED_NAME_CUSTOMER = "customer";
-  @SerializedName(SERIALIZED_NAME_CUSTOMER)
+  public static final String JSON_PROPERTY_CUSTOMER = "customer";
   private InvoiceObjectCustomer customer;
 
-  public static final String SERIALIZED_NAME_METADATA = "metadata";
-  @SerializedName(SERIALIZED_NAME_METADATA)
+  public static final String JSON_PROPERTY_METADATA = "metadata";
   private List<InvoiceMetadataObject> metadata;
 
-  public static final String SERIALIZED_NAME_APPLIED_TAXES = "applied_taxes";
-  @SerializedName(SERIALIZED_NAME_APPLIED_TAXES)
+  public static final String JSON_PROPERTY_APPLIED_TAXES = "applied_taxes";
   private List<InvoiceAppliedTaxObject> appliedTaxes;
 
-  public static final String SERIALIZED_NAME_CREDITS = "credits";
-  @SerializedName(SERIALIZED_NAME_CREDITS)
+  public static final String JSON_PROPERTY_CREDITS = "credits";
   private List<CreditObject> credits;
 
-  public static final String SERIALIZED_NAME_FEES = "fees";
-  @SerializedName(SERIALIZED_NAME_FEES)
+  public static final String JSON_PROPERTY_FEES = "fees";
   private List<FeeObject> fees;
 
-  public static final String SERIALIZED_NAME_SUBSCRIPTIONS = "subscriptions";
-  @SerializedName(SERIALIZED_NAME_SUBSCRIPTIONS)
+  public static final String JSON_PROPERTY_SUBSCRIPTIONS = "subscriptions";
   private List<SubscriptionObject> subscriptions;
 
   public InvoiceObjectExtended() {
@@ -329,11 +271,16 @@ public class InvoiceObjectExtended {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -350,11 +297,16 @@ public class InvoiceObjectExtended {
    * @return sequentialId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SEQUENTIAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getSequentialId() {
     return sequentialId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SEQUENTIAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSequentialId(Integer sequentialId) {
     this.sequentialId = sequentialId;
   }
@@ -371,11 +323,16 @@ public class InvoiceObjectExtended {
    * @return number
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getNumber() {
     return number;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setNumber(String number) {
     this.number = number;
   }
@@ -392,11 +349,16 @@ public class InvoiceObjectExtended {
    * @return issuingDate
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ISSUING_DATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public LocalDate getIssuingDate() {
     return issuingDate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ISSUING_DATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setIssuingDate(LocalDate issuingDate) {
     this.issuingDate = issuingDate;
   }
@@ -413,11 +375,16 @@ public class InvoiceObjectExtended {
    * @return paymentDueDate
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PAYMENT_DUE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public LocalDate getPaymentDueDate() {
     return paymentDueDate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAYMENT_DUE_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPaymentDueDate(LocalDate paymentDueDate) {
     this.paymentDueDate = paymentDueDate;
   }
@@ -434,11 +401,16 @@ public class InvoiceObjectExtended {
    * @return netPaymentTerm
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getNetPaymentTerm() {
     return netPaymentTerm;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNetPaymentTerm(Integer netPaymentTerm) {
     this.netPaymentTerm = netPaymentTerm;
   }
@@ -455,11 +427,16 @@ public class InvoiceObjectExtended {
    * @return invoiceType
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_INVOICE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public InvoiceTypeEnum getInvoiceType() {
     return invoiceType;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICE_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setInvoiceType(InvoiceTypeEnum invoiceType) {
     this.invoiceType = invoiceType;
   }
@@ -476,11 +453,16 @@ public class InvoiceObjectExtended {
    * @return status
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public StatusEnum getStatus() {
     return status;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -497,11 +479,16 @@ public class InvoiceObjectExtended {
    * @return paymentStatus
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaymentStatusEnum getPaymentStatus() {
     return paymentStatus;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
     this.paymentStatus = paymentStatus;
   }
@@ -518,11 +505,16 @@ public class InvoiceObjectExtended {
    * @return currency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getCurrency() {
     return currency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCurrency(Currency currency) {
     this.currency = currency;
   }
@@ -539,11 +531,16 @@ public class InvoiceObjectExtended {
    * @return feesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FEES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getFeesAmountCents() {
     return feesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FEES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFeesAmountCents(Integer feesAmountCents) {
     this.feesAmountCents = feesAmountCents;
   }
@@ -560,11 +557,16 @@ public class InvoiceObjectExtended {
    * @return couponsAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_COUPONS_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getCouponsAmountCents() {
     return couponsAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_COUPONS_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCouponsAmountCents(Integer couponsAmountCents) {
     this.couponsAmountCents = couponsAmountCents;
   }
@@ -581,11 +583,16 @@ public class InvoiceObjectExtended {
    * @return creditNotesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREDIT_NOTES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getCreditNotesAmountCents() {
     return creditNotesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREDIT_NOTES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreditNotesAmountCents(Integer creditNotesAmountCents) {
     this.creditNotesAmountCents = creditNotesAmountCents;
   }
@@ -602,11 +609,16 @@ public class InvoiceObjectExtended {
    * @return subTotalExcludingTaxesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getSubTotalExcludingTaxesAmountCents() {
     return subTotalExcludingTaxesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SUB_TOTAL_EXCLUDING_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSubTotalExcludingTaxesAmountCents(Integer subTotalExcludingTaxesAmountCents) {
     this.subTotalExcludingTaxesAmountCents = subTotalExcludingTaxesAmountCents;
   }
@@ -623,11 +635,16 @@ public class InvoiceObjectExtended {
    * @return taxesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTaxesAmountCents() {
     return taxesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTaxesAmountCents(Integer taxesAmountCents) {
     this.taxesAmountCents = taxesAmountCents;
   }
@@ -644,11 +661,16 @@ public class InvoiceObjectExtended {
    * @return subTotalIncludingTaxesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getSubTotalIncludingTaxesAmountCents() {
     return subTotalIncludingTaxesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SUB_TOTAL_INCLUDING_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSubTotalIncludingTaxesAmountCents(Integer subTotalIncludingTaxesAmountCents) {
     this.subTotalIncludingTaxesAmountCents = subTotalIncludingTaxesAmountCents;
   }
@@ -665,11 +687,16 @@ public class InvoiceObjectExtended {
    * @return prepaidCreditAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PREPAID_CREDIT_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getPrepaidCreditAmountCents() {
     return prepaidCreditAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PREPAID_CREDIT_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPrepaidCreditAmountCents(Integer prepaidCreditAmountCents) {
     this.prepaidCreditAmountCents = prepaidCreditAmountCents;
   }
@@ -686,11 +713,16 @@ public class InvoiceObjectExtended {
    * @return totalAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTotalAmountCents() {
     return totalAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTotalAmountCents(Integer totalAmountCents) {
     this.totalAmountCents = totalAmountCents;
   }
@@ -707,11 +739,16 @@ public class InvoiceObjectExtended {
    * @return versionNumber
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_VERSION_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getVersionNumber() {
     return versionNumber;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_VERSION_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVersionNumber(Integer versionNumber) {
     this.versionNumber = versionNumber;
   }
@@ -728,11 +765,16 @@ public class InvoiceObjectExtended {
    * @return fileUrl
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_FILE_URL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public URI getFileUrl() {
     return fileUrl;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FILE_URL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFileUrl(URI fileUrl) {
     this.fileUrl = fileUrl;
   }
@@ -749,11 +791,16 @@ public class InvoiceObjectExtended {
    * @return customer
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CUSTOMER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public InvoiceObjectCustomer getCustomer() {
     return customer;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CUSTOMER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCustomer(InvoiceObjectCustomer customer) {
     this.customer = customer;
   }
@@ -778,11 +825,16 @@ public class InvoiceObjectExtended {
    * @return metadata
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<InvoiceMetadataObject> getMetadata() {
     return metadata;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMetadata(List<InvoiceMetadataObject> metadata) {
     this.metadata = metadata;
   }
@@ -807,11 +859,16 @@ public class InvoiceObjectExtended {
    * @return appliedTaxes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_APPLIED_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<InvoiceAppliedTaxObject> getAppliedTaxes() {
     return appliedTaxes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_APPLIED_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppliedTaxes(List<InvoiceAppliedTaxObject> appliedTaxes) {
     this.appliedTaxes = appliedTaxes;
   }
@@ -836,11 +893,16 @@ public class InvoiceObjectExtended {
    * @return credits
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CREDITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<CreditObject> getCredits() {
     return credits;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREDITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCredits(List<CreditObject> credits) {
     this.credits = credits;
   }
@@ -865,11 +927,16 @@ public class InvoiceObjectExtended {
    * @return fees
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_FEES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<FeeObject> getFees() {
     return fees;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FEES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFees(List<FeeObject> fees) {
     this.fees = fees;
   }
@@ -894,16 +961,19 @@ public class InvoiceObjectExtended {
    * @return subscriptions
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<SubscriptionObject> getSubscriptions() {
     return subscriptions;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSubscriptions(List<SubscriptionObject> subscriptions) {
     this.subscriptions = subscriptions;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -992,232 +1062,5 @@ public class InvoiceObjectExtended {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("sequential_id");
-    openapiFields.add("number");
-    openapiFields.add("issuing_date");
-    openapiFields.add("payment_due_date");
-    openapiFields.add("net_payment_term");
-    openapiFields.add("invoice_type");
-    openapiFields.add("status");
-    openapiFields.add("payment_status");
-    openapiFields.add("currency");
-    openapiFields.add("fees_amount_cents");
-    openapiFields.add("coupons_amount_cents");
-    openapiFields.add("credit_notes_amount_cents");
-    openapiFields.add("sub_total_excluding_taxes_amount_cents");
-    openapiFields.add("taxes_amount_cents");
-    openapiFields.add("sub_total_including_taxes_amount_cents");
-    openapiFields.add("prepaid_credit_amount_cents");
-    openapiFields.add("total_amount_cents");
-    openapiFields.add("version_number");
-    openapiFields.add("file_url");
-    openapiFields.add("customer");
-    openapiFields.add("metadata");
-    openapiFields.add("applied_taxes");
-    openapiFields.add("credits");
-    openapiFields.add("fees");
-    openapiFields.add("subscriptions");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("sequential_id");
-    openapiRequiredFields.add("number");
-    openapiRequiredFields.add("issuing_date");
-    openapiRequiredFields.add("invoice_type");
-    openapiRequiredFields.add("status");
-    openapiRequiredFields.add("payment_status");
-    openapiRequiredFields.add("currency");
-    openapiRequiredFields.add("fees_amount_cents");
-    openapiRequiredFields.add("coupons_amount_cents");
-    openapiRequiredFields.add("credit_notes_amount_cents");
-    openapiRequiredFields.add("sub_total_excluding_taxes_amount_cents");
-    openapiRequiredFields.add("taxes_amount_cents");
-    openapiRequiredFields.add("sub_total_including_taxes_amount_cents");
-    openapiRequiredFields.add("prepaid_credit_amount_cents");
-    openapiRequiredFields.add("total_amount_cents");
-    openapiRequiredFields.add("version_number");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to InvoiceObjectExtended
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!InvoiceObjectExtended.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in InvoiceObjectExtended is not found in the empty JSON string", InvoiceObjectExtended.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!InvoiceObjectExtended.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `InvoiceObjectExtended` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : InvoiceObjectExtended.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
-      }
-      if (!jsonObj.get("invoice_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `invoice_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("invoice_type").toString()));
-      }
-      if (!jsonObj.get("status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      if (!jsonObj.get("payment_status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `payment_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_status").toString()));
-      }
-      // validate the required field `currency`
-      Currency.validateJsonElement(jsonObj.get("currency"));
-      if ((jsonObj.get("file_url") != null && !jsonObj.get("file_url").isJsonNull()) && !jsonObj.get("file_url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `file_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("file_url").toString()));
-      }
-      // validate the optional field `customer`
-      if (jsonObj.get("customer") != null && !jsonObj.get("customer").isJsonNull()) {
-        InvoiceObjectCustomer.validateJsonElement(jsonObj.get("customer"));
-      }
-      if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
-        JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");
-        if (jsonArraymetadata != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("metadata").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `metadata` to be an array in the JSON string but got `%s`", jsonObj.get("metadata").toString()));
-          }
-
-          // validate the optional field `metadata` (array)
-          for (int i = 0; i < jsonArraymetadata.size(); i++) {
-            InvoiceMetadataObject.validateJsonElement(jsonArraymetadata.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("applied_taxes") != null && !jsonObj.get("applied_taxes").isJsonNull()) {
-        JsonArray jsonArrayappliedTaxes = jsonObj.getAsJsonArray("applied_taxes");
-        if (jsonArrayappliedTaxes != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("applied_taxes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `applied_taxes` to be an array in the JSON string but got `%s`", jsonObj.get("applied_taxes").toString()));
-          }
-
-          // validate the optional field `applied_taxes` (array)
-          for (int i = 0; i < jsonArrayappliedTaxes.size(); i++) {
-            InvoiceAppliedTaxObject.validateJsonElement(jsonArrayappliedTaxes.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("credits") != null && !jsonObj.get("credits").isJsonNull()) {
-        JsonArray jsonArraycredits = jsonObj.getAsJsonArray("credits");
-        if (jsonArraycredits != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("credits").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `credits` to be an array in the JSON string but got `%s`", jsonObj.get("credits").toString()));
-          }
-
-          // validate the optional field `credits` (array)
-          for (int i = 0; i < jsonArraycredits.size(); i++) {
-            CreditObject.validateJsonElement(jsonArraycredits.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("fees") != null && !jsonObj.get("fees").isJsonNull()) {
-        JsonArray jsonArrayfees = jsonObj.getAsJsonArray("fees");
-        if (jsonArrayfees != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("fees").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `fees` to be an array in the JSON string but got `%s`", jsonObj.get("fees").toString()));
-          }
-
-          // validate the optional field `fees` (array)
-          for (int i = 0; i < jsonArrayfees.size(); i++) {
-            FeeObject.validateJsonElement(jsonArrayfees.get(i));
-          };
-        }
-      }
-      if (jsonObj.get("subscriptions") != null && !jsonObj.get("subscriptions").isJsonNull()) {
-        JsonArray jsonArraysubscriptions = jsonObj.getAsJsonArray("subscriptions");
-        if (jsonArraysubscriptions != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("subscriptions").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `subscriptions` to be an array in the JSON string but got `%s`", jsonObj.get("subscriptions").toString()));
-          }
-
-          // validate the optional field `subscriptions` (array)
-          for (int i = 0; i < jsonArraysubscriptions.size(); i++) {
-            SubscriptionObject.validateJsonElement(jsonArraysubscriptions.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!InvoiceObjectExtended.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'InvoiceObjectExtended' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<InvoiceObjectExtended> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(InvoiceObjectExtended.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<InvoiceObjectExtended>() {
-           @Override
-           public void write(JsonWriter out, InvoiceObjectExtended value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public InvoiceObjectExtended read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of InvoiceObjectExtended given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of InvoiceObjectExtended
-  * @throws IOException if the JSON string is invalid with respect to InvoiceObjectExtended
-  */
-  public static InvoiceObjectExtended fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, InvoiceObjectExtended.class);
-  }
-
- /**
-  * Convert an instance of InvoiceObjectExtended to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

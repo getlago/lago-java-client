@@ -15,63 +15,45 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CustomerChargeUsageObjectGroupsInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomerChargeUsageObjectGroupsInner.JSON_PROPERTY_LAGO_ID,
+  CustomerChargeUsageObjectGroupsInner.JSON_PROPERTY_KEY,
+  CustomerChargeUsageObjectGroupsInner.JSON_PROPERTY_VALUE,
+  CustomerChargeUsageObjectGroupsInner.JSON_PROPERTY_UNITS,
+  CustomerChargeUsageObjectGroupsInner.JSON_PROPERTY_AMOUNT_CENTS
+})
+@JsonTypeName("CustomerChargeUsageObject_groups_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomerChargeUsageObjectGroupsInner {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_KEY = "key";
-  @SerializedName(SERIALIZED_NAME_KEY)
-  private String key;
+  public static final String JSON_PROPERTY_KEY = "key";
+  private JsonNullable<String> key = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_VALUE = "value";
-  @SerializedName(SERIALIZED_NAME_VALUE)
+  public static final String JSON_PROPERTY_VALUE = "value";
   private String value;
 
-  public static final String SERIALIZED_NAME_UNITS = "units";
-  @SerializedName(SERIALIZED_NAME_UNITS)
+  public static final String JSON_PROPERTY_UNITS = "units";
   private String units;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
   public CustomerChargeUsageObjectGroupsInner() {
@@ -88,19 +70,24 @@ public class CustomerChargeUsageObjectGroupsInner {
    * @return lagoId
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
 
 
   public CustomerChargeUsageObjectGroupsInner key(String key) {
+    this.key = JsonNullable.<String>of(key);
     
-    this.key = key;
     return this;
   }
 
@@ -109,13 +96,26 @@ public class CustomerChargeUsageObjectGroupsInner {
    * @return key
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getKey() {
-    return key;
+        return key.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_KEY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getKey_JsonNullable() {
+    return key;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_KEY)
+  public void setKey_JsonNullable(JsonNullable<String> key) {
+    this.key = key;
+  }
 
   public void setKey(String key) {
-    this.key = key;
+    this.key = JsonNullable.<String>of(key);
   }
 
 
@@ -130,11 +130,16 @@ public class CustomerChargeUsageObjectGroupsInner {
    * @return value
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getValue() {
     return value;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setValue(String value) {
     this.value = value;
   }
@@ -151,11 +156,16 @@ public class CustomerChargeUsageObjectGroupsInner {
    * @return units
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getUnits() {
     return units;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setUnits(String units) {
     this.units = units;
   }
@@ -172,16 +182,19 @@ public class CustomerChargeUsageObjectGroupsInner {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -193,7 +206,7 @@ public class CustomerChargeUsageObjectGroupsInner {
     }
     CustomerChargeUsageObjectGroupsInner customerChargeUsageObjectGroupsInner = (CustomerChargeUsageObjectGroupsInner) o;
     return Objects.equals(this.lagoId, customerChargeUsageObjectGroupsInner.lagoId) &&
-        Objects.equals(this.key, customerChargeUsageObjectGroupsInner.key) &&
+        equalsNullable(this.key, customerChargeUsageObjectGroupsInner.key) &&
         Objects.equals(this.value, customerChargeUsageObjectGroupsInner.value) &&
         Objects.equals(this.units, customerChargeUsageObjectGroupsInner.units) &&
         Objects.equals(this.amountCents, customerChargeUsageObjectGroupsInner.amountCents);
@@ -205,7 +218,7 @@ public class CustomerChargeUsageObjectGroupsInner {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, key, value, units, amountCents);
+    return Objects.hash(lagoId, hashCodeNullable(key), value, units, amountCents);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -239,105 +252,5 @@ public class CustomerChargeUsageObjectGroupsInner {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("key");
-    openapiFields.add("value");
-    openapiFields.add("units");
-    openapiFields.add("amount_cents");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomerChargeUsageObjectGroupsInner
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomerChargeUsageObjectGroupsInner.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomerChargeUsageObjectGroupsInner is not found in the empty JSON string", CustomerChargeUsageObjectGroupsInner.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomerChargeUsageObjectGroupsInner.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomerChargeUsageObjectGroupsInner` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("lago_id") != null && !jsonObj.get("lago_id").isJsonNull()) && !jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if ((jsonObj.get("key") != null && !jsonObj.get("key").isJsonNull()) && !jsonObj.get("key").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("key").toString()));
-      }
-      if ((jsonObj.get("value") != null && !jsonObj.get("value").isJsonNull()) && !jsonObj.get("value").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("value").toString()));
-      }
-      if ((jsonObj.get("units") != null && !jsonObj.get("units").isJsonNull()) && !jsonObj.get("units").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `units` to be a primitive type in the JSON string but got `%s`", jsonObj.get("units").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomerChargeUsageObjectGroupsInner.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomerChargeUsageObjectGroupsInner' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomerChargeUsageObjectGroupsInner> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomerChargeUsageObjectGroupsInner.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomerChargeUsageObjectGroupsInner>() {
-           @Override
-           public void write(JsonWriter out, CustomerChargeUsageObjectGroupsInner value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomerChargeUsageObjectGroupsInner read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomerChargeUsageObjectGroupsInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomerChargeUsageObjectGroupsInner
-  * @throws IOException if the JSON string is invalid with respect to CustomerChargeUsageObjectGroupsInner
-  */
-  public static CustomerChargeUsageObjectGroupsInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomerChargeUsageObjectGroupsInner.class);
-  }
-
- /**
-  * Convert an instance of CustomerChargeUsageObjectGroupsInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

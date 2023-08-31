@@ -15,69 +15,63 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.openapitools.client.model.Currency;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CouponObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CouponObject.JSON_PROPERTY_LAGO_ID,
+  CouponObject.JSON_PROPERTY_NAME,
+  CouponObject.JSON_PROPERTY_CODE,
+  CouponObject.JSON_PROPERTY_DESCRIPTION,
+  CouponObject.JSON_PROPERTY_COUPON_TYPE,
+  CouponObject.JSON_PROPERTY_AMOUNT_CENTS,
+  CouponObject.JSON_PROPERTY_AMOUNT_CURRENCY,
+  CouponObject.JSON_PROPERTY_REUSABLE,
+  CouponObject.JSON_PROPERTY_LIMITED_PLANS,
+  CouponObject.JSON_PROPERTY_PLAN_CODES,
+  CouponObject.JSON_PROPERTY_LIMITED_BILLABLE_METRICS,
+  CouponObject.JSON_PROPERTY_BILLABLE_METRIC_CODES,
+  CouponObject.JSON_PROPERTY_PERCENTAGE_RATE,
+  CouponObject.JSON_PROPERTY_FREQUENCY,
+  CouponObject.JSON_PROPERTY_FREQUENCY_DURATION,
+  CouponObject.JSON_PROPERTY_EXPIRATION,
+  CouponObject.JSON_PROPERTY_EXPIRATION_AT,
+  CouponObject.JSON_PROPERTY_CREATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CouponObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  private JsonNullable<String> description = JsonNullable.<String>undefined();
 
   /**
    * The type of the coupon. It can have two possible values: &#x60;fixed_amount&#x60; or &#x60;percentage&#x60;.  - If set to &#x60;fixed_amount&#x60;, the coupon represents a fixed amount discount. - If set to &#x60;percentage&#x60;, the coupon represents a percentage-based discount.
    */
-  @JsonAdapter(CouponTypeEnum.Adapter.class)
   public enum CouponTypeEnum {
     FIXED_AMOUNT("fixed_amount"),
     
@@ -89,6 +83,7 @@ public class CouponObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -98,6 +93,7 @@ public class CouponObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static CouponTypeEnum fromValue(String value) {
       for (CouponTypeEnum b : CouponTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -106,61 +102,38 @@ public class CouponObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<CouponTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CouponTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CouponTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CouponTypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_COUPON_TYPE = "coupon_type";
-  @SerializedName(SERIALIZED_NAME_COUPON_TYPE)
+  public static final String JSON_PROPERTY_COUPON_TYPE = "coupon_type";
   private CouponTypeEnum couponType;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
-  private Integer amountCents;
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
+  private JsonNullable<Integer> amountCents = JsonNullable.<Integer>undefined();
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_REUSABLE = "reusable";
-  @SerializedName(SERIALIZED_NAME_REUSABLE)
+  public static final String JSON_PROPERTY_REUSABLE = "reusable";
   private Boolean reusable;
 
-  public static final String SERIALIZED_NAME_LIMITED_PLANS = "limited_plans";
-  @SerializedName(SERIALIZED_NAME_LIMITED_PLANS)
+  public static final String JSON_PROPERTY_LIMITED_PLANS = "limited_plans";
   private Boolean limitedPlans;
 
-  public static final String SERIALIZED_NAME_PLAN_CODES = "plan_codes";
-  @SerializedName(SERIALIZED_NAME_PLAN_CODES)
+  public static final String JSON_PROPERTY_PLAN_CODES = "plan_codes";
   private List<String> planCodes;
 
-  public static final String SERIALIZED_NAME_LIMITED_BILLABLE_METRICS = "limited_billable_metrics";
-  @SerializedName(SERIALIZED_NAME_LIMITED_BILLABLE_METRICS)
+  public static final String JSON_PROPERTY_LIMITED_BILLABLE_METRICS = "limited_billable_metrics";
   private Boolean limitedBillableMetrics;
 
-  public static final String SERIALIZED_NAME_BILLABLE_METRIC_CODES = "billable_metric_codes";
-  @SerializedName(SERIALIZED_NAME_BILLABLE_METRIC_CODES)
+  public static final String JSON_PROPERTY_BILLABLE_METRIC_CODES = "billable_metric_codes";
   private List<String> billableMetricCodes;
 
-  public static final String SERIALIZED_NAME_PERCENTAGE_RATE = "percentage_rate";
-  @SerializedName(SERIALIZED_NAME_PERCENTAGE_RATE)
-  private String percentageRate;
+  public static final String JSON_PROPERTY_PERCENTAGE_RATE = "percentage_rate";
+  private JsonNullable<String> percentageRate = JsonNullable.<String>undefined();
 
   /**
    * The type of frequency for the coupon. It can have three possible values: &#x60;once&#x60;, &#x60;recurring&#x60;, or &#x60;forever&#x60;.  - If set to &#x60;once&#x60;, the coupon is applicable only for a single use. - If set to &#x60;recurring&#x60;, the coupon can be used multiple times for recurring billing periods. - If set to &#x60;forever&#x60;, the coupon has unlimited usage and can be applied indefinitely.
    */
-  @JsonAdapter(FrequencyEnum.Adapter.class)
   public enum FrequencyEnum {
     ONCE("once"),
     
@@ -172,6 +145,7 @@ public class CouponObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -181,6 +155,7 @@ public class CouponObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static FrequencyEnum fromValue(String value) {
       for (FrequencyEnum b : FrequencyEnum.values()) {
         if (b.value.equals(value)) {
@@ -189,33 +164,17 @@ public class CouponObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<FrequencyEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FrequencyEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FrequencyEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FrequencyEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_FREQUENCY = "frequency";
-  @SerializedName(SERIALIZED_NAME_FREQUENCY)
+  public static final String JSON_PROPERTY_FREQUENCY = "frequency";
   private FrequencyEnum frequency;
 
-  public static final String SERIALIZED_NAME_FREQUENCY_DURATION = "frequency_duration";
-  @SerializedName(SERIALIZED_NAME_FREQUENCY_DURATION)
-  private Integer frequencyDuration;
+  public static final String JSON_PROPERTY_FREQUENCY_DURATION = "frequency_duration";
+  private JsonNullable<Integer> frequencyDuration = JsonNullable.<Integer>undefined();
 
   /**
    * Specifies the type of expiration for the coupon. It can have two possible values: &#x60;time_limit&#x60; or &#x60;no_expiration&#x60;.  - If set to &#x60;time_limit&#x60;, the coupon has an expiration based on a specified time limit. - If set to &#x60;no_expiration&#x60;, the coupon does not have an expiration date and remains valid indefinitely.
    */
-  @JsonAdapter(ExpirationEnum.Adapter.class)
   public enum ExpirationEnum {
     NO_EXPIRATION("no_expiration"),
     
@@ -227,6 +186,7 @@ public class CouponObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -236,6 +196,7 @@ public class CouponObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static ExpirationEnum fromValue(String value) {
       for (ExpirationEnum b : ExpirationEnum.values()) {
         if (b.value.equals(value)) {
@@ -244,31 +205,15 @@ public class CouponObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<ExpirationEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ExpirationEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ExpirationEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ExpirationEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_EXPIRATION = "expiration";
-  @SerializedName(SERIALIZED_NAME_EXPIRATION)
+  public static final String JSON_PROPERTY_EXPIRATION = "expiration";
   private ExpirationEnum expiration;
 
-  public static final String SERIALIZED_NAME_EXPIRATION_AT = "expiration_at";
-  @SerializedName(SERIALIZED_NAME_EXPIRATION_AT)
-  private OffsetDateTime expirationAt;
+  public static final String JSON_PROPERTY_EXPIRATION_AT = "expiration_at";
+  private JsonNullable<OffsetDateTime> expirationAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   public CouponObject() {
@@ -285,11 +230,16 @@ public class CouponObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -306,11 +256,16 @@ public class CouponObject {
    * @return name
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
@@ -327,19 +282,24 @@ public class CouponObject {
    * @return code
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCode(String code) {
     this.code = code;
   }
 
 
   public CouponObject description(String description) {
+    this.description = JsonNullable.<String>of(description);
     
-    this.description = description;
     return this;
   }
 
@@ -348,13 +308,26 @@ public class CouponObject {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getDescription() {
-    return description;
+        return description.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getDescription_JsonNullable() {
+    return description;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  public void setDescription_JsonNullable(JsonNullable<String> description) {
+    this.description = description;
+  }
 
   public void setDescription(String description) {
-    this.description = description;
+    this.description = JsonNullable.<String>of(description);
   }
 
 
@@ -369,19 +342,24 @@ public class CouponObject {
    * @return couponType
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_COUPON_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public CouponTypeEnum getCouponType() {
     return couponType;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_COUPON_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCouponType(CouponTypeEnum couponType) {
     this.couponType = couponType;
   }
 
 
   public CouponObject amountCents(Integer amountCents) {
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
     
-    this.amountCents = amountCents;
     return this;
   }
 
@@ -390,13 +368,26 @@ public class CouponObject {
    * @return amountCents
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getAmountCents() {
-    return amountCents;
+        return amountCents.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getAmountCents_JsonNullable() {
+    return amountCents;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  public void setAmountCents_JsonNullable(JsonNullable<Integer> amountCents) {
+    this.amountCents = amountCents;
+  }
 
   public void setAmountCents(Integer amountCents) {
-    this.amountCents = amountCents;
+    this.amountCents = JsonNullable.<Integer>of(amountCents);
   }
 
 
@@ -411,11 +402,16 @@ public class CouponObject {
    * @return amountCurrency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -432,11 +428,16 @@ public class CouponObject {
    * @return reusable
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_REUSABLE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getReusable() {
     return reusable;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_REUSABLE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setReusable(Boolean reusable) {
     this.reusable = reusable;
   }
@@ -453,11 +454,16 @@ public class CouponObject {
    * @return limitedPlans
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LIMITED_PLANS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getLimitedPlans() {
     return limitedPlans;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LIMITED_PLANS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLimitedPlans(Boolean limitedPlans) {
     this.limitedPlans = limitedPlans;
   }
@@ -482,11 +488,16 @@ public class CouponObject {
    * @return planCodes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_PLAN_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<String> getPlanCodes() {
     return planCodes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PLAN_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPlanCodes(List<String> planCodes) {
     this.planCodes = planCodes;
   }
@@ -503,11 +514,16 @@ public class CouponObject {
    * @return limitedBillableMetrics
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LIMITED_BILLABLE_METRICS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getLimitedBillableMetrics() {
     return limitedBillableMetrics;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LIMITED_BILLABLE_METRICS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLimitedBillableMetrics(Boolean limitedBillableMetrics) {
     this.limitedBillableMetrics = limitedBillableMetrics;
   }
@@ -532,19 +548,24 @@ public class CouponObject {
    * @return billableMetricCodes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<String> getBillableMetricCodes() {
     return billableMetricCodes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLABLE_METRIC_CODES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBillableMetricCodes(List<String> billableMetricCodes) {
     this.billableMetricCodes = billableMetricCodes;
   }
 
 
   public CouponObject percentageRate(String percentageRate) {
+    this.percentageRate = JsonNullable.<String>of(percentageRate);
     
-    this.percentageRate = percentageRate;
     return this;
   }
 
@@ -553,13 +574,26 @@ public class CouponObject {
    * @return percentageRate
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPercentageRate() {
-    return percentageRate;
+        return percentageRate.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PERCENTAGE_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getPercentageRate_JsonNullable() {
+    return percentageRate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PERCENTAGE_RATE)
+  public void setPercentageRate_JsonNullable(JsonNullable<String> percentageRate) {
+    this.percentageRate = percentageRate;
+  }
 
   public void setPercentageRate(String percentageRate) {
-    this.percentageRate = percentageRate;
+    this.percentageRate = JsonNullable.<String>of(percentageRate);
   }
 
 
@@ -574,19 +608,24 @@ public class CouponObject {
    * @return frequency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FREQUENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public FrequencyEnum getFrequency() {
     return frequency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FREQUENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFrequency(FrequencyEnum frequency) {
     this.frequency = frequency;
   }
 
 
   public CouponObject frequencyDuration(Integer frequencyDuration) {
+    this.frequencyDuration = JsonNullable.<Integer>of(frequencyDuration);
     
-    this.frequencyDuration = frequencyDuration;
     return this;
   }
 
@@ -595,13 +634,26 @@ public class CouponObject {
    * @return frequencyDuration
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public Integer getFrequencyDuration() {
-    return frequencyDuration;
+        return frequencyDuration.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FREQUENCY_DURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Integer> getFrequencyDuration_JsonNullable() {
+    return frequencyDuration;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FREQUENCY_DURATION)
+  public void setFrequencyDuration_JsonNullable(JsonNullable<Integer> frequencyDuration) {
+    this.frequencyDuration = frequencyDuration;
+  }
 
   public void setFrequencyDuration(Integer frequencyDuration) {
-    this.frequencyDuration = frequencyDuration;
+    this.frequencyDuration = JsonNullable.<Integer>of(frequencyDuration);
   }
 
 
@@ -616,19 +668,24 @@ public class CouponObject {
    * @return expiration
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXPIRATION)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ExpirationEnum getExpiration() {
     return expiration;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXPIRATION)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExpiration(ExpirationEnum expiration) {
     this.expiration = expiration;
   }
 
 
   public CouponObject expirationAt(OffsetDateTime expirationAt) {
+    this.expirationAt = JsonNullable.<OffsetDateTime>of(expirationAt);
     
-    this.expirationAt = expirationAt;
     return this;
   }
 
@@ -637,13 +694,26 @@ public class CouponObject {
    * @return expirationAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getExpirationAt() {
-    return expirationAt;
+        return expirationAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EXPIRATION_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getExpirationAt_JsonNullable() {
+    return expirationAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXPIRATION_AT)
+  public void setExpirationAt_JsonNullable(JsonNullable<OffsetDateTime> expirationAt) {
+    this.expirationAt = expirationAt;
+  }
 
   public void setExpirationAt(OffsetDateTime expirationAt) {
-    this.expirationAt = expirationAt;
+    this.expirationAt = JsonNullable.<OffsetDateTime>of(expirationAt);
   }
 
 
@@ -658,16 +728,19 @@ public class CouponObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -681,20 +754,20 @@ public class CouponObject {
     return Objects.equals(this.lagoId, couponObject.lagoId) &&
         Objects.equals(this.name, couponObject.name) &&
         Objects.equals(this.code, couponObject.code) &&
-        Objects.equals(this.description, couponObject.description) &&
+        equalsNullable(this.description, couponObject.description) &&
         Objects.equals(this.couponType, couponObject.couponType) &&
-        Objects.equals(this.amountCents, couponObject.amountCents) &&
+        equalsNullable(this.amountCents, couponObject.amountCents) &&
         Objects.equals(this.amountCurrency, couponObject.amountCurrency) &&
         Objects.equals(this.reusable, couponObject.reusable) &&
         Objects.equals(this.limitedPlans, couponObject.limitedPlans) &&
         Objects.equals(this.planCodes, couponObject.planCodes) &&
         Objects.equals(this.limitedBillableMetrics, couponObject.limitedBillableMetrics) &&
         Objects.equals(this.billableMetricCodes, couponObject.billableMetricCodes) &&
-        Objects.equals(this.percentageRate, couponObject.percentageRate) &&
+        equalsNullable(this.percentageRate, couponObject.percentageRate) &&
         Objects.equals(this.frequency, couponObject.frequency) &&
-        Objects.equals(this.frequencyDuration, couponObject.frequencyDuration) &&
+        equalsNullable(this.frequencyDuration, couponObject.frequencyDuration) &&
         Objects.equals(this.expiration, couponObject.expiration) &&
-        Objects.equals(this.expirationAt, couponObject.expirationAt) &&
+        equalsNullable(this.expirationAt, couponObject.expirationAt) &&
         Objects.equals(this.createdAt, couponObject.createdAt);
   }
 
@@ -704,7 +777,7 @@ public class CouponObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, name, code, description, couponType, amountCents, amountCurrency, reusable, limitedPlans, planCodes, limitedBillableMetrics, billableMetricCodes, percentageRate, frequency, frequencyDuration, expiration, expirationAt, createdAt);
+    return Objects.hash(lagoId, name, code, hashCodeNullable(description), couponType, hashCodeNullable(amountCents), amountCurrency, reusable, limitedPlans, planCodes, limitedBillableMetrics, billableMetricCodes, hashCodeNullable(percentageRate), frequency, hashCodeNullable(frequencyDuration), expiration, hashCodeNullable(expirationAt), createdAt);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -751,159 +824,5 @@ public class CouponObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("name");
-    openapiFields.add("code");
-    openapiFields.add("description");
-    openapiFields.add("coupon_type");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("reusable");
-    openapiFields.add("limited_plans");
-    openapiFields.add("plan_codes");
-    openapiFields.add("limited_billable_metrics");
-    openapiFields.add("billable_metric_codes");
-    openapiFields.add("percentage_rate");
-    openapiFields.add("frequency");
-    openapiFields.add("frequency_duration");
-    openapiFields.add("expiration");
-    openapiFields.add("expiration_at");
-    openapiFields.add("created_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("name");
-    openapiRequiredFields.add("code");
-    openapiRequiredFields.add("coupon_type");
-    openapiRequiredFields.add("reusable");
-    openapiRequiredFields.add("limited_plans");
-    openapiRequiredFields.add("limited_billable_metrics");
-    openapiRequiredFields.add("frequency");
-    openapiRequiredFields.add("expiration");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CouponObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CouponObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CouponObject is not found in the empty JSON string", CouponObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CouponObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CouponObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CouponObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-      if (!jsonObj.get("coupon_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `coupon_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("coupon_type").toString()));
-      }
-      // validate the optional field `amount_currency`
-      if (jsonObj.get("amount_currency") != null && !jsonObj.get("amount_currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("plan_codes") != null && !jsonObj.get("plan_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `plan_codes` to be an array in the JSON string but got `%s`", jsonObj.get("plan_codes").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("billable_metric_codes") != null && !jsonObj.get("billable_metric_codes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `billable_metric_codes` to be an array in the JSON string but got `%s`", jsonObj.get("billable_metric_codes").toString()));
-      }
-      if ((jsonObj.get("percentage_rate") != null && !jsonObj.get("percentage_rate").isJsonNull()) && !jsonObj.get("percentage_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `percentage_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("percentage_rate").toString()));
-      }
-      if (!jsonObj.get("frequency").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `frequency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("frequency").toString()));
-      }
-      if (!jsonObj.get("expiration").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `expiration` to be a primitive type in the JSON string but got `%s`", jsonObj.get("expiration").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CouponObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CouponObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CouponObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CouponObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CouponObject>() {
-           @Override
-           public void write(JsonWriter out, CouponObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CouponObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CouponObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CouponObject
-  * @throws IOException if the JSON string is invalid with respect to CouponObject
-  */
-  public static CouponObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CouponObject.class);
-  }
-
- /**
-  * Convert an instance of CouponObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

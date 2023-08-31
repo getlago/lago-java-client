@@ -15,50 +15,29 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreditNoteCreateInputCreditNoteItemsInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreditNoteCreateInputCreditNoteItemsInner.JSON_PROPERTY_FEE_ID,
+  CreditNoteCreateInputCreditNoteItemsInner.JSON_PROPERTY_AMOUNT_CENTS
+})
+@JsonTypeName("CreditNoteCreateInput_credit_note_items_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreditNoteCreateInputCreditNoteItemsInner {
-  public static final String SERIALIZED_NAME_FEE_ID = "fee_id";
-  @SerializedName(SERIALIZED_NAME_FEE_ID)
+  public static final String JSON_PROPERTY_FEE_ID = "fee_id";
   private UUID feeId;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
   public CreditNoteCreateInputCreditNoteItemsInner() {
@@ -75,11 +54,16 @@ public class CreditNoteCreateInputCreditNoteItemsInner {
    * @return feeId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FEE_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getFeeId() {
     return feeId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FEE_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFeeId(UUID feeId) {
     this.feeId = feeId;
   }
@@ -96,16 +80,19 @@ public class CreditNoteCreateInputCreditNoteItemsInner {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -146,102 +133,5 @@ public class CreditNoteCreateInputCreditNoteItemsInner {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("fee_id");
-    openapiFields.add("amount_cents");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("fee_id");
-    openapiRequiredFields.add("amount_cents");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreditNoteCreateInputCreditNoteItemsInner
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreditNoteCreateInputCreditNoteItemsInner.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreditNoteCreateInputCreditNoteItemsInner is not found in the empty JSON string", CreditNoteCreateInputCreditNoteItemsInner.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreditNoteCreateInputCreditNoteItemsInner.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreditNoteCreateInputCreditNoteItemsInner` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreditNoteCreateInputCreditNoteItemsInner.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("fee_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `fee_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fee_id").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreditNoteCreateInputCreditNoteItemsInner.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreditNoteCreateInputCreditNoteItemsInner' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreditNoteCreateInputCreditNoteItemsInner> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreditNoteCreateInputCreditNoteItemsInner.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreditNoteCreateInputCreditNoteItemsInner>() {
-           @Override
-           public void write(JsonWriter out, CreditNoteCreateInputCreditNoteItemsInner value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreditNoteCreateInputCreditNoteItemsInner read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreditNoteCreateInputCreditNoteItemsInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreditNoteCreateInputCreditNoteItemsInner
-  * @throws IOException if the JSON string is invalid with respect to CreditNoteCreateInputCreditNoteItemsInner
-  */
-  public static CreditNoteCreateInputCreditNoteItemsInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreditNoteCreateInputCreditNoteItemsInner.class);
-  }
-
- /**
-  * Convert an instance of CreditNoteCreateInputCreditNoteItemsInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

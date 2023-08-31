@@ -15,18 +15,15 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.io.IOException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Gets or Sets Currency
  */
-@JsonAdapter(Currency.Adapter.class)
 public enum Currency {
   
   AED("AED"),
@@ -309,6 +306,7 @@ public enum Currency {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -318,6 +316,7 @@ public enum Currency {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static Currency fromValue(String value) {
     for (Currency b : Currency.values()) {
       if (b.value.equals(value)) {
@@ -325,19 +324,6 @@ public enum Currency {
       }
     }
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
-  }
-
-  public static class Adapter extends TypeAdapter<Currency> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final Currency enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public Currency read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return Currency.fromValue(value);
-    }
   }
 }
 

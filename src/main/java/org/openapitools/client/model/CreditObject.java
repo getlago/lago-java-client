@@ -15,69 +15,47 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 import org.openapitools.client.model.CreditObjectInvoice;
 import org.openapitools.client.model.CreditObjectItem;
 import org.openapitools.client.model.Currency;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreditObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreditObject.JSON_PROPERTY_LAGO_ID,
+  CreditObject.JSON_PROPERTY_AMOUNT_CENTS,
+  CreditObject.JSON_PROPERTY_AMOUNT_CURRENCY,
+  CreditObject.JSON_PROPERTY_BEFORE_TAXES,
+  CreditObject.JSON_PROPERTY_ITEM,
+  CreditObject.JSON_PROPERTY_INVOICE
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreditObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_BEFORE_TAXES = "before_taxes";
-  @SerializedName(SERIALIZED_NAME_BEFORE_TAXES)
+  public static final String JSON_PROPERTY_BEFORE_TAXES = "before_taxes";
   private Boolean beforeTaxes;
 
-  public static final String SERIALIZED_NAME_ITEM = "item";
-  @SerializedName(SERIALIZED_NAME_ITEM)
+  public static final String JSON_PROPERTY_ITEM = "item";
   private CreditObjectItem item;
 
-  public static final String SERIALIZED_NAME_INVOICE = "invoice";
-  @SerializedName(SERIALIZED_NAME_INVOICE)
+  public static final String JSON_PROPERTY_INVOICE = "invoice";
   private CreditObjectInvoice invoice;
 
   public CreditObject() {
@@ -94,11 +72,16 @@ public class CreditObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -115,11 +98,16 @@ public class CreditObject {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -136,11 +124,16 @@ public class CreditObject {
    * @return amountCurrency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -157,11 +150,16 @@ public class CreditObject {
    * @return beforeTaxes
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_BEFORE_TAXES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getBeforeTaxes() {
     return beforeTaxes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BEFORE_TAXES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setBeforeTaxes(Boolean beforeTaxes) {
     this.beforeTaxes = beforeTaxes;
   }
@@ -178,11 +176,16 @@ public class CreditObject {
    * @return item
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ITEM)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public CreditObjectItem getItem() {
     return item;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ITEM)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setItem(CreditObjectItem item) {
     this.item = item;
   }
@@ -199,16 +202,19 @@ public class CreditObject {
    * @return invoice
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_INVOICE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public CreditObjectInvoice getInvoice() {
     return invoice;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setInvoice(CreditObjectInvoice invoice) {
     this.invoice = invoice;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -257,116 +263,5 @@ public class CreditObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("before_taxes");
-    openapiFields.add("item");
-    openapiFields.add("invoice");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("amount_cents");
-    openapiRequiredFields.add("amount_currency");
-    openapiRequiredFields.add("before_taxes");
-    openapiRequiredFields.add("item");
-    openapiRequiredFields.add("invoice");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreditObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreditObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreditObject is not found in the empty JSON string", CreditObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreditObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreditObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreditObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      // validate the required field `amount_currency`
-      Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      // validate the required field `item`
-      CreditObjectItem.validateJsonElement(jsonObj.get("item"));
-      // validate the required field `invoice`
-      CreditObjectInvoice.validateJsonElement(jsonObj.get("invoice"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreditObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreditObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreditObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreditObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreditObject>() {
-           @Override
-           public void write(JsonWriter out, CreditObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreditObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreditObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreditObject
-  * @throws IOException if the JSON string is invalid with respect to CreditObject
-  */
-  public static CreditObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreditObject.class);
-  }
-
- /**
-  * Convert an instance of CreditObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

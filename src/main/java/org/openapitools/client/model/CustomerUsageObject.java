@@ -15,78 +15,56 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.Currency;
 import org.openapitools.client.model.CustomerChargeUsageObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CustomerUsageObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomerUsageObject.JSON_PROPERTY_FROM_DATETIME,
+  CustomerUsageObject.JSON_PROPERTY_TO_DATETIME,
+  CustomerUsageObject.JSON_PROPERTY_ISSUING_DATE,
+  CustomerUsageObject.JSON_PROPERTY_CURRENCY,
+  CustomerUsageObject.JSON_PROPERTY_AMOUNT_CENTS,
+  CustomerUsageObject.JSON_PROPERTY_TAXES_AMOUNT_CENTS,
+  CustomerUsageObject.JSON_PROPERTY_TOTAL_AMOUNT_CENTS,
+  CustomerUsageObject.JSON_PROPERTY_CHARGES_USAGE
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomerUsageObject {
-  public static final String SERIALIZED_NAME_FROM_DATETIME = "from_datetime";
-  @SerializedName(SERIALIZED_NAME_FROM_DATETIME)
+  public static final String JSON_PROPERTY_FROM_DATETIME = "from_datetime";
   private OffsetDateTime fromDatetime;
 
-  public static final String SERIALIZED_NAME_TO_DATETIME = "to_datetime";
-  @SerializedName(SERIALIZED_NAME_TO_DATETIME)
+  public static final String JSON_PROPERTY_TO_DATETIME = "to_datetime";
   private OffsetDateTime toDatetime;
 
-  public static final String SERIALIZED_NAME_ISSUING_DATE = "issuing_date";
-  @SerializedName(SERIALIZED_NAME_ISSUING_DATE)
+  public static final String JSON_PROPERTY_ISSUING_DATE = "issuing_date";
   private OffsetDateTime issuingDate;
 
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  public static final String JSON_PROPERTY_CURRENCY = "currency";
   private Currency currency;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TAXES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
   private Integer taxesAmountCents;
 
-  public static final String SERIALIZED_NAME_TOTAL_AMOUNT_CENTS = "total_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TOTAL_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TOTAL_AMOUNT_CENTS = "total_amount_cents";
   private Integer totalAmountCents;
 
-  public static final String SERIALIZED_NAME_CHARGES_USAGE = "charges_usage";
-  @SerializedName(SERIALIZED_NAME_CHARGES_USAGE)
+  public static final String JSON_PROPERTY_CHARGES_USAGE = "charges_usage";
   private List<CustomerChargeUsageObject> chargesUsage = new ArrayList<>();
 
   public CustomerUsageObject() {
@@ -103,11 +81,16 @@ public class CustomerUsageObject {
    * @return fromDatetime
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_FROM_DATETIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getFromDatetime() {
     return fromDatetime;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_FROM_DATETIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFromDatetime(OffsetDateTime fromDatetime) {
     this.fromDatetime = fromDatetime;
   }
@@ -124,11 +107,16 @@ public class CustomerUsageObject {
    * @return toDatetime
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TO_DATETIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getToDatetime() {
     return toDatetime;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TO_DATETIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToDatetime(OffsetDateTime toDatetime) {
     this.toDatetime = toDatetime;
   }
@@ -145,11 +133,16 @@ public class CustomerUsageObject {
    * @return issuingDate
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ISSUING_DATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getIssuingDate() {
     return issuingDate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ISSUING_DATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setIssuingDate(OffsetDateTime issuingDate) {
     this.issuingDate = issuingDate;
   }
@@ -166,11 +159,16 @@ public class CustomerUsageObject {
    * @return currency
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Currency getCurrency() {
     return currency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCurrency(Currency currency) {
     this.currency = currency;
   }
@@ -187,11 +185,16 @@ public class CustomerUsageObject {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -208,11 +211,16 @@ public class CustomerUsageObject {
    * @return taxesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTaxesAmountCents() {
     return taxesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTaxesAmountCents(Integer taxesAmountCents) {
     this.taxesAmountCents = taxesAmountCents;
   }
@@ -229,11 +237,16 @@ public class CustomerUsageObject {
    * @return totalAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTotalAmountCents() {
     return totalAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTotalAmountCents(Integer totalAmountCents) {
     this.totalAmountCents = totalAmountCents;
   }
@@ -258,16 +271,19 @@ public class CustomerUsageObject {
    * @return chargesUsage
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CHARGES_USAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<CustomerChargeUsageObject> getChargesUsage() {
     return chargesUsage;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CHARGES_USAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setChargesUsage(List<CustomerChargeUsageObject> chargesUsage) {
     this.chargesUsage = chargesUsage;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -320,124 +336,5 @@ public class CustomerUsageObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("from_datetime");
-    openapiFields.add("to_datetime");
-    openapiFields.add("issuing_date");
-    openapiFields.add("currency");
-    openapiFields.add("amount_cents");
-    openapiFields.add("taxes_amount_cents");
-    openapiFields.add("total_amount_cents");
-    openapiFields.add("charges_usage");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("from_datetime");
-    openapiRequiredFields.add("to_datetime");
-    openapiRequiredFields.add("issuing_date");
-    openapiRequiredFields.add("amount_cents");
-    openapiRequiredFields.add("taxes_amount_cents");
-    openapiRequiredFields.add("total_amount_cents");
-    openapiRequiredFields.add("charges_usage");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomerUsageObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomerUsageObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomerUsageObject is not found in the empty JSON string", CustomerUsageObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomerUsageObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomerUsageObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CustomerUsageObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `currency`
-      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        Currency.validateJsonElement(jsonObj.get("currency"));
-      }
-      // ensure the json data is an array
-      if (!jsonObj.get("charges_usage").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `charges_usage` to be an array in the JSON string but got `%s`", jsonObj.get("charges_usage").toString()));
-      }
-
-      JsonArray jsonArraychargesUsage = jsonObj.getAsJsonArray("charges_usage");
-      // validate the required field `charges_usage` (array)
-      for (int i = 0; i < jsonArraychargesUsage.size(); i++) {
-        CustomerChargeUsageObject.validateJsonElement(jsonArraychargesUsage.get(i));
-      };
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomerUsageObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomerUsageObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomerUsageObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomerUsageObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomerUsageObject>() {
-           @Override
-           public void write(JsonWriter out, CustomerUsageObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomerUsageObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomerUsageObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomerUsageObject
-  * @throws IOException if the JSON string is invalid with respect to CustomerUsageObject
-  */
-  public static CustomerUsageObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomerUsageObject.class);
-  }
-
- /**
-  * Convert an instance of CustomerUsageObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

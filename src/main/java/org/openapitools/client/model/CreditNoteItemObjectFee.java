@@ -15,12 +15,11 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -30,125 +29,115 @@ import org.openapitools.client.model.Currency;
 import org.openapitools.client.model.FeeAppliedTaxObject;
 import org.openapitools.client.model.FeeObjectItem;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * CreditNoteItemObjectFee
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_GROUP_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_INVOICE_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_TRUE_UP_FEE_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_TRUE_UP_PARENT_FEE_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_SUBSCRIPTION_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_LAGO_CUSTOMER_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_AMOUNT_CENTS,
+  CreditNoteItemObjectFee.JSON_PROPERTY_AMOUNT_CURRENCY,
+  CreditNoteItemObjectFee.JSON_PROPERTY_TAXES_AMOUNT_CENTS,
+  CreditNoteItemObjectFee.JSON_PROPERTY_TAXES_RATE,
+  CreditNoteItemObjectFee.JSON_PROPERTY_UNITS,
+  CreditNoteItemObjectFee.JSON_PROPERTY_TOTAL_AMOUNT_CENTS,
+  CreditNoteItemObjectFee.JSON_PROPERTY_TOTAL_AMOUNT_CURRENCY,
+  CreditNoteItemObjectFee.JSON_PROPERTY_EVENTS_COUNT,
+  CreditNoteItemObjectFee.JSON_PROPERTY_PAY_IN_ADVANCE,
+  CreditNoteItemObjectFee.JSON_PROPERTY_INVOICEABLE,
+  CreditNoteItemObjectFee.JSON_PROPERTY_FROM_DATE,
+  CreditNoteItemObjectFee.JSON_PROPERTY_TO_DATE,
+  CreditNoteItemObjectFee.JSON_PROPERTY_PAYMENT_STATUS,
+  CreditNoteItemObjectFee.JSON_PROPERTY_CREATED_AT,
+  CreditNoteItemObjectFee.JSON_PROPERTY_SUCCEEDED_AT,
+  CreditNoteItemObjectFee.JSON_PROPERTY_FAILED_AT,
+  CreditNoteItemObjectFee.JSON_PROPERTY_REFUNDED_AT,
+  CreditNoteItemObjectFee.JSON_PROPERTY_EVENT_TRANSACTION_ID,
+  CreditNoteItemObjectFee.JSON_PROPERTY_ITEM,
+  CreditNoteItemObjectFee.JSON_PROPERTY_APPLIED_TAXES
+})
+@JsonTypeName("CreditNoteItemObject_fee")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CreditNoteItemObjectFee {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
-  private UUID lagoId;
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
+  private JsonNullable<UUID> lagoId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_GROUP_ID = "lago_group_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_GROUP_ID)
-  private UUID lagoGroupId;
+  public static final String JSON_PROPERTY_LAGO_GROUP_ID = "lago_group_id";
+  private JsonNullable<UUID> lagoGroupId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_INVOICE_ID = "lago_invoice_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_INVOICE_ID)
-  private UUID lagoInvoiceId;
+  public static final String JSON_PROPERTY_LAGO_INVOICE_ID = "lago_invoice_id";
+  private JsonNullable<UUID> lagoInvoiceId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_TRUE_UP_FEE_ID = "lago_true_up_fee_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_TRUE_UP_FEE_ID)
-  private UUID lagoTrueUpFeeId;
+  public static final String JSON_PROPERTY_LAGO_TRUE_UP_FEE_ID = "lago_true_up_fee_id";
+  private JsonNullable<UUID> lagoTrueUpFeeId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_TRUE_UP_PARENT_FEE_ID = "lago_true_up_parent_fee_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_TRUE_UP_PARENT_FEE_ID)
-  private UUID lagoTrueUpParentFeeId;
+  public static final String JSON_PROPERTY_LAGO_TRUE_UP_PARENT_FEE_ID = "lago_true_up_parent_fee_id";
+  private JsonNullable<UUID> lagoTrueUpParentFeeId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_SUBSCRIPTION_ID = "lago_subscription_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_SUBSCRIPTION_ID)
-  private UUID lagoSubscriptionId;
+  public static final String JSON_PROPERTY_LAGO_SUBSCRIPTION_ID = "lago_subscription_id";
+  private JsonNullable<UUID> lagoSubscriptionId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_LAGO_CUSTOMER_ID = "lago_customer_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_CUSTOMER_ID)
-  private UUID lagoCustomerId;
+  public static final String JSON_PROPERTY_LAGO_CUSTOMER_ID = "lago_customer_id";
+  private JsonNullable<UUID> lagoCustomerId = JsonNullable.<UUID>undefined();
 
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
-  private String externalCustomerId;
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
+  private JsonNullable<String> externalCustomerId = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_EXTERNAL_SUBSCRIPTION_ID = "external_subscription_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_SUBSCRIPTION_ID)
-  private String externalSubscriptionId;
+  public static final String JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID = "external_subscription_id";
+  private JsonNullable<String> externalSubscriptionId = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TAXES_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TAXES_AMOUNT_CENTS = "taxes_amount_cents";
   private Integer taxesAmountCents;
 
-  public static final String SERIALIZED_NAME_TAXES_RATE = "taxes_rate";
-  @SerializedName(SERIALIZED_NAME_TAXES_RATE)
+  public static final String JSON_PROPERTY_TAXES_RATE = "taxes_rate";
   private BigDecimal taxesRate;
 
-  public static final String SERIALIZED_NAME_UNITS = "units";
-  @SerializedName(SERIALIZED_NAME_UNITS)
+  public static final String JSON_PROPERTY_UNITS = "units";
   private String units;
 
-  public static final String SERIALIZED_NAME_TOTAL_AMOUNT_CENTS = "total_amount_cents";
-  @SerializedName(SERIALIZED_NAME_TOTAL_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_TOTAL_AMOUNT_CENTS = "total_amount_cents";
   private Integer totalAmountCents;
 
-  public static final String SERIALIZED_NAME_TOTAL_AMOUNT_CURRENCY = "total_amount_currency";
-  @SerializedName(SERIALIZED_NAME_TOTAL_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_TOTAL_AMOUNT_CURRENCY = "total_amount_currency";
   private Currency totalAmountCurrency;
 
-  public static final String SERIALIZED_NAME_EVENTS_COUNT = "events_count";
-  @SerializedName(SERIALIZED_NAME_EVENTS_COUNT)
+  public static final String JSON_PROPERTY_EVENTS_COUNT = "events_count";
   private Integer eventsCount;
 
-  public static final String SERIALIZED_NAME_PAY_IN_ADVANCE = "pay_in_advance";
-  @SerializedName(SERIALIZED_NAME_PAY_IN_ADVANCE)
+  public static final String JSON_PROPERTY_PAY_IN_ADVANCE = "pay_in_advance";
   private Boolean payInAdvance;
 
-  public static final String SERIALIZED_NAME_INVOICEABLE = "invoiceable";
-  @SerializedName(SERIALIZED_NAME_INVOICEABLE)
+  public static final String JSON_PROPERTY_INVOICEABLE = "invoiceable";
   private Boolean invoiceable;
 
-  public static final String SERIALIZED_NAME_FROM_DATE = "from_date";
-  @SerializedName(SERIALIZED_NAME_FROM_DATE)
-  private OffsetDateTime fromDate;
+  public static final String JSON_PROPERTY_FROM_DATE = "from_date";
+  private JsonNullable<OffsetDateTime> fromDate = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_TO_DATE = "to_date";
-  @SerializedName(SERIALIZED_NAME_TO_DATE)
-  private OffsetDateTime toDate;
+  public static final String JSON_PROPERTY_TO_DATE = "to_date";
+  private JsonNullable<OffsetDateTime> toDate = JsonNullable.<OffsetDateTime>undefined();
 
   /**
    * Indicates the payment status of the fee. It represents the current status of the payment associated with the fee. The possible values for this field are &#x60;pending&#x60;, &#x60;succeeded&#x60;, &#x60;failed&#x60; and &#x60;refunded&#x60;.
    */
-  @JsonAdapter(PaymentStatusEnum.Adapter.class)
   public enum PaymentStatusEnum {
     PENDING("pending"),
     
@@ -164,6 +153,7 @@ public class CreditNoteItemObjectFee {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -173,6 +163,7 @@ public class CreditNoteItemObjectFee {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static PaymentStatusEnum fromValue(String value) {
       for (PaymentStatusEnum b : PaymentStatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -181,59 +172,38 @@ public class CreditNoteItemObjectFee {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<PaymentStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PaymentStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PaymentStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PaymentStatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_PAYMENT_STATUS = "payment_status";
-  @SerializedName(SERIALIZED_NAME_PAYMENT_STATUS)
+  public static final String JSON_PROPERTY_PAYMENT_STATUS = "payment_status";
   private PaymentStatusEnum paymentStatus;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
-  private OffsetDateTime createdAt;
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+  private JsonNullable<OffsetDateTime> createdAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_SUCCEEDED_AT = "succeeded_at";
-  @SerializedName(SERIALIZED_NAME_SUCCEEDED_AT)
-  private OffsetDateTime succeededAt;
+  public static final String JSON_PROPERTY_SUCCEEDED_AT = "succeeded_at";
+  private JsonNullable<OffsetDateTime> succeededAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_FAILED_AT = "failed_at";
-  @SerializedName(SERIALIZED_NAME_FAILED_AT)
-  private OffsetDateTime failedAt;
+  public static final String JSON_PROPERTY_FAILED_AT = "failed_at";
+  private JsonNullable<OffsetDateTime> failedAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_REFUNDED_AT = "refunded_at";
-  @SerializedName(SERIALIZED_NAME_REFUNDED_AT)
-  private OffsetDateTime refundedAt;
+  public static final String JSON_PROPERTY_REFUNDED_AT = "refunded_at";
+  private JsonNullable<OffsetDateTime> refundedAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_EVENT_TRANSACTION_ID = "event_transaction_id";
-  @SerializedName(SERIALIZED_NAME_EVENT_TRANSACTION_ID)
-  private String eventTransactionId;
+  public static final String JSON_PROPERTY_EVENT_TRANSACTION_ID = "event_transaction_id";
+  private JsonNullable<String> eventTransactionId = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_ITEM = "item";
-  @SerializedName(SERIALIZED_NAME_ITEM)
+  public static final String JSON_PROPERTY_ITEM = "item";
   private FeeObjectItem item;
 
-  public static final String SERIALIZED_NAME_APPLIED_TAXES = "applied_taxes";
-  @SerializedName(SERIALIZED_NAME_APPLIED_TAXES)
+  public static final String JSON_PROPERTY_APPLIED_TAXES = "applied_taxes";
   private List<FeeAppliedTaxObject> appliedTaxes;
 
   public CreditNoteItemObjectFee() {
   }
 
   public CreditNoteItemObjectFee lagoId(UUID lagoId) {
+    this.lagoId = JsonNullable.<UUID>of(lagoId);
     
-    this.lagoId = lagoId;
     return this;
   }
 
@@ -242,19 +212,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoId() {
-    return lagoId;
+        return lagoId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoId_JsonNullable() {
+    return lagoId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  public void setLagoId_JsonNullable(JsonNullable<UUID> lagoId) {
+    this.lagoId = lagoId;
+  }
 
   public void setLagoId(UUID lagoId) {
-    this.lagoId = lagoId;
+    this.lagoId = JsonNullable.<UUID>of(lagoId);
   }
 
 
   public CreditNoteItemObjectFee lagoGroupId(UUID lagoGroupId) {
+    this.lagoGroupId = JsonNullable.<UUID>of(lagoGroupId);
     
-    this.lagoGroupId = lagoGroupId;
     return this;
   }
 
@@ -263,19 +246,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoGroupId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoGroupId() {
-    return lagoGroupId;
+        return lagoGroupId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_GROUP_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoGroupId_JsonNullable() {
+    return lagoGroupId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_GROUP_ID)
+  public void setLagoGroupId_JsonNullable(JsonNullable<UUID> lagoGroupId) {
+    this.lagoGroupId = lagoGroupId;
+  }
 
   public void setLagoGroupId(UUID lagoGroupId) {
-    this.lagoGroupId = lagoGroupId;
+    this.lagoGroupId = JsonNullable.<UUID>of(lagoGroupId);
   }
 
 
   public CreditNoteItemObjectFee lagoInvoiceId(UUID lagoInvoiceId) {
+    this.lagoInvoiceId = JsonNullable.<UUID>of(lagoInvoiceId);
     
-    this.lagoInvoiceId = lagoInvoiceId;
     return this;
   }
 
@@ -284,19 +280,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoInvoiceId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoInvoiceId() {
-    return lagoInvoiceId;
+        return lagoInvoiceId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_INVOICE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoInvoiceId_JsonNullable() {
+    return lagoInvoiceId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_INVOICE_ID)
+  public void setLagoInvoiceId_JsonNullable(JsonNullable<UUID> lagoInvoiceId) {
+    this.lagoInvoiceId = lagoInvoiceId;
+  }
 
   public void setLagoInvoiceId(UUID lagoInvoiceId) {
-    this.lagoInvoiceId = lagoInvoiceId;
+    this.lagoInvoiceId = JsonNullable.<UUID>of(lagoInvoiceId);
   }
 
 
   public CreditNoteItemObjectFee lagoTrueUpFeeId(UUID lagoTrueUpFeeId) {
+    this.lagoTrueUpFeeId = JsonNullable.<UUID>of(lagoTrueUpFeeId);
     
-    this.lagoTrueUpFeeId = lagoTrueUpFeeId;
     return this;
   }
 
@@ -305,19 +314,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoTrueUpFeeId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoTrueUpFeeId() {
-    return lagoTrueUpFeeId;
+        return lagoTrueUpFeeId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_TRUE_UP_FEE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoTrueUpFeeId_JsonNullable() {
+    return lagoTrueUpFeeId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_TRUE_UP_FEE_ID)
+  public void setLagoTrueUpFeeId_JsonNullable(JsonNullable<UUID> lagoTrueUpFeeId) {
+    this.lagoTrueUpFeeId = lagoTrueUpFeeId;
+  }
 
   public void setLagoTrueUpFeeId(UUID lagoTrueUpFeeId) {
-    this.lagoTrueUpFeeId = lagoTrueUpFeeId;
+    this.lagoTrueUpFeeId = JsonNullable.<UUID>of(lagoTrueUpFeeId);
   }
 
 
   public CreditNoteItemObjectFee lagoTrueUpParentFeeId(UUID lagoTrueUpParentFeeId) {
+    this.lagoTrueUpParentFeeId = JsonNullable.<UUID>of(lagoTrueUpParentFeeId);
     
-    this.lagoTrueUpParentFeeId = lagoTrueUpParentFeeId;
     return this;
   }
 
@@ -326,19 +348,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoTrueUpParentFeeId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoTrueUpParentFeeId() {
-    return lagoTrueUpParentFeeId;
+        return lagoTrueUpParentFeeId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_TRUE_UP_PARENT_FEE_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoTrueUpParentFeeId_JsonNullable() {
+    return lagoTrueUpParentFeeId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_TRUE_UP_PARENT_FEE_ID)
+  public void setLagoTrueUpParentFeeId_JsonNullable(JsonNullable<UUID> lagoTrueUpParentFeeId) {
+    this.lagoTrueUpParentFeeId = lagoTrueUpParentFeeId;
+  }
 
   public void setLagoTrueUpParentFeeId(UUID lagoTrueUpParentFeeId) {
-    this.lagoTrueUpParentFeeId = lagoTrueUpParentFeeId;
+    this.lagoTrueUpParentFeeId = JsonNullable.<UUID>of(lagoTrueUpParentFeeId);
   }
 
 
   public CreditNoteItemObjectFee lagoSubscriptionId(UUID lagoSubscriptionId) {
+    this.lagoSubscriptionId = JsonNullable.<UUID>of(lagoSubscriptionId);
     
-    this.lagoSubscriptionId = lagoSubscriptionId;
     return this;
   }
 
@@ -347,19 +382,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoSubscriptionId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoSubscriptionId() {
-    return lagoSubscriptionId;
+        return lagoSubscriptionId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_SUBSCRIPTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoSubscriptionId_JsonNullable() {
+    return lagoSubscriptionId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_SUBSCRIPTION_ID)
+  public void setLagoSubscriptionId_JsonNullable(JsonNullable<UUID> lagoSubscriptionId) {
+    this.lagoSubscriptionId = lagoSubscriptionId;
+  }
 
   public void setLagoSubscriptionId(UUID lagoSubscriptionId) {
-    this.lagoSubscriptionId = lagoSubscriptionId;
+    this.lagoSubscriptionId = JsonNullable.<UUID>of(lagoSubscriptionId);
   }
 
 
   public CreditNoteItemObjectFee lagoCustomerId(UUID lagoCustomerId) {
+    this.lagoCustomerId = JsonNullable.<UUID>of(lagoCustomerId);
     
-    this.lagoCustomerId = lagoCustomerId;
     return this;
   }
 
@@ -368,19 +416,32 @@ public class CreditNoteItemObjectFee {
    * @return lagoCustomerId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public UUID getLagoCustomerId() {
-    return lagoCustomerId;
+        return lagoCustomerId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<UUID> getLagoCustomerId_JsonNullable() {
+    return lagoCustomerId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  public void setLagoCustomerId_JsonNullable(JsonNullable<UUID> lagoCustomerId) {
+    this.lagoCustomerId = lagoCustomerId;
+  }
 
   public void setLagoCustomerId(UUID lagoCustomerId) {
-    this.lagoCustomerId = lagoCustomerId;
+    this.lagoCustomerId = JsonNullable.<UUID>of(lagoCustomerId);
   }
 
 
   public CreditNoteItemObjectFee externalCustomerId(String externalCustomerId) {
+    this.externalCustomerId = JsonNullable.<String>of(externalCustomerId);
     
-    this.externalCustomerId = externalCustomerId;
     return this;
   }
 
@@ -389,19 +450,32 @@ public class CreditNoteItemObjectFee {
    * @return externalCustomerId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getExternalCustomerId() {
-    return externalCustomerId;
+        return externalCustomerId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getExternalCustomerId_JsonNullable() {
+    return externalCustomerId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  public void setExternalCustomerId_JsonNullable(JsonNullable<String> externalCustomerId) {
+    this.externalCustomerId = externalCustomerId;
+  }
 
   public void setExternalCustomerId(String externalCustomerId) {
-    this.externalCustomerId = externalCustomerId;
+    this.externalCustomerId = JsonNullable.<String>of(externalCustomerId);
   }
 
 
   public CreditNoteItemObjectFee externalSubscriptionId(String externalSubscriptionId) {
+    this.externalSubscriptionId = JsonNullable.<String>of(externalSubscriptionId);
     
-    this.externalSubscriptionId = externalSubscriptionId;
     return this;
   }
 
@@ -410,13 +484,26 @@ public class CreditNoteItemObjectFee {
    * @return externalSubscriptionId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getExternalSubscriptionId() {
-    return externalSubscriptionId;
+        return externalSubscriptionId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getExternalSubscriptionId_JsonNullable() {
+    return externalSubscriptionId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_SUBSCRIPTION_ID)
+  public void setExternalSubscriptionId_JsonNullable(JsonNullable<String> externalSubscriptionId) {
+    this.externalSubscriptionId = externalSubscriptionId;
+  }
 
   public void setExternalSubscriptionId(String externalSubscriptionId) {
-    this.externalSubscriptionId = externalSubscriptionId;
+    this.externalSubscriptionId = JsonNullable.<String>of(externalSubscriptionId);
   }
 
 
@@ -431,11 +518,16 @@ public class CreditNoteItemObjectFee {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -452,11 +544,16 @@ public class CreditNoteItemObjectFee {
    * @return amountCurrency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -473,11 +570,16 @@ public class CreditNoteItemObjectFee {
    * @return taxesAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTaxesAmountCents() {
     return taxesAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTaxesAmountCents(Integer taxesAmountCents) {
     this.taxesAmountCents = taxesAmountCents;
   }
@@ -494,11 +596,16 @@ public class CreditNoteItemObjectFee {
    * @return taxesRate
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TAXES_RATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public BigDecimal getTaxesRate() {
     return taxesRate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TAXES_RATE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTaxesRate(BigDecimal taxesRate) {
     this.taxesRate = taxesRate;
   }
@@ -515,11 +622,16 @@ public class CreditNoteItemObjectFee {
    * @return units
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getUnits() {
     return units;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_UNITS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUnits(String units) {
     this.units = units;
   }
@@ -536,11 +648,16 @@ public class CreditNoteItemObjectFee {
    * @return totalAmountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTotalAmountCents() {
     return totalAmountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTotalAmountCents(Integer totalAmountCents) {
     this.totalAmountCents = totalAmountCents;
   }
@@ -557,11 +674,16 @@ public class CreditNoteItemObjectFee {
    * @return totalAmountCurrency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getTotalAmountCurrency() {
     return totalAmountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTotalAmountCurrency(Currency totalAmountCurrency) {
     this.totalAmountCurrency = totalAmountCurrency;
   }
@@ -578,11 +700,16 @@ public class CreditNoteItemObjectFee {
    * @return eventsCount
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_EVENTS_COUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getEventsCount() {
     return eventsCount;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EVENTS_COUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEventsCount(Integer eventsCount) {
     this.eventsCount = eventsCount;
   }
@@ -599,11 +726,16 @@ public class CreditNoteItemObjectFee {
    * @return payInAdvance
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getPayInAdvance() {
     return payInAdvance;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAY_IN_ADVANCE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPayInAdvance(Boolean payInAdvance) {
     this.payInAdvance = payInAdvance;
   }
@@ -620,19 +752,24 @@ public class CreditNoteItemObjectFee {
    * @return invoiceable
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_INVOICEABLE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getInvoiceable() {
     return invoiceable;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_INVOICEABLE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setInvoiceable(Boolean invoiceable) {
     this.invoiceable = invoiceable;
   }
 
 
   public CreditNoteItemObjectFee fromDate(OffsetDateTime fromDate) {
+    this.fromDate = JsonNullable.<OffsetDateTime>of(fromDate);
     
-    this.fromDate = fromDate;
     return this;
   }
 
@@ -641,19 +778,32 @@ public class CreditNoteItemObjectFee {
    * @return fromDate
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getFromDate() {
-    return fromDate;
+        return fromDate.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FROM_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getFromDate_JsonNullable() {
+    return fromDate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FROM_DATE)
+  public void setFromDate_JsonNullable(JsonNullable<OffsetDateTime> fromDate) {
+    this.fromDate = fromDate;
+  }
 
   public void setFromDate(OffsetDateTime fromDate) {
-    this.fromDate = fromDate;
+    this.fromDate = JsonNullable.<OffsetDateTime>of(fromDate);
   }
 
 
   public CreditNoteItemObjectFee toDate(OffsetDateTime toDate) {
+    this.toDate = JsonNullable.<OffsetDateTime>of(toDate);
     
-    this.toDate = toDate;
     return this;
   }
 
@@ -662,13 +812,26 @@ public class CreditNoteItemObjectFee {
    * @return toDate
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getToDate() {
-    return toDate;
+        return toDate.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_TO_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getToDate_JsonNullable() {
+    return toDate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TO_DATE)
+  public void setToDate_JsonNullable(JsonNullable<OffsetDateTime> toDate) {
+    this.toDate = toDate;
+  }
 
   public void setToDate(OffsetDateTime toDate) {
-    this.toDate = toDate;
+    this.toDate = JsonNullable.<OffsetDateTime>of(toDate);
   }
 
 
@@ -683,19 +846,24 @@ public class CreditNoteItemObjectFee {
    * @return paymentStatus
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaymentStatusEnum getPaymentStatus() {
     return paymentStatus;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
     this.paymentStatus = paymentStatus;
   }
 
 
   public CreditNoteItemObjectFee createdAt(OffsetDateTime createdAt) {
+    this.createdAt = JsonNullable.<OffsetDateTime>of(createdAt);
     
-    this.createdAt = createdAt;
     return this;
   }
 
@@ -704,19 +872,32 @@ public class CreditNoteItemObjectFee {
    * @return createdAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getCreatedAt() {
-    return createdAt;
+        return createdAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getCreatedAt_JsonNullable() {
+    return createdAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  public void setCreatedAt_JsonNullable(JsonNullable<OffsetDateTime> createdAt) {
+    this.createdAt = createdAt;
+  }
 
   public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+    this.createdAt = JsonNullable.<OffsetDateTime>of(createdAt);
   }
 
 
   public CreditNoteItemObjectFee succeededAt(OffsetDateTime succeededAt) {
+    this.succeededAt = JsonNullable.<OffsetDateTime>of(succeededAt);
     
-    this.succeededAt = succeededAt;
     return this;
   }
 
@@ -725,19 +906,32 @@ public class CreditNoteItemObjectFee {
    * @return succeededAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getSucceededAt() {
-    return succeededAt;
+        return succeededAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_SUCCEEDED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getSucceededAt_JsonNullable() {
+    return succeededAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SUCCEEDED_AT)
+  public void setSucceededAt_JsonNullable(JsonNullable<OffsetDateTime> succeededAt) {
+    this.succeededAt = succeededAt;
+  }
 
   public void setSucceededAt(OffsetDateTime succeededAt) {
-    this.succeededAt = succeededAt;
+    this.succeededAt = JsonNullable.<OffsetDateTime>of(succeededAt);
   }
 
 
   public CreditNoteItemObjectFee failedAt(OffsetDateTime failedAt) {
+    this.failedAt = JsonNullable.<OffsetDateTime>of(failedAt);
     
-    this.failedAt = failedAt;
     return this;
   }
 
@@ -746,19 +940,32 @@ public class CreditNoteItemObjectFee {
    * @return failedAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getFailedAt() {
-    return failedAt;
+        return failedAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_FAILED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getFailedAt_JsonNullable() {
+    return failedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FAILED_AT)
+  public void setFailedAt_JsonNullable(JsonNullable<OffsetDateTime> failedAt) {
+    this.failedAt = failedAt;
+  }
 
   public void setFailedAt(OffsetDateTime failedAt) {
-    this.failedAt = failedAt;
+    this.failedAt = JsonNullable.<OffsetDateTime>of(failedAt);
   }
 
 
   public CreditNoteItemObjectFee refundedAt(OffsetDateTime refundedAt) {
+    this.refundedAt = JsonNullable.<OffsetDateTime>of(refundedAt);
     
-    this.refundedAt = refundedAt;
     return this;
   }
 
@@ -767,19 +974,32 @@ public class CreditNoteItemObjectFee {
    * @return refundedAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getRefundedAt() {
-    return refundedAt;
+        return refundedAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_REFUNDED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getRefundedAt_JsonNullable() {
+    return refundedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_REFUNDED_AT)
+  public void setRefundedAt_JsonNullable(JsonNullable<OffsetDateTime> refundedAt) {
+    this.refundedAt = refundedAt;
+  }
 
   public void setRefundedAt(OffsetDateTime refundedAt) {
-    this.refundedAt = refundedAt;
+    this.refundedAt = JsonNullable.<OffsetDateTime>of(refundedAt);
   }
 
 
   public CreditNoteItemObjectFee eventTransactionId(String eventTransactionId) {
+    this.eventTransactionId = JsonNullable.<String>of(eventTransactionId);
     
-    this.eventTransactionId = eventTransactionId;
     return this;
   }
 
@@ -788,13 +1008,26 @@ public class CreditNoteItemObjectFee {
    * @return eventTransactionId
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getEventTransactionId() {
-    return eventTransactionId;
+        return eventTransactionId.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EVENT_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getEventTransactionId_JsonNullable() {
+    return eventTransactionId;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EVENT_TRANSACTION_ID)
+  public void setEventTransactionId_JsonNullable(JsonNullable<String> eventTransactionId) {
+    this.eventTransactionId = eventTransactionId;
+  }
 
   public void setEventTransactionId(String eventTransactionId) {
-    this.eventTransactionId = eventTransactionId;
+    this.eventTransactionId = JsonNullable.<String>of(eventTransactionId);
   }
 
 
@@ -809,11 +1042,16 @@ public class CreditNoteItemObjectFee {
    * @return item
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ITEM)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public FeeObjectItem getItem() {
     return item;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ITEM)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setItem(FeeObjectItem item) {
     this.item = item;
   }
@@ -838,16 +1076,19 @@ public class CreditNoteItemObjectFee {
    * @return appliedTaxes
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_APPLIED_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<FeeAppliedTaxObject> getAppliedTaxes() {
     return appliedTaxes;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_APPLIED_TAXES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppliedTaxes(List<FeeAppliedTaxObject> appliedTaxes) {
     this.appliedTaxes = appliedTaxes;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -858,15 +1099,15 @@ public class CreditNoteItemObjectFee {
       return false;
     }
     CreditNoteItemObjectFee creditNoteItemObjectFee = (CreditNoteItemObjectFee) o;
-    return Objects.equals(this.lagoId, creditNoteItemObjectFee.lagoId) &&
-        Objects.equals(this.lagoGroupId, creditNoteItemObjectFee.lagoGroupId) &&
-        Objects.equals(this.lagoInvoiceId, creditNoteItemObjectFee.lagoInvoiceId) &&
-        Objects.equals(this.lagoTrueUpFeeId, creditNoteItemObjectFee.lagoTrueUpFeeId) &&
-        Objects.equals(this.lagoTrueUpParentFeeId, creditNoteItemObjectFee.lagoTrueUpParentFeeId) &&
-        Objects.equals(this.lagoSubscriptionId, creditNoteItemObjectFee.lagoSubscriptionId) &&
-        Objects.equals(this.lagoCustomerId, creditNoteItemObjectFee.lagoCustomerId) &&
-        Objects.equals(this.externalCustomerId, creditNoteItemObjectFee.externalCustomerId) &&
-        Objects.equals(this.externalSubscriptionId, creditNoteItemObjectFee.externalSubscriptionId) &&
+    return equalsNullable(this.lagoId, creditNoteItemObjectFee.lagoId) &&
+        equalsNullable(this.lagoGroupId, creditNoteItemObjectFee.lagoGroupId) &&
+        equalsNullable(this.lagoInvoiceId, creditNoteItemObjectFee.lagoInvoiceId) &&
+        equalsNullable(this.lagoTrueUpFeeId, creditNoteItemObjectFee.lagoTrueUpFeeId) &&
+        equalsNullable(this.lagoTrueUpParentFeeId, creditNoteItemObjectFee.lagoTrueUpParentFeeId) &&
+        equalsNullable(this.lagoSubscriptionId, creditNoteItemObjectFee.lagoSubscriptionId) &&
+        equalsNullable(this.lagoCustomerId, creditNoteItemObjectFee.lagoCustomerId) &&
+        equalsNullable(this.externalCustomerId, creditNoteItemObjectFee.externalCustomerId) &&
+        equalsNullable(this.externalSubscriptionId, creditNoteItemObjectFee.externalSubscriptionId) &&
         Objects.equals(this.amountCents, creditNoteItemObjectFee.amountCents) &&
         Objects.equals(this.amountCurrency, creditNoteItemObjectFee.amountCurrency) &&
         Objects.equals(this.taxesAmountCents, creditNoteItemObjectFee.taxesAmountCents) &&
@@ -877,14 +1118,14 @@ public class CreditNoteItemObjectFee {
         Objects.equals(this.eventsCount, creditNoteItemObjectFee.eventsCount) &&
         Objects.equals(this.payInAdvance, creditNoteItemObjectFee.payInAdvance) &&
         Objects.equals(this.invoiceable, creditNoteItemObjectFee.invoiceable) &&
-        Objects.equals(this.fromDate, creditNoteItemObjectFee.fromDate) &&
-        Objects.equals(this.toDate, creditNoteItemObjectFee.toDate) &&
+        equalsNullable(this.fromDate, creditNoteItemObjectFee.fromDate) &&
+        equalsNullable(this.toDate, creditNoteItemObjectFee.toDate) &&
         Objects.equals(this.paymentStatus, creditNoteItemObjectFee.paymentStatus) &&
-        Objects.equals(this.createdAt, creditNoteItemObjectFee.createdAt) &&
-        Objects.equals(this.succeededAt, creditNoteItemObjectFee.succeededAt) &&
-        Objects.equals(this.failedAt, creditNoteItemObjectFee.failedAt) &&
-        Objects.equals(this.refundedAt, creditNoteItemObjectFee.refundedAt) &&
-        Objects.equals(this.eventTransactionId, creditNoteItemObjectFee.eventTransactionId) &&
+        equalsNullable(this.createdAt, creditNoteItemObjectFee.createdAt) &&
+        equalsNullable(this.succeededAt, creditNoteItemObjectFee.succeededAt) &&
+        equalsNullable(this.failedAt, creditNoteItemObjectFee.failedAt) &&
+        equalsNullable(this.refundedAt, creditNoteItemObjectFee.refundedAt) &&
+        equalsNullable(this.eventTransactionId, creditNoteItemObjectFee.eventTransactionId) &&
         Objects.equals(this.item, creditNoteItemObjectFee.item) &&
         Objects.equals(this.appliedTaxes, creditNoteItemObjectFee.appliedTaxes);
   }
@@ -895,7 +1136,7 @@ public class CreditNoteItemObjectFee {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, lagoGroupId, lagoInvoiceId, lagoTrueUpFeeId, lagoTrueUpParentFeeId, lagoSubscriptionId, lagoCustomerId, externalCustomerId, externalSubscriptionId, amountCents, amountCurrency, taxesAmountCents, taxesRate, units, totalAmountCents, totalAmountCurrency, eventsCount, payInAdvance, invoiceable, fromDate, toDate, paymentStatus, createdAt, succeededAt, failedAt, refundedAt, eventTransactionId, item, appliedTaxes);
+    return Objects.hash(hashCodeNullable(lagoId), hashCodeNullable(lagoGroupId), hashCodeNullable(lagoInvoiceId), hashCodeNullable(lagoTrueUpFeeId), hashCodeNullable(lagoTrueUpParentFeeId), hashCodeNullable(lagoSubscriptionId), hashCodeNullable(lagoCustomerId), hashCodeNullable(externalCustomerId), hashCodeNullable(externalSubscriptionId), amountCents, amountCurrency, taxesAmountCents, taxesRate, units, totalAmountCents, totalAmountCurrency, eventsCount, payInAdvance, invoiceable, hashCodeNullable(fromDate), hashCodeNullable(toDate), paymentStatus, hashCodeNullable(createdAt), hashCodeNullable(succeededAt), hashCodeNullable(failedAt), hashCodeNullable(refundedAt), hashCodeNullable(eventTransactionId), item, appliedTaxes);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -953,191 +1194,5 @@ public class CreditNoteItemObjectFee {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_group_id");
-    openapiFields.add("lago_invoice_id");
-    openapiFields.add("lago_true_up_fee_id");
-    openapiFields.add("lago_true_up_parent_fee_id");
-    openapiFields.add("lago_subscription_id");
-    openapiFields.add("lago_customer_id");
-    openapiFields.add("external_customer_id");
-    openapiFields.add("external_subscription_id");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("taxes_amount_cents");
-    openapiFields.add("taxes_rate");
-    openapiFields.add("units");
-    openapiFields.add("total_amount_cents");
-    openapiFields.add("total_amount_currency");
-    openapiFields.add("events_count");
-    openapiFields.add("pay_in_advance");
-    openapiFields.add("invoiceable");
-    openapiFields.add("from_date");
-    openapiFields.add("to_date");
-    openapiFields.add("payment_status");
-    openapiFields.add("created_at");
-    openapiFields.add("succeeded_at");
-    openapiFields.add("failed_at");
-    openapiFields.add("refunded_at");
-    openapiFields.add("event_transaction_id");
-    openapiFields.add("item");
-    openapiFields.add("applied_taxes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("amount_cents");
-    openapiRequiredFields.add("amount_currency");
-    openapiRequiredFields.add("taxes_amount_cents");
-    openapiRequiredFields.add("taxes_rate");
-    openapiRequiredFields.add("units");
-    openapiRequiredFields.add("total_amount_cents");
-    openapiRequiredFields.add("total_amount_currency");
-    openapiRequiredFields.add("pay_in_advance");
-    openapiRequiredFields.add("invoiceable");
-    openapiRequiredFields.add("payment_status");
-    openapiRequiredFields.add("item");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CreditNoteItemObjectFee
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreditNoteItemObjectFee.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreditNoteItemObjectFee is not found in the empty JSON string", CreditNoteItemObjectFee.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CreditNoteItemObjectFee.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreditNoteItemObjectFee` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreditNoteItemObjectFee.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("lago_id") != null && !jsonObj.get("lago_id").isJsonNull()) && !jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if ((jsonObj.get("lago_group_id") != null && !jsonObj.get("lago_group_id").isJsonNull()) && !jsonObj.get("lago_group_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_group_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_group_id").toString()));
-      }
-      if ((jsonObj.get("lago_invoice_id") != null && !jsonObj.get("lago_invoice_id").isJsonNull()) && !jsonObj.get("lago_invoice_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_invoice_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_invoice_id").toString()));
-      }
-      if ((jsonObj.get("lago_true_up_fee_id") != null && !jsonObj.get("lago_true_up_fee_id").isJsonNull()) && !jsonObj.get("lago_true_up_fee_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_true_up_fee_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_true_up_fee_id").toString()));
-      }
-      if ((jsonObj.get("lago_true_up_parent_fee_id") != null && !jsonObj.get("lago_true_up_parent_fee_id").isJsonNull()) && !jsonObj.get("lago_true_up_parent_fee_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_true_up_parent_fee_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_true_up_parent_fee_id").toString()));
-      }
-      if ((jsonObj.get("lago_subscription_id") != null && !jsonObj.get("lago_subscription_id").isJsonNull()) && !jsonObj.get("lago_subscription_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_subscription_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_subscription_id").toString()));
-      }
-      if ((jsonObj.get("lago_customer_id") != null && !jsonObj.get("lago_customer_id").isJsonNull()) && !jsonObj.get("lago_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_customer_id").toString()));
-      }
-      if ((jsonObj.get("external_customer_id") != null && !jsonObj.get("external_customer_id").isJsonNull()) && !jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if ((jsonObj.get("external_subscription_id") != null && !jsonObj.get("external_subscription_id").isJsonNull()) && !jsonObj.get("external_subscription_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_subscription_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_subscription_id").toString()));
-      }
-      // validate the required field `amount_currency`
-      Currency.validateJsonElement(jsonObj.get("amount_currency"));
-      if (!jsonObj.get("units").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `units` to be a primitive type in the JSON string but got `%s`", jsonObj.get("units").toString()));
-      }
-      // validate the required field `total_amount_currency`
-      Currency.validateJsonElement(jsonObj.get("total_amount_currency"));
-      if (!jsonObj.get("payment_status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `payment_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_status").toString()));
-      }
-      if ((jsonObj.get("event_transaction_id") != null && !jsonObj.get("event_transaction_id").isJsonNull()) && !jsonObj.get("event_transaction_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `event_transaction_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("event_transaction_id").toString()));
-      }
-      // validate the required field `item`
-      FeeObjectItem.validateJsonElement(jsonObj.get("item"));
-      if (jsonObj.get("applied_taxes") != null && !jsonObj.get("applied_taxes").isJsonNull()) {
-        JsonArray jsonArrayappliedTaxes = jsonObj.getAsJsonArray("applied_taxes");
-        if (jsonArrayappliedTaxes != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("applied_taxes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `applied_taxes` to be an array in the JSON string but got `%s`", jsonObj.get("applied_taxes").toString()));
-          }
-
-          // validate the optional field `applied_taxes` (array)
-          for (int i = 0; i < jsonArrayappliedTaxes.size(); i++) {
-            FeeAppliedTaxObject.validateJsonElement(jsonArrayappliedTaxes.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreditNoteItemObjectFee.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreditNoteItemObjectFee' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreditNoteItemObjectFee> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreditNoteItemObjectFee.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreditNoteItemObjectFee>() {
-           @Override
-           public void write(JsonWriter out, CreditNoteItemObjectFee value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreditNoteItemObjectFee read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CreditNoteItemObjectFee given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CreditNoteItemObjectFee
-  * @throws IOException if the JSON string is invalid with respect to CreditNoteItemObjectFee
-  */
-  public static CreditNoteItemObjectFee fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreditNoteItemObjectFee.class);
-  }
-
- /**
-  * Convert an instance of CreditNoteItemObjectFee to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

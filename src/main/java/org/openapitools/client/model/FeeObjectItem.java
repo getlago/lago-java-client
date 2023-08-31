@@ -15,48 +15,31 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Item attached to the fee
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  FeeObjectItem.JSON_PROPERTY_TYPE,
+  FeeObjectItem.JSON_PROPERTY_CODE,
+  FeeObjectItem.JSON_PROPERTY_NAME,
+  FeeObjectItem.JSON_PROPERTY_LAGO_ITEM_ID,
+  FeeObjectItem.JSON_PROPERTY_ITEM_TYPE
+})
+@JsonTypeName("FeeObject_item")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class FeeObjectItem {
   /**
    * The fee type. Possible values are &#x60;add-on&#x60;, &#x60;charge&#x60;, &#x60;credit&#x60; or &#x60;subscription&#x60;.
    */
-  @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
     CHARGE("charge"),
     
@@ -72,6 +55,7 @@ public class FeeObjectItem {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -81,6 +65,7 @@ public class FeeObjectItem {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static TypeEnum fromValue(String value) {
       for (TypeEnum b : TypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -89,41 +74,23 @@ public class FeeObjectItem {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
+  public static final String JSON_PROPERTY_TYPE = "type";
   private TypeEnum type;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_LAGO_ITEM_ID = "lago_item_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ITEM_ID)
+  public static final String JSON_PROPERTY_LAGO_ITEM_ID = "lago_item_id";
   private UUID lagoItemId;
 
   /**
    * The type of the fee item. Possible values are &#x60;AddOn&#x60;, &#x60;BillableMetric&#x60;, &#x60;WalletTransaction&#x60; or &#x60;Subscription&#x60;.
    */
-  @JsonAdapter(ItemTypeEnum.Adapter.class)
   public enum ItemTypeEnum {
     ADDON("AddOn"),
     
@@ -139,6 +106,7 @@ public class FeeObjectItem {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -148,6 +116,7 @@ public class FeeObjectItem {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static ItemTypeEnum fromValue(String value) {
       for (ItemTypeEnum b : ItemTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -156,23 +125,9 @@ public class FeeObjectItem {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<ItemTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ItemTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ItemTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ItemTypeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_ITEM_TYPE = "item_type";
-  @SerializedName(SERIALIZED_NAME_ITEM_TYPE)
+  public static final String JSON_PROPERTY_ITEM_TYPE = "item_type";
   private ItemTypeEnum itemType;
 
   public FeeObjectItem() {
@@ -189,11 +144,16 @@ public class FeeObjectItem {
    * @return type
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public TypeEnum getType() {
     return type;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(TypeEnum type) {
     this.type = type;
   }
@@ -210,11 +170,16 @@ public class FeeObjectItem {
    * @return code
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCode(String code) {
     this.code = code;
   }
@@ -231,11 +196,16 @@ public class FeeObjectItem {
    * @return name
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
@@ -252,11 +222,16 @@ public class FeeObjectItem {
    * @return lagoItemId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ITEM_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoItemId() {
     return lagoItemId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ITEM_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoItemId(UUID lagoItemId) {
     this.lagoItemId = lagoItemId;
   }
@@ -273,16 +248,19 @@ public class FeeObjectItem {
    * @return itemType
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ITEM_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ItemTypeEnum getItemType() {
     return itemType;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ITEM_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setItemType(ItemTypeEnum itemType) {
     this.itemType = itemType;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -329,120 +307,5 @@ public class FeeObjectItem {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("type");
-    openapiFields.add("code");
-    openapiFields.add("name");
-    openapiFields.add("lago_item_id");
-    openapiFields.add("item_type");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("type");
-    openapiRequiredFields.add("code");
-    openapiRequiredFields.add("name");
-    openapiRequiredFields.add("lago_item_id");
-    openapiRequiredFields.add("item_type");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to FeeObjectItem
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!FeeObjectItem.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in FeeObjectItem is not found in the empty JSON string", FeeObjectItem.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!FeeObjectItem.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FeeObjectItem` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : FeeObjectItem.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      if (!jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("lago_item_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_item_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_item_id").toString()));
-      }
-      if (!jsonObj.get("item_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `item_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("item_type").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!FeeObjectItem.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'FeeObjectItem' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<FeeObjectItem> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(FeeObjectItem.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<FeeObjectItem>() {
-           @Override
-           public void write(JsonWriter out, FeeObjectItem value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public FeeObjectItem read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of FeeObjectItem given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of FeeObjectItem
-  * @throws IOException if the JSON string is invalid with respect to FeeObjectItem
-  */
-  public static FeeObjectItem fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, FeeObjectItem.class);
-  }
-
- /**
-  * Convert an instance of FeeObjectItem to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

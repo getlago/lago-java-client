@@ -15,48 +15,26 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.WalletTransactionObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * WalletTransactions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  WalletTransactions.JSON_PROPERTY_WALLET_TRANSACTIONS
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class WalletTransactions {
-  public static final String SERIALIZED_NAME_WALLET_TRANSACTIONS = "wallet_transactions";
-  @SerializedName(SERIALIZED_NAME_WALLET_TRANSACTIONS)
+  public static final String JSON_PROPERTY_WALLET_TRANSACTIONS = "wallet_transactions";
   private List<WalletTransactionObject> walletTransactions = new ArrayList<>();
 
   public WalletTransactions() {
@@ -81,16 +59,19 @@ public class WalletTransactions {
    * @return walletTransactions
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_WALLET_TRANSACTIONS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<WalletTransactionObject> getWalletTransactions() {
     return walletTransactions;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_WALLET_TRANSACTIONS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setWalletTransactions(List<WalletTransactionObject> walletTransactions) {
     this.walletTransactions = walletTransactions;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -129,107 +110,5 @@ public class WalletTransactions {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("wallet_transactions");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("wallet_transactions");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to WalletTransactions
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!WalletTransactions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in WalletTransactions is not found in the empty JSON string", WalletTransactions.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!WalletTransactions.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `WalletTransactions` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : WalletTransactions.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the json data is an array
-      if (!jsonObj.get("wallet_transactions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `wallet_transactions` to be an array in the JSON string but got `%s`", jsonObj.get("wallet_transactions").toString()));
-      }
-
-      JsonArray jsonArraywalletTransactions = jsonObj.getAsJsonArray("wallet_transactions");
-      // validate the required field `wallet_transactions` (array)
-      for (int i = 0; i < jsonArraywalletTransactions.size(); i++) {
-        WalletTransactionObject.validateJsonElement(jsonArraywalletTransactions.get(i));
-      };
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!WalletTransactions.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'WalletTransactions' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<WalletTransactions> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(WalletTransactions.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<WalletTransactions>() {
-           @Override
-           public void write(JsonWriter out, WalletTransactions value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public WalletTransactions read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of WalletTransactions given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of WalletTransactions
-  * @throws IOException if the JSON string is invalid with respect to WalletTransactions
-  */
-  public static WalletTransactions fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, WalletTransactions.class);
-  }
-
- /**
-  * Convert an instance of WalletTransactions to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -15,62 +15,43 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * TaxBaseInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  TaxBaseInput.JSON_PROPERTY_NAME,
+  TaxBaseInput.JSON_PROPERTY_CODE,
+  TaxBaseInput.JSON_PROPERTY_RATE,
+  TaxBaseInput.JSON_PROPERTY_DESCRIPTION,
+  TaxBaseInput.JSON_PROPERTY_APPLIED_TO_ORGANIZATION
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class TaxBaseInput {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_CODE = "code";
-  @SerializedName(SERIALIZED_NAME_CODE)
+  public static final String JSON_PROPERTY_CODE = "code";
   private String code;
 
-  public static final String SERIALIZED_NAME_RATE = "rate";
-  @SerializedName(SERIALIZED_NAME_RATE)
+  public static final String JSON_PROPERTY_RATE = "rate";
   private String rate;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  private JsonNullable<String> description = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_APPLIED_TO_ORGANIZATION = "applied_to_organization";
-  @SerializedName(SERIALIZED_NAME_APPLIED_TO_ORGANIZATION)
+  public static final String JSON_PROPERTY_APPLIED_TO_ORGANIZATION = "applied_to_organization";
   private Boolean appliedToOrganization;
 
   public TaxBaseInput() {
@@ -87,11 +68,16 @@ public class TaxBaseInput {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getName() {
     return name;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -108,11 +94,16 @@ public class TaxBaseInput {
    * @return code
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getCode() {
     return code;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCode(String code) {
     this.code = code;
   }
@@ -129,19 +120,24 @@ public class TaxBaseInput {
    * @return rate
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getRate() {
     return rate;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_RATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRate(String rate) {
     this.rate = rate;
   }
 
 
   public TaxBaseInput description(String description) {
+    this.description = JsonNullable.<String>of(description);
     
-    this.description = description;
     return this;
   }
 
@@ -150,13 +146,26 @@ public class TaxBaseInput {
    * @return description
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getDescription() {
-    return description;
+        return description.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getDescription_JsonNullable() {
+    return description;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
+  public void setDescription_JsonNullable(JsonNullable<String> description) {
+    this.description = description;
+  }
 
   public void setDescription(String description) {
-    this.description = description;
+    this.description = JsonNullable.<String>of(description);
   }
 
 
@@ -171,16 +180,19 @@ public class TaxBaseInput {
    * @return appliedToOrganization
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_APPLIED_TO_ORGANIZATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getAppliedToOrganization() {
     return appliedToOrganization;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_APPLIED_TO_ORGANIZATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppliedToOrganization(Boolean appliedToOrganization) {
     this.appliedToOrganization = appliedToOrganization;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -194,7 +206,7 @@ public class TaxBaseInput {
     return Objects.equals(this.name, taxBaseInput.name) &&
         Objects.equals(this.code, taxBaseInput.code) &&
         Objects.equals(this.rate, taxBaseInput.rate) &&
-        Objects.equals(this.description, taxBaseInput.description) &&
+        equalsNullable(this.description, taxBaseInput.description) &&
         Objects.equals(this.appliedToOrganization, taxBaseInput.appliedToOrganization);
   }
 
@@ -204,7 +216,7 @@ public class TaxBaseInput {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, code, rate, description, appliedToOrganization);
+    return Objects.hash(name, code, rate, hashCodeNullable(description), appliedToOrganization);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -238,105 +250,5 @@ public class TaxBaseInput {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("name");
-    openapiFields.add("code");
-    openapiFields.add("rate");
-    openapiFields.add("description");
-    openapiFields.add("applied_to_organization");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to TaxBaseInput
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!TaxBaseInput.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in TaxBaseInput is not found in the empty JSON string", TaxBaseInput.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!TaxBaseInput.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TaxBaseInput` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if ((jsonObj.get("code") != null && !jsonObj.get("code").isJsonNull()) && !jsonObj.get("code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if ((jsonObj.get("rate") != null && !jsonObj.get("rate").isJsonNull()) && !jsonObj.get("rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rate").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!TaxBaseInput.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'TaxBaseInput' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<TaxBaseInput> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(TaxBaseInput.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<TaxBaseInput>() {
-           @Override
-           public void write(JsonWriter out, TaxBaseInput value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public TaxBaseInput read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of TaxBaseInput given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of TaxBaseInput
-  * @throws IOException if the JSON string is invalid with respect to TaxBaseInput
-  */
-  public static TaxBaseInput fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, TaxBaseInput.class);
-  }
-
- /**
-  * Convert an instance of TaxBaseInput to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

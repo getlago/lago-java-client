@@ -15,105 +15,88 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.client.model.Country;
 import org.openapitools.client.model.OrganizationBillingConfiguration;
 import org.openapitools.client.model.Timezone;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * OrganizationUpdateInputOrganization
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_WEBHOOK_URL,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_COUNTRY,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_ADDRESS_LINE1,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_ADDRESS_LINE2,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_STATE,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_ZIPCODE,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_EMAIL,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_CITY,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_LEGAL_NAME,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_LEGAL_NUMBER,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_NET_PAYMENT_TERM,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_TIMEZONE,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_EMAIL_SETTINGS,
+  OrganizationUpdateInputOrganization.JSON_PROPERTY_BILLING_CONFIGURATION
+})
+@JsonTypeName("OrganizationUpdateInput_organization")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class OrganizationUpdateInputOrganization {
-  public static final String SERIALIZED_NAME_WEBHOOK_URL = "webhook_url";
-  @SerializedName(SERIALIZED_NAME_WEBHOOK_URL)
-  private String webhookUrl;
+  public static final String JSON_PROPERTY_WEBHOOK_URL = "webhook_url";
+  private JsonNullable<String> webhookUrl = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_COUNTRY = "country";
-  @SerializedName(SERIALIZED_NAME_COUNTRY)
+  public static final String JSON_PROPERTY_COUNTRY = "country";
   private Country country;
 
-  public static final String SERIALIZED_NAME_ADDRESS_LINE1 = "address_line1";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE1)
-  private String addressLine1;
+  public static final String JSON_PROPERTY_ADDRESS_LINE1 = "address_line1";
+  private JsonNullable<String> addressLine1 = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_ADDRESS_LINE2 = "address_line2";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE2)
-  private String addressLine2;
+  public static final String JSON_PROPERTY_ADDRESS_LINE2 = "address_line2";
+  private JsonNullable<String> addressLine2 = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_STATE = "state";
-  @SerializedName(SERIALIZED_NAME_STATE)
-  private String state;
+  public static final String JSON_PROPERTY_STATE = "state";
+  private JsonNullable<String> state = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_ZIPCODE = "zipcode";
-  @SerializedName(SERIALIZED_NAME_ZIPCODE)
-  private String zipcode;
+  public static final String JSON_PROPERTY_ZIPCODE = "zipcode";
+  private JsonNullable<String> zipcode = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_EMAIL = "email";
-  @SerializedName(SERIALIZED_NAME_EMAIL)
-  private String email;
+  public static final String JSON_PROPERTY_EMAIL = "email";
+  private JsonNullable<String> email = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_CITY = "city";
-  @SerializedName(SERIALIZED_NAME_CITY)
-  private String city;
+  public static final String JSON_PROPERTY_CITY = "city";
+  private JsonNullable<String> city = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_LEGAL_NAME = "legal_name";
-  @SerializedName(SERIALIZED_NAME_LEGAL_NAME)
-  private String legalName;
+  public static final String JSON_PROPERTY_LEGAL_NAME = "legal_name";
+  private JsonNullable<String> legalName = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_LEGAL_NUMBER = "legal_number";
-  @SerializedName(SERIALIZED_NAME_LEGAL_NUMBER)
-  private String legalNumber;
+  public static final String JSON_PROPERTY_LEGAL_NUMBER = "legal_number";
+  private JsonNullable<String> legalNumber = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_NET_PAYMENT_TERM = "net_payment_term";
-  @SerializedName(SERIALIZED_NAME_NET_PAYMENT_TERM)
+  public static final String JSON_PROPERTY_NET_PAYMENT_TERM = "net_payment_term";
   private Integer netPaymentTerm;
 
-  public static final String SERIALIZED_NAME_TAX_IDENTIFICATION_NUMBER = "tax_identification_number";
-  @SerializedName(SERIALIZED_NAME_TAX_IDENTIFICATION_NUMBER)
-  private String taxIdentificationNumber;
+  public static final String JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER = "tax_identification_number";
+  private JsonNullable<String> taxIdentificationNumber = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_TIMEZONE = "timezone";
-  @SerializedName(SERIALIZED_NAME_TIMEZONE)
+  public static final String JSON_PROPERTY_TIMEZONE = "timezone";
   private Timezone timezone;
 
   /**
    * Gets or Sets emailSettings
    */
-  @JsonAdapter(EmailSettingsEnum.Adapter.class)
   public enum EmailSettingsEnum {
     INVOICE_FINALIZED("invoice.finalized"),
     
@@ -125,6 +108,7 @@ public class OrganizationUpdateInputOrganization {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -134,6 +118,7 @@ public class OrganizationUpdateInputOrganization {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static EmailSettingsEnum fromValue(String value) {
       for (EmailSettingsEnum b : EmailSettingsEnum.values()) {
         if (b.value.equals(value)) {
@@ -142,35 +127,20 @@ public class OrganizationUpdateInputOrganization {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<EmailSettingsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final EmailSettingsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public EmailSettingsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return EmailSettingsEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_EMAIL_SETTINGS = "email_settings";
-  @SerializedName(SERIALIZED_NAME_EMAIL_SETTINGS)
+  public static final String JSON_PROPERTY_EMAIL_SETTINGS = "email_settings";
   private List<EmailSettingsEnum> emailSettings;
 
-  public static final String SERIALIZED_NAME_BILLING_CONFIGURATION = "billing_configuration";
-  @SerializedName(SERIALIZED_NAME_BILLING_CONFIGURATION)
+  public static final String JSON_PROPERTY_BILLING_CONFIGURATION = "billing_configuration";
   private OrganizationBillingConfiguration billingConfiguration;
 
   public OrganizationUpdateInputOrganization() {
   }
 
   public OrganizationUpdateInputOrganization webhookUrl(String webhookUrl) {
+    this.webhookUrl = JsonNullable.<String>of(webhookUrl);
     
-    this.webhookUrl = webhookUrl;
     return this;
   }
 
@@ -179,13 +149,26 @@ public class OrganizationUpdateInputOrganization {
    * @return webhookUrl
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getWebhookUrl() {
-    return webhookUrl;
+        return webhookUrl.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_WEBHOOK_URL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getWebhookUrl_JsonNullable() {
+    return webhookUrl;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_WEBHOOK_URL)
+  public void setWebhookUrl_JsonNullable(JsonNullable<String> webhookUrl) {
+    this.webhookUrl = webhookUrl;
+  }
 
   public void setWebhookUrl(String webhookUrl) {
-    this.webhookUrl = webhookUrl;
+    this.webhookUrl = JsonNullable.<String>of(webhookUrl);
   }
 
 
@@ -200,19 +183,24 @@ public class OrganizationUpdateInputOrganization {
    * @return country
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Country getCountry() {
     return country;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCountry(Country country) {
     this.country = country;
   }
 
 
   public OrganizationUpdateInputOrganization addressLine1(String addressLine1) {
+    this.addressLine1 = JsonNullable.<String>of(addressLine1);
     
-    this.addressLine1 = addressLine1;
     return this;
   }
 
@@ -221,19 +209,32 @@ public class OrganizationUpdateInputOrganization {
    * @return addressLine1
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getAddressLine1() {
-    return addressLine1;
+        return addressLine1.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getAddressLine1_JsonNullable() {
+    return addressLine1;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  public void setAddressLine1_JsonNullable(JsonNullable<String> addressLine1) {
+    this.addressLine1 = addressLine1;
+  }
 
   public void setAddressLine1(String addressLine1) {
-    this.addressLine1 = addressLine1;
+    this.addressLine1 = JsonNullable.<String>of(addressLine1);
   }
 
 
   public OrganizationUpdateInputOrganization addressLine2(String addressLine2) {
+    this.addressLine2 = JsonNullable.<String>of(addressLine2);
     
-    this.addressLine2 = addressLine2;
     return this;
   }
 
@@ -242,19 +243,32 @@ public class OrganizationUpdateInputOrganization {
    * @return addressLine2
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getAddressLine2() {
-    return addressLine2;
+        return addressLine2.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getAddressLine2_JsonNullable() {
+    return addressLine2;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  public void setAddressLine2_JsonNullable(JsonNullable<String> addressLine2) {
+    this.addressLine2 = addressLine2;
+  }
 
   public void setAddressLine2(String addressLine2) {
-    this.addressLine2 = addressLine2;
+    this.addressLine2 = JsonNullable.<String>of(addressLine2);
   }
 
 
   public OrganizationUpdateInputOrganization state(String state) {
+    this.state = JsonNullable.<String>of(state);
     
-    this.state = state;
     return this;
   }
 
@@ -263,19 +277,32 @@ public class OrganizationUpdateInputOrganization {
    * @return state
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getState() {
-    return state;
+        return state.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getState_JsonNullable() {
+    return state;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_STATE)
+  public void setState_JsonNullable(JsonNullable<String> state) {
+    this.state = state;
+  }
 
   public void setState(String state) {
-    this.state = state;
+    this.state = JsonNullable.<String>of(state);
   }
 
 
   public OrganizationUpdateInputOrganization zipcode(String zipcode) {
+    this.zipcode = JsonNullable.<String>of(zipcode);
     
-    this.zipcode = zipcode;
     return this;
   }
 
@@ -284,19 +311,32 @@ public class OrganizationUpdateInputOrganization {
    * @return zipcode
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getZipcode() {
-    return zipcode;
+        return zipcode.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_ZIPCODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getZipcode_JsonNullable() {
+    return zipcode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ZIPCODE)
+  public void setZipcode_JsonNullable(JsonNullable<String> zipcode) {
+    this.zipcode = zipcode;
+  }
 
   public void setZipcode(String zipcode) {
-    this.zipcode = zipcode;
+    this.zipcode = JsonNullable.<String>of(zipcode);
   }
 
 
   public OrganizationUpdateInputOrganization email(String email) {
+    this.email = JsonNullable.<String>of(email);
     
-    this.email = email;
     return this;
   }
 
@@ -305,19 +345,32 @@ public class OrganizationUpdateInputOrganization {
    * @return email
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getEmail() {
-    return email;
+        return email.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_EMAIL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getEmail_JsonNullable() {
+    return email;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EMAIL)
+  public void setEmail_JsonNullable(JsonNullable<String> email) {
+    this.email = email;
+  }
 
   public void setEmail(String email) {
-    this.email = email;
+    this.email = JsonNullable.<String>of(email);
   }
 
 
   public OrganizationUpdateInputOrganization city(String city) {
+    this.city = JsonNullable.<String>of(city);
     
-    this.city = city;
     return this;
   }
 
@@ -326,19 +379,32 @@ public class OrganizationUpdateInputOrganization {
    * @return city
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getCity() {
-    return city;
+        return city.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getCity_JsonNullable() {
+    return city;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CITY)
+  public void setCity_JsonNullable(JsonNullable<String> city) {
+    this.city = city;
+  }
 
   public void setCity(String city) {
-    this.city = city;
+    this.city = JsonNullable.<String>of(city);
   }
 
 
   public OrganizationUpdateInputOrganization legalName(String legalName) {
+    this.legalName = JsonNullable.<String>of(legalName);
     
-    this.legalName = legalName;
     return this;
   }
 
@@ -347,19 +413,32 @@ public class OrganizationUpdateInputOrganization {
    * @return legalName
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getLegalName() {
-    return legalName;
+        return legalName.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LEGAL_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getLegalName_JsonNullable() {
+    return legalName;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LEGAL_NAME)
+  public void setLegalName_JsonNullable(JsonNullable<String> legalName) {
+    this.legalName = legalName;
+  }
 
   public void setLegalName(String legalName) {
-    this.legalName = legalName;
+    this.legalName = JsonNullable.<String>of(legalName);
   }
 
 
   public OrganizationUpdateInputOrganization legalNumber(String legalNumber) {
+    this.legalNumber = JsonNullable.<String>of(legalNumber);
     
-    this.legalNumber = legalNumber;
     return this;
   }
 
@@ -368,13 +447,26 @@ public class OrganizationUpdateInputOrganization {
    * @return legalNumber
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getLegalNumber() {
-    return legalNumber;
+        return legalNumber.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_LEGAL_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getLegalNumber_JsonNullable() {
+    return legalNumber;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LEGAL_NUMBER)
+  public void setLegalNumber_JsonNullable(JsonNullable<String> legalNumber) {
+    this.legalNumber = legalNumber;
+  }
 
   public void setLegalNumber(String legalNumber) {
-    this.legalNumber = legalNumber;
+    this.legalNumber = JsonNullable.<String>of(legalNumber);
   }
 
 
@@ -389,19 +481,24 @@ public class OrganizationUpdateInputOrganization {
    * @return netPaymentTerm
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getNetPaymentTerm() {
     return netPaymentTerm;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_NET_PAYMENT_TERM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNetPaymentTerm(Integer netPaymentTerm) {
     this.netPaymentTerm = netPaymentTerm;
   }
 
 
   public OrganizationUpdateInputOrganization taxIdentificationNumber(String taxIdentificationNumber) {
+    this.taxIdentificationNumber = JsonNullable.<String>of(taxIdentificationNumber);
     
-    this.taxIdentificationNumber = taxIdentificationNumber;
     return this;
   }
 
@@ -410,13 +507,26 @@ public class OrganizationUpdateInputOrganization {
    * @return taxIdentificationNumber
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getTaxIdentificationNumber() {
-    return taxIdentificationNumber;
+        return taxIdentificationNumber.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getTaxIdentificationNumber_JsonNullable() {
+    return taxIdentificationNumber;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TAX_IDENTIFICATION_NUMBER)
+  public void setTaxIdentificationNumber_JsonNullable(JsonNullable<String> taxIdentificationNumber) {
+    this.taxIdentificationNumber = taxIdentificationNumber;
+  }
 
   public void setTaxIdentificationNumber(String taxIdentificationNumber) {
-    this.taxIdentificationNumber = taxIdentificationNumber;
+    this.taxIdentificationNumber = JsonNullable.<String>of(taxIdentificationNumber);
   }
 
 
@@ -431,11 +541,16 @@ public class OrganizationUpdateInputOrganization {
    * @return timezone
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Timezone getTimezone() {
     return timezone;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_TIMEZONE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimezone(Timezone timezone) {
     this.timezone = timezone;
   }
@@ -460,11 +575,16 @@ public class OrganizationUpdateInputOrganization {
    * @return emailSettings
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_EMAIL_SETTINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<EmailSettingsEnum> getEmailSettings() {
     return emailSettings;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EMAIL_SETTINGS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEmailSettings(List<EmailSettingsEnum> emailSettings) {
     this.emailSettings = emailSettings;
   }
@@ -481,16 +601,19 @@ public class OrganizationUpdateInputOrganization {
    * @return billingConfiguration
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BILLING_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public OrganizationBillingConfiguration getBillingConfiguration() {
     return billingConfiguration;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLING_CONFIGURATION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBillingConfiguration(OrganizationBillingConfiguration billingConfiguration) {
     this.billingConfiguration = billingConfiguration;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -501,18 +624,18 @@ public class OrganizationUpdateInputOrganization {
       return false;
     }
     OrganizationUpdateInputOrganization organizationUpdateInputOrganization = (OrganizationUpdateInputOrganization) o;
-    return Objects.equals(this.webhookUrl, organizationUpdateInputOrganization.webhookUrl) &&
+    return equalsNullable(this.webhookUrl, organizationUpdateInputOrganization.webhookUrl) &&
         Objects.equals(this.country, organizationUpdateInputOrganization.country) &&
-        Objects.equals(this.addressLine1, organizationUpdateInputOrganization.addressLine1) &&
-        Objects.equals(this.addressLine2, organizationUpdateInputOrganization.addressLine2) &&
-        Objects.equals(this.state, organizationUpdateInputOrganization.state) &&
-        Objects.equals(this.zipcode, organizationUpdateInputOrganization.zipcode) &&
-        Objects.equals(this.email, organizationUpdateInputOrganization.email) &&
-        Objects.equals(this.city, organizationUpdateInputOrganization.city) &&
-        Objects.equals(this.legalName, organizationUpdateInputOrganization.legalName) &&
-        Objects.equals(this.legalNumber, organizationUpdateInputOrganization.legalNumber) &&
+        equalsNullable(this.addressLine1, organizationUpdateInputOrganization.addressLine1) &&
+        equalsNullable(this.addressLine2, organizationUpdateInputOrganization.addressLine2) &&
+        equalsNullable(this.state, organizationUpdateInputOrganization.state) &&
+        equalsNullable(this.zipcode, organizationUpdateInputOrganization.zipcode) &&
+        equalsNullable(this.email, organizationUpdateInputOrganization.email) &&
+        equalsNullable(this.city, organizationUpdateInputOrganization.city) &&
+        equalsNullable(this.legalName, organizationUpdateInputOrganization.legalName) &&
+        equalsNullable(this.legalNumber, organizationUpdateInputOrganization.legalNumber) &&
         Objects.equals(this.netPaymentTerm, organizationUpdateInputOrganization.netPaymentTerm) &&
-        Objects.equals(this.taxIdentificationNumber, organizationUpdateInputOrganization.taxIdentificationNumber) &&
+        equalsNullable(this.taxIdentificationNumber, organizationUpdateInputOrganization.taxIdentificationNumber) &&
         Objects.equals(this.timezone, organizationUpdateInputOrganization.timezone) &&
         Objects.equals(this.emailSettings, organizationUpdateInputOrganization.emailSettings) &&
         Objects.equals(this.billingConfiguration, organizationUpdateInputOrganization.billingConfiguration);
@@ -524,7 +647,7 @@ public class OrganizationUpdateInputOrganization {
 
   @Override
   public int hashCode() {
-    return Objects.hash(webhookUrl, country, addressLine1, addressLine2, state, zipcode, email, city, legalName, legalNumber, netPaymentTerm, taxIdentificationNumber, timezone, emailSettings, billingConfiguration);
+    return Objects.hash(hashCodeNullable(webhookUrl), country, hashCodeNullable(addressLine1), hashCodeNullable(addressLine2), hashCodeNullable(state), hashCodeNullable(zipcode), hashCodeNullable(email), hashCodeNullable(city), hashCodeNullable(legalName), hashCodeNullable(legalNumber), netPaymentTerm, hashCodeNullable(taxIdentificationNumber), timezone, emailSettings, billingConfiguration);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -568,149 +691,5 @@ public class OrganizationUpdateInputOrganization {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("webhook_url");
-    openapiFields.add("country");
-    openapiFields.add("address_line1");
-    openapiFields.add("address_line2");
-    openapiFields.add("state");
-    openapiFields.add("zipcode");
-    openapiFields.add("email");
-    openapiFields.add("city");
-    openapiFields.add("legal_name");
-    openapiFields.add("legal_number");
-    openapiFields.add("net_payment_term");
-    openapiFields.add("tax_identification_number");
-    openapiFields.add("timezone");
-    openapiFields.add("email_settings");
-    openapiFields.add("billing_configuration");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to OrganizationUpdateInputOrganization
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!OrganizationUpdateInputOrganization.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in OrganizationUpdateInputOrganization is not found in the empty JSON string", OrganizationUpdateInputOrganization.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!OrganizationUpdateInputOrganization.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `OrganizationUpdateInputOrganization` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("webhook_url") != null && !jsonObj.get("webhook_url").isJsonNull()) && !jsonObj.get("webhook_url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `webhook_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("webhook_url").toString()));
-      }
-      // validate the optional field `country`
-      if (jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) {
-        Country.validateJsonElement(jsonObj.get("country"));
-      }
-      if ((jsonObj.get("address_line1") != null && !jsonObj.get("address_line1").isJsonNull()) && !jsonObj.get("address_line1").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `address_line1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address_line1").toString()));
-      }
-      if ((jsonObj.get("address_line2") != null && !jsonObj.get("address_line2").isJsonNull()) && !jsonObj.get("address_line2").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `address_line2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address_line2").toString()));
-      }
-      if ((jsonObj.get("state") != null && !jsonObj.get("state").isJsonNull()) && !jsonObj.get("state").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `state` to be a primitive type in the JSON string but got `%s`", jsonObj.get("state").toString()));
-      }
-      if ((jsonObj.get("zipcode") != null && !jsonObj.get("zipcode").isJsonNull()) && !jsonObj.get("zipcode").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `zipcode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("zipcode").toString()));
-      }
-      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
-      }
-      if ((jsonObj.get("city") != null && !jsonObj.get("city").isJsonNull()) && !jsonObj.get("city").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `city` to be a primitive type in the JSON string but got `%s`", jsonObj.get("city").toString()));
-      }
-      if ((jsonObj.get("legal_name") != null && !jsonObj.get("legal_name").isJsonNull()) && !jsonObj.get("legal_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `legal_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legal_name").toString()));
-      }
-      if ((jsonObj.get("legal_number") != null && !jsonObj.get("legal_number").isJsonNull()) && !jsonObj.get("legal_number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `legal_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legal_number").toString()));
-      }
-      if ((jsonObj.get("tax_identification_number") != null && !jsonObj.get("tax_identification_number").isJsonNull()) && !jsonObj.get("tax_identification_number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tax_identification_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_identification_number").toString()));
-      }
-      // validate the optional field `timezone`
-      if (jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) {
-        Timezone.validateJsonElement(jsonObj.get("timezone"));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("email_settings") != null && !jsonObj.get("email_settings").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `email_settings` to be an array in the JSON string but got `%s`", jsonObj.get("email_settings").toString()));
-      }
-      // validate the optional field `billing_configuration`
-      if (jsonObj.get("billing_configuration") != null && !jsonObj.get("billing_configuration").isJsonNull()) {
-        OrganizationBillingConfiguration.validateJsonElement(jsonObj.get("billing_configuration"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!OrganizationUpdateInputOrganization.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'OrganizationUpdateInputOrganization' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<OrganizationUpdateInputOrganization> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(OrganizationUpdateInputOrganization.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<OrganizationUpdateInputOrganization>() {
-           @Override
-           public void write(JsonWriter out, OrganizationUpdateInputOrganization value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public OrganizationUpdateInputOrganization read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of OrganizationUpdateInputOrganization given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of OrganizationUpdateInputOrganization
-  * @throws IOException if the JSON string is invalid with respect to OrganizationUpdateInputOrganization
-  */
-  public static OrganizationUpdateInputOrganization fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, OrganizationUpdateInputOrganization.class);
-  }
-
- /**
-  * Convert an instance of OrganizationUpdateInputOrganization to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

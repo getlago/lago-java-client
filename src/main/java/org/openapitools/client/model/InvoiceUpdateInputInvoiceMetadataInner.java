@@ -15,54 +15,33 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * InvoiceUpdateInputInvoiceMetadataInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  InvoiceUpdateInputInvoiceMetadataInner.JSON_PROPERTY_ID,
+  InvoiceUpdateInputInvoiceMetadataInner.JSON_PROPERTY_KEY,
+  InvoiceUpdateInputInvoiceMetadataInner.JSON_PROPERTY_VALUE
+})
+@JsonTypeName("InvoiceUpdateInput_invoice_metadata_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class InvoiceUpdateInputInvoiceMetadataInner {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+  public static final String JSON_PROPERTY_ID = "id";
   private UUID id;
 
-  public static final String SERIALIZED_NAME_KEY = "key";
-  @SerializedName(SERIALIZED_NAME_KEY)
+  public static final String JSON_PROPERTY_KEY = "key";
   private String key;
 
-  public static final String SERIALIZED_NAME_VALUE = "value";
-  @SerializedName(SERIALIZED_NAME_VALUE)
+  public static final String JSON_PROPERTY_VALUE = "value";
   private String value;
 
   public InvoiceUpdateInputInvoiceMetadataInner() {
@@ -79,11 +58,16 @@ public class InvoiceUpdateInputInvoiceMetadataInner {
    * @return id
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public UUID getId() {
     return id;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setId(UUID id) {
     this.id = id;
   }
@@ -100,11 +84,16 @@ public class InvoiceUpdateInputInvoiceMetadataInner {
    * @return key
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_KEY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getKey() {
     return key;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_KEY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setKey(String key) {
     this.key = key;
   }
@@ -121,16 +110,19 @@ public class InvoiceUpdateInputInvoiceMetadataInner {
    * @return value
   **/
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getValue() {
     return value;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setValue(String value) {
     this.value = value;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -173,100 +165,5 @@ public class InvoiceUpdateInputInvoiceMetadataInner {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("id");
-    openapiFields.add("key");
-    openapiFields.add("value");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to InvoiceUpdateInputInvoiceMetadataInner
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!InvoiceUpdateInputInvoiceMetadataInner.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in InvoiceUpdateInputInvoiceMetadataInner is not found in the empty JSON string", InvoiceUpdateInputInvoiceMetadataInner.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!InvoiceUpdateInputInvoiceMetadataInner.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `InvoiceUpdateInputInvoiceMetadataInner` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
-      }
-      if ((jsonObj.get("key") != null && !jsonObj.get("key").isJsonNull()) && !jsonObj.get("key").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("key").toString()));
-      }
-      if ((jsonObj.get("value") != null && !jsonObj.get("value").isJsonNull()) && !jsonObj.get("value").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("value").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!InvoiceUpdateInputInvoiceMetadataInner.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'InvoiceUpdateInputInvoiceMetadataInner' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<InvoiceUpdateInputInvoiceMetadataInner> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(InvoiceUpdateInputInvoiceMetadataInner.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<InvoiceUpdateInputInvoiceMetadataInner>() {
-           @Override
-           public void write(JsonWriter out, InvoiceUpdateInputInvoiceMetadataInner value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public InvoiceUpdateInputInvoiceMetadataInner read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of InvoiceUpdateInputInvoiceMetadataInner given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of InvoiceUpdateInputInvoiceMetadataInner
-  * @throws IOException if the JSON string is invalid with respect to InvoiceUpdateInputInvoiceMetadataInner
-  */
-  public static InvoiceUpdateInputInvoiceMetadataInner fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, InvoiceUpdateInputInvoiceMetadataInner.class);
-  }
-
- /**
-  * Convert an instance of InvoiceUpdateInputInvoiceMetadataInner to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

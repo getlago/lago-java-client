@@ -15,76 +15,54 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.client.model.Currency;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * AppliedAddOnObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  AppliedAddOnObject.JSON_PROPERTY_LAGO_ID,
+  AppliedAddOnObject.JSON_PROPERTY_LAGO_ADD_ON_ID,
+  AppliedAddOnObject.JSON_PROPERTY_ADD_ON_CODE,
+  AppliedAddOnObject.JSON_PROPERTY_LAGO_CUSTOMER_ID,
+  AppliedAddOnObject.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  AppliedAddOnObject.JSON_PROPERTY_AMOUNT_CENTS,
+  AppliedAddOnObject.JSON_PROPERTY_AMOUNT_CURRENCY,
+  AppliedAddOnObject.JSON_PROPERTY_CREATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class AppliedAddOnObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_LAGO_ADD_ON_ID = "lago_add_on_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ADD_ON_ID)
+  public static final String JSON_PROPERTY_LAGO_ADD_ON_ID = "lago_add_on_id";
   private UUID lagoAddOnId;
 
-  public static final String SERIALIZED_NAME_ADD_ON_CODE = "add_on_code";
-  @SerializedName(SERIALIZED_NAME_ADD_ON_CODE)
+  public static final String JSON_PROPERTY_ADD_ON_CODE = "add_on_code";
   private String addOnCode;
 
-  public static final String SERIALIZED_NAME_LAGO_CUSTOMER_ID = "lago_customer_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_LAGO_CUSTOMER_ID = "lago_customer_id";
   private UUID lagoCustomerId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CENTS = "amount_cents";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CENTS)
+  public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;
 
-  public static final String SERIALIZED_NAME_AMOUNT_CURRENCY = "amount_currency";
-  @SerializedName(SERIALIZED_NAME_AMOUNT_CURRENCY)
+  public static final String JSON_PROPERTY_AMOUNT_CURRENCY = "amount_currency";
   private Currency amountCurrency;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   public AppliedAddOnObject() {
@@ -101,11 +79,16 @@ public class AppliedAddOnObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -122,11 +105,16 @@ public class AppliedAddOnObject {
    * @return lagoAddOnId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ADD_ON_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoAddOnId() {
     return lagoAddOnId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ADD_ON_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoAddOnId(UUID lagoAddOnId) {
     this.lagoAddOnId = lagoAddOnId;
   }
@@ -143,11 +131,16 @@ public class AppliedAddOnObject {
    * @return addOnCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddOnCode() {
     return addOnCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_ADD_ON_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddOnCode(String addOnCode) {
     this.addOnCode = addOnCode;
   }
@@ -164,11 +157,16 @@ public class AppliedAddOnObject {
    * @return lagoCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoCustomerId() {
     return lagoCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoCustomerId(UUID lagoCustomerId) {
     this.lagoCustomerId = lagoCustomerId;
   }
@@ -185,11 +183,16 @@ public class AppliedAddOnObject {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -206,11 +209,16 @@ public class AppliedAddOnObject {
    * @return amountCents
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getAmountCents() {
     return amountCents;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CENTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCents(Integer amountCents) {
     this.amountCents = amountCents;
   }
@@ -227,11 +235,16 @@ public class AppliedAddOnObject {
    * @return amountCurrency
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Currency getAmountCurrency() {
     return amountCurrency;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_AMOUNT_CURRENCY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmountCurrency(Currency amountCurrency) {
     this.amountCurrency = amountCurrency;
   }
@@ -248,16 +261,19 @@ public class AppliedAddOnObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -310,128 +326,5 @@ public class AppliedAddOnObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("lago_add_on_id");
-    openapiFields.add("add_on_code");
-    openapiFields.add("lago_customer_id");
-    openapiFields.add("external_customer_id");
-    openapiFields.add("amount_cents");
-    openapiFields.add("amount_currency");
-    openapiFields.add("created_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("lago_add_on_id");
-    openapiRequiredFields.add("add_on_code");
-    openapiRequiredFields.add("lago_customer_id");
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("amount_cents");
-    openapiRequiredFields.add("amount_currency");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AppliedAddOnObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AppliedAddOnObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AppliedAddOnObject is not found in the empty JSON string", AppliedAddOnObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!AppliedAddOnObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AppliedAddOnObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : AppliedAddOnObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("lago_add_on_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_add_on_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_add_on_id").toString()));
-      }
-      if (!jsonObj.get("add_on_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `add_on_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("add_on_code").toString()));
-      }
-      if (!jsonObj.get("lago_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_customer_id").toString()));
-      }
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      // validate the required field `amount_currency`
-      Currency.validateJsonElement(jsonObj.get("amount_currency"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AppliedAddOnObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AppliedAddOnObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AppliedAddOnObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AppliedAddOnObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AppliedAddOnObject>() {
-           @Override
-           public void write(JsonWriter out, AppliedAddOnObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AppliedAddOnObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of AppliedAddOnObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AppliedAddOnObject
-  * @throws IOException if the JSON string is invalid with respect to AppliedAddOnObject
-  */
-  public static AppliedAddOnObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AppliedAddOnObject.class);
-  }
-
- /**
-  * Convert an instance of AppliedAddOnObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -15,66 +15,58 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * SubscriptionObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  SubscriptionObject.JSON_PROPERTY_LAGO_ID,
+  SubscriptionObject.JSON_PROPERTY_EXTERNAL_ID,
+  SubscriptionObject.JSON_PROPERTY_LAGO_CUSTOMER_ID,
+  SubscriptionObject.JSON_PROPERTY_EXTERNAL_CUSTOMER_ID,
+  SubscriptionObject.JSON_PROPERTY_BILLING_TIME,
+  SubscriptionObject.JSON_PROPERTY_NAME,
+  SubscriptionObject.JSON_PROPERTY_PLAN_CODE,
+  SubscriptionObject.JSON_PROPERTY_STATUS,
+  SubscriptionObject.JSON_PROPERTY_CREATED_AT,
+  SubscriptionObject.JSON_PROPERTY_CANCELED_AT,
+  SubscriptionObject.JSON_PROPERTY_STARTED_AT,
+  SubscriptionObject.JSON_PROPERTY_SUBSCRIPTION_AT,
+  SubscriptionObject.JSON_PROPERTY_TERMINATED_AT,
+  SubscriptionObject.JSON_PROPERTY_PREVIOUS_PLAN_CODE,
+  SubscriptionObject.JSON_PROPERTY_NEXT_PLAN_CODE,
+  SubscriptionObject.JSON_PROPERTY_DOWNGRADE_PLAN_DATE
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class SubscriptionObject {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_ID = "external_id";
   private String externalId;
 
-  public static final String SERIALIZED_NAME_LAGO_CUSTOMER_ID = "lago_customer_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_LAGO_CUSTOMER_ID = "lago_customer_id";
   private UUID lagoCustomerId;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID = "external_customer_id";
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_CUSTOMER_ID)
+  public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;
 
   /**
    * The billing time for the subscription, which can be set as either &#x60;anniversary&#x60; or &#x60;calendar&#x60;. If not explicitly provided, it will default to &#x60;calendar&#x60;. The billing time determines the timing of recurring billing cycles for the subscription. By specifying &#x60;anniversary&#x60;, the billing cycle will be based on the specific date the subscription started (billed fully), while &#x60;calendar&#x60; sets the billing cycle at the first day of the week/month/year (billed with proration).
    */
-  @JsonAdapter(BillingTimeEnum.Adapter.class)
   public enum BillingTimeEnum {
     CALENDAR("calendar"),
     
@@ -86,6 +78,7 @@ public class SubscriptionObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -95,6 +88,7 @@ public class SubscriptionObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static BillingTimeEnum fromValue(String value) {
       for (BillingTimeEnum b : BillingTimeEnum.values()) {
         if (b.value.equals(value)) {
@@ -103,37 +97,20 @@ public class SubscriptionObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<BillingTimeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BillingTimeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BillingTimeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BillingTimeEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_BILLING_TIME = "billing_time";
-  @SerializedName(SERIALIZED_NAME_BILLING_TIME)
+  public static final String JSON_PROPERTY_BILLING_TIME = "billing_time";
   private BillingTimeEnum billingTime;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String JSON_PROPERTY_NAME = "name";
+  private JsonNullable<String> name = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_PLAN_CODE = "plan_code";
-  @SerializedName(SERIALIZED_NAME_PLAN_CODE)
+  public static final String JSON_PROPERTY_PLAN_CODE = "plan_code";
   private String planCode;
 
   /**
    * The status of the subscription, which can have the following values: - &#x60;pending&#x60;: a previous subscription has been downgraded, and the current one is awaiting automatic activation at the end of the billing period. - &#x60;active&#x60;: the subscription is currently active and applied to the customer. - &#x60;terminated&#x60;: the subscription is no longer active. - &#x60;canceled&#x60;: the subscription has been stopped before its activation. This can occur when two consecutive downgrades have been applied to a customer or when a subscription with a pending status is terminated.
    */
-  @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
     ACTIVE("active"),
     
@@ -149,6 +126,7 @@ public class SubscriptionObject {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -158,6 +136,7 @@ public class SubscriptionObject {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static StatusEnum fromValue(String value) {
       for (StatusEnum b : StatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -166,56 +145,34 @@ public class SubscriptionObject {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
   }
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   private StatusEnum status;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
-  public static final String SERIALIZED_NAME_CANCELED_AT = "canceled_at";
-  @SerializedName(SERIALIZED_NAME_CANCELED_AT)
-  private OffsetDateTime canceledAt;
+  public static final String JSON_PROPERTY_CANCELED_AT = "canceled_at";
+  private JsonNullable<OffsetDateTime> canceledAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_STARTED_AT = "started_at";
-  @SerializedName(SERIALIZED_NAME_STARTED_AT)
-  private OffsetDateTime startedAt;
+  public static final String JSON_PROPERTY_STARTED_AT = "started_at";
+  private JsonNullable<OffsetDateTime> startedAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_SUBSCRIPTION_AT = "subscription_at";
-  @SerializedName(SERIALIZED_NAME_SUBSCRIPTION_AT)
+  public static final String JSON_PROPERTY_SUBSCRIPTION_AT = "subscription_at";
   private OffsetDateTime subscriptionAt;
 
-  public static final String SERIALIZED_NAME_TERMINATED_AT = "terminated_at";
-  @SerializedName(SERIALIZED_NAME_TERMINATED_AT)
-  private OffsetDateTime terminatedAt;
+  public static final String JSON_PROPERTY_TERMINATED_AT = "terminated_at";
+  private JsonNullable<OffsetDateTime> terminatedAt = JsonNullable.<OffsetDateTime>undefined();
 
-  public static final String SERIALIZED_NAME_PREVIOUS_PLAN_CODE = "previous_plan_code";
-  @SerializedName(SERIALIZED_NAME_PREVIOUS_PLAN_CODE)
-  private String previousPlanCode;
+  public static final String JSON_PROPERTY_PREVIOUS_PLAN_CODE = "previous_plan_code";
+  private JsonNullable<String> previousPlanCode = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_NEXT_PLAN_CODE = "next_plan_code";
-  @SerializedName(SERIALIZED_NAME_NEXT_PLAN_CODE)
-  private String nextPlanCode;
+  public static final String JSON_PROPERTY_NEXT_PLAN_CODE = "next_plan_code";
+  private JsonNullable<String> nextPlanCode = JsonNullable.<String>undefined();
 
-  public static final String SERIALIZED_NAME_DOWNGRADE_PLAN_DATE = "downgrade_plan_date";
-  @SerializedName(SERIALIZED_NAME_DOWNGRADE_PLAN_DATE)
-  private OffsetDateTime downgradePlanDate;
+  public static final String JSON_PROPERTY_DOWNGRADE_PLAN_DATE = "downgrade_plan_date";
+  private JsonNullable<OffsetDateTime> downgradePlanDate = JsonNullable.<OffsetDateTime>undefined();
 
   public SubscriptionObject() {
   }
@@ -231,11 +188,16 @@ public class SubscriptionObject {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -252,11 +214,16 @@ public class SubscriptionObject {
    * @return externalId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalId() {
     return externalId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalId(String externalId) {
     this.externalId = externalId;
   }
@@ -273,11 +240,16 @@ public class SubscriptionObject {
    * @return lagoCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoCustomerId() {
     return lagoCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoCustomerId(UUID lagoCustomerId) {
     this.lagoCustomerId = lagoCustomerId;
   }
@@ -294,11 +266,16 @@ public class SubscriptionObject {
    * @return externalCustomerId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getExternalCustomerId() {
     return externalCustomerId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_CUSTOMER_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExternalCustomerId(String externalCustomerId) {
     this.externalCustomerId = externalCustomerId;
   }
@@ -315,19 +292,24 @@ public class SubscriptionObject {
    * @return billingTime
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_BILLING_TIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public BillingTimeEnum getBillingTime() {
     return billingTime;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_BILLING_TIME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setBillingTime(BillingTimeEnum billingTime) {
     this.billingTime = billingTime;
   }
 
 
   public SubscriptionObject name(String name) {
+    this.name = JsonNullable.<String>of(name);
     
-    this.name = name;
     return this;
   }
 
@@ -336,13 +318,26 @@ public class SubscriptionObject {
    * @return name
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getName() {
-    return name;
+        return name.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getName_JsonNullable() {
+    return name;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NAME)
+  public void setName_JsonNullable(JsonNullable<String> name) {
+    this.name = name;
+  }
 
   public void setName(String name) {
-    this.name = name;
+    this.name = JsonNullable.<String>of(name);
   }
 
 
@@ -357,11 +352,16 @@ public class SubscriptionObject {
    * @return planCode
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getPlanCode() {
     return planCode;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPlanCode(String planCode) {
     this.planCode = planCode;
   }
@@ -378,11 +378,16 @@ public class SubscriptionObject {
    * @return status
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public StatusEnum getStatus() {
     return status;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_STATUS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -399,19 +404,24 @@ public class SubscriptionObject {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
 
 
   public SubscriptionObject canceledAt(OffsetDateTime canceledAt) {
+    this.canceledAt = JsonNullable.<OffsetDateTime>of(canceledAt);
     
-    this.canceledAt = canceledAt;
     return this;
   }
 
@@ -420,19 +430,32 @@ public class SubscriptionObject {
    * @return canceledAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getCanceledAt() {
-    return canceledAt;
+        return canceledAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_CANCELED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getCanceledAt_JsonNullable() {
+    return canceledAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CANCELED_AT)
+  public void setCanceledAt_JsonNullable(JsonNullable<OffsetDateTime> canceledAt) {
+    this.canceledAt = canceledAt;
+  }
 
   public void setCanceledAt(OffsetDateTime canceledAt) {
-    this.canceledAt = canceledAt;
+    this.canceledAt = JsonNullable.<OffsetDateTime>of(canceledAt);
   }
 
 
   public SubscriptionObject startedAt(OffsetDateTime startedAt) {
+    this.startedAt = JsonNullable.<OffsetDateTime>of(startedAt);
     
-    this.startedAt = startedAt;
     return this;
   }
 
@@ -441,13 +464,26 @@ public class SubscriptionObject {
    * @return startedAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getStartedAt() {
-    return startedAt;
+        return startedAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_STARTED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getStartedAt_JsonNullable() {
+    return startedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_STARTED_AT)
+  public void setStartedAt_JsonNullable(JsonNullable<OffsetDateTime> startedAt) {
+    this.startedAt = startedAt;
+  }
 
   public void setStartedAt(OffsetDateTime startedAt) {
-    this.startedAt = startedAt;
+    this.startedAt = JsonNullable.<OffsetDateTime>of(startedAt);
   }
 
 
@@ -462,19 +498,24 @@ public class SubscriptionObject {
    * @return subscriptionAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTION_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getSubscriptionAt() {
     return subscriptionAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_SUBSCRIPTION_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSubscriptionAt(OffsetDateTime subscriptionAt) {
     this.subscriptionAt = subscriptionAt;
   }
 
 
   public SubscriptionObject terminatedAt(OffsetDateTime terminatedAt) {
+    this.terminatedAt = JsonNullable.<OffsetDateTime>of(terminatedAt);
     
-    this.terminatedAt = terminatedAt;
     return this;
   }
 
@@ -483,19 +524,32 @@ public class SubscriptionObject {
    * @return terminatedAt
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getTerminatedAt() {
-    return terminatedAt;
+        return terminatedAt.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_TERMINATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<OffsetDateTime> getTerminatedAt_JsonNullable() {
+    return terminatedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TERMINATED_AT)
+  public void setTerminatedAt_JsonNullable(JsonNullable<OffsetDateTime> terminatedAt) {
+    this.terminatedAt = terminatedAt;
+  }
 
   public void setTerminatedAt(OffsetDateTime terminatedAt) {
-    this.terminatedAt = terminatedAt;
+    this.terminatedAt = JsonNullable.<OffsetDateTime>of(terminatedAt);
   }
 
 
   public SubscriptionObject previousPlanCode(String previousPlanCode) {
+    this.previousPlanCode = JsonNullable.<String>of(previousPlanCode);
     
-    this.previousPlanCode = previousPlanCode;
     return this;
   }
 
@@ -504,19 +558,32 @@ public class SubscriptionObject {
    * @return previousPlanCode
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getPreviousPlanCode() {
-    return previousPlanCode;
+        return previousPlanCode.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getPreviousPlanCode_JsonNullable() {
+    return previousPlanCode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PREVIOUS_PLAN_CODE)
+  public void setPreviousPlanCode_JsonNullable(JsonNullable<String> previousPlanCode) {
+    this.previousPlanCode = previousPlanCode;
+  }
 
   public void setPreviousPlanCode(String previousPlanCode) {
-    this.previousPlanCode = previousPlanCode;
+    this.previousPlanCode = JsonNullable.<String>of(previousPlanCode);
   }
 
 
   public SubscriptionObject nextPlanCode(String nextPlanCode) {
+    this.nextPlanCode = JsonNullable.<String>of(nextPlanCode);
     
-    this.nextPlanCode = nextPlanCode;
     return this;
   }
 
@@ -525,19 +592,32 @@ public class SubscriptionObject {
    * @return nextPlanCode
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public String getNextPlanCode() {
-    return nextPlanCode;
+        return nextPlanCode.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_NEXT_PLAN_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<String> getNextPlanCode_JsonNullable() {
+    return nextPlanCode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NEXT_PLAN_CODE)
+  public void setNextPlanCode_JsonNullable(JsonNullable<String> nextPlanCode) {
+    this.nextPlanCode = nextPlanCode;
+  }
 
   public void setNextPlanCode(String nextPlanCode) {
-    this.nextPlanCode = nextPlanCode;
+    this.nextPlanCode = JsonNullable.<String>of(nextPlanCode);
   }
 
 
   public SubscriptionObject downgradePlanDate(OffsetDateTime downgradePlanDate) {
+    this.downgradePlanDate = JsonNullable.<OffsetDateTime>of(downgradePlanDate);
     
-    this.downgradePlanDate = downgradePlanDate;
     return this;
   }
 
@@ -546,16 +626,27 @@ public class SubscriptionObject {
    * @return downgradePlanDate
   **/
   @javax.annotation.Nullable
+  @JsonIgnore
+
   public OffsetDateTime getDowngradePlanDate() {
-    return downgradePlanDate;
+        return downgradePlanDate.orElse(null);
   }
 
+  @JsonProperty(JSON_PROPERTY_DOWNGRADE_PLAN_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public void setDowngradePlanDate(OffsetDateTime downgradePlanDate) {
+  public JsonNullable<OffsetDateTime> getDowngradePlanDate_JsonNullable() {
+    return downgradePlanDate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DOWNGRADE_PLAN_DATE)
+  public void setDowngradePlanDate_JsonNullable(JsonNullable<OffsetDateTime> downgradePlanDate) {
     this.downgradePlanDate = downgradePlanDate;
   }
 
-
+  public void setDowngradePlanDate(OffsetDateTime downgradePlanDate) {
+    this.downgradePlanDate = JsonNullable.<OffsetDateTime>of(downgradePlanDate);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -571,17 +662,17 @@ public class SubscriptionObject {
         Objects.equals(this.lagoCustomerId, subscriptionObject.lagoCustomerId) &&
         Objects.equals(this.externalCustomerId, subscriptionObject.externalCustomerId) &&
         Objects.equals(this.billingTime, subscriptionObject.billingTime) &&
-        Objects.equals(this.name, subscriptionObject.name) &&
+        equalsNullable(this.name, subscriptionObject.name) &&
         Objects.equals(this.planCode, subscriptionObject.planCode) &&
         Objects.equals(this.status, subscriptionObject.status) &&
         Objects.equals(this.createdAt, subscriptionObject.createdAt) &&
-        Objects.equals(this.canceledAt, subscriptionObject.canceledAt) &&
-        Objects.equals(this.startedAt, subscriptionObject.startedAt) &&
+        equalsNullable(this.canceledAt, subscriptionObject.canceledAt) &&
+        equalsNullable(this.startedAt, subscriptionObject.startedAt) &&
         Objects.equals(this.subscriptionAt, subscriptionObject.subscriptionAt) &&
-        Objects.equals(this.terminatedAt, subscriptionObject.terminatedAt) &&
-        Objects.equals(this.previousPlanCode, subscriptionObject.previousPlanCode) &&
-        Objects.equals(this.nextPlanCode, subscriptionObject.nextPlanCode) &&
-        Objects.equals(this.downgradePlanDate, subscriptionObject.downgradePlanDate);
+        equalsNullable(this.terminatedAt, subscriptionObject.terminatedAt) &&
+        equalsNullable(this.previousPlanCode, subscriptionObject.previousPlanCode) &&
+        equalsNullable(this.nextPlanCode, subscriptionObject.nextPlanCode) &&
+        equalsNullable(this.downgradePlanDate, subscriptionObject.downgradePlanDate);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -590,7 +681,7 @@ public class SubscriptionObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lagoId, externalId, lagoCustomerId, externalCustomerId, billingTime, name, planCode, status, createdAt, canceledAt, startedAt, subscriptionAt, terminatedAt, previousPlanCode, nextPlanCode, downgradePlanDate);
+    return Objects.hash(lagoId, externalId, lagoCustomerId, externalCustomerId, billingTime, hashCodeNullable(name), planCode, status, createdAt, hashCodeNullable(canceledAt), hashCodeNullable(startedAt), subscriptionAt, hashCodeNullable(terminatedAt), hashCodeNullable(previousPlanCode), hashCodeNullable(nextPlanCode), hashCodeNullable(downgradePlanDate));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -635,150 +726,5 @@ public class SubscriptionObject {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("external_id");
-    openapiFields.add("lago_customer_id");
-    openapiFields.add("external_customer_id");
-    openapiFields.add("billing_time");
-    openapiFields.add("name");
-    openapiFields.add("plan_code");
-    openapiFields.add("status");
-    openapiFields.add("created_at");
-    openapiFields.add("canceled_at");
-    openapiFields.add("started_at");
-    openapiFields.add("subscription_at");
-    openapiFields.add("terminated_at");
-    openapiFields.add("previous_plan_code");
-    openapiFields.add("next_plan_code");
-    openapiFields.add("downgrade_plan_date");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("external_id");
-    openapiRequiredFields.add("lago_customer_id");
-    openapiRequiredFields.add("external_customer_id");
-    openapiRequiredFields.add("billing_time");
-    openapiRequiredFields.add("plan_code");
-    openapiRequiredFields.add("status");
-    openapiRequiredFields.add("created_at");
-    openapiRequiredFields.add("subscription_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to SubscriptionObject
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!SubscriptionObject.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in SubscriptionObject is not found in the empty JSON string", SubscriptionObject.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!SubscriptionObject.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SubscriptionObject` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SubscriptionObject.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("external_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
-      }
-      if (!jsonObj.get("lago_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_customer_id").toString()));
-      }
-      if (!jsonObj.get("external_customer_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `external_customer_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_customer_id").toString()));
-      }
-      if (!jsonObj.get("billing_time").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `billing_time` to be a primitive type in the JSON string but got `%s`", jsonObj.get("billing_time").toString()));
-      }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if (!jsonObj.get("plan_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `plan_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("plan_code").toString()));
-      }
-      if (!jsonObj.get("status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      if ((jsonObj.get("previous_plan_code") != null && !jsonObj.get("previous_plan_code").isJsonNull()) && !jsonObj.get("previous_plan_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `previous_plan_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("previous_plan_code").toString()));
-      }
-      if ((jsonObj.get("next_plan_code") != null && !jsonObj.get("next_plan_code").isJsonNull()) && !jsonObj.get("next_plan_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `next_plan_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("next_plan_code").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SubscriptionObject.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SubscriptionObject' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SubscriptionObject> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SubscriptionObject.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<SubscriptionObject>() {
-           @Override
-           public void write(JsonWriter out, SubscriptionObject value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public SubscriptionObject read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of SubscriptionObject given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SubscriptionObject
-  * @throws IOException if the JSON string is invalid with respect to SubscriptionObject
-  */
-  public static SubscriptionObject fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SubscriptionObject.class);
-  }
-
- /**
-  * Convert an instance of SubscriptionObject to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

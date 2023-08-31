@@ -15,63 +15,41 @@ package org.openapitools.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.openapitools.client.JSON;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Set of key-value pairs that you can attach to a customer. This can be useful for storing additional information about the customer in a structured format
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T09:24:39.843670Z[Etc/UTC]")
+@JsonPropertyOrder({
+  CustomerMetadata.JSON_PROPERTY_LAGO_ID,
+  CustomerMetadata.JSON_PROPERTY_KEY,
+  CustomerMetadata.JSON_PROPERTY_VALUE,
+  CustomerMetadata.JSON_PROPERTY_DISPLAY_IN_INVOICE,
+  CustomerMetadata.JSON_PROPERTY_CREATED_AT
+})
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
 public class CustomerMetadata {
-  public static final String SERIALIZED_NAME_LAGO_ID = "lago_id";
-  @SerializedName(SERIALIZED_NAME_LAGO_ID)
+  public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;
 
-  public static final String SERIALIZED_NAME_KEY = "key";
-  @SerializedName(SERIALIZED_NAME_KEY)
+  public static final String JSON_PROPERTY_KEY = "key";
   private String key;
 
-  public static final String SERIALIZED_NAME_VALUE = "value";
-  @SerializedName(SERIALIZED_NAME_VALUE)
+  public static final String JSON_PROPERTY_VALUE = "value";
   private String value;
 
-  public static final String SERIALIZED_NAME_DISPLAY_IN_INVOICE = "display_in_invoice";
-  @SerializedName(SERIALIZED_NAME_DISPLAY_IN_INVOICE)
+  public static final String JSON_PROPERTY_DISPLAY_IN_INVOICE = "display_in_invoice";
   private Boolean displayInInvoice;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
 
   public CustomerMetadata() {
@@ -88,11 +66,16 @@ public class CustomerMetadata {
    * @return lagoId
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public UUID getLagoId() {
     return lagoId;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_LAGO_ID)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setLagoId(UUID lagoId) {
     this.lagoId = lagoId;
   }
@@ -109,11 +92,16 @@ public class CustomerMetadata {
    * @return key
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_KEY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getKey() {
     return key;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_KEY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setKey(String key) {
     this.key = key;
   }
@@ -130,11 +118,16 @@ public class CustomerMetadata {
    * @return value
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getValue() {
     return value;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_VALUE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setValue(String value) {
     this.value = value;
   }
@@ -151,11 +144,16 @@ public class CustomerMetadata {
    * @return displayInInvoice
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_DISPLAY_IN_INVOICE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Boolean getDisplayInInvoice() {
     return displayInInvoice;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_DISPLAY_IN_INVOICE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setDisplayInInvoice(Boolean displayInInvoice) {
     this.displayInInvoice = displayInInvoice;
   }
@@ -172,16 +170,19 @@ public class CustomerMetadata {
    * @return createdAt
   **/
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
 
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -228,114 +229,5 @@ public class CustomerMetadata {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("lago_id");
-    openapiFields.add("key");
-    openapiFields.add("value");
-    openapiFields.add("display_in_invoice");
-    openapiFields.add("created_at");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("lago_id");
-    openapiRequiredFields.add("key");
-    openapiRequiredFields.add("value");
-    openapiRequiredFields.add("display_in_invoice");
-    openapiRequiredFields.add("created_at");
-  }
-
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to CustomerMetadata
-  */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CustomerMetadata.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomerMetadata is not found in the empty JSON string", CustomerMetadata.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!CustomerMetadata.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CustomerMetadata` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CustomerMetadata.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("lago_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `lago_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lago_id").toString()));
-      }
-      if (!jsonObj.get("key").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("key").toString()));
-      }
-      if (!jsonObj.get("value").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("value").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CustomerMetadata.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CustomerMetadata' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CustomerMetadata> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CustomerMetadata.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CustomerMetadata>() {
-           @Override
-           public void write(JsonWriter out, CustomerMetadata value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CustomerMetadata read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
- /**
-  * Create an instance of CustomerMetadata given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CustomerMetadata
-  * @throws IOException if the JSON string is invalid with respect to CustomerMetadata
-  */
-  public static CustomerMetadata fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CustomerMetadata.class);
-  }
-
- /**
-  * Convert an instance of CustomerMetadata to an JSON string
-  *
-  * @return JSON string
-  */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

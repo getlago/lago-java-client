@@ -14,8 +14,9 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | [**updateInvoice**](InvoicesApi.md#updateInvoice) | **PUT** /invoices/{lago_id} | Update an invoice |
 
 
-<a id="createInvoice"></a>
-# **createInvoice**
+
+## createInvoice
+
 > Invoice createInvoice(invoiceOneOffCreateInput)
 
 Create a one-off invoice
@@ -23,41 +24,43 @@ Create a one-off invoice
 This endpoint is used for issuing a one-off invoice.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    InvoiceOneOffCreateInput invoiceOneOffCreateInput = new InvoiceOneOffCreateInput(); // InvoiceOneOffCreateInput | Invoice payload
-    try {
-      Invoice result = apiInstance.createInvoice(invoiceOneOffCreateInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#createInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        InvoiceOneOffCreateInput invoiceOneOffCreateInput = new InvoiceOneOffCreateInput(); // InvoiceOneOffCreateInput | Invoice payload
+        try {
+            Invoice result = apiInstance.createInvoice(invoiceOneOffCreateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#createInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -73,8 +76,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -84,8 +88,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
 
-<a id="downloadInvoice"></a>
-# **downloadInvoice**
+
+## downloadInvoice
+
 > Invoice downloadInvoice(lagoId)
 
 Download an invoice PDF
@@ -93,41 +98,43 @@ Download an invoice PDF
 This endpoint is used for downloading a specific invoice PDF document.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    try {
-      Invoice result = apiInstance.downloadInvoice(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#downloadInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            Invoice result = apiInstance.downloadInvoice(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#downloadInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -143,8 +150,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -153,8 +161,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="finalizeInvoice"></a>
-# **finalizeInvoice**
+
+## finalizeInvoice
+
 > Invoice finalizeInvoice(lagoId)
 
 Finalize a draft invoice
@@ -162,41 +171,43 @@ Finalize a draft invoice
 This endpoint is used for finalizing a draft invoice.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    try {
-      Invoice result = apiInstance.finalizeInvoice(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#finalizeInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            Invoice result = apiInstance.finalizeInvoice(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#finalizeInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -212,8 +223,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -222,8 +234,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="findAllInvoices"></a>
-# **findAllInvoices**
+
+## findAllInvoices
+
 > InvoicesPaginated findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status, paymentStatus)
 
 List all invoices
@@ -231,47 +244,49 @@ List all invoices
 This endpoint is used for retrievign all invoices.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    Integer page = 1; // Integer | Page number.
-    Integer perPage = 20; // Integer | Number of records per page.
-    String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | Unique identifier assigned to the customer in your application.
-    LocalDate issuingDateFrom = LocalDate.parse("Fri Jul 08 00:00:00 UTC 2022"); // LocalDate | Filter invoices starting from a specific date.
-    LocalDate issuingDateTo = LocalDate.parse("Tue Aug 09 00:00:00 UTC 2022"); // LocalDate | Filter invoices up to a specific date.
-    String status = "draft"; // String | Filter invoices by status. Possible values are `draft` or `finalized`.
-    String paymentStatus = "pending"; // String | Filter invoices by payment status. Possible values are `pending`, `failed` or `succeeded`.
-    try {
-      InvoicesPaginated result = apiInstance.findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status, paymentStatus);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#findAllInvoices");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | Unique identifier assigned to the customer in your application.
+        LocalDate issuingDateFrom = LocalDate.parse("Fri Jul 08 00:00:00 UTC 2022"); // LocalDate | Filter invoices starting from a specific date.
+        LocalDate issuingDateTo = LocalDate.parse("Tue Aug 09 00:00:00 UTC 2022"); // LocalDate | Filter invoices up to a specific date.
+        String status = "draft"; // String | Filter invoices by status. Possible values are `draft` or `finalized`.
+        String paymentStatus = "pending"; // String | Filter invoices by payment status. Possible values are `pending`, `failed` or `succeeded`.
+        try {
+            InvoicesPaginated result = apiInstance.findAllInvoices(page, perPage, externalCustomerId, issuingDateFrom, issuingDateTo, status, paymentStatus);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#findAllInvoices");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -293,8 +308,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -302,8 +318,9 @@ public class Example {
 | **200** | Invoices |  -  |
 | **401** | Unauthorized error |  -  |
 
-<a id="findInvoice"></a>
-# **findInvoice**
+
+## findInvoice
+
 > Invoice findInvoice(lagoId)
 
 Retrieve an invoice
@@ -311,41 +328,43 @@ Retrieve an invoice
 This endpoint is used for retrieving a specific invoice that has been issued.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    try {
-      Invoice result = apiInstance.findInvoice(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#findInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            Invoice result = apiInstance.findInvoice(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#findInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -361,8 +380,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -371,8 +391,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="refreshInvoice"></a>
-# **refreshInvoice**
+
+## refreshInvoice
+
 > Invoice refreshInvoice(lagoId)
 
 Refresh a draft invoice
@@ -380,41 +401,43 @@ Refresh a draft invoice
 This endpoint is used for refreshing a draft invoice.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    try {
-      Invoice result = apiInstance.refreshInvoice(lagoId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#refreshInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            Invoice result = apiInstance.refreshInvoice(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#refreshInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -430,8 +453,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -440,8 +464,9 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 
-<a id="retryPayment"></a>
-# **retryPayment**
+
+## retryPayment
+
 > retryPayment(lagoId)
 
 Retry an invoice payment
@@ -449,40 +474,42 @@ Retry an invoice payment
 This endpoint resends an invoice for collection and retry a payment.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    try {
-      apiInstance.retryPayment(lagoId);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#retryPayment");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            apiInstance.retryPayment(lagoId);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#retryPayment");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -498,8 +525,9 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -509,8 +537,9 @@ null (empty response body)
 | **404** | Not Found error |  -  |
 | **405** | Not Allowed error |  -  |
 
-<a id="updateInvoice"></a>
-# **updateInvoice**
+
+## updateInvoice
+
 > Invoice updateInvoice(lagoId, invoiceUpdateInput)
 
 Update an invoice
@@ -518,42 +547,44 @@ Update an invoice
 This endpoint is used for updating an existing invoice.
 
 ### Example
+
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.InvoicesApi;
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
 
 public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.getlago.com/api/v1");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
 
-    InvoicesApi apiInstance = new InvoicesApi(defaultClient);
-    UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
-    InvoiceUpdateInput invoiceUpdateInput = new InvoiceUpdateInput(); // InvoiceUpdateInput | Update an existing invoice
-    try {
-      Invoice result = apiInstance.updateInvoice(lagoId, invoiceUpdateInput);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling InvoicesApi#updateInvoice");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        InvoiceUpdateInput invoiceUpdateInput = new InvoiceUpdateInput(); // InvoiceUpdateInput | Update an existing invoice
+        try {
+            Invoice result = apiInstance.updateInvoice(lagoId, invoiceUpdateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#updateInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -570,8 +601,9 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
