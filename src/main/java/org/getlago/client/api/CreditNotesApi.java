@@ -9,6 +9,8 @@ import org.openapitools.client.model.ApiErrorUnauthorized;
 import org.openapitools.client.model.ApiErrorUnprocessableEntity;
 import org.openapitools.client.model.CreditNote;
 import org.openapitools.client.model.CreditNoteCreateInput;
+import org.openapitools.client.model.CreditNoteEstimateInput;
+import org.openapitools.client.model.CreditNoteEstimated;
 import org.openapitools.client.model.CreditNoteUpdateInput;
 import org.openapitools.client.model.CreditNotes;
 import java.util.UUID;
@@ -34,7 +36,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CreditNotesApi {
     private ApiClient apiClient;
 
@@ -222,6 +224,88 @@ public class CreditNotesApi {
      */
     public ResponseSpec downloadCreditNoteWithResponseSpec(UUID lagoId) throws WebClientResponseException {
         return downloadCreditNoteRequestCreation(lagoId);
+    }
+    /**
+     * Estimate amounts for a new credit note
+     * This endpoint allows you to retrieve amounts for a new credit note creation.
+     * <p><b>200</b> - Credit note amounts
+     * <p><b>400</b> - Bad Request error
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param creditNoteEstimateInput Credit note estimate payload
+     * @return CreditNoteEstimated
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec estimateCreditNoteRequestCreation(CreditNoteEstimateInput creditNoteEstimateInput) throws WebClientResponseException {
+        Object postBody = creditNoteEstimateInput;
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { 
+            "application/json"
+        };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+
+        ParameterizedTypeReference<CreditNoteEstimated> localVarReturnType = new ParameterizedTypeReference<CreditNoteEstimated>() {};
+        return apiClient.invokeAPI("/credit_notes/estimate", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Estimate amounts for a new credit note
+     * This endpoint allows you to retrieve amounts for a new credit note creation.
+     * <p><b>200</b> - Credit note amounts
+     * <p><b>400</b> - Bad Request error
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param creditNoteEstimateInput Credit note estimate payload
+     * @return CreditNoteEstimated
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<CreditNoteEstimated> estimateCreditNote(CreditNoteEstimateInput creditNoteEstimateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<CreditNoteEstimated> localVarReturnType = new ParameterizedTypeReference<CreditNoteEstimated>() {};
+        return estimateCreditNoteRequestCreation(creditNoteEstimateInput).bodyToMono(localVarReturnType);
+    }
+
+    /**
+     * Estimate amounts for a new credit note
+     * This endpoint allows you to retrieve amounts for a new credit note creation.
+     * <p><b>200</b> - Credit note amounts
+     * <p><b>400</b> - Bad Request error
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param creditNoteEstimateInput Credit note estimate payload
+     * @return ResponseEntity&lt;CreditNoteEstimated&gt;
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ResponseEntity<CreditNoteEstimated>> estimateCreditNoteWithHttpInfo(CreditNoteEstimateInput creditNoteEstimateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<CreditNoteEstimated> localVarReturnType = new ParameterizedTypeReference<CreditNoteEstimated>() {};
+        return estimateCreditNoteRequestCreation(creditNoteEstimateInput).toEntity(localVarReturnType);
+    }
+
+    /**
+     * Estimate amounts for a new credit note
+     * This endpoint allows you to retrieve amounts for a new credit note creation.
+     * <p><b>200</b> - Credit note amounts
+     * <p><b>400</b> - Bad Request error
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param creditNoteEstimateInput Credit note estimate payload
+     * @return ResponseSpec
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public ResponseSpec estimateCreditNoteWithResponseSpec(CreditNoteEstimateInput creditNoteEstimateInput) throws WebClientResponseException {
+        return estimateCreditNoteRequestCreation(creditNoteEstimateInput);
     }
     /**
      * List all credit notes

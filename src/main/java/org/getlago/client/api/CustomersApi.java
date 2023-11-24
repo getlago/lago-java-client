@@ -10,8 +10,10 @@ import org.openapitools.client.model.ApiErrorUnprocessableEntity;
 import org.openapitools.client.model.AppliedCoupon;
 import org.openapitools.client.model.Customer;
 import org.openapitools.client.model.CustomerCreateInput;
+import org.openapitools.client.model.CustomerPastUsage;
 import org.openapitools.client.model.CustomerUsage;
 import org.openapitools.client.model.CustomersPaginated;
+import org.openapitools.client.model.GenerateCustomerCheckoutURL200Response;
 import org.openapitools.client.model.GetCustomerPortalUrl200Response;
 import java.util.UUID;
 
@@ -36,7 +38,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CustomersApi {
     private ApiClient apiClient;
 
@@ -317,6 +319,122 @@ public class CustomersApi {
         return destroyCustomerRequestCreation(externalId);
     }
     /**
+     * Retrieve customer past usage
+     * This endpoint enables the retrieval of the usage-based billing data for a customer within past periods.
+     * <p><b>200</b> - Customer past usage
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @param externalSubscriptionId The unique identifier of the subscription within your application.
+     * @param page Page number.
+     * @param perPage Number of records per page.
+     * @param billableMetricCode Billable metric code filter to apply to the charge usage
+     * @param periodsCount Number of past billing period to returns in the result
+     * @return CustomerPastUsage
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec findAllCustomerPastUsageRequestCreation(String externalCustomerId, String externalSubscriptionId, Integer page, Integer perPage, String billableMetricCode, Integer periodsCount) throws WebClientResponseException {
+        Object postBody = null;
+        // verify the required parameter 'externalCustomerId' is set
+        if (externalCustomerId == null) {
+            throw new WebClientResponseException("Missing the required parameter 'externalCustomerId' when calling findAllCustomerPastUsage", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // verify the required parameter 'externalSubscriptionId' is set
+        if (externalSubscriptionId == null) {
+            throw new WebClientResponseException("Missing the required parameter 'externalSubscriptionId' when calling findAllCustomerPastUsage", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("external_customer_id", externalCustomerId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "external_subscription_id", externalSubscriptionId));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "billable_metric_code", billableMetricCode));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "periods_count", periodsCount));
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+
+        ParameterizedTypeReference<CustomerPastUsage> localVarReturnType = new ParameterizedTypeReference<CustomerPastUsage>() {};
+        return apiClient.invokeAPI("/customers/{external_customer_id}/past_usage", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Retrieve customer past usage
+     * This endpoint enables the retrieval of the usage-based billing data for a customer within past periods.
+     * <p><b>200</b> - Customer past usage
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @param externalSubscriptionId The unique identifier of the subscription within your application.
+     * @param page Page number.
+     * @param perPage Number of records per page.
+     * @param billableMetricCode Billable metric code filter to apply to the charge usage
+     * @param periodsCount Number of past billing period to returns in the result
+     * @return CustomerPastUsage
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<CustomerPastUsage> findAllCustomerPastUsage(String externalCustomerId, String externalSubscriptionId, Integer page, Integer perPage, String billableMetricCode, Integer periodsCount) throws WebClientResponseException {
+        ParameterizedTypeReference<CustomerPastUsage> localVarReturnType = new ParameterizedTypeReference<CustomerPastUsage>() {};
+        return findAllCustomerPastUsageRequestCreation(externalCustomerId, externalSubscriptionId, page, perPage, billableMetricCode, periodsCount).bodyToMono(localVarReturnType);
+    }
+
+    /**
+     * Retrieve customer past usage
+     * This endpoint enables the retrieval of the usage-based billing data for a customer within past periods.
+     * <p><b>200</b> - Customer past usage
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @param externalSubscriptionId The unique identifier of the subscription within your application.
+     * @param page Page number.
+     * @param perPage Number of records per page.
+     * @param billableMetricCode Billable metric code filter to apply to the charge usage
+     * @param periodsCount Number of past billing period to returns in the result
+     * @return ResponseEntity&lt;CustomerPastUsage&gt;
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ResponseEntity<CustomerPastUsage>> findAllCustomerPastUsageWithHttpInfo(String externalCustomerId, String externalSubscriptionId, Integer page, Integer perPage, String billableMetricCode, Integer periodsCount) throws WebClientResponseException {
+        ParameterizedTypeReference<CustomerPastUsage> localVarReturnType = new ParameterizedTypeReference<CustomerPastUsage>() {};
+        return findAllCustomerPastUsageRequestCreation(externalCustomerId, externalSubscriptionId, page, perPage, billableMetricCode, periodsCount).toEntity(localVarReturnType);
+    }
+
+    /**
+     * Retrieve customer past usage
+     * This endpoint enables the retrieval of the usage-based billing data for a customer within past periods.
+     * <p><b>200</b> - Customer past usage
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @param externalSubscriptionId The unique identifier of the subscription within your application.
+     * @param page Page number.
+     * @param perPage Number of records per page.
+     * @param billableMetricCode Billable metric code filter to apply to the charge usage
+     * @param periodsCount Number of past billing period to returns in the result
+     * @return ResponseSpec
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public ResponseSpec findAllCustomerPastUsageWithResponseSpec(String externalCustomerId, String externalSubscriptionId, Integer page, Integer perPage, String billableMetricCode, Integer periodsCount) throws WebClientResponseException {
+        return findAllCustomerPastUsageRequestCreation(externalCustomerId, externalSubscriptionId, page, perPage, billableMetricCode, periodsCount);
+    }
+    /**
      * List all customers
      * This endpoint retrieves all existing customers.
      * <p><b>200</b> - List of customers
@@ -568,6 +686,92 @@ public class CustomersApi {
      */
     public ResponseSpec findCustomerCurrentUsageWithResponseSpec(String externalCustomerId, String externalSubscriptionId) throws WebClientResponseException {
         return findCustomerCurrentUsageRequestCreation(externalCustomerId, externalSubscriptionId);
+    }
+    /**
+     * Generate a Customer Payment Provider Checkout URL
+     * This endpoint regenerates the Payment Provider Checkout URL of a Customer.
+     * <p><b>200</b> - Customer Checkout URL
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @return GenerateCustomerCheckoutURL200Response
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec generateCustomerCheckoutURLRequestCreation(String externalCustomerId) throws WebClientResponseException {
+        Object postBody = null;
+        // verify the required parameter 'externalCustomerId' is set
+        if (externalCustomerId == null) {
+            throw new WebClientResponseException("Missing the required parameter 'externalCustomerId' when calling generateCustomerCheckoutURL", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("external_customer_id", externalCustomerId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+
+        ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response> localVarReturnType = new ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response>() {};
+        return apiClient.invokeAPI("/customers/{external_customer_id}/checkout_url", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Generate a Customer Payment Provider Checkout URL
+     * This endpoint regenerates the Payment Provider Checkout URL of a Customer.
+     * <p><b>200</b> - Customer Checkout URL
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @return GenerateCustomerCheckoutURL200Response
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<GenerateCustomerCheckoutURL200Response> generateCustomerCheckoutURL(String externalCustomerId) throws WebClientResponseException {
+        ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response> localVarReturnType = new ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response>() {};
+        return generateCustomerCheckoutURLRequestCreation(externalCustomerId).bodyToMono(localVarReturnType);
+    }
+
+    /**
+     * Generate a Customer Payment Provider Checkout URL
+     * This endpoint regenerates the Payment Provider Checkout URL of a Customer.
+     * <p><b>200</b> - Customer Checkout URL
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @return ResponseEntity&lt;GenerateCustomerCheckoutURL200Response&gt;
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ResponseEntity<GenerateCustomerCheckoutURL200Response>> generateCustomerCheckoutURLWithHttpInfo(String externalCustomerId) throws WebClientResponseException {
+        ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response> localVarReturnType = new ParameterizedTypeReference<GenerateCustomerCheckoutURL200Response>() {};
+        return generateCustomerCheckoutURLRequestCreation(externalCustomerId).toEntity(localVarReturnType);
+    }
+
+    /**
+     * Generate a Customer Payment Provider Checkout URL
+     * This endpoint regenerates the Payment Provider Checkout URL of a Customer.
+     * <p><b>200</b> - Customer Checkout URL
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * <p><b>422</b> - Unprocessable entity error
+     * @param externalCustomerId The customer external unique identifier (provided by your own application).
+     * @return ResponseSpec
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public ResponseSpec generateCustomerCheckoutURLWithResponseSpec(String externalCustomerId) throws WebClientResponseException {
+        return generateCustomerCheckoutURLRequestCreation(externalCustomerId);
     }
     /**
      * Get a customer portal URL

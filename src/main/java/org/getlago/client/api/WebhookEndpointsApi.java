@@ -7,10 +7,11 @@ import org.openapitools.client.model.ApiErrorNotAllowed;
 import org.openapitools.client.model.ApiErrorNotFound;
 import org.openapitools.client.model.ApiErrorUnauthorized;
 import org.openapitools.client.model.ApiErrorUnprocessableEntity;
-import org.openapitools.client.model.CreateWebhookEndpoint200Response;
-import org.openapitools.client.model.CreateWebhookEndpointRequest;
-import org.openapitools.client.model.FindAllWebhookEndpoints200Response;
 import java.util.UUID;
+import org.openapitools.client.model.WebhookEndpoint;
+import org.openapitools.client.model.WebhookEndpointCreateInput;
+import org.openapitools.client.model.WebhookEndpointUpdateInput;
+import org.openapitools.client.model.WebhookEndpointsPaginated;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class WebhookEndpointsApi {
     private ApiClient apiClient;
 
@@ -61,15 +62,15 @@ public class WebhookEndpointsApi {
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
-     * @param createWebhookEndpointRequest Webhook Endpoint payload
-     * @return CreateWebhookEndpoint200Response
+     * @param webhookEndpointCreateInput Webhook Endpoint payload
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec createWebhookEndpointRequestCreation(CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        Object postBody = createWebhookEndpointRequest;
-        // verify the required parameter 'createWebhookEndpointRequest' is set
-        if (createWebhookEndpointRequest == null) {
-            throw new WebClientResponseException("Missing the required parameter 'createWebhookEndpointRequest' when calling createWebhookEndpoint", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+    private ResponseSpec createWebhookEndpointRequestCreation(WebhookEndpointCreateInput webhookEndpointCreateInput) throws WebClientResponseException {
+        Object postBody = webhookEndpointCreateInput;
+        // verify the required parameter 'webhookEndpointCreateInput' is set
+        if (webhookEndpointCreateInput == null) {
+            throw new WebClientResponseException("Missing the required parameter 'webhookEndpointCreateInput' when calling createWebhookEndpoint", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
         }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -90,7 +91,7 @@ public class WebhookEndpointsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<CreateWebhookEndpoint200Response> localVarReturnType = new ParameterizedTypeReference<CreateWebhookEndpoint200Response>() {};
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return apiClient.invokeAPI("/webhook_endpoints", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
@@ -101,13 +102,13 @@ public class WebhookEndpointsApi {
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
-     * @param createWebhookEndpointRequest Webhook Endpoint payload
-     * @return CreateWebhookEndpoint200Response
+     * @param webhookEndpointCreateInput Webhook Endpoint payload
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<CreateWebhookEndpoint200Response> createWebhookEndpoint(CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        ParameterizedTypeReference<CreateWebhookEndpoint200Response> localVarReturnType = new ParameterizedTypeReference<CreateWebhookEndpoint200Response>() {};
-        return createWebhookEndpointRequestCreation(createWebhookEndpointRequest).bodyToMono(localVarReturnType);
+    public Mono<WebhookEndpoint> createWebhookEndpoint(WebhookEndpointCreateInput webhookEndpointCreateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
+        return createWebhookEndpointRequestCreation(webhookEndpointCreateInput).bodyToMono(localVarReturnType);
     }
 
     /**
@@ -117,13 +118,13 @@ public class WebhookEndpointsApi {
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
-     * @param createWebhookEndpointRequest Webhook Endpoint payload
-     * @return ResponseEntity&lt;CreateWebhookEndpoint200Response&gt;
+     * @param webhookEndpointCreateInput Webhook Endpoint payload
+     * @return ResponseEntity&lt;WebhookEndpoint&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<CreateWebhookEndpoint200Response>> createWebhookEndpointWithHttpInfo(CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        ParameterizedTypeReference<CreateWebhookEndpoint200Response> localVarReturnType = new ParameterizedTypeReference<CreateWebhookEndpoint200Response>() {};
-        return createWebhookEndpointRequestCreation(createWebhookEndpointRequest).toEntity(localVarReturnType);
+    public Mono<ResponseEntity<WebhookEndpoint>> createWebhookEndpointWithHttpInfo(WebhookEndpointCreateInput webhookEndpointCreateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
+        return createWebhookEndpointRequestCreation(webhookEndpointCreateInput).toEntity(localVarReturnType);
     }
 
     /**
@@ -133,12 +134,12 @@ public class WebhookEndpointsApi {
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
-     * @param createWebhookEndpointRequest Webhook Endpoint payload
+     * @param webhookEndpointCreateInput Webhook Endpoint payload
      * @return ResponseSpec
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public ResponseSpec createWebhookEndpointWithResponseSpec(CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        return createWebhookEndpointRequestCreation(createWebhookEndpointRequest);
+    public ResponseSpec createWebhookEndpointWithResponseSpec(WebhookEndpointCreateInput webhookEndpointCreateInput) throws WebClientResponseException {
+        return createWebhookEndpointRequestCreation(webhookEndpointCreateInput);
     }
     /**
      * Delete a webhook endpoint
@@ -148,7 +149,7 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>405</b> - Not Allowed error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return Object
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     private ResponseSpec destroyWebhookEndpointRequestCreation(UUID lagoId) throws WebClientResponseException {
@@ -176,7 +177,7 @@ public class WebhookEndpointsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return apiClient.invokeAPI("/webhook_endpoints/{lago_id}", HttpMethod.DELETE, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
@@ -188,11 +189,11 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>405</b> - Not Allowed error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return Object
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<Object> destroyWebhookEndpoint(UUID lagoId) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+    public Mono<WebhookEndpoint> destroyWebhookEndpoint(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return destroyWebhookEndpointRequestCreation(lagoId).bodyToMono(localVarReturnType);
     }
 
@@ -204,11 +205,11 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>405</b> - Not Allowed error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return ResponseEntity&lt;Object&gt;
+     * @return ResponseEntity&lt;WebhookEndpoint&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<Object>> destroyWebhookEndpointWithHttpInfo(UUID lagoId) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+    public Mono<ResponseEntity<WebhookEndpoint>> destroyWebhookEndpointWithHttpInfo(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return destroyWebhookEndpointRequestCreation(lagoId).toEntity(localVarReturnType);
     }
 
@@ -233,7 +234,7 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * @param page Page number.
      * @param perPage Number of records per page.
-     * @return FindAllWebhookEndpoints200Response
+     * @return WebhookEndpointsPaginated
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     private ResponseSpec findAllWebhookEndpointsRequestCreation(Integer page, Integer perPage) throws WebClientResponseException {
@@ -258,7 +259,7 @@ public class WebhookEndpointsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<FindAllWebhookEndpoints200Response> localVarReturnType = new ParameterizedTypeReference<FindAllWebhookEndpoints200Response>() {};
+        ParameterizedTypeReference<WebhookEndpointsPaginated> localVarReturnType = new ParameterizedTypeReference<WebhookEndpointsPaginated>() {};
         return apiClient.invokeAPI("/webhook_endpoints", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
@@ -269,11 +270,11 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * @param page Page number.
      * @param perPage Number of records per page.
-     * @return FindAllWebhookEndpoints200Response
+     * @return WebhookEndpointsPaginated
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<FindAllWebhookEndpoints200Response> findAllWebhookEndpoints(Integer page, Integer perPage) throws WebClientResponseException {
-        ParameterizedTypeReference<FindAllWebhookEndpoints200Response> localVarReturnType = new ParameterizedTypeReference<FindAllWebhookEndpoints200Response>() {};
+    public Mono<WebhookEndpointsPaginated> findAllWebhookEndpoints(Integer page, Integer perPage) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpointsPaginated> localVarReturnType = new ParameterizedTypeReference<WebhookEndpointsPaginated>() {};
         return findAllWebhookEndpointsRequestCreation(page, perPage).bodyToMono(localVarReturnType);
     }
 
@@ -284,11 +285,11 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * @param page Page number.
      * @param perPage Number of records per page.
-     * @return ResponseEntity&lt;FindAllWebhookEndpoints200Response&gt;
+     * @return ResponseEntity&lt;WebhookEndpointsPaginated&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<FindAllWebhookEndpoints200Response>> findAllWebhookEndpointsWithHttpInfo(Integer page, Integer perPage) throws WebClientResponseException {
-        ParameterizedTypeReference<FindAllWebhookEndpoints200Response> localVarReturnType = new ParameterizedTypeReference<FindAllWebhookEndpoints200Response>() {};
+    public Mono<ResponseEntity<WebhookEndpointsPaginated>> findAllWebhookEndpointsWithHttpInfo(Integer page, Integer perPage) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpointsPaginated> localVarReturnType = new ParameterizedTypeReference<WebhookEndpointsPaginated>() {};
         return findAllWebhookEndpointsRequestCreation(page, perPage).toEntity(localVarReturnType);
     }
 
@@ -312,7 +313,7 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * <p><b>404</b> - Not Found error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return Object
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     private ResponseSpec findWebhookEndpointRequestCreation(UUID lagoId) throws WebClientResponseException {
@@ -340,7 +341,7 @@ public class WebhookEndpointsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return apiClient.invokeAPI("/webhook_endpoints/{lago_id}", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
@@ -351,11 +352,11 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * <p><b>404</b> - Not Found error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return Object
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<Object> findWebhookEndpoint(UUID lagoId) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+    public Mono<WebhookEndpoint> findWebhookEndpoint(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return findWebhookEndpointRequestCreation(lagoId).bodyToMono(localVarReturnType);
     }
 
@@ -366,11 +367,11 @@ public class WebhookEndpointsApi {
      * <p><b>401</b> - Unauthorized error
      * <p><b>404</b> - Not Found error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @return ResponseEntity&lt;Object&gt;
+     * @return ResponseEntity&lt;WebhookEndpoint&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<Object>> findWebhookEndpointWithHttpInfo(UUID lagoId) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+    public Mono<ResponseEntity<WebhookEndpoint>> findWebhookEndpointWithHttpInfo(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return findWebhookEndpointRequestCreation(lagoId).toEntity(localVarReturnType);
     }
 
@@ -396,19 +397,19 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>422</b> - Unprocessable entity error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @param createWebhookEndpointRequest Webhook Endpoint update payload
-     * @return Object
+     * @param webhookEndpointUpdateInput Webhook Endpoint update payload
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec updateWebhookEndpointRequestCreation(UUID lagoId, CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        Object postBody = createWebhookEndpointRequest;
+    private ResponseSpec updateWebhookEndpointRequestCreation(UUID lagoId, WebhookEndpointUpdateInput webhookEndpointUpdateInput) throws WebClientResponseException {
+        Object postBody = webhookEndpointUpdateInput;
         // verify the required parameter 'lagoId' is set
         if (lagoId == null) {
             throw new WebClientResponseException("Missing the required parameter 'lagoId' when calling updateWebhookEndpoint", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
         }
-        // verify the required parameter 'createWebhookEndpointRequest' is set
-        if (createWebhookEndpointRequest == null) {
-            throw new WebClientResponseException("Missing the required parameter 'createWebhookEndpointRequest' when calling updateWebhookEndpoint", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        // verify the required parameter 'webhookEndpointUpdateInput' is set
+        if (webhookEndpointUpdateInput == null) {
+            throw new WebClientResponseException("Missing the required parameter 'webhookEndpointUpdateInput' when calling updateWebhookEndpoint", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
         }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -431,7 +432,7 @@ public class WebhookEndpointsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
         return apiClient.invokeAPI("/webhook_endpoints/{lago_id}", HttpMethod.PUT, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
@@ -444,13 +445,13 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>422</b> - Unprocessable entity error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @param createWebhookEndpointRequest Webhook Endpoint update payload
-     * @return Object
+     * @param webhookEndpointUpdateInput Webhook Endpoint update payload
+     * @return WebhookEndpoint
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<Object> updateWebhookEndpoint(UUID lagoId, CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
-        return updateWebhookEndpointRequestCreation(lagoId, createWebhookEndpointRequest).bodyToMono(localVarReturnType);
+    public Mono<WebhookEndpoint> updateWebhookEndpoint(UUID lagoId, WebhookEndpointUpdateInput webhookEndpointUpdateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
+        return updateWebhookEndpointRequestCreation(lagoId, webhookEndpointUpdateInput).bodyToMono(localVarReturnType);
     }
 
     /**
@@ -462,13 +463,13 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>422</b> - Unprocessable entity error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @param createWebhookEndpointRequest Webhook Endpoint update payload
-     * @return ResponseEntity&lt;Object&gt;
+     * @param webhookEndpointUpdateInput Webhook Endpoint update payload
+     * @return ResponseEntity&lt;WebhookEndpoint&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<Object>> updateWebhookEndpointWithHttpInfo(UUID lagoId, CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        ParameterizedTypeReference<Object> localVarReturnType = new ParameterizedTypeReference<Object>() {};
-        return updateWebhookEndpointRequestCreation(lagoId, createWebhookEndpointRequest).toEntity(localVarReturnType);
+    public Mono<ResponseEntity<WebhookEndpoint>> updateWebhookEndpointWithHttpInfo(UUID lagoId, WebhookEndpointUpdateInput webhookEndpointUpdateInput) throws WebClientResponseException {
+        ParameterizedTypeReference<WebhookEndpoint> localVarReturnType = new ParameterizedTypeReference<WebhookEndpoint>() {};
+        return updateWebhookEndpointRequestCreation(lagoId, webhookEndpointUpdateInput).toEntity(localVarReturnType);
     }
 
     /**
@@ -480,11 +481,11 @@ public class WebhookEndpointsApi {
      * <p><b>404</b> - Not Found error
      * <p><b>422</b> - Unprocessable entity error
      * @param lagoId Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system.
-     * @param createWebhookEndpointRequest Webhook Endpoint update payload
+     * @param webhookEndpointUpdateInput Webhook Endpoint update payload
      * @return ResponseSpec
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public ResponseSpec updateWebhookEndpointWithResponseSpec(UUID lagoId, CreateWebhookEndpointRequest createWebhookEndpointRequest) throws WebClientResponseException {
-        return updateWebhookEndpointRequestCreation(lagoId, createWebhookEndpointRequest);
+    public ResponseSpec updateWebhookEndpointWithResponseSpec(UUID lagoId, WebhookEndpointUpdateInput webhookEndpointUpdateInput) throws WebClientResponseException {
+        return updateWebhookEndpointRequestCreation(lagoId, webhookEndpointUpdateInput);
     }
 }

@@ -7,6 +7,7 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | [**createSubscription**](SubscriptionsApi.md#createSubscription) | **POST** /subscriptions | Assign a plan to a customer |
 | [**destroySubscription**](SubscriptionsApi.md#destroySubscription) | **DELETE** /subscriptions/{external_id} | Terminate a subscription |
 | [**findAllSubscriptions**](SubscriptionsApi.md#findAllSubscriptions) | **GET** /subscriptions | List all subscriptions |
+| [**findSubscription**](SubscriptionsApi.md#findSubscription) | **GET** /subscriptions/{external_id} | Retrieve a subscription |
 | [**updateSubscription**](SubscriptionsApi.md#updateSubscription) | **PUT** /subscriptions/{external_id} | Update a subscription |
 
 
@@ -239,6 +240,79 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | List of subscriptions |  -  |
+| **401** | Unauthorized error |  -  |
+| **404** | Not Found error |  -  |
+
+
+## findSubscription
+
+> Subscription findSubscription(externalId)
+
+Retrieve a subscription
+
+This endpoint retrieves a specific subscription.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.SubscriptionsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        SubscriptionsApi apiInstance = new SubscriptionsApi(defaultClient);
+        String externalId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | External ID of the existing subscription
+        try {
+            Subscription result = apiInstance.findSubscription(externalId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SubscriptionsApi#findSubscription");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **externalId** | **String**| External ID of the existing subscription | |
+
+### Return type
+
+[**Subscription**](Subscription.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Subscription |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 

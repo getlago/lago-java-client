@@ -25,7 +25,7 @@
 |**balanceAmountCents** | **Integer** | The remaining credit note amount, expressed in cents. |  |
 |**creditAmountCents** | **Integer** | The credited amount of the credit note, expressed in cents. |  |
 |**refundAmountCents** | **Integer** | The refunded amount of the credit note, expressed in cents. |  |
-|**couponsAdjustementAmountCents** | **Integer** | The pro-rated amount of the coupons applied to the source invoice. |  |
+|**couponsAdjustmentAmountCents** | **Integer** | The pro-rated amount of the coupons applied to the source invoice. |  |
 |**createdAt** | **OffsetDateTime** | The date when the credit note was created. It is expressed in Coordinated Universal Time (UTC). |  |
 |**updatedAt** | **OffsetDateTime** | The date when the credit note was last updated. It is expressed in Coordinated Universal Time (UTC). |  |
 |**fileUrl** | **String** | The PDF file of the credit note. |  [optional] |

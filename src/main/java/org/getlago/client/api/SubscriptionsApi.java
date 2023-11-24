@@ -33,7 +33,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class SubscriptionsApi {
     private ApiClient apiClient;
 
@@ -333,6 +333,88 @@ public class SubscriptionsApi {
      */
     public ResponseSpec findAllSubscriptionsWithResponseSpec(Integer page, Integer perPage, String externalCustomerId, String planCode, List<String> status) throws WebClientResponseException {
         return findAllSubscriptionsRequestCreation(page, perPage, externalCustomerId, planCode, status);
+    }
+    /**
+     * Retrieve a subscription
+     * This endpoint retrieves a specific subscription.
+     * <p><b>200</b> - Subscription
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param externalId External ID of the existing subscription
+     * @return Subscription
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec findSubscriptionRequestCreation(String externalId) throws WebClientResponseException {
+        Object postBody = null;
+        // verify the required parameter 'externalId' is set
+        if (externalId == null) {
+            throw new WebClientResponseException("Missing the required parameter 'externalId' when calling findSubscription", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("external_id", externalId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+
+        ParameterizedTypeReference<Subscription> localVarReturnType = new ParameterizedTypeReference<Subscription>() {};
+        return apiClient.invokeAPI("/subscriptions/{external_id}", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Retrieve a subscription
+     * This endpoint retrieves a specific subscription.
+     * <p><b>200</b> - Subscription
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param externalId External ID of the existing subscription
+     * @return Subscription
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<Subscription> findSubscription(String externalId) throws WebClientResponseException {
+        ParameterizedTypeReference<Subscription> localVarReturnType = new ParameterizedTypeReference<Subscription>() {};
+        return findSubscriptionRequestCreation(externalId).bodyToMono(localVarReturnType);
+    }
+
+    /**
+     * Retrieve a subscription
+     * This endpoint retrieves a specific subscription.
+     * <p><b>200</b> - Subscription
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param externalId External ID of the existing subscription
+     * @return ResponseEntity&lt;Subscription&gt;
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ResponseEntity<Subscription>> findSubscriptionWithHttpInfo(String externalId) throws WebClientResponseException {
+        ParameterizedTypeReference<Subscription> localVarReturnType = new ParameterizedTypeReference<Subscription>() {};
+        return findSubscriptionRequestCreation(externalId).toEntity(localVarReturnType);
+    }
+
+    /**
+     * Retrieve a subscription
+     * This endpoint retrieves a specific subscription.
+     * <p><b>200</b> - Subscription
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param externalId External ID of the existing subscription
+     * @return ResponseSpec
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public ResponseSpec findSubscriptionWithResponseSpec(String externalId) throws WebClientResponseException {
+        return findSubscriptionRequestCreation(externalId);
     }
     /**
      * Update a subscription

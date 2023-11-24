@@ -4,88 +4,12 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**applyAddOn**](AddOnsApi.md#applyAddOn) | **POST** /applied_add_ons | Apply an add-on to a customer |
 | [**createAddOn**](AddOnsApi.md#createAddOn) | **POST** /add_ons | Create an add-on |
 | [**destroyAddOn**](AddOnsApi.md#destroyAddOn) | **DELETE** /add_ons/{code} | Delete an add-on |
 | [**findAddOn**](AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Retrieve an add-on |
 | [**findAllAddOns**](AddOnsApi.md#findAllAddOns) | **GET** /add_ons | List all add-ons |
 | [**updateAddOn**](AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an add-on |
 
-
-
-## applyAddOn
-
-> AppliedAddOn applyAddOn(appliedAddOnInput)
-
-Apply an add-on to a customer
-
-Apply an add-on to a customer
-
-### Example
-
-```java
-// Import classes:
-import org.getlago.client.ApiClient;
-import org.getlago.client.ApiException;
-import org.getlago.client.Configuration;
-import org.getlago.client.auth.*;
-import org.getlago.client.models.*;
-import org.getlago.client.api.AddOnsApi;
-
-public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://api.getlago.com/api/v1");
-        
-        // Configure HTTP bearer authorization: bearerAuth
-        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-        bearerAuth.setBearerToken("BEARER TOKEN");
-
-        AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-        AppliedAddOnInput appliedAddOnInput = new AppliedAddOnInput(); // AppliedAddOnInput | Apply add-on payload
-        try {
-            AppliedAddOn result = apiInstance.applyAddOn(appliedAddOnInput);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AddOnsApi#applyAddOn");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **appliedAddOnInput** | [**AppliedAddOnInput**](AppliedAddOnInput.md)| Apply add-on payload | |
-
-### Return type
-
-[**AppliedAddOn**](AppliedAddOn.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Add-on applied |  -  |
-| **400** | Bad Request error |  -  |
-| **401** | Unauthorized error |  -  |
-| **404** | Not Found error |  -  |
-| **422** | Unprocessable entity error |  -  |
 
 
 ## createAddOn

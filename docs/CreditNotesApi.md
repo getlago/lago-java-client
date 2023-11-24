@@ -6,6 +6,7 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 |------------- | ------------- | -------------|
 | [**createCreditNote**](CreditNotesApi.md#createCreditNote) | **POST** /credit_notes | Create a credit note |
 | [**downloadCreditNote**](CreditNotesApi.md#downloadCreditNote) | **POST** /credit_notes/{lago_id}/download | Download a credit note PDF |
+| [**estimateCreditNote**](CreditNotesApi.md#estimateCreditNote) | **POST** /credit_notes/estimate | Estimate amounts for a new credit note |
 | [**findAllCreditNotes**](CreditNotesApi.md#findAllCreditNotes) | **GET** /credit_notes | List all credit notes |
 | [**findCreditNote**](CreditNotesApi.md#findCreditNote) | **GET** /credit_notes/{lago_id} | Retrieve a credit note |
 | [**updateCreditNote**](CreditNotesApi.md#updateCreditNote) | **PUT** /credit_notes/{lago_id} | Update a credit note |
@@ -158,6 +159,80 @@ public class Example {
 | **200** | Credit note PDF |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
+
+
+## estimateCreditNote
+
+> CreditNoteEstimated estimateCreditNote(creditNoteEstimateInput)
+
+Estimate amounts for a new credit note
+
+This endpoint allows you to retrieve amounts for a new credit note creation.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CreditNotesApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        CreditNotesApi apiInstance = new CreditNotesApi(defaultClient);
+        CreditNoteEstimateInput creditNoteEstimateInput = new CreditNoteEstimateInput(); // CreditNoteEstimateInput | Credit note estimate payload
+        try {
+            CreditNoteEstimated result = apiInstance.estimateCreditNote(creditNoteEstimateInput);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CreditNotesApi#estimateCreditNote");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **creditNoteEstimateInput** | [**CreditNoteEstimateInput**](CreditNoteEstimateInput.md)| Credit note estimate payload | [optional] |
+
+### Return type
+
+[**CreditNoteEstimated**](CreditNoteEstimated.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Credit note amounts |  -  |
+| **400** | Bad Request error |  -  |
+| **401** | Unauthorized error |  -  |
+| **422** | Unprocessable entity error |  -  |
 
 
 ## findAllCreditNotes

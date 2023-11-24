@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**webhookUrl** | **String** | The URL of your newest updated webhook endpoint. This URL allows your organization to receive important messages, notifications, or data from the Lago system. By configuring your webhook endpoint to this URL, you can ensure that your organization stays informed and receives relevant information in a timely manner. |  [optional] |
 |**country** | [**Country**](Country.md) |  |  [optional] |
+|**defaultCurrency** | [**Currency**](Currency.md) |  |  [optional] |
 |**addressLine1** | **String** | The first line of your organization’s billing address. |  [optional] |
 |**addressLine2** | **String** | The second line of your organization’s billing address. |  [optional] |
 |**state** | **String** | The state of your organization’s billing address. |  [optional] |

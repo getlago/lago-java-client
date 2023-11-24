@@ -2,9 +2,9 @@
 
 Lago API documentation
 
-- API version: 0.46.0-beta
+- API version: 0.52.0-beta
 
-- Build date: 2023-08-31T15:04:44.084574Z[Etc/UTC]
+- Build date: 2023-11-24T14:46:07.416771019Z[Etc/UTC]
 
 Lago API allows your application to push customer information and metrics (events) from your application to the billing application.
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.openapitools</groupId>
   <artifactId>lago-java-client</artifactId>
-  <version>0.46.0-beta</version>
+  <version>0.52.0-beta</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.openapitools:lago-java-client:0.46.0-beta"
+     implementation "org.openapitools:lago-java-client:0.52.0-beta"
   }
 ```
 
@@ -72,7 +72,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/lago-java-client-0.46.0-beta.jar`
+- `target/lago-java-client-0.52.0-beta.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -97,12 +97,12 @@ public class AddOnsApiExample {
         bearerAuth.setBearerToken("BEARER TOKEN");
 
         AddOnsApi apiInstance = new AddOnsApi(defaultClient);
-        AppliedAddOnInput appliedAddOnInput = new AppliedAddOnInput(); // AppliedAddOnInput | Apply add-on payload
+        AddOnCreateInput addOnCreateInput = new AddOnCreateInput(); // AddOnCreateInput | Add-on payload
         try {
-            AppliedAddOn result = apiInstance.applyAddOn(appliedAddOnInput);
+            AddOn result = apiInstance.createAddOn(addOnCreateInput);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling AddOnsApi#applyAddOn");
+            System.err.println("Exception when calling AddOnsApi#createAddOn");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -119,12 +119,15 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AddOnsApi* | [**applyAddOn**](docs/AddOnsApi.md#applyAddOn) | **POST** /applied_add_ons | Apply an add-on to a customer
 *AddOnsApi* | [**createAddOn**](docs/AddOnsApi.md#createAddOn) | **POST** /add_ons | Create an add-on
 *AddOnsApi* | [**destroyAddOn**](docs/AddOnsApi.md#destroyAddOn) | **DELETE** /add_ons/{code} | Delete an add-on
 *AddOnsApi* | [**findAddOn**](docs/AddOnsApi.md#findAddOn) | **GET** /add_ons/{code} | Retrieve an add-on
 *AddOnsApi* | [**findAllAddOns**](docs/AddOnsApi.md#findAllAddOns) | **GET** /add_ons | List all add-ons
 *AddOnsApi* | [**updateAddOn**](docs/AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an add-on
+*AnalyticsApi* | [**findAllGrossRevenues**](docs/AnalyticsApi.md#findAllGrossRevenues) | **GET** /analytics/gross_revenue | List gross revenue
+*AnalyticsApi* | [**findAllInvoicedUsages**](docs/AnalyticsApi.md#findAllInvoicedUsages) | **GET** /analytics/invoiced_usage | List usage revenue
+*AnalyticsApi* | [**findAllMrrs**](docs/AnalyticsApi.md#findAllMrrs) | **GET** /analytics/mrr | List MRR
+*AnalyticsApi* | [**findAllOutstandingInvoices**](docs/AnalyticsApi.md#findAllOutstandingInvoices) | **GET** /analytics/outstanding_invoices | List outstanding invoices
 *BillableMetricsApi* | [**createBillableMetric**](docs/BillableMetricsApi.md#createBillableMetric) | **POST** /billable_metrics | Create a billable metric
 *BillableMetricsApi* | [**destroyBillableMetric**](docs/BillableMetricsApi.md#destroyBillableMetric) | **DELETE** /billable_metrics/{code} | Delete a billable metric
 *BillableMetricsApi* | [**findAllBillableMetricGroups**](docs/BillableMetricsApi.md#findAllBillableMetricGroups) | **GET** /billable_metrics/{code}/groups | Find a billable metric&#39;s groups
@@ -141,6 +144,7 @@ Class | Method | HTTP request | Description
 *CouponsApi* | [**updateCoupon**](docs/CouponsApi.md#updateCoupon) | **PUT** /coupons/{code} | Update a coupon
 *CreditNotesApi* | [**createCreditNote**](docs/CreditNotesApi.md#createCreditNote) | **POST** /credit_notes | Create a credit note
 *CreditNotesApi* | [**downloadCreditNote**](docs/CreditNotesApi.md#downloadCreditNote) | **POST** /credit_notes/{lago_id}/download | Download a credit note PDF
+*CreditNotesApi* | [**estimateCreditNote**](docs/CreditNotesApi.md#estimateCreditNote) | **POST** /credit_notes/estimate | Estimate amounts for a new credit note
 *CreditNotesApi* | [**findAllCreditNotes**](docs/CreditNotesApi.md#findAllCreditNotes) | **GET** /credit_notes | List all credit notes
 *CreditNotesApi* | [**findCreditNote**](docs/CreditNotesApi.md#findCreditNote) | **GET** /credit_notes/{lago_id} | Retrieve a credit note
 *CreditNotesApi* | [**updateCreditNote**](docs/CreditNotesApi.md#updateCreditNote) | **PUT** /credit_notes/{lago_id} | Update a credit note
@@ -148,9 +152,11 @@ Class | Method | HTTP request | Description
 *CustomersApi* | [**createCustomer**](docs/CustomersApi.md#createCustomer) | **POST** /customers | Create a customer
 *CustomersApi* | [**deleteAppliedCoupon**](docs/CustomersApi.md#deleteAppliedCoupon) | **DELETE** /customers/{external_customer_id}/applied_coupons/{applied_coupon_id} | Delete an applied coupon
 *CustomersApi* | [**destroyCustomer**](docs/CustomersApi.md#destroyCustomer) | **DELETE** /customers/{external_id} | Delete a customer
+*CustomersApi* | [**findAllCustomerPastUsage**](docs/CustomersApi.md#findAllCustomerPastUsage) | **GET** /customers/{external_customer_id}/past_usage | Retrieve customer past usage
 *CustomersApi* | [**findAllCustomers**](docs/CustomersApi.md#findAllCustomers) | **GET** /customers | List all customers
 *CustomersApi* | [**findCustomer**](docs/CustomersApi.md#findCustomer) | **GET** /customers/{external_id} | Retrieve a customer
 *CustomersApi* | [**findCustomerCurrentUsage**](docs/CustomersApi.md#findCustomerCurrentUsage) | **GET** /customers/{external_customer_id}/current_usage | Retrieve customer current usage
+*CustomersApi* | [**generateCustomerCheckoutURL**](docs/CustomersApi.md#generateCustomerCheckoutURL) | **POST** /customers/{external_customer_id}/checkout_url | Generate a Customer Payment Provider Checkout URL
 *CustomersApi* | [**getCustomerPortalUrl**](docs/CustomersApi.md#getCustomerPortalUrl) | **GET** /customers/{external_customer_id}/portal_url | Get a customer portal URL
 *EventsApi* | [**createBatchEvents**](docs/EventsApi.md#createBatchEvents) | **POST** /events/batch | Batch multiple events
 *EventsApi* | [**createEvent**](docs/EventsApi.md#createEvent) | **POST** /events | Send usage events
@@ -176,6 +182,7 @@ Class | Method | HTTP request | Description
 *SubscriptionsApi* | [**createSubscription**](docs/SubscriptionsApi.md#createSubscription) | **POST** /subscriptions | Assign a plan to a customer
 *SubscriptionsApi* | [**destroySubscription**](docs/SubscriptionsApi.md#destroySubscription) | **DELETE** /subscriptions/{external_id} | Terminate a subscription
 *SubscriptionsApi* | [**findAllSubscriptions**](docs/SubscriptionsApi.md#findAllSubscriptions) | **GET** /subscriptions | List all subscriptions
+*SubscriptionsApi* | [**findSubscription**](docs/SubscriptionsApi.md#findSubscription) | **GET** /subscriptions/{external_id} | Retrieve a subscription
 *SubscriptionsApi* | [**updateSubscription**](docs/SubscriptionsApi.md#updateSubscription) | **PUT** /subscriptions/{external_id} | Update a subscription
 *TaxesApi* | [**createTax**](docs/TaxesApi.md#createTax) | **POST** /taxes | Create a tax
 *TaxesApi* | [**destroyTax**](docs/TaxesApi.md#destroyTax) | **DELETE** /taxes/{code} | Delete a tax
@@ -212,10 +219,6 @@ Class | Method | HTTP request | Description
  - [ApiErrorNotFound](docs/ApiErrorNotFound.md)
  - [ApiErrorUnauthorized](docs/ApiErrorUnauthorized.md)
  - [ApiErrorUnprocessableEntity](docs/ApiErrorUnprocessableEntity.md)
- - [AppliedAddOn](docs/AppliedAddOn.md)
- - [AppliedAddOnInput](docs/AppliedAddOnInput.md)
- - [AppliedAddOnInputAppliedAddOn](docs/AppliedAddOnInputAppliedAddOn.md)
- - [AppliedAddOnObject](docs/AppliedAddOnObject.md)
  - [AppliedCoupon](docs/AppliedCoupon.md)
  - [AppliedCouponInput](docs/AppliedCouponInput.md)
  - [AppliedCouponInputAppliedCoupon](docs/AppliedCouponInputAppliedCoupon.md)
@@ -248,15 +251,17 @@ Class | Method | HTTP request | Description
  - [CouponObject](docs/CouponObject.md)
  - [CouponUpdateInput](docs/CouponUpdateInput.md)
  - [CouponsPaginated](docs/CouponsPaginated.md)
- - [CreateWebhookEndpoint200Response](docs/CreateWebhookEndpoint200Response.md)
- - [CreateWebhookEndpoint200ResponseWebhookEndpoint](docs/CreateWebhookEndpoint200ResponseWebhookEndpoint.md)
- - [CreateWebhookEndpointRequest](docs/CreateWebhookEndpointRequest.md)
- - [CreateWebhookEndpointRequestWebhookEndpoint](docs/CreateWebhookEndpointRequestWebhookEndpoint.md)
  - [CreditNote](docs/CreditNote.md)
  - [CreditNoteAppliedTaxObject](docs/CreditNoteAppliedTaxObject.md)
  - [CreditNoteCreateInput](docs/CreditNoteCreateInput.md)
  - [CreditNoteCreateInputCreditNote](docs/CreditNoteCreateInputCreditNote.md)
- - [CreditNoteCreateInputCreditNoteItemsInner](docs/CreditNoteCreateInputCreditNoteItemsInner.md)
+ - [CreditNoteEstimateInput](docs/CreditNoteEstimateInput.md)
+ - [CreditNoteEstimateInputCreditNote](docs/CreditNoteEstimateInputCreditNote.md)
+ - [CreditNoteEstimateInputCreditNoteItemsInner](docs/CreditNoteEstimateInputCreditNoteItemsInner.md)
+ - [CreditNoteEstimated](docs/CreditNoteEstimated.md)
+ - [CreditNoteEstimatedEstimatedCreditNote](docs/CreditNoteEstimatedEstimatedCreditNote.md)
+ - [CreditNoteEstimatedEstimatedCreditNoteAppliedTaxesInner](docs/CreditNoteEstimatedEstimatedCreditNoteAppliedTaxesInner.md)
+ - [CreditNoteEstimatedEstimatedCreditNoteItemsInner](docs/CreditNoteEstimatedEstimatedCreditNoteItemsInner.md)
  - [CreditNoteItemObject](docs/CreditNoteItemObject.md)
  - [CreditNoteItemObjectFee](docs/CreditNoteItemObjectFee.md)
  - [CreditNoteObject](docs/CreditNoteObject.md)
@@ -279,6 +284,7 @@ Class | Method | HTTP request | Description
  - [CustomerMetadata](docs/CustomerMetadata.md)
  - [CustomerObject](docs/CustomerObject.md)
  - [CustomerObjectExtended](docs/CustomerObjectExtended.md)
+ - [CustomerPastUsage](docs/CustomerPastUsage.md)
  - [CustomerUsage](docs/CustomerUsage.md)
  - [CustomerUsageObject](docs/CustomerUsageObject.md)
  - [CustomersPaginated](docs/CustomersPaginated.md)
@@ -290,7 +296,9 @@ Class | Method | HTTP request | Description
  - [EventEstimateFeesInputEvent](docs/EventEstimateFeesInputEvent.md)
  - [EventInput](docs/EventInput.md)
  - [EventInputEvent](docs/EventInputEvent.md)
+ - [EventInputEventTimestamp](docs/EventInputEventTimestamp.md)
  - [EventObject](docs/EventObject.md)
+ - [EventObjectProperties](docs/EventObjectProperties.md)
  - [Fee](docs/Fee.md)
  - [FeeAppliedTaxObject](docs/FeeAppliedTaxObject.md)
  - [FeeObject](docs/FeeObject.md)
@@ -299,9 +307,11 @@ Class | Method | HTTP request | Description
  - [FeeUpdateInputFee](docs/FeeUpdateInputFee.md)
  - [Fees](docs/Fees.md)
  - [FeesPaginated](docs/FeesPaginated.md)
- - [FindAllWebhookEndpoints200Response](docs/FindAllWebhookEndpoints200Response.md)
+ - [GenerateCustomerCheckoutURL200Response](docs/GenerateCustomerCheckoutURL200Response.md)
  - [GetCustomerPortalUrl200Response](docs/GetCustomerPortalUrl200Response.md)
  - [GetCustomerPortalUrl200ResponseCustomer](docs/GetCustomerPortalUrl200ResponseCustomer.md)
+ - [GrossRevenueObject](docs/GrossRevenueObject.md)
+ - [GrossRevenues](docs/GrossRevenues.md)
  - [GroupObject](docs/GroupObject.md)
  - [GroupPropertiesObject](docs/GroupPropertiesObject.md)
  - [GroupPropertiesObjectValues](docs/GroupPropertiesObjectValues.md)
@@ -318,12 +328,18 @@ Class | Method | HTTP request | Description
  - [InvoiceUpdateInput](docs/InvoiceUpdateInput.md)
  - [InvoiceUpdateInputInvoice](docs/InvoiceUpdateInputInvoice.md)
  - [InvoiceUpdateInputInvoiceMetadataInner](docs/InvoiceUpdateInputInvoiceMetadataInner.md)
+ - [InvoicedUsageObject](docs/InvoicedUsageObject.md)
+ - [InvoicedUsages](docs/InvoicedUsages.md)
  - [InvoicesPaginated](docs/InvoicesPaginated.md)
+ - [MrrObject](docs/MrrObject.md)
+ - [Mrrs](docs/Mrrs.md)
  - [Organization](docs/Organization.md)
  - [OrganizationBillingConfiguration](docs/OrganizationBillingConfiguration.md)
  - [OrganizationObject](docs/OrganizationObject.md)
  - [OrganizationUpdateInput](docs/OrganizationUpdateInput.md)
  - [OrganizationUpdateInputOrganization](docs/OrganizationUpdateInputOrganization.md)
+ - [OutstandingInvoiceObject](docs/OutstandingInvoiceObject.md)
+ - [OutstandingInvoices](docs/OutstandingInvoices.md)
  - [PaginationMeta](docs/PaginationMeta.md)
  - [Plan](docs/Plan.md)
  - [PlanCreateInput](docs/PlanCreateInput.md)
@@ -331,6 +347,8 @@ Class | Method | HTTP request | Description
  - [PlanCreateInputPlanChargesInner](docs/PlanCreateInputPlanChargesInner.md)
  - [PlanCreateInputPlanChargesInnerGroupPropertiesInner](docs/PlanCreateInputPlanChargesInnerGroupPropertiesInner.md)
  - [PlanObject](docs/PlanObject.md)
+ - [PlanOverridesObject](docs/PlanOverridesObject.md)
+ - [PlanOverridesObjectChargesInner](docs/PlanOverridesObjectChargesInner.md)
  - [PlanUpdateInput](docs/PlanUpdateInput.md)
  - [PlanUpdateInputPlan](docs/PlanUpdateInputPlan.md)
  - [PlanUpdateInputPlanChargesInner](docs/PlanUpdateInputPlanChargesInner.md)
@@ -339,6 +357,7 @@ Class | Method | HTTP request | Description
  - [SubscriptionCreateInput](docs/SubscriptionCreateInput.md)
  - [SubscriptionCreateInputSubscription](docs/SubscriptionCreateInputSubscription.md)
  - [SubscriptionObject](docs/SubscriptionObject.md)
+ - [SubscriptionObjectExtended](docs/SubscriptionObjectExtended.md)
  - [SubscriptionUpdateInput](docs/SubscriptionUpdateInput.md)
  - [SubscriptionUpdateInputSubscription](docs/SubscriptionUpdateInputSubscription.md)
  - [SubscriptionsPaginated](docs/SubscriptionsPaginated.md)
@@ -362,6 +381,12 @@ Class | Method | HTTP request | Description
  - [WalletUpdateInput](docs/WalletUpdateInput.md)
  - [WalletUpdateInputWallet](docs/WalletUpdateInputWallet.md)
  - [WalletsPaginated](docs/WalletsPaginated.md)
+ - [WebhookEndpoint](docs/WebhookEndpoint.md)
+ - [WebhookEndpointCreateInput](docs/WebhookEndpointCreateInput.md)
+ - [WebhookEndpointCreateInputWebhookEndpoint](docs/WebhookEndpointCreateInputWebhookEndpoint.md)
+ - [WebhookEndpointObject](docs/WebhookEndpointObject.md)
+ - [WebhookEndpointUpdateInput](docs/WebhookEndpointUpdateInput.md)
+ - [WebhookEndpointsPaginated](docs/WebhookEndpointsPaginated.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -1,7 +1,7 @@
 apiPackage: org.getlago.client.api
 artifactDescription: Lago Java API Client
 artifactId: lago-java-client
-artifactUrl: https://github.com/getlago/lago
+artifactUrl: https://github.com/getlago/lago-java-client
 developerEmail: tech@getlago.com
 developerName: Jeremy Denquin
 developerOrganization: Lago

@@ -10,6 +10,7 @@ Object listing all the properties for a specific charge item.
 |------------ | ------------- | ------------- | -------------|
 |**lagoId** | **UUID** | Unique identifier assigned to the charge within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the charge’s record within the Lago system. |  |
 |**chargeModel** | [**ChargeModelEnum**](#ChargeModelEnum) | The pricing model applied to this charge. Possible values are standard, &#x60;graduated&#x60;, &#x60;percentage&#x60;, &#x60;package&#x60; or &#x60;volume&#x60;. |  |
+|**invoiceDisplayName** | **String** | Specifies the name that will be displayed on an invoice. If no value is set for this field, the name of the actual charge will be used as the default display name. |  [optional] |
 
 
 
