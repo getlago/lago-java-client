@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonPropertyOrder({
   TaxCreateInput.JSON_PROPERTY_TAX
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class TaxCreateInput {
   public static final String JSON_PROPERTY_TAX = "tax";
   private TaxCreateInputTax tax;

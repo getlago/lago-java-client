@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   GenerateCustomerCheckoutURL200Response.JSON_PROPERTY_CHECKOUT_URL
 })
 @JsonTypeName("generateCustomerCheckoutURL_200_response")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class GenerateCustomerCheckoutURL200Response {
   public static final String JSON_PROPERTY_LAGO_CUSTOMER_ID = "lago_customer_id";
   private String lagoCustomerId;

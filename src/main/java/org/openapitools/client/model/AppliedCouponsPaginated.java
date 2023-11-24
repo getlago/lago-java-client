@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   AppliedCouponsPaginated.JSON_PROPERTY_APPLIED_COUPONS,
   AppliedCouponsPaginated.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class AppliedCouponsPaginated {
   public static final String JSON_PROPERTY_APPLIED_COUPONS = "applied_coupons";
   private List<AppliedCouponObjectExtended> appliedCoupons = new ArrayList<>();

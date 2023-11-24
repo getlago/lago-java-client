@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonPropertyOrder({
   AddOnUpdateInput.JSON_PROPERTY_ADD_ON
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class AddOnUpdateInput {
   public static final String JSON_PROPERTY_ADD_ON = "add_on";
   private AddOnBaseInput addOn;

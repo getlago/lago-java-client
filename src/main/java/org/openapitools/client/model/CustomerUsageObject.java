@@ -48,7 +48,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CustomerUsageObject.JSON_PROPERTY_TOTAL_AMOUNT_CENTS,
   CustomerUsageObject.JSON_PROPERTY_CHARGES_USAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CustomerUsageObject {
   public static final String JSON_PROPERTY_FROM_DATETIME = "from_datetime";
   private OffsetDateTime fromDatetime;

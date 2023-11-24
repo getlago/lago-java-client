@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   InvoiceUpdateInputInvoice.JSON_PROPERTY_METADATA
 })
 @JsonTypeName("InvoiceUpdateInput_invoice")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class InvoiceUpdateInputInvoice {
   /**
    * The payment status of the invoice. Possible values are &#x60;pending&#x60;, &#x60;failed&#x60; or &#x60;succeeded&#x60;.

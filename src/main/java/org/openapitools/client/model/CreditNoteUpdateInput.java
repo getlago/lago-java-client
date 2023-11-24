@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonPropertyOrder({
   CreditNoteUpdateInput.JSON_PROPERTY_CREDIT_NOTE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CreditNoteUpdateInput {
   public static final String JSON_PROPERTY_CREDIT_NOTE = "credit_note";
   private CreditNoteUpdateInputCreditNote creditNote;

@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WalletObject.JSON_PROPERTY_LAST_CONSUMED_CREDIT_AT,
   WalletObject.JSON_PROPERTY_TERMINATED_AT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class WalletObject {
   public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;

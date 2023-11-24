@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   GetCustomerPortalUrl200ResponseCustomer.JSON_PROPERTY_PORTAL_URL
 })
 @JsonTypeName("getCustomerPortalUrl_200_response_customer")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class GetCustomerPortalUrl200ResponseCustomer {
   public static final String JSON_PROPERTY_PORTAL_URL = "portal_url";
   private String portalUrl;

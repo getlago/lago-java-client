@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CouponBaseInputAppliesTo.JSON_PROPERTY_BILLABLE_METRIC_CODES
 })
 @JsonTypeName("CouponBaseInput_applies_to")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CouponBaseInputAppliesTo {
   public static final String JSON_PROPERTY_PLAN_CODES = "plan_codes";
   private JsonNullable<List<String>> planCodes = JsonNullable.<List<String>>undefined();

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   ChargePropertiesVolumeRangesInner.JSON_PROPERTY_PER_UNIT_AMOUNT
 })
 @JsonTypeName("ChargeProperties_volume_ranges_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class ChargePropertiesVolumeRangesInner {
   public static final String JSON_PROPERTY_FROM_VALUE = "from_value";
   private Integer fromValue;

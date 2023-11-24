@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <name>lago-java-client</name>
     <version>0.52.0-beta</version>
-    <url>https://github.com/getlago/lago</url>
+    <url>https://github.com/getlago/lago-java-client</url>
     <description>Lago Java API Client</description>
     <scm>
         <connection>scm:git:git@github.com:openapitools/openapi-generator.git</connection>

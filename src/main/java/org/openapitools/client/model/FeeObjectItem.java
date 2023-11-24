@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   FeeObjectItem.JSON_PROPERTY_ITEM_TYPE
 })
 @JsonTypeName("FeeObject_item")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class FeeObjectItem {
   /**
    * The fee type. Possible values are &#x60;add-on&#x60;, &#x60;charge&#x60;, &#x60;credit&#x60; or &#x60;subscription&#x60;.

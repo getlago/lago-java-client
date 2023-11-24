@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CreditObjectItem.JSON_PROPERTY_NAME
 })
 @JsonTypeName("CreditObject_item")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CreditObjectItem {
   public static final String JSON_PROPERTY_LAGO_ITEM_ID = "lago_item_id";
   private UUID lagoItemId;

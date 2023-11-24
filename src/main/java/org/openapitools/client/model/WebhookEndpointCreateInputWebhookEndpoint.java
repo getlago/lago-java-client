@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WebhookEndpointCreateInputWebhookEndpoint.JSON_PROPERTY_SIGNATURE_ALGO
 })
 @JsonTypeName("WebhookEndpointCreateInput_webhook_endpoint")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class WebhookEndpointCreateInputWebhookEndpoint {
   public static final String JSON_PROPERTY_WEBHOOK_URL = "webhook_url";
   private String webhookUrl;

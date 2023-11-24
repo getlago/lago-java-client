@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   ChargePropertiesGraduatedPercentageRangesInner.JSON_PROPERTY_FLAT_AMOUNT
 })
 @JsonTypeName("ChargeProperties_graduated_percentage_ranges_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class ChargePropertiesGraduatedPercentageRangesInner {
   public static final String JSON_PROPERTY_FROM_VALUE = "from_value";
   private Integer fromValue;

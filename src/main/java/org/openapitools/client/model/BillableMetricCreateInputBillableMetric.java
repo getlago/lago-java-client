@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   BillableMetricCreateInputBillableMetric.JSON_PROPERTY_GROUP
 })
 @JsonTypeName("BillableMetricCreateInput_billable_metric")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class BillableMetricCreateInputBillableMetric {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;

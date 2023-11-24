@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TaxCreateInputTax.JSON_PROPERTY_APPLIED_TO_ORGANIZATION
 })
 @JsonTypeName("TaxCreateInput_tax")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class TaxCreateInputTax {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;

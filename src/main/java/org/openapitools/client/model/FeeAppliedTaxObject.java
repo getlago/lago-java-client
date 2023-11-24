@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   FeeAppliedTaxObject.JSON_PROPERTY_AMOUNT_CURRENCY,
   FeeAppliedTaxObject.JSON_PROPERTY_CREATED_AT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class FeeAppliedTaxObject {
   public static final String JSON_PROPERTY_LAGO_FEE_ID = "lago_fee_id";
   private UUID lagoFeeId;

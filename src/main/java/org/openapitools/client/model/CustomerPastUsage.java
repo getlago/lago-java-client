@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CustomerPastUsage.JSON_PROPERTY_USAGE_PERIODS,
   CustomerPastUsage.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CustomerPastUsage {
   public static final String JSON_PROPERTY_USAGE_PERIODS = "usage_periods";
   private List<CustomerUsage> usagePeriods = new ArrayList<>();

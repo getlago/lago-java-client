@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   AppliedCouponInputAppliedCoupon.JSON_PROPERTY_PERCENTAGE_RATE
 })
 @JsonTypeName("AppliedCouponInput_applied_coupon")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class AppliedCouponInputAppliedCoupon {
   public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;

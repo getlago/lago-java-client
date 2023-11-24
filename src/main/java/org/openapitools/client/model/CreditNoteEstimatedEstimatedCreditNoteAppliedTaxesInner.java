@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CreditNoteEstimatedEstimatedCreditNoteAppliedTaxesInner.JSON_PROPERTY_AMOUNT_CURRENCY
 })
 @JsonTypeName("CreditNoteEstimated_estimated_credit_note_applied_taxes_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class CreditNoteEstimatedEstimatedCreditNoteAppliedTaxesInner {
   public static final String JSON_PROPERTY_LAGO_TAX_ID = "lago_tax_id";
   private UUID lagoTaxId;

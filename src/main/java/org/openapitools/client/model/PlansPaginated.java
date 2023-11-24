@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   PlansPaginated.JSON_PROPERTY_PLANS,
   PlansPaginated.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:46:07.416771019Z[Etc/UTC]")
 public class PlansPaginated {
   public static final String JSON_PROPERTY_PLANS = "plans";
   private List<PlanObject> plans = new ArrayList<>();
