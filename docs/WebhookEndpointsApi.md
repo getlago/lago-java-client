@@ -14,7 +14,7 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 
 ## createWebhookEndpoint
 
-> CreateWebhookEndpoint200Response createWebhookEndpoint(createWebhookEndpointRequest)
+> WebhookEndpoint createWebhookEndpoint(webhookEndpointCreateInput)
 
 Create a webhook_endpoint
 
@@ -41,9 +41,9 @@ public class Example {
         bearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhookEndpointsApi apiInstance = new WebhookEndpointsApi(defaultClient);
-        CreateWebhookEndpointRequest createWebhookEndpointRequest = new CreateWebhookEndpointRequest(); // CreateWebhookEndpointRequest | Webhook Endpoint payload
+        WebhookEndpointCreateInput webhookEndpointCreateInput = new WebhookEndpointCreateInput(); // WebhookEndpointCreateInput | Webhook Endpoint payload
         try {
-            CreateWebhookEndpoint200Response result = apiInstance.createWebhookEndpoint(createWebhookEndpointRequest);
+            WebhookEndpoint result = apiInstance.createWebhookEndpoint(webhookEndpointCreateInput);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebhookEndpointsApi#createWebhookEndpoint");
@@ -61,11 +61,11 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createWebhookEndpointRequest** | [**CreateWebhookEndpointRequest**](CreateWebhookEndpointRequest.md)| Webhook Endpoint payload | |
+| **webhookEndpointCreateInput** | [**WebhookEndpointCreateInput**](WebhookEndpointCreateInput.md)| Webhook Endpoint payload | |
 
 ### Return type
 
-[**CreateWebhookEndpoint200Response**](CreateWebhookEndpoint200Response.md)
+[**WebhookEndpoint**](WebhookEndpoint.md)
 
 ### Authorization
 
@@ -88,7 +88,7 @@ public class Example {
 
 ## destroyWebhookEndpoint
 
-> Object destroyWebhookEndpoint(lagoId)
+> WebhookEndpoint destroyWebhookEndpoint(lagoId)
 
 Delete a webhook endpoint
 
@@ -117,7 +117,7 @@ public class Example {
         WebhookEndpointsApi apiInstance = new WebhookEndpointsApi(defaultClient);
         UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint's record within the Lago system.
         try {
-            Object result = apiInstance.destroyWebhookEndpoint(lagoId);
+            WebhookEndpoint result = apiInstance.destroyWebhookEndpoint(lagoId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebhookEndpointsApi#destroyWebhookEndpoint");
@@ -139,7 +139,7 @@ public class Example {
 
 ### Return type
 
-**Object**
+[**WebhookEndpoint**](WebhookEndpoint.md)
 
 ### Authorization
 
@@ -162,7 +162,7 @@ public class Example {
 
 ## findAllWebhookEndpoints
 
-> FindAllWebhookEndpoints200Response findAllWebhookEndpoints(page, perPage)
+> WebhookEndpointsPaginated findAllWebhookEndpoints(page, perPage)
 
 List all webhook endpoints
 
@@ -192,7 +192,7 @@ public class Example {
         Integer page = 1; // Integer | Page number.
         Integer perPage = 20; // Integer | Number of records per page.
         try {
-            FindAllWebhookEndpoints200Response result = apiInstance.findAllWebhookEndpoints(page, perPage);
+            WebhookEndpointsPaginated result = apiInstance.findAllWebhookEndpoints(page, perPage);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebhookEndpointsApi#findAllWebhookEndpoints");
@@ -215,7 +215,7 @@ public class Example {
 
 ### Return type
 
-[**FindAllWebhookEndpoints200Response**](FindAllWebhookEndpoints200Response.md)
+[**WebhookEndpointsPaginated**](WebhookEndpointsPaginated.md)
 
 ### Authorization
 
@@ -236,7 +236,7 @@ public class Example {
 
 ## findWebhookEndpoint
 
-> Object findWebhookEndpoint(lagoId)
+> WebhookEndpoint findWebhookEndpoint(lagoId)
 
 Retrieve a webhook endpoint
 
@@ -265,7 +265,7 @@ public class Example {
         WebhookEndpointsApi apiInstance = new WebhookEndpointsApi(defaultClient);
         UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint's record within the Lago system.
         try {
-            Object result = apiInstance.findWebhookEndpoint(lagoId);
+            WebhookEndpoint result = apiInstance.findWebhookEndpoint(lagoId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebhookEndpointsApi#findWebhookEndpoint");
@@ -287,7 +287,7 @@ public class Example {
 
 ### Return type
 
-**Object**
+[**WebhookEndpoint**](WebhookEndpoint.md)
 
 ### Authorization
 
@@ -309,7 +309,7 @@ public class Example {
 
 ## updateWebhookEndpoint
 
-> Object updateWebhookEndpoint(lagoId, createWebhookEndpointRequest)
+> WebhookEndpoint updateWebhookEndpoint(lagoId, webhookEndpointUpdateInput)
 
 Update a webhook endpoint
 
@@ -337,9 +337,9 @@ public class Example {
 
         WebhookEndpointsApi apiInstance = new WebhookEndpointsApi(defaultClient);
         UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint's record within the Lago system.
-        CreateWebhookEndpointRequest createWebhookEndpointRequest = new CreateWebhookEndpointRequest(); // CreateWebhookEndpointRequest | Webhook Endpoint update payload
+        WebhookEndpointUpdateInput webhookEndpointUpdateInput = new WebhookEndpointUpdateInput(); // WebhookEndpointUpdateInput | Webhook Endpoint update payload
         try {
-            Object result = apiInstance.updateWebhookEndpoint(lagoId, createWebhookEndpointRequest);
+            WebhookEndpoint result = apiInstance.updateWebhookEndpoint(lagoId, webhookEndpointUpdateInput);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebhookEndpointsApi#updateWebhookEndpoint");
@@ -358,11 +358,11 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **lagoId** | **UUID**| Unique identifier assigned to the webhook endpoint within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the webhook endpoint&#39;s record within the Lago system. | |
-| **createWebhookEndpointRequest** | [**CreateWebhookEndpointRequest**](CreateWebhookEndpointRequest.md)| Webhook Endpoint update payload | |
+| **webhookEndpointUpdateInput** | [**WebhookEndpointUpdateInput**](WebhookEndpointUpdateInput.md)| Webhook Endpoint update payload | |
 
 ### Return type
 
-**Object**
+[**WebhookEndpoint**](WebhookEndpoint.md)
 
 ### Authorization
 

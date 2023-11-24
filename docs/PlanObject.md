@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**lagoId** | **UUID** | Unique identifier of the plan created by Lago. |  |
 |**name** | **String** | The name of the plan. |  |
+|**invoiceDisplayName** | **String** | Specifies the name that will be displayed on an invoice. If no value is set for this field, the name of the plan will be used as the default display name. |  [optional] |
 |**createdAt** | **OffsetDateTime** | The date and time when the plan was created. It is expressed in UTC format according to the ISO 8601 datetime standard. This field provides the timestamp for the exact moment when the plan was initially created. |  |
 |**code** | **String** | The code of the plan. It serves as a unique identifier associated with a particular plan. The code is typically used for internal or system-level identification purposes, like assigning a subscription, for instance. |  |
 |**interval** | [**IntervalEnum**](#IntervalEnum) | The interval used for recurring billing. It represents the frequency at which subscription billing occurs. The interval can be one of the following values: &#x60;yearly&#x60;, &#x60;quarterly&#x60;, &#x60;monthly&#x60; or &#x60;weekly&#x60;. |  |

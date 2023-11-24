@@ -11,6 +11,7 @@
 |**key** | **String** | The group key, only returned for groups with two dimensions. |  [optional] |
 |**value** | **String** | The group value. |  [optional] |
 |**units** | **String** | The number of units consumed for a specific group related to a charge item. |  [optional] |
+|**eventsCount** | **Integer** | The quantity of usage events that have been recorded for a particular charge during the specified time period. These events may also be referred to as the number of transactions in some contexts. |  [optional] |
 |**amountCents** | **Integer** | The amount in cents, tax excluded, consumed for a specific group related to a charge item. |  [optional] |
 
 

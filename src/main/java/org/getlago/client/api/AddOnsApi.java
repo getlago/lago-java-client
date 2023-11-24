@@ -10,8 +10,6 @@ import org.openapitools.client.model.ApiErrorBadRequest;
 import org.openapitools.client.model.ApiErrorNotFound;
 import org.openapitools.client.model.ApiErrorUnauthorized;
 import org.openapitools.client.model.ApiErrorUnprocessableEntity;
-import org.openapitools.client.model.AppliedAddOn;
-import org.openapitools.client.model.AppliedAddOnInput;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +32,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
 public class AddOnsApi {
     private ApiClient apiClient;
 
@@ -55,98 +53,6 @@ public class AddOnsApi {
         this.apiClient = apiClient;
     }
 
-    /**
-     * Apply an add-on to a customer
-     * Apply an add-on to a customer
-     * <p><b>200</b> - Add-on applied
-     * <p><b>400</b> - Bad Request error
-     * <p><b>401</b> - Unauthorized error
-     * <p><b>404</b> - Not Found error
-     * <p><b>422</b> - Unprocessable entity error
-     * @param appliedAddOnInput Apply add-on payload
-     * @return AppliedAddOn
-     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
-     * @deprecated
-     */
-    @Deprecated
-    private ResponseSpec applyAddOnRequestCreation(AppliedAddOnInput appliedAddOnInput) throws WebClientResponseException {
-        Object postBody = appliedAddOnInput;
-        // verify the required parameter 'appliedAddOnInput' is set
-        if (appliedAddOnInput == null) {
-            throw new WebClientResponseException("Missing the required parameter 'appliedAddOnInput' when calling applyAddOn", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
-        // create path and map variables
-        final Map<String, Object> pathParams = new HashMap<String, Object>();
-
-        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
-        final HttpHeaders headerParams = new HttpHeaders();
-        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
-        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
-
-        final String[] localVarAccepts = { 
-            "application/json"
-        };
-        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        final String[] localVarContentTypes = { 
-            "application/json"
-        };
-        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-
-        ParameterizedTypeReference<AppliedAddOn> localVarReturnType = new ParameterizedTypeReference<AppliedAddOn>() {};
-        return apiClient.invokeAPI("/applied_add_ons", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    }
-
-    /**
-     * Apply an add-on to a customer
-     * Apply an add-on to a customer
-     * <p><b>200</b> - Add-on applied
-     * <p><b>400</b> - Bad Request error
-     * <p><b>401</b> - Unauthorized error
-     * <p><b>404</b> - Not Found error
-     * <p><b>422</b> - Unprocessable entity error
-     * @param appliedAddOnInput Apply add-on payload
-     * @return AppliedAddOn
-     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
-     */
-    public Mono<AppliedAddOn> applyAddOn(AppliedAddOnInput appliedAddOnInput) throws WebClientResponseException {
-        ParameterizedTypeReference<AppliedAddOn> localVarReturnType = new ParameterizedTypeReference<AppliedAddOn>() {};
-        return applyAddOnRequestCreation(appliedAddOnInput).bodyToMono(localVarReturnType);
-    }
-
-    /**
-     * Apply an add-on to a customer
-     * Apply an add-on to a customer
-     * <p><b>200</b> - Add-on applied
-     * <p><b>400</b> - Bad Request error
-     * <p><b>401</b> - Unauthorized error
-     * <p><b>404</b> - Not Found error
-     * <p><b>422</b> - Unprocessable entity error
-     * @param appliedAddOnInput Apply add-on payload
-     * @return ResponseEntity&lt;AppliedAddOn&gt;
-     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
-     */
-    public Mono<ResponseEntity<AppliedAddOn>> applyAddOnWithHttpInfo(AppliedAddOnInput appliedAddOnInput) throws WebClientResponseException {
-        ParameterizedTypeReference<AppliedAddOn> localVarReturnType = new ParameterizedTypeReference<AppliedAddOn>() {};
-        return applyAddOnRequestCreation(appliedAddOnInput).toEntity(localVarReturnType);
-    }
-
-    /**
-     * Apply an add-on to a customer
-     * Apply an add-on to a customer
-     * <p><b>200</b> - Add-on applied
-     * <p><b>400</b> - Bad Request error
-     * <p><b>401</b> - Unauthorized error
-     * <p><b>404</b> - Not Found error
-     * <p><b>422</b> - Unprocessable entity error
-     * @param appliedAddOnInput Apply add-on payload
-     * @return ResponseSpec
-     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
-     */
-    public ResponseSpec applyAddOnWithResponseSpec(AppliedAddOnInput appliedAddOnInput) throws WebClientResponseException {
-        return applyAddOnRequestCreation(appliedAddOnInput);
-    }
     /**
      * Create an add-on
      * This endpoint is used to create an add-on that can be then attached to a one-off invoice.

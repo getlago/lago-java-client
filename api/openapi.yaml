@@ -7,7 +7,7 @@ info:
   license:
     name: AGPLv3
   title: Lago API documentation
-  version: 0.46.0-beta
+  version: 0.52.0-beta
 externalDocs:
   description: Lago Github
   url: https://github.com/getlago
@@ -16,6 +16,8 @@ servers:
 security:
 - bearerAuth: []
 tags:
+- description: Everything about Analytics
+  name: analytics
 - description: Everything about Billable metric collection
   externalDocs:
     description: Find out more
@@ -298,54 +300,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
           description: Unprocessable entity error
       summary: Update an add-on
-      tags:
-      - add_ons
-      x-content-type: application/json
-      x-accepts: application/json
-  /applied_add_ons:
-    post:
-      deprecated: true
-      description: Apply an add-on to a customer
-      operationId: applyAddOn
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AppliedAddOnInput'
-        description: Apply add-on payload
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AppliedAddOn'
-          description: Add-on applied
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorBadRequest'
-          description: Bad Request error
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorUnauthorized'
-          description: Unauthorized error
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorNotFound'
-          description: Not Found error
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
-          description: Unprocessable entity error
-      summary: Apply an add-on to a customer
       tags:
       - add_ons
       x-content-type: application/json
@@ -1172,6 +1126,47 @@ paths:
       tags:
       - credit_notes
       x-accepts: application/json
+  /credit_notes/estimate:
+    post:
+      description: This endpoint allows you to retrieve amounts for a new credit note
+        creation.
+      operationId: estimateCreditNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteEstimateInput'
+        description: Credit note estimate payload
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditNoteEstimated'
+          description: Credit note amounts
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorBadRequest'
+          description: Bad Request error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
+          description: Unprocessable entity error
+      summary: Estimate amounts for a new credit note
+      tags:
+      - credit_notes
+      x-content-type: application/json
+      x-accepts: application/json
   /credit_notes/{lago_id}/void:
     put:
       description: This endpoint voids an existing credit note.
@@ -1513,6 +1508,141 @@ paths:
       tags:
       - customers
       x-accepts: application/json
+  /customers/{external_customer_id}/past_usage:
+    get:
+      description: This endpoint enables the retrieval of the usage-based billing
+        data for a customer within past periods.
+      operationId: findAllCustomerPastUsage
+      parameters:
+      - description: Page number.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 1
+          type: integer
+        style: form
+      - description: Number of records per page.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          example: 20
+          type: integer
+        style: form
+      - description: The customer external unique identifier (provided by your own
+          application).
+        explode: false
+        in: path
+        name: external_customer_id
+        required: true
+        schema:
+          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          type: string
+        style: simple
+      - description: The unique identifier of the subscription within your application.
+        explode: true
+        in: query
+        name: external_subscription_id
+        required: true
+        schema:
+          example: sub_1234567890
+          type: string
+        style: form
+      - description: Billable metric code filter to apply to the charge usage
+        explode: true
+        in: query
+        name: billable_metric_code
+        required: false
+        schema:
+          example: cpu
+          type: string
+        style: form
+      - description: Number of past billing period to returns in the result
+        explode: true
+        in: query
+        name: periods_count
+        required: false
+        schema:
+          example: 5
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPastUsage'
+          description: Customer past usage
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorNotFound'
+          description: Not Found error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
+          description: Unprocessable entity error
+      summary: Retrieve customer past usage
+      tags:
+      - customers
+      x-accepts: application/json
+  /customers/{external_customer_id}/checkout_url:
+    post:
+      description: This endpoint regenerates the Payment Provider Checkout URL of
+        a Customer.
+      operationId: generateCustomerCheckoutURL
+      parameters:
+      - description: The customer external unique identifier (provided by your own
+          application).
+        explode: false
+        in: path
+        name: external_customer_id
+        required: true
+        schema:
+          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/generateCustomerCheckoutURL_200_response'
+          description: Customer Checkout URL
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorNotFound'
+          description: Not Found error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
+          description: Unprocessable entity error
+      summary: Generate a Customer Payment Provider Checkout URL
+      tags:
+      - customers
+      x-accepts: application/json
   /events:
     post:
       description: This endpoint is used for transmitting usage measurement events
@@ -1527,7 +1657,11 @@ paths:
         required: true
       responses:
         "200":
-          description: Event received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: Event
         "400":
           content:
             application/json:
@@ -1553,6 +1687,7 @@ paths:
       x-accepts: application/json
   /events/batch:
     post:
+      deprecated: true
       description: This endpoint is used for transmitting a batch of usage measurement
         events to multiple subscriptions for a single customer.
       operationId: createBatchEvents
@@ -1978,6 +2113,87 @@ paths:
       - fees
       x-content-type: application/json
       x-accepts: application/json
+  /analytics/gross_revenue:
+    get:
+      description: Gross revenue is the sum of monthly `finalized` invoice payments
+        and fees paid in advance that are not invoiceable. This total is calculated
+        after deducting taxes and discounts.
+      operationId: findAllGrossRevenues
+      parameters:
+      - description: Currency of revenue analytics. Format must be ISO 4217.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - example: USD
+        style: form
+      - description: The customer external unique identifier (provided by your own
+          application). Use it to filter revenue analytics at the customer level.
+        explode: true
+        in: query
+        name: external_customer_id
+        required: false
+        schema:
+          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrossRevenues'
+          description: Gross revenue
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+      summary: List gross revenue
+      tags:
+      - analytics
+      x-accepts: application/json
+  /analytics/invoiced_usage:
+    get:
+      description: "Reports a monthly analysis focused on the revenue generated from\
+        \ all usage-based fees. It exclusively accounts for revenue that has been\
+        \ formally invoiced. Importantly, this report does not include revenue related\
+        \ to the usage in the current billing period, limiting its scope to previously\
+        \ invoiced amounts."
+      operationId: findAllInvoicedUsages
+      parameters:
+      - description: The currency of invoiced usage analytics. Format must be ISO
+          4217.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - example: USD
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicedUsages'
+          description: Invoiced usage
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+      summary: List usage revenue
+      tags:
+      - analytics
+      x-accepts: application/json
   /invoices:
     get:
       description: This endpoint is used for retrievign all invoices.
@@ -2373,6 +2589,53 @@ paths:
       tags:
       - invoices
       x-accepts: application/json
+  /analytics/mrr:
+    get:
+      description: This endpoint is used to list MRR.
+      operationId: findAllMrrs
+      parameters:
+      - description: |-
+          Quantifies the revenue generated from `subscription` fees on a monthly basis. This figure is calculated post-application of applicable taxes and prior to the deduction of any applicable discounts. The method of calculation varies based on the subscription billing cycle:
+
+          - Revenue from `monthly` subscription invoices is included in the MRR for the month in which the invoice is issued.
+          - Revenue from `quarterly` subscription invoices is distributed evenly over three months. This distribution applies to fees paid in advance (allocated to the next three months) as well as to fees paid in arrears (allocated to the preceding three months).
+          - Revenue from `yearly` subscription invoices is distributed evenly over twelve months. This allocation is applicable for fees paid in advance (spread over the next twelve months) and for fees paid in arrears (spread over the previous twelve months).
+          - Revenue from `weekly` subscription invoices, the total revenue from all invoices issued within a month is summed up. This total is then divided by the number of invoices issued during that month, and the result is multiplied by 4.33, representing the average number of weeks in a month.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - example: USD
+        style: form
+      - description: Show data only for given number of months.
+        explode: true
+        in: query
+        name: months
+        required: false
+        schema:
+          example: 12
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mrrs'
+          description: MRR
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+      summary: List MRR
+      tags:
+      - analytics
+      x-accepts: application/json
   /organizations:
     put:
       description: This endpoint is used to update your own organization's settings.
@@ -2413,6 +2676,40 @@ paths:
       tags:
       - organizations
       x-content-type: application/json
+      x-accepts: application/json
+  /analytics/outstanding_invoices:
+    get:
+      description: "Represents a monthly aggregation, detailing both the total count\
+        \ and the cumulative amount of invoices that have been marked as `finalized`.\
+        \ This report sorts invoices categorically based on their `payment_status`."
+      operationId: findAllOutstandingInvoices
+      parameters:
+      - description: The currency of revenue analytics. Format must be ISO 4217.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - example: USD
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutstandingInvoices'
+          description: Outstanding invoices
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+      summary: List outstanding invoices
+      tags:
+      - analytics
       x-accepts: application/json
   /plans:
     get:
@@ -2825,6 +3122,42 @@ paths:
                 $ref: '#/components/schemas/ApiErrorNotAllowed'
           description: Not Allowed error
       summary: Terminate a subscription
+      tags:
+      - subscriptions
+      x-accepts: application/json
+    get:
+      description: This endpoint retrieves a specific subscription.
+      operationId: findSubscription
+      parameters:
+      - description: External ID of the existing subscription
+        explode: false
+        in: path
+        name: external_id
+        required: true
+        schema:
+          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: Subscription
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorNotFound'
+          description: Not Found error
+      summary: Retrieve a subscription
       tags:
       - subscriptions
       x-accepts: application/json
@@ -3536,7 +3869,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/findAllWebhookEndpoints_200_response'
+                $ref: '#/components/schemas/WebhookEndpointsPaginated'
           description: WebhookEndpoints
         "401":
           content:
@@ -3555,7 +3888,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createWebhookEndpoint_request'
+              $ref: '#/components/schemas/WebhookEndpointCreateInput'
         description: Webhook Endpoint payload
         required: true
       responses:
@@ -3563,7 +3896,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createWebhookEndpoint_200_response'
+                $ref: '#/components/schemas/WebhookEndpoint'
           description: Webhook Endpoint created
         "400":
           content:
@@ -3610,7 +3943,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1webhook_endpoints/post/responses/200/content/application~1json/schema'
+                $ref: '#/components/schemas/WebhookEndpoint'
           description: Webhook Endpoint deleted
         "401":
           content:
@@ -3655,7 +3988,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1webhook_endpoints/post/responses/200/content/application~1json/schema'
+                $ref: '#/components/schemas/WebhookEndpoint'
           description: WebhookEndpoint
         "401":
           content:
@@ -3693,7 +4026,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createWebhookEndpoint_request'
+              $ref: '#/components/schemas/WebhookEndpointUpdateInput'
         description: Webhook Endpoint update payload
         required: true
       responses:
@@ -3701,7 +4034,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1webhook_endpoints/post/responses/200/content/application~1json/schema'
+                $ref: '#/components/schemas/WebhookEndpoint'
           description: Webhook Endpoint updated
         "400":
           content:
@@ -3830,6 +4163,7 @@ components:
         tax_codes:
         - french_standard_vat
         code: setup_fee
+        invoice_display_name: Setup Fee (SF1)
         amount_cents: 50000
         amount_currency: ""
         name: Setup Fee
@@ -3838,6 +4172,12 @@ components:
         name:
           description: The name of the add-on.
           example: Setup Fee
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup Fee (SF1)
           type: string
         code:
           description: Unique code used to identify the add-on.
@@ -3879,6 +4219,7 @@ components:
     AddOnObject:
       example:
         code: setup_fee
+        invoice_display_name: Setup Fee (SF1)
         amount_cents: 50000
         amount_currency: ""
         name: Setup Fee
@@ -3917,6 +4258,12 @@ components:
         name:
           description: The name of the add-on.
           example: Setup Fee
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup Fee (SF1)
           type: string
         code:
           description: Unique code used to identify the add-on.
@@ -3963,6 +4310,7 @@ components:
       example:
         add_on:
           code: setup_fee
+          invoice_display_name: Setup Fee (SF1)
           amount_cents: 50000
           amount_currency: ""
           name: Setup Fee
@@ -4008,6 +4356,7 @@ components:
           current_page: 2
         add_ons:
         - code: setup_fee
+          invoice_display_name: Setup Fee (SF1)
           amount_cents: 50000
           amount_currency: ""
           name: Setup Fee
@@ -4038,6 +4387,7 @@ components:
             charges_count: 0
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         - code: setup_fee
+          invoice_display_name: Setup Fee (SF1)
           amount_cents: 50000
           amount_currency: ""
           name: Setup Fee
@@ -4084,6 +4434,7 @@ components:
           tax_codes:
           - french_standard_vat
           code: setup_fee
+          invoice_display_name: Setup Fee (SF1)
           amount_cents: 50000
           amount_currency: ""
           name: Setup Fee
@@ -4190,97 +4541,6 @@ components:
       - code
       - error
       - status
-      type: object
-    AppliedAddOn:
-      example:
-        applied_add_on:
-          lago_add_on_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          amount_cents: 50000
-          external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          amount_currency: ""
-          created_at: 2022-09-14T16:35:31Z
-          add_on_code: setup_fee
-          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-      properties:
-        applied_add_on:
-          $ref: '#/components/schemas/AppliedAddOnObject'
-      required:
-      - applied_add_on
-      type: object
-    AppliedAddOnInput:
-      example:
-        applied_add_on:
-          amount_cents: 50000
-          external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          amount_currency: ""
-          add_on_code: setup_fee
-      properties:
-        applied_add_on:
-          $ref: '#/components/schemas/AppliedAddOnInput_applied_add_on'
-      required:
-      - applied_add_on
-      type: object
-    AppliedAddOnObject:
-      example:
-        lago_add_on_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-        amount_cents: 50000
-        external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-        amount_currency: ""
-        created_at: 2022-09-14T16:35:31Z
-        add_on_code: setup_fee
-        lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-        lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-      properties:
-        lago_id:
-          description: Unique identifier of the applied add-on created by Lago.
-          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          format: uuid
-          type: string
-        lago_add_on_id:
-          description: Unique identifier of the add-on created by Lago.
-          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          format: uuid
-          type: string
-        add_on_code:
-          description: Unique code used to identify the add-on.
-          example: setup_fee
-          type: string
-        lago_customer_id:
-          description: Unique identifier of the customer created by Lago.
-          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          format: uuid
-          type: string
-        external_customer_id:
-          description: The customer external unique identifier (provided by your own
-            application)
-          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          type: string
-        amount_cents:
-          description: "The cost of the add-on in cents, excluding any applicable\
-            \ taxes, that is billed to a customer. By creating a one-off invoice,\
-            \ you will be able to override this value."
-          example: 50000
-          type: integer
-        amount_currency:
-          allOf:
-          - $ref: '#/components/schemas/Currency'
-          - description: The currency of the add-on.
-            example: USD
-            nullable: true
-        created_at:
-          example: 2022-09-14T16:35:31Z
-          format: date-time
-          type: string
-      required:
-      - add_on_code
-      - amount_cents
-      - amount_currency
-      - created_at
-      - external_customer_id
-      - lago_add_on_id
-      - lago_customer_id
-      - lago_id
       type: object
     AppliedCoupon:
       example:
@@ -4550,17 +4810,18 @@ components:
     BillableMetric:
       example:
         billable_metric:
-          aggregation_type: sum_agg
           code: storage
-          plans_count: 4
           recurring: false
-          name: Storage
           description: GB of storage used in my application
           created_at: 2022-09-14T16:35:31Z
-          active_subscriptions_count: 4
           draft_invoices_count: 10
-          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          weighted_interval: seconds
           field_name: gb
+          aggregation_type: sum_agg
+          plans_count: 4
+          name: Storage
+          active_subscriptions_count: 4
+          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           group:
             values:
             - us-east-1
@@ -4575,17 +4836,18 @@ components:
       type: object
     BillableMetricObject:
       example:
-        aggregation_type: sum_agg
         code: storage
-        plans_count: 4
         recurring: false
-        name: Storage
         description: GB of storage used in my application
         created_at: 2022-09-14T16:35:31Z
-        active_subscriptions_count: 4
         draft_invoices_count: 10
-        lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        weighted_interval: seconds
         field_name: gb
+        aggregation_type: sum_agg
+        plans_count: 4
+        name: Storage
+        active_subscriptions_count: 4
+        lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         group:
           values:
           - us-east-1
@@ -4634,14 +4896,27 @@ components:
           nullable: true
           type: string
         aggregation_type:
-          description: "Aggregation method used to compute usage for this billable\
-            \ metric. Possible values are `count_agg`, `sum_agg`, `max_agg` or `unique_count_agg`."
+          description: Aggregation method used to compute usage for this billable
+            metric.
           enum:
           - count_agg
           - sum_agg
           - max_agg
           - unique_count_agg
+          - weighted_sum_agg
+          - latest_agg
           example: sum_agg
+          type: string
+        weighted_interval:
+          description: "Parameter exclusively utilized in conjunction with the `weighted_sum`\
+            \ aggregation type. It serves to adjust the aggregation result by assigning\
+            \ weights and proration to the result based on time intervals. When this\
+            \ field is not provided, the default time interval is assumed to be in\
+            \ `seconds`."
+          enum:
+          - seconds
+          example: seconds
+          nullable: true
           type: string
         group:
           $ref: '#/components/schemas/BillableMetricGroup'
@@ -4676,6 +4951,7 @@ components:
         recurring: false
         name: Storage
         description: GB of storage used in my application
+        weighted_interval: seconds
         field_name: gb
         group:
           values:
@@ -4715,14 +4991,27 @@ components:
           nullable: true
           type: string
         aggregation_type:
-          description: "Aggregation method used to compute usage for this billable\
-            \ metric. Possible values are `count_agg`, `sum_agg`, `max_agg` or `unique_count_agg`."
+          description: Aggregation method used to compute usage for this billable
+            metric.
           enum:
           - count_agg
           - sum_agg
           - max_agg
           - unique_count_agg
+          - weighted_sum_agg
+          - latest_agg
           example: sum_agg
+          type: string
+        weighted_interval:
+          description: "Parameter exclusively utilized in conjunction with the `weighted_sum`\
+            \ aggregation type. It serves to adjust the aggregation result by assigning\
+            \ weights and proration to the result based on time intervals. When this\
+            \ field is not provided, the default time interval is assumed to be in\
+            \ `seconds`."
+          enum:
+          - seconds
+          example: seconds
+          nullable: true
           type: string
         group:
           $ref: '#/components/schemas/BillableMetricGroup'
@@ -4744,6 +5033,7 @@ components:
           recurring: false
           name: Storage
           description: GB of storage used in my application
+          weighted_interval: seconds
           field_name: gb
           group:
             values:
@@ -4793,34 +5083,36 @@ components:
           prev_page: 1
           current_page: 2
         billable_metrics:
-        - aggregation_type: sum_agg
-          code: storage
-          plans_count: 4
+        - code: storage
           recurring: false
-          name: Storage
           description: GB of storage used in my application
           created_at: 2022-09-14T16:35:31Z
-          active_subscriptions_count: 4
           draft_invoices_count: 10
-          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          weighted_interval: seconds
           field_name: gb
+          aggregation_type: sum_agg
+          plans_count: 4
+          name: Storage
+          active_subscriptions_count: 4
+          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           group:
             values:
             - us-east-1
             - us-east-2
             - eu-west-1
             key: region
-        - aggregation_type: sum_agg
-          code: storage
-          plans_count: 4
+        - code: storage
           recurring: false
-          name: Storage
           description: GB of storage used in my application
           created_at: 2022-09-14T16:35:31Z
-          active_subscriptions_count: 4
           draft_invoices_count: 10
-          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          weighted_interval: seconds
           field_name: gb
+          aggregation_type: sum_agg
+          plans_count: 4
+          name: Storage
+          active_subscriptions_count: 4
+          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           group:
             values:
             - us-east-1
@@ -4853,6 +5145,12 @@ components:
         billable_metric_code:
           description: Unique code identifying a billable metric.
           example: requests
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup
           type: string
         created_at:
           description: The date and time when the charge was created. It is expressed
@@ -5279,6 +5577,7 @@ components:
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           expiration_at: 2022-08-08T23:59:59Z
           coupon_type: fixed_amount
+          terminated_at: 2022-08-08T23:59:59Z
       properties:
         coupon:
           $ref: '#/components/schemas/CouponObject'
@@ -5412,6 +5711,7 @@ components:
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         expiration_at: 2022-08-08T23:59:59Z
         coupon_type: fixed_amount
+        terminated_at: 2022-08-08T23:59:59Z
       properties:
         lago_id:
           description: "Unique identifier of the coupon, created by Lago."
@@ -5545,6 +5845,14 @@ components:
           example: 2022-04-29T08:59:51Z
           format: date-time
           type: string
+        terminated_at:
+          description: "This field indicates if the coupon has been terminated and\
+            \ is no longer usable. If it's not null, it won't be removed for existing\
+            \ customers using it, but it prevents the coupon from being applied in\
+            \ the future."
+          example: 2022-08-08T23:59:59Z
+          format: date-time
+          type: string
       required:
       - code
       - coupon_type
@@ -5579,6 +5887,7 @@ components:
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           expiration_at: 2022-08-08T23:59:59Z
           coupon_type: fixed_amount
+          terminated_at: 2022-08-08T23:59:59Z
         - limited_plans: true
           code: startup_deal
           limited_billable_metrics: false
@@ -5598,6 +5907,7 @@ components:
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           expiration_at: 2022-08-08T23:59:59Z
           coupon_type: fixed_amount
+          terminated_at: 2022-08-08T23:59:59Z
         meta:
           next_page: 3
           total_count: 70
@@ -5624,6 +5934,61 @@ components:
           - $ref: '#/components/schemas/CouponBaseInput'
       required:
       - coupon
+      type: object
+    CreditNoteEstimateInput:
+      example:
+        credit_note:
+          invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          items:
+          - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 10
+          - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
+            amount_cents: 5
+      properties:
+        credit_note:
+          $ref: '#/components/schemas/CreditNoteEstimateInput_credit_note'
+      required:
+      - credit_note
+      type: object
+    CreditNoteEstimated:
+      example:
+        estimated_credit_note:
+          taxes_amount_cents: 20
+          taxes_rate: 20
+          lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          max_creditable_amount_cents: 100
+          max_refundable_amount_cents: 0
+          currency: ""
+          applied_taxes:
+          - tax_code: french_standard_vat
+            amount_cents: 2000
+            tax_name: TVA
+            amount_currency: ""
+            lago_tax_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            tax_description: French standard VAT
+            base_amount_cents: 100
+            tax_rate: 20
+          - tax_code: french_standard_vat
+            amount_cents: 2000
+            tax_name: TVA
+            amount_currency: ""
+            lago_tax_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            tax_description: French standard VAT
+            base_amount_cents: 100
+            tax_rate: 20
+          sub_total_excluding_taxes_amount_cents: 100
+          invoice_number: LAG-1234
+          items:
+          - lago_fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 100
+          - lago_fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 100
+          coupons_adjustment_amount_cents: 20
+      properties:
+        estimated_credit_note:
+          $ref: '#/components/schemas/CreditNoteEstimated_estimated_credit_note'
+      required:
+      - estimated_credit_note
       type: object
     CreditObject:
       properties:
@@ -5676,13 +6041,13 @@ components:
           description: Free text
           created_at: 2022-09-14T16:35:31Z
           sub_total_excluding_taxes_amount_cents: 100
+          coupons_adjustment_amount_cents: 20
           total_amount_cents: 120
           number: LAG-1234-CN2
           credit_status: available
           credit_amount_cents: 100
           balance_amount_cents: 100
           updated_at: 2022-09-14T16:35:31Z
-          coupons_adjustement_amount_cents: 20
           refund_amount_cents: 0
           currency: ""
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -5765,13 +6130,13 @@ components:
         description: Free text
         created_at: 2022-09-14T16:35:31Z
         sub_total_excluding_taxes_amount_cents: 100
+        coupons_adjustment_amount_cents: 20
         total_amount_cents: 120
         number: LAG-1234-CN2
         credit_status: available
         credit_amount_cents: 100
         balance_amount_cents: 100
         updated_at: 2022-09-14T16:35:31Z
-        coupons_adjustement_amount_cents: 20
         refund_amount_cents: 0
         currency: ""
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -5903,7 +6268,7 @@ components:
           description: "The refunded amount of the credit note, expressed in cents."
           example: 0
           type: integer
-        coupons_adjustement_amount_cents:
+        coupons_adjustment_amount_cents:
           description: The pro-rated amount of the coupons applied to the source invoice.
           example: 20
           type: integer
@@ -5935,7 +6300,7 @@ components:
           type: array
       required:
       - balance_amount_cents
-      - coupons_adjustement_amount_cents
+      - coupons_adjustment_amount_cents
       - created_at
       - credit_amount_cents
       - currency
@@ -5967,13 +6332,13 @@ components:
           description: Free text
           created_at: 2022-09-14T16:35:31Z
           sub_total_excluding_taxes_amount_cents: 100
+          coupons_adjustment_amount_cents: 20
           total_amount_cents: 120
           number: LAG-1234-CN2
           credit_status: available
           credit_amount_cents: 100
           balance_amount_cents: 100
           updated_at: 2022-09-14T16:35:31Z
-          coupons_adjustement_amount_cents: 20
           refund_amount_cents: 0
           currency: ""
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -6003,13 +6368,13 @@ components:
           description: Free text
           created_at: 2022-09-14T16:35:31Z
           sub_total_excluding_taxes_amount_cents: 100
+          coupons_adjustment_amount_cents: 20
           total_amount_cents: 120
           number: LAG-1234-CN2
           credit_status: available
           credit_amount_cents: 100
           balance_amount_cents: 100
           updated_at: 2022-09-14T16:35:31Z
-          coupons_adjustement_amount_cents: 20
           refund_amount_cents: 0
           currency: ""
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -6294,18 +6659,22 @@ components:
           code: storage
           name: Storage
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        events_count: 10
         charge:
+          invoice_display_name: Setup
           charge_model: graduated
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         amount_cents: 123
         amount_currency: ""
         groups:
-        - amount_cents: 1000
+        - events_count: 10
+          amount_cents: 1000
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           units: "0.9"
           value: europe
           key: key
-        - amount_cents: 1000
+        - events_count: 10
+          amount_cents: 1000
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           units: "0.9"
           value: europe
@@ -6318,6 +6687,12 @@ components:
           example: "1.0"
           pattern: "^[0-9]+.?[0-9]*$"
           type: string
+        events_count:
+          description: The quantity of usage events that have been recorded for a
+            particular charge during the specified time period. These events may also
+            be referred to as the number of transactions in some contexts.
+          example: 10
+          type: integer
         amount_cents:
           description: "The amount in cents, tax excluded, consumed by the customer\
             \ for a specific charge item."
@@ -6339,6 +6714,7 @@ components:
             $ref: '#/components/schemas/CustomerChargeUsageObject_groups_inner'
           required:
           - amount_cents
+          - events_count
           - lago_id
           - units
           - value
@@ -6348,6 +6724,7 @@ components:
       - amount_currency
       - billable_metric
       - charge
+      - events_count
       - groups
       - units
       type: object
@@ -6609,6 +6986,150 @@ components:
               $ref: '#/components/schemas/TaxObject'
             type: array
         type: object
+    CustomerPastUsage:
+      example:
+        meta:
+          next_page: 3
+          total_count: 70
+          total_pages: 4
+          prev_page: 1
+          current_page: 2
+        usage_periods:
+        - customer_usage:
+            total_amount_cents: 123
+            charges_usage:
+            - billable_metric:
+                aggregation_type: sum_agg
+                code: storage
+                name: Storage
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              events_count: 10
+              charge:
+                invoice_display_name: Setup
+                charge_model: graduated
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              amount_cents: 123
+              amount_currency: ""
+              groups:
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              units: "1.0"
+            - billable_metric:
+                aggregation_type: sum_agg
+                code: storage
+                name: Storage
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              events_count: 10
+              charge:
+                invoice_display_name: Setup
+                charge_model: graduated
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              amount_cents: 123
+              amount_currency: ""
+              groups:
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              units: "1.0"
+            taxes_amount_cents: 200
+            issuing_date: 2022-08-01T23:59:59Z
+            lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 123
+            to_datetime: 2022-07-31T23:59:59Z
+            currency: ""
+            from_datetime: 2022-07-01T00:00:00Z
+        - customer_usage:
+            total_amount_cents: 123
+            charges_usage:
+            - billable_metric:
+                aggregation_type: sum_agg
+                code: storage
+                name: Storage
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              events_count: 10
+              charge:
+                invoice_display_name: Setup
+                charge_model: graduated
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              amount_cents: 123
+              amount_currency: ""
+              groups:
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              units: "1.0"
+            - billable_metric:
+                aggregation_type: sum_agg
+                code: storage
+                name: Storage
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              events_count: 10
+              charge:
+                invoice_display_name: Setup
+                charge_model: graduated
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              amount_cents: 123
+              amount_currency: ""
+              groups:
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              - events_count: 10
+                amount_cents: 1000
+                lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                units: "0.9"
+                value: europe
+                key: key
+              units: "1.0"
+            taxes_amount_cents: 200
+            issuing_date: 2022-08-01T23:59:59Z
+            lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 123
+            to_datetime: 2022-07-31T23:59:59Z
+            currency: ""
+            from_datetime: 2022-07-01T00:00:00Z
+      properties:
+        usage_periods:
+          items:
+            $ref: '#/components/schemas/CustomerUsage'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - meta
+      - usage_periods
+      type: object
     CustomersPaginated:
       example:
         meta:
@@ -6641,18 +7162,22 @@ components:
               code: storage
               name: Storage
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            events_count: 10
             charge:
+              invoice_display_name: Setup
               charge_model: graduated
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             amount_cents: 123
             amount_currency: ""
             groups:
-            - amount_cents: 1000
+            - events_count: 10
+              amount_cents: 1000
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
               units: "0.9"
               value: europe
               key: key
-            - amount_cents: 1000
+            - events_count: 10
+              amount_cents: 1000
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
               units: "0.9"
               value: europe
@@ -6663,18 +7188,22 @@ components:
               code: storage
               name: Storage
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            events_count: 10
             charge:
+              invoice_display_name: Setup
               charge_model: graduated
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             amount_cents: 123
             amount_currency: ""
             groups:
-            - amount_cents: 1000
+            - events_count: 10
+              amount_cents: 1000
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
               units: "0.9"
               value: europe
               key: key
-            - amount_cents: 1000
+            - events_count: 10
+              amount_cents: 1000
               lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
               units: "0.9"
               value: europe
@@ -6682,6 +7211,7 @@ components:
             units: "1.0"
           taxes_amount_cents: 200
           issuing_date: 2022-08-01T23:59:59Z
+          lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           amount_cents: 123
           to_datetime: 2022-07-31T23:59:59Z
           currency: ""
@@ -6701,18 +7231,22 @@ components:
             code: storage
             name: Storage
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          events_count: 10
           charge:
+            invoice_display_name: Setup
             charge_model: graduated
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           amount_cents: 123
           amount_currency: ""
           groups:
-          - amount_cents: 1000
+          - events_count: 10
+            amount_cents: 1000
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             units: "0.9"
             value: europe
             key: key
-          - amount_cents: 1000
+          - events_count: 10
+            amount_cents: 1000
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             units: "0.9"
             value: europe
@@ -6723,18 +7257,22 @@ components:
             code: storage
             name: Storage
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          events_count: 10
           charge:
+            invoice_display_name: Setup
             charge_model: graduated
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           amount_cents: 123
           amount_currency: ""
           groups:
-          - amount_cents: 1000
+          - events_count: 10
+            amount_cents: 1000
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             units: "0.9"
             value: europe
             key: key
-          - amount_cents: 1000
+          - events_count: 10
+            amount_cents: 1000
             lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             units: "0.9"
             value: europe
@@ -6742,6 +7280,7 @@ components:
           units: "1.0"
         taxes_amount_cents: 200
         issuing_date: 2022-08-01T23:59:59Z
+        lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         amount_cents: 123
         to_datetime: 2022-07-31T23:59:59Z
         currency: ""
@@ -6763,6 +7302,13 @@ components:
           description: The date of creation of the invoice.
           example: 2022-08-01T23:59:59Z
           format: date-time
+          type: string
+        lago_invoice_id:
+          description: A unique identifier associated with the invoice related to
+            this particular usage record.
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          nullable: true
           type: string
         currency:
           allOf:
@@ -6810,7 +7356,7 @@ components:
           properties:
             gb: 10
           lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          timestamp: 2022-04-29T08:59:51Z
+          timestamp: 2022-04-29T08:59:51.123Z
       properties:
         event:
           $ref: '#/components/schemas/EventObject'
@@ -6857,7 +7403,7 @@ components:
           external_subscription_id: sub_1234567890
           properties:
             gb: 10
-          timestamp: 1651240791
+          timestamp: "1651240791.123"
       properties:
         event:
           $ref: '#/components/schemas/EventInput_event'
@@ -6876,7 +7422,7 @@ components:
         properties:
           gb: 10
         lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-        timestamp: 2022-04-29T08:59:51Z
+        timestamp: 2022-04-29T08:59:51.123Z
       properties:
         lago_id:
           description: Unique identifier assigned to the event within the Lago application.
@@ -6898,12 +7444,14 @@ components:
             identifier for the customer's record within the Lago system
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
           format: uuid
+          nullable: true
           type: string
         external_customer_id:
           description: "The customer external unique identifier (provided by your\
             \ own application). This field is optional if you send the `external_subscription_id`,\
             \ targeting a specific subscription."
           example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          nullable: true
           type: string
         code:
           description: "The code that identifies a targeted billable metric. It is\
@@ -6917,23 +7465,25 @@ components:
             \ the occurrence of the event in Coordinated Universal Time (UTC). If\
             \ this timestamp is not provided, the API will automatically set it to\
             \ the time of event reception."
-          example: 2022-04-29T08:59:51Z
+          example: 2022-04-29T08:59:51.123Z
           format: date-time
           type: string
         properties:
-          $ref: '#/components/schemas/EventBatchInput_event_properties'
+          $ref: '#/components/schemas/EventObject_properties'
         lago_subscription_id:
           description: Unique identifier assigned to the subscription within the Lago
             application. This ID is exclusively created by Lago and serves as a unique
             identifier for the subscription’s record within the Lago system
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
           format: uuid
+          nullable: true
           type: string
         external_subscription_id:
           description: The unique identifier of the subscription within your application.
             It is a mandatory field when the customer possesses multiple subscriptions
             or when the `external_customer_id` is not provided.
           example: sub_1234567890
+          nullable: true
           type: string
         created_at:
           description: "The creation date of the event's record in the Lago application,\
@@ -6962,6 +7512,7 @@ components:
           amount_cents: 100
           external_customer_id: external_id
           created_at: 2022-08-24T14:58:59Z
+          precise_unit_amount: "312.5"
           units: "0.32"
           total_amount_currency: ""
           event_transaction_id: transaction_1234567890
@@ -6973,6 +7524,8 @@ components:
           item:
             lago_item_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             code: startup
+            invoice_display_name: Setup Fee (SF1)
+            group_invoice_display_name: Transactions - ACH
             item_type: Subscription
             name: Startup
             type: subscription
@@ -6984,6 +7537,7 @@ components:
           succeeded_at: 2022-08-24T14:58:59Z
           total_amount_cents: 120
           events_count: 23
+          invoice_display_name: Setup Fee (SF1)
           pay_in_advance: true
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           lago_group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -7018,6 +7572,7 @@ components:
         amount_cents: 100
         external_customer_id: external_id
         created_at: 2022-08-24T14:58:59Z
+        precise_unit_amount: "312.5"
         units: "0.32"
         total_amount_currency: ""
         event_transaction_id: transaction_1234567890
@@ -7029,6 +7584,8 @@ components:
         item:
           lago_item_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           code: startup
+          invoice_display_name: Setup Fee (SF1)
+          group_invoice_display_name: Transactions - ACH
           item_type: Subscription
           name: Startup
           type: subscription
@@ -7040,6 +7597,7 @@ components:
         succeeded_at: 2022-08-24T14:58:59Z
         total_amount_cents: 120
         events_count: 23
+        invoice_display_name: Setup Fee (SF1)
         pay_in_advance: true
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         lago_group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -7092,34 +7650,36 @@ components:
         lago_subscription_id:
           description: "Unique identifier assigned to the subscription, created by\
             \ Lago. This field is specifically displayed when the fee type is charge\
-            \ and the payment for the fee is made in advance (`pay_in_advance` is\
-            \ set to true)."
+            \ or subscription."
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
           format: uuid
           nullable: true
           type: string
         lago_customer_id:
           description: "Unique identifier assigned to the customer, created by Lago.\
-            \ This field is specifically displayed when the fee type is charge and\
-            \ the payment for the fee is made in advance (`pay_in_advance` is set\
-            \ to true)."
+            \ This field is specifically displayed when the fee type is charge or\
+            \ subscription."
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
           format: uuid
           nullable: true
           type: string
         external_customer_id:
           description: Unique identifier assigned to the customer in your application.
-            This field is specifically displayed when the fee type is charge and the
-            payment for the fee is made in advance (`pay_in_advance` is set to true).
+            This field is specifically displayed when the fee type is charge or subscription.
           example: external_id
           nullable: true
           type: string
         external_subscription_id:
           description: Unique identifier assigned to the subscription in your application.
-            This field is specifically displayed when the fee type is charge and the
-            payment for the fee is made in advance (`pay_in_advance` is set to true).
+            This field is specifically displayed when the fee type is charge or subscription.
           example: external_id
           nullable: true
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup Fee (SF1)
           type: string
         amount_cents:
           description: "The cost of this specific fee, excluding any applicable taxes."
@@ -7146,6 +7706,10 @@ components:
             or cost associated with the usage of the service or product provided to
             the customer.
           example: "0.32"
+          type: string
+        precise_unit_amount:
+          description: "The unit amount of the fee per unit, with precision."
+          example: "312.5"
           type: string
         total_amount_cents:
           description: "The cost of this specific fee, including any applicable taxes."
@@ -7255,11 +7819,11 @@ components:
       - item
       - pay_in_advance
       - payment_status
+      - precise_unit_amount
       - taxes_amount_cents
       - taxes_rate
       - total_amount_cents
       - total_amount_currency
-      - unit_amount_cents
       - units
       type: object
     Fees:
@@ -7270,6 +7834,7 @@ components:
           amount_cents: 100
           external_customer_id: external_id
           created_at: 2022-08-24T14:58:59Z
+          precise_unit_amount: "312.5"
           units: "0.32"
           total_amount_currency: ""
           event_transaction_id: transaction_1234567890
@@ -7281,6 +7846,8 @@ components:
           item:
             lago_item_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             code: startup
+            invoice_display_name: Setup Fee (SF1)
+            group_invoice_display_name: Transactions - ACH
             item_type: Subscription
             name: Startup
             type: subscription
@@ -7292,6 +7859,7 @@ components:
           succeeded_at: 2022-08-24T14:58:59Z
           total_amount_cents: 120
           events_count: 23
+          invoice_display_name: Setup Fee (SF1)
           pay_in_advance: true
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           lago_group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -7306,6 +7874,7 @@ components:
           amount_cents: 100
           external_customer_id: external_id
           created_at: 2022-08-24T14:58:59Z
+          precise_unit_amount: "312.5"
           units: "0.32"
           total_amount_currency: ""
           event_transaction_id: transaction_1234567890
@@ -7317,6 +7886,8 @@ components:
           item:
             lago_item_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
             code: startup
+            invoice_display_name: Setup Fee (SF1)
+            group_invoice_display_name: Transactions - ACH
             item_type: Subscription
             name: Startup
             type: subscription
@@ -7328,6 +7899,7 @@ components:
           succeeded_at: 2022-08-24T14:58:59Z
           total_amount_cents: 120
           events_count: 23
+          invoice_display_name: Setup Fee (SF1)
           pay_in_advance: true
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           lago_group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -7364,6 +7936,45 @@ components:
       required:
       - fee
       type: object
+    GrossRevenueObject:
+      example:
+        month: 2023-11-01T00:00:00.000Z
+        amount_cents: 50000
+        currency: ""
+      properties:
+        month:
+          description: Identifies the month to analyze revenue.
+          example: 2023-11-01T00:00:00.000Z
+          type: string
+        amount_cents:
+          description: "The total amount of revenue for a period, expressed in cents."
+          example: 50000
+          type: integer
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The currency of revenue analytics. Format must be ISO 4217.
+            example: USD
+      required:
+      - month
+      type: object
+    GrossRevenues:
+      example:
+        gross_revenues:
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+      properties:
+        gross_revenues:
+          items:
+            $ref: '#/components/schemas/GrossRevenueObject'
+          type: array
+      required:
+      - gross_revenues
+      type: object
     GroupObject:
       example:
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -7397,6 +8008,12 @@ components:
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
           format: uuid
           type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual group will be\
+            \ used as the default display name."
+          example: AWS
+          type: string
         values:
           $ref: '#/components/schemas/GroupPropertiesObject_values'
       required:
@@ -7429,6 +8046,45 @@ components:
       - groups
       - meta
       type: object
+    MrrObject:
+      example:
+        month: 2023-11-01T00:00:00.000Z
+        amount_cents: 50000
+        currency: ""
+      properties:
+        month:
+          description: Identifies the month to analyze MRR.
+          example: 2023-11-01T00:00:00.000Z
+          type: string
+        amount_cents:
+          description: "The total amount of MRR, expressed in cents."
+          example: 50000
+          type: integer
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The currency of MRR analytics. Format must be ISO 4217.
+            example: USD
+      required:
+      - month
+      type: object
+    Mrrs:
+      example:
+        mrrs:
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+      properties:
+        mrrs:
+          items:
+            $ref: '#/components/schemas/MrrObject'
+          type: array
+      required:
+      - mrrs
+      type: object
     Invoice:
       example:
         invoice: null
@@ -7454,6 +8110,54 @@ components:
           description: Fees total amount on which the tax is applied
           example: 20000
           type: integer
+      type: object
+    InvoicedUsageObject:
+      example:
+        code: code1
+        month: 2023-11-01T00:00:00.000Z
+        amount_cents: 50000
+        currency: ""
+      properties:
+        month:
+          description: Identifies the month to analyze revenue.
+          example: 2023-11-01T00:00:00.000Z
+          type: string
+        code:
+          description: The code of the usage-based billable metrics.
+          example: code1
+          type: string
+        amount_cents:
+          description: "The total amount of revenue for a period, expressed in cents."
+          example: 50000
+          type: integer
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The currency of revenue analytics. Format must be ISO 4217.
+            example: USD
+      required:
+      - amount_cents
+      - currency
+      - month
+      type: object
+    InvoicedUsages:
+      example:
+        invoiced_usages:
+        - code: code1
+          month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+        - code: code1
+          month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          currency: ""
+      properties:
+        invoiced_usages:
+          items:
+            $ref: '#/components/schemas/InvoicedUsageObject'
+          type: array
+      required:
+      - invoiced_usages
       type: object
     InvoiceMetadataObject:
       example:
@@ -7713,6 +8417,7 @@ components:
           - unit_amount_cents: 12000
             tax_codes:
             - french_standard_vat
+            invoice_display_name: Setup Fee (SF1)
             description: "The description of the fee line item in the invoice. By\
               \ default, the description of the add-on is used."
             add_on_code: setup_fee
@@ -7720,6 +8425,7 @@ components:
           - unit_amount_cents: 12000
             tax_codes:
             - french_standard_vat
+            invoice_display_name: Setup Fee (SF1)
             description: "The description of the fee line item in the invoice. By\
               \ default, the description of the add-on is used."
             add_on_code: setup_fee
@@ -7839,6 +8545,65 @@ components:
       required:
       - invoice
       type: object
+    OutstandingInvoiceObject:
+      example:
+        month: 2023-11-01T00:00:00.000Z
+        amount_cents: 50000
+        payment_status: succeeded
+        currency: ""
+        invoices_count: 10
+      properties:
+        month:
+          description: Identifies the month to analyze revenue.
+          example: 2023-11-01T00:00:00.000Z
+          type: string
+        payment_status:
+          description: The payment status of the invoices.
+          enum:
+          - pending
+          - succeeded
+          - failed
+          example: succeeded
+          type: string
+        invoices_count:
+          description: Contains invoices count.
+          example: 10
+          type: integer
+        amount_cents:
+          description: "The total amount of revenue for a period, expressed in cents."
+          example: 50000
+          type: integer
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The currency of revenue analytics. Format must be ISO 4217.
+            example: USD
+      required:
+      - amount_cents
+      - invoices_count
+      - month
+      type: object
+    OutstandingInvoices:
+      example:
+        outstanding_invoices:
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          payment_status: succeeded
+          currency: ""
+          invoices_count: 10
+        - month: 2023-11-01T00:00:00.000Z
+          amount_cents: 50000
+          payment_status: succeeded
+          currency: ""
+          invoices_count: 10
+      properties:
+        outstanding_invoices:
+          items:
+            $ref: '#/components/schemas/OutstandingInvoiceObject'
+          type: array
+      required:
+      - outstanding_invoices
+      type: object
     Organization:
       example:
         organization:
@@ -7886,6 +8651,7 @@ components:
           - https://webhook2.brex.com
           state: NYC
           legal_name: legal_name
+          default_currency: ""
           email: brex@brex.com
           tax_identification_number: US123456789
       properties:
@@ -7967,6 +8733,7 @@ components:
         - https://webhook2.brex.com
         state: NYC
         legal_name: legal_name
+        default_currency: ""
         email: brex@brex.com
         tax_identification_number: US123456789
       properties:
@@ -8013,6 +8780,11 @@ components:
           - description: The country of your organization.
             example: US
             nullable: true
+        default_currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The default currency of an organization.
+            example: USD
         address_line1:
           description: The first line of your organization’s billing address.
           example: 100 Brex Street
@@ -8106,6 +8878,7 @@ components:
           net_payment_term: 30
           state: NYC
           legal_name: legal_name
+          default_currency: ""
           email: brex@brex.com
           tax_identification_number: US123456789
       properties:
@@ -8187,6 +8960,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8201,6 +8975,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8221,18 +8996,22 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
@@ -8241,6 +9020,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8261,6 +9041,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -8270,6 +9051,7 @@ components:
               free_units_per_events: 5
               free_units_per_total_aggregation: "500"
             group_properties: []
+          invoice_display_name: Startup plan
           amount_currency: ""
           bill_charges_monthly: true
           name: Startup
@@ -8293,6 +9075,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8306,6 +9089,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8323,23 +9107,28 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8357,6 +9146,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -8367,6 +9157,7 @@ components:
               free_units_per_total_aggregation: "500"
             group_properties: []
           code: startup
+          invoice_display_name: Startup plan
           amount_cents: 10000
           amount_currency: ""
           bill_charges_monthly: true
@@ -8381,6 +9172,88 @@ components:
       required:
       - plan
       type: object
+    PlanOverridesObject:
+      description: Based plan overrides.
+      example:
+        tax_codes:
+        - french_standard_vat
+        charges:
+        - tax_codes:
+          - french_standard_vat
+          invoice_display_name: Setup
+          billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          group_properties:
+          - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            values: null
+          - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            values: null
+          min_amount_cents: 0
+          id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          properties: null
+        - tax_codes:
+          - french_standard_vat
+          invoice_display_name: Setup
+          billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          group_properties:
+          - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            values: null
+          - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            values: null
+          min_amount_cents: 0
+          id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          properties: null
+        invoice_display_name: Startup plan
+        amount_cents: 10000
+        amount_currency: ""
+        name: Startup
+        description: Plan for early stage startups.
+        trial_period: 5
+      properties:
+        amount_cents:
+          description: "The base cost of the plan, excluding any applicable taxes,\
+            \ that is billed on a recurring basis. This value is defined at 0 if your\
+            \ plan is a pay-as-you-go plan."
+          example: 10000
+          type: integer
+        amount_currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: "The currency of the plan. It indicates the monetary unit\
+              \ in which the plan's cost, including taxes and usage-based charges,\
+              \ is expressed."
+            example: USD
+        description:
+          description: The description on the plan.
+          example: Plan for early stage startups.
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the plan will be used as\
+            \ the default display name."
+          example: Startup plan
+          type: string
+        name:
+          description: The name of the plan.
+          example: Startup
+          type: string
+        tax_codes:
+          description: List of unique code used to identify the taxes.
+          example:
+          - french_standard_vat
+          items:
+            type: string
+          type: array
+        trial_period:
+          description: The duration in days during which the base cost of the plan
+            is offered for free.
+          example: 5
+          type: number
+        charges:
+          description: Additional usage-based charges for this plan.
+          items:
+            $ref: '#/components/schemas/PlanOverridesObject_charges_inner'
+          type: array
+      type: object
     PlanUpdateInput:
       example:
         plan:
@@ -8390,6 +9263,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8403,6 +9277,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8420,23 +9295,28 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8454,6 +9334,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -8464,6 +9345,7 @@ components:
               free_units_per_total_aggregation: "500"
             group_properties: []
           code: startup
+          invoice_display_name: Startup plan
           amount_cents: 10000
           amount_currency: ""
           bill_charges_monthly: true
@@ -8515,6 +9397,7 @@ components:
           created_at: 2023-06-27T19:43:42Z
           charge_model: package
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 3000
@@ -8529,6 +9412,7 @@ components:
           created_at: 2023-06-27T19:43:42Z
           charge_model: graduated
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -8549,18 +9433,22 @@ components:
           created_at: 2023-06-27T19:43:42Z
           charge_model: standard
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
           properties: {}
           group_properties:
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+            invoice_display_name: Europe
             values:
               amount: "10"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+            invoice_display_name: USA
             values:
               amount: "5"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+            invoice_display_name: Africa
             values:
               amount: "8"
         - lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
@@ -8569,6 +9457,7 @@ components:
           created_at: 2023-06-27T19:43:42Z
           charge_model: volume
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -8589,6 +9478,7 @@ components:
           created_at: 2023-06-27T19:43:42Z
           charge_model: percentage
           invoiceable: false
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
@@ -8598,6 +9488,7 @@ components:
             free_units_per_events: 5
             free_units_per_total_aggregation: "500"
           group_properties: []
+        invoice_display_name: Startup plan
         amount_currency: ""
         bill_charges_monthly: true
         name: Startup
@@ -8615,6 +9506,12 @@ components:
         name:
           description: The name of the plan.
           example: Startup
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the plan will be used as\
+            \ the default display name."
+          example: Startup plan
           type: string
         created_at:
           description: The date and time when the plan was created. It is expressed
@@ -8702,6 +9599,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8716,6 +9614,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8736,18 +9635,22 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
@@ -8756,6 +9659,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8776,6 +9680,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -8842,6 +9747,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8856,6 +9762,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8876,18 +9783,22 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
@@ -8896,6 +9807,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -8916,6 +9828,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -8925,6 +9838,7 @@ components:
               free_units_per_events: 5
               free_units_per_total_aggregation: "500"
             group_properties: []
+          invoice_display_name: Startup plan
           amount_currency: ""
           bill_charges_monthly: true
           name: Startup
@@ -8968,6 +9882,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -8982,6 +9897,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -9002,18 +9918,22 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
@@ -9022,6 +9942,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -9042,6 +9963,7 @@ components:
             created_at: 2023-06-27T19:43:42Z
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -9051,6 +9973,7 @@ components:
               free_units_per_events: 5
               free_units_per_total_aggregation: "500"
             group_properties: []
+          invoice_display_name: Startup plan
           amount_currency: ""
           bill_charges_monthly: true
           name: Startup
@@ -9078,32 +10001,51 @@ components:
       type: object
     Subscription:
       example:
-        subscription:
-          canceled_at: 2022-09-14T16:35:31Z
-          external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          next_plan_code: next_plan_code
-          plan_code: premium
-          created_at: 2022-08-08T00:00:00Z
-          external_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          downgrade_plan_date: 2000-01-23T04:56:07.000+00:00
-          billing_time: anniversary
-          name: Repository A
-          subscription_at: 2022-08-08T00:00:00Z
-          started_at: 2022-08-08T00:00:00Z
-          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          previous_plan_code: previous_plan_code
-          terminated_at: 2022-09-14T16:35:31Z
-          lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          status: active
+        subscription: null
       properties:
         subscription:
-          $ref: '#/components/schemas/SubscriptionObject'
+          $ref: '#/components/schemas/SubscriptionObjectExtended'
       required:
       - subscription
       type: object
     SubscriptionCreateInput:
       example:
         subscription:
+          ending_at: 2022-10-08T00:00:00Z
+          plan_overrides:
+            tax_codes:
+            - french_standard_vat
+            charges:
+            - tax_codes:
+              - french_standard_vat
+              invoice_display_name: Setup
+              billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              group_properties:
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              min_amount_cents: 0
+              id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              properties: null
+            - tax_codes:
+              - french_standard_vat
+              invoice_display_name: Setup
+              billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              group_properties:
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              min_amount_cents: 0
+              id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              properties: null
+            invoice_display_name: Startup plan
+            amount_cents: 10000
+            amount_currency: ""
+            name: Startup
+            description: Plan for early stage startups.
+            trial_period: 5
           external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
           billing_time: anniversary
           name: Repository A
@@ -9119,6 +10061,41 @@ components:
     SubscriptionUpdateInput:
       example:
         subscription:
+          ending_at: 2022-10-08T00:00:00Z
+          plan_overrides:
+            tax_codes:
+            - french_standard_vat
+            charges:
+            - tax_codes:
+              - french_standard_vat
+              invoice_display_name: Setup
+              billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              group_properties:
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              min_amount_cents: 0
+              id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              properties: null
+            - tax_codes:
+              - french_standard_vat
+              invoice_display_name: Setup
+              billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              group_properties:
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+                values: null
+              min_amount_cents: 0
+              id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              properties: null
+            invoice_display_name: Startup plan
+            amount_cents: 10000
+            amount_currency: ""
+            name: Startup
+            description: Plan for early stage startups.
+            trial_period: 5
           name: Repository B
           subscription_at: 2022-08-08T00:00:00Z
       properties:
@@ -9135,6 +10112,7 @@ components:
         plan_code: premium
         created_at: 2022-08-08T00:00:00Z
         external_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+        ending_at: 2022-10-08T00:00:00Z
         downgrade_plan_date: 2000-01-23T04:56:07.000+00:00
         billing_time: anniversary
         name: Repository A
@@ -9237,6 +10215,14 @@ components:
           format: date-time
           nullable: true
           type: string
+        ending_at:
+          description: "The effective end date of the subscription. If this field\
+            \ is set to null, the subscription will automatically renew. This date\
+            \ should be provided in ISO 8601 datetime format, and use Coordinated\
+            \ Universal Time (UTC)."
+          example: 2022-10-08T00:00:00Z
+          format: date-time
+          type: string
         subscription_at:
           description: The anniversary date and time of the initial subscription.
             This date serves as the basis for billing subscriptions with `anniversary`
@@ -9283,6 +10269,13 @@ components:
       - status
       - subscription_at
       type: object
+    SubscriptionObjectExtended:
+      allOf:
+      - $ref: '#/components/schemas/SubscriptionObject'
+      - properties:
+          plan:
+            $ref: '#/components/schemas/PlanObject'
+        type: object
     SubscriptionsPaginated:
       example:
         subscriptions:
@@ -9292,6 +10285,7 @@ components:
           plan_code: premium
           created_at: 2022-08-08T00:00:00Z
           external_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          ending_at: 2022-10-08T00:00:00Z
           downgrade_plan_date: 2000-01-23T04:56:07.000+00:00
           billing_time: anniversary
           name: Repository A
@@ -9308,6 +10302,7 @@ components:
           plan_code: premium
           created_at: 2022-08-08T00:00:00Z
           external_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          ending_at: 2022-10-08T00:00:00Z
           downgrade_plan_date: 2000-01-23T04:56:07.000+00:00
           billing_time: anniversary
           name: Repository A
@@ -10000,72 +10995,30 @@ components:
       required:
       - wallet
       type: object
-    getCustomerPortalUrl_200_response_customer:
+    WebhookEndpoint:
       example:
-        portal_url: https://app.lago.com/customer-portal/1234567890
-      properties:
-        portal_url:
-          description: An embeddable link for displaying a customer portal
-          example: https://app.lago.com/customer-portal/1234567890
-          type: string
-      required:
-      - portal_url
-      type: object
-    getCustomerPortalUrl_200_response:
-      example:
-        customer:
-          portal_url: https://app.lago.com/customer-portal/1234567890
-      properties:
-        customer:
-          $ref: '#/components/schemas/getCustomerPortalUrl_200_response_customer'
-      required:
-      - customer
-      type: object
-    findAllWebhookEndpoints_200_response:
-      example:
-        webhook_endpoints:
-        - "{}"
-        - "{}"
-        meta:
-          next_page: 3
-          total_count: 70
-          total_pages: 4
-          prev_page: 1
-          current_page: 2
-      properties:
-        webhook_endpoints:
-          items:
-            $ref: '#/paths/~1webhook_endpoints/post/responses/200/content/application~1json/schema/properties/webhook_endpoint'
-          type: array
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-      required:
-      - meta
-      - webhook_endpoints
-      type: object
-    createWebhookEndpoint_request_webhook_endpoint:
-      properties:
-        webhook_url:
-          description: The URL of the webhook endpoint.
-          example: https://foo.bar
-          type: string
-        signature_algo:
-          description: "The signature used for the webhook. If no value is passed,"
-          enum:
-          - jwt
-          - hmac
-          example: hmac
-          nullable: true
-          type: string
-      required:
-      - webhook_url
-      type: object
-    createWebhookEndpoint_request:
+        webhook_endpoint:
+          webhook_url: Prepaid
+          lago_organization_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          created_at: 2022-04-29T08:59:51Z
+          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          signature_algo: hmac
       properties:
         webhook_endpoint:
-          $ref: '#/components/schemas/createWebhookEndpoint_request_webhook_endpoint'
+          $ref: '#/components/schemas/WebhookEndpointObject'
+      required:
+      - webhook_endpoint
       type: object
-    createWebhookEndpoint_200_response_webhook_endpoint:
+    WebhookEndpointCreateInput:
+      example:
+        webhook_endpoint:
+          webhook_url: https://foo.bar
+          signature_algo: hmac
+      properties:
+        webhook_endpoint:
+          $ref: '#/components/schemas/WebhookEndpointCreateInput_webhook_endpoint'
+      type: object
+    WebhookEndpointObject:
       example:
         webhook_url: Prepaid
         lago_organization_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -10112,19 +11065,93 @@ components:
       - lago_organization_id
       - webhook_url
       type: object
-    createWebhookEndpoint_200_response:
+    WebhookEndpointsPaginated:
       example:
-        webhook_endpoint:
-          webhook_url: Prepaid
+        webhook_endpoints:
+        - webhook_url: Prepaid
           lago_organization_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           created_at: 2022-04-29T08:59:51Z
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
           signature_algo: hmac
+        - webhook_url: Prepaid
+          lago_organization_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          created_at: 2022-04-29T08:59:51Z
+          lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          signature_algo: hmac
+        meta:
+          next_page: 3
+          total_count: 70
+          total_pages: 4
+          prev_page: 1
+          current_page: 2
+      properties:
+        webhook_endpoints:
+          items:
+            $ref: '#/components/schemas/WebhookEndpointObject'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - meta
+      - webhook_endpoints
+      type: object
+    WebhookEndpointUpdateInput:
+      example:
+        webhook_endpoint:
+          webhook_url: https://foo.bar
+          signature_algo: hmac
       properties:
         webhook_endpoint:
-          $ref: '#/components/schemas/createWebhookEndpoint_200_response_webhook_endpoint'
+          $ref: '#/components/schemas/WebhookEndpointCreateInput_webhook_endpoint'
+      type: object
+    getCustomerPortalUrl_200_response_customer:
+      example:
+        portal_url: https://app.lago.com/customer-portal/1234567890
+      properties:
+        portal_url:
+          description: An embeddable link for displaying a customer portal
+          example: https://app.lago.com/customer-portal/1234567890
+          type: string
       required:
-      - webhook_endpoint
+      - portal_url
+      type: object
+    getCustomerPortalUrl_200_response:
+      example:
+        customer:
+          portal_url: https://app.lago.com/customer-portal/1234567890
+      properties:
+        customer:
+          $ref: '#/components/schemas/getCustomerPortalUrl_200_response_customer'
+      required:
+      - customer
+      type: object
+    generateCustomerCheckoutURL_200_response:
+      description: "."
+      example:
+        checkout_url: https://foo.bar
+        external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+        payment_provider: stripe
+        lago_customer_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+      properties:
+        lago_customer_id:
+          description: Unique identifier assigned to the customer within the Lago
+            application. This ID is exclusively created by Lago and serves as a unique
+            identifier for the customer's record within the Lago system
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          type: string
+        external_customer_id:
+          description: The customer external unique identifier (provided by your own
+            application)
+          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
+          type: string
+        payment_provider:
+          description: The Payment Provider name linked to the Customer.
+          example: stripe
+          type: string
+        checkout_url:
+          description: The new generated Payment Provider Checkout URL for the Customer.
+          example: https://foo.bar
+          type: string
       type: object
     AddOnCreateInput_add_on:
       allOf:
@@ -10134,39 +11161,6 @@ components:
         - amount_currency
         - code
         - name
-    AppliedAddOnInput_applied_add_on:
-      example:
-        amount_cents: 50000
-        external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-        amount_currency: ""
-        add_on_code: setup_fee
-      properties:
-        external_customer_id:
-          description: The customer external unique identifier (provided by your own
-            application)
-          example: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
-          type: string
-        add_on_code:
-          description: Unique code used to identify the add-on.
-          example: setup_fee
-          type: string
-        amount_cents:
-          description: "The cost of the add-on in cents, excluding any applicable\
-            \ taxes, that is billed to a customer. By creating a one-off invoice,\
-            \ you will be able to override this value."
-          example: 50000
-          nullable: true
-          type: integer
-        amount_currency:
-          allOf:
-          - $ref: '#/components/schemas/Currency'
-          - description: The currency of the add-on.
-            example: USD
-            nullable: true
-      required:
-      - add_on_code
-      - external_customer_id
-      type: object
     AppliedCouponInput_applied_coupon:
       example:
         coupon_code: startup_deal
@@ -10400,10 +11394,215 @@ components:
         - coupon_type
         - frequency
         - name
+    CreditNoteEstimateInput_credit_note_items_inner:
+      properties:
+        fee_id:
+          description: "The fee unique identifier, created by Lago."
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        amount_cents:
+          description: "The amount of the credit note item, expressed in cents."
+          example: 10
+          type: integer
+      required:
+      - amount_cents
+      - fee_id
+      type: object
+    CreditNoteEstimateInput_credit_note:
+      example:
+        invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        items:
+        - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          amount_cents: 10
+        - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
+          amount_cents: 5
+      properties:
+        invoice_id:
+          description: "The invoice unique identifier, created by Lago."
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        items:
+          description: The list of credit note’s items.
+          example:
+          - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            amount_cents: 10
+          - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
+            amount_cents: 5
+          items:
+            $ref: '#/components/schemas/CreditNoteEstimateInput_credit_note_items_inner'
+          type: array
+      required:
+      - invoice_id
+      - items
+      type: object
+    CreditNoteEstimated_estimated_credit_note_items_inner:
+      example:
+        lago_fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        amount_cents: 100
+      properties:
+        amount_cents:
+          description: "The credit note’s item amount, expressed in cents."
+          example: 100
+          type: integer
+        lago_fee_id:
+          description: Unique identifier assigned to the fee within the Lago application.
+            This ID is exclusively created by Lago and serves as a unique identifier
+            for the fee’s record within the Lago system.
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - amount_cents
+      - lago_fee_id
+      type: object
+    CreditNoteEstimated_estimated_credit_note_applied_taxes_inner:
+      example:
+        tax_code: french_standard_vat
+        amount_cents: 2000
+        tax_name: TVA
+        amount_currency: ""
+        lago_tax_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        tax_description: French standard VAT
+        base_amount_cents: 100
+        tax_rate: 20
+      properties:
+        lago_tax_id:
+          description: "Unique identifier of the tax, created by Lago."
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        tax_name:
+          description: Name of the tax.
+          example: TVA
+          type: string
+        tax_code:
+          description: Unique code used to identify the tax associated with the API
+            request.
+          example: french_standard_vat
+          type: string
+        tax_rate:
+          description: The percentage rate of the tax
+          example: 20
+          type: number
+        tax_description:
+          description: Internal description of the taxe
+          example: French standard VAT
+          type: string
+        base_amount_cents:
+          example: 100
+          type: integer
+        amount_cents:
+          description: Amount of the tax
+          example: 2000
+          type: integer
+        amount_currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: Currency of the tax
+            example: USD
+      type: object
+    CreditNoteEstimated_estimated_credit_note:
+      example:
+        taxes_amount_cents: 20
+        taxes_rate: 20
+        lago_invoice_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        max_creditable_amount_cents: 100
+        max_refundable_amount_cents: 0
+        currency: ""
+        applied_taxes:
+        - tax_code: french_standard_vat
+          amount_cents: 2000
+          tax_name: TVA
+          amount_currency: ""
+          lago_tax_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          tax_description: French standard VAT
+          base_amount_cents: 100
+          tax_rate: 20
+        - tax_code: french_standard_vat
+          amount_cents: 2000
+          tax_name: TVA
+          amount_currency: ""
+          lago_tax_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          tax_description: French standard VAT
+          base_amount_cents: 100
+          tax_rate: 20
+        sub_total_excluding_taxes_amount_cents: 100
+        invoice_number: LAG-1234
+        items:
+        - lago_fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          amount_cents: 100
+        - lago_fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          amount_cents: 100
+        coupons_adjustment_amount_cents: 20
+      properties:
+        lago_invoice_id:
+          description: Unique identifier assigned to the invoice that the credit note
+            belongs to
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        invoice_number:
+          description: "The invoice unique number, related to the credit note."
+          example: LAG-1234
+          type: string
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The currency of the credit note.
+            example: EUR
+        taxes_amount_cents:
+          description: "The tax amount of the credit note, expressed in cents."
+          example: 20
+          type: integer
+        taxes_rate:
+          description: The tax rate associated with this specific credit note.
+          example: 20
+          type: number
+        sub_total_excluding_taxes_amount_cents:
+          description: "The subtotal of the credit note excluding any applicable taxes,\
+            \ expressed in cents."
+          example: 100
+          type: integer
+        max_creditable_amount_cents:
+          description: "The credited amount of the credit note, expressed in cents."
+          example: 100
+          type: integer
+        max_refundable_amount_cents:
+          description: "The refunded amount of the credit note, expressed in cents."
+          example: 0
+          type: integer
+        coupons_adjustment_amount_cents:
+          description: The pro-rated amount of the coupons applied to the source invoice.
+          example: 20
+          type: integer
+        items:
+          description: Array of credit note’s items.
+          items:
+            $ref: '#/components/schemas/CreditNoteEstimated_estimated_credit_note_items_inner'
+          type: array
+        applied_taxes:
+          items:
+            $ref: '#/components/schemas/CreditNoteEstimated_estimated_credit_note_applied_taxes_inner'
+          type: array
+      required:
+      - coupons_adjustment_amount_cents
+      - currency
+      - invoice_number
+      - items
+      - lago_invoice_id
+      - max_creditable_amount_cents
+      - max_refundable_amount_cents
+      - sub_total_excluding_taxes_amount_cents
+      - taxes_amount_cents
+      - taxes_rate
+      type: object
     CreditObject_item:
       description: The item attached to the credit.
       properties:
-        lago_id:
+        lago_item_id:
           description: Unique identifier assigned to the credit item within the Lago
             application.
           example: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -10430,7 +11629,7 @@ components:
           type: string
       required:
       - code
-      - lago_id
+      - lago_item_id
       - name
       - type
       type: object
@@ -10455,21 +11654,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/FeeObject'
       - description: The fee object related to the credit note item.
-    CreditNoteCreateInput_credit_note_items_inner:
-      properties:
-        fee_id:
-          description: "The fee unique identifier, created by Lago."
-          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
-          format: uuid
-          type: string
-        amount_cents:
-          description: "The amount of the credit note item, expressed in cents."
-          example: 10
-          type: integer
-      required:
-      - amount_cents
-      - fee_id
-      type: object
     CreditNoteCreateInput_credit_note:
       example:
         reason: duplicated_charge
@@ -10524,7 +11708,7 @@ components:
           - fee_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
             amount_cents: 5
           items:
-            $ref: '#/components/schemas/CreditNoteCreateInput_credit_note_items_inner'
+            $ref: '#/components/schemas/CreditNoteEstimateInput_credit_note_items_inner'
           type: array
       required:
       - invoice_id
@@ -10553,6 +11737,7 @@ components:
     CustomerChargeUsageObject_charge:
       description: Object listing all the properties for a specific charge item.
       example:
+        invoice_display_name: Setup
         charge_model: graduated
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
       properties:
@@ -10573,6 +11758,12 @@ components:
           - percentage
           - volume
           example: graduated
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup
           type: string
       required:
       - charge_model
@@ -10619,6 +11810,7 @@ components:
       type: object
     CustomerChargeUsageObject_groups_inner:
       example:
+        events_count: 10
         amount_cents: 1000
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         units: "0.9"
@@ -10647,6 +11839,12 @@ components:
           example: "0.9"
           pattern: "^[0-9]+.?[0-9]*$"
           type: string
+        events_count:
+          description: The quantity of usage events that have been recorded for a
+            particular charge during the specified time period. These events may also
+            be referred to as the number of transactions in some contexts.
+          example: 10
+          type: integer
         amount_cents:
           description: "The amount in cents, tax excluded, consumed for a specific\
             \ group related to a charge item."
@@ -10956,6 +12154,15 @@ components:
       required:
       - code
       type: object
+    EventInput_event_timestamp:
+      anyOf:
+      - type: integer
+      - type: string
+      description: |
+        This field captures the Unix timestamp in seconds indicating the occurrence of the event in Coordinated Universal Time (UTC).
+        If this timestamp is not provided, the API will automatically set it to the time of event reception.
+        You can also provide miliseconds precision by appending decimals to the timestamp.
+      example: "1651240791.123"
     EventInput_event:
       example:
         transaction_id: transaction_1234567890
@@ -10964,7 +12171,7 @@ components:
         external_subscription_id: sub_1234567890
         properties:
           gb: 10
-        timestamp: 1651240791
+        timestamp: "1651240791.123"
       properties:
         transaction_id:
           description: "This field represents a unique identifier for the event. It\
@@ -10993,23 +12200,52 @@ components:
           example: storage
           type: string
         timestamp:
-          description: "This field captures the Unix timestamp in seconds indicating\
-            \ the occurrence of the event in Coordinated Universal Time (UTC). If\
-            \ this timestamp is not provided, the API will automatically set it to\
-            \ the time of event reception."
-          example: 1651240791
-          type: integer
+          $ref: '#/components/schemas/EventInput_event_timestamp'
         properties:
-          $ref: '#/components/schemas/EventBatchInput_event_properties'
+          additionalProperties:
+            type: string
+          description: "This field represents additional properties associated with\
+            \ the event, which are utilized in the calculation of the final fee. This\
+            \ object becomes mandatory when the targeted billable metric employs a\
+            \ `sum_agg`, `max_agg`, or `unique_count_agg` aggregation method. However,\
+            \ when using a simple `count_agg`, this object is not required."
+          example:
+            gb: 10
+          type: object
       required:
       - code
       - transaction_id
+      type: object
+    EventObject_properties:
+      additionalProperties:
+        type: string
+      description: "This field represents additional properties associated with the\
+        \ event, which are utilized in the calculation of the final fee. This object\
+        \ becomes mandatory when the targeted billable metric employs a `sum_agg`,\
+        \ `max_agg`, or `unique_count_agg` aggregation method. However, when using\
+        \ a simple `count_agg`, this object is not required."
+      example:
+        gb: 10
+      properties:
+        operation_type:
+          description: "The `operation_type` field is only necessary when adding or\
+            \ removing a specific unit when the targeted billable metric adopts a\
+            \ `unique_count_agg` aggregation method. In other cases, the `operation_type`\
+            \ field is not required. The valid values for the `operation_type` field\
+            \ are `add` or `remove`, which indicate whether the unit is being added\
+            \ or removed from the unique count aggregation, respectively."
+          enum:
+          - add
+          - remove
+          type: string
       type: object
     FeeObject_item:
       description: Item attached to the fee
       example:
         lago_item_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
         code: startup
+        invoice_display_name: Setup Fee (SF1)
+        group_invoice_display_name: Transactions - ACH
         item_type: Subscription
         name: Startup
         type: subscription
@@ -11035,6 +12271,18 @@ components:
             \ the name of the `charge`, the name of the `credit` or the name of the\
             \ `subscription`."
           example: Startup
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup Fee (SF1)
+          type: string
+        group_invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Transactions - ACH
           type: string
         lago_item_id:
           description: "Unique identifier of the fee item, created by Lago. It can\
@@ -11092,6 +12340,7 @@ components:
         unit_amount_cents: 12000
         tax_codes:
         - french_standard_vat
+        invoice_display_name: Setup Fee (SF1)
         description: "The description of the fee line item in the invoice. By default,\
           \ the description of the add-on is used."
         add_on_code: setup_fee
@@ -11100,6 +12349,12 @@ components:
         add_on_code:
           description: The code of the add-on used as invoice item.
           example: setup_fee
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup Fee (SF1)
           type: string
         unit_amount_cents:
           description: "The amount of the fee per unit, expressed in cents. By default,\
@@ -11136,6 +12391,7 @@ components:
         - unit_amount_cents: 12000
           tax_codes:
           - french_standard_vat
+          invoice_display_name: Setup Fee (SF1)
           description: "The description of the fee line item in the invoice. By default,\
             \ the description of the add-on is used."
           add_on_code: setup_fee
@@ -11143,6 +12399,7 @@ components:
         - unit_amount_cents: 12000
           tax_codes:
           - french_standard_vat
+          invoice_display_name: Setup Fee (SF1)
           description: "The description of the fee line item in the invoice. By default,\
             \ the description of the add-on is used."
           add_on_code: setup_fee
@@ -11233,6 +12490,7 @@ components:
         net_payment_term: 30
         state: NYC
         legal_name: legal_name
+        default_currency: ""
         email: brex@brex.com
         tax_identification_number: US123456789
       properties:
@@ -11251,6 +12509,11 @@ components:
           - description: The country of your organization.
             example: US
             nullable: true
+        default_currency:
+          allOf:
+          - $ref: '#/components/schemas/Currency'
+          - description: The default currency of an organization.
+            example: USD
         address_line1:
           description: The first line of your organization’s billing address.
           example: 100 Brex Street
@@ -11329,6 +12592,9 @@ components:
           $ref: '#/components/schemas/OrganizationBillingConfiguration'
       type: object
     PlanCreateInput_plan_charges_inner_group_properties_inner:
+      example:
+        group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        values: null
       properties:
         group_id:
           description: "Unique identifier of a billable metric group, created by Lago."
@@ -11374,6 +12640,12 @@ components:
             \ `true`."
           example: true
           type: boolean
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup
+          type: string
         prorated:
           description: |-
             Specifies whether a charge is prorated based on the remaining number of days in the billing period or billed fully.
@@ -11412,6 +12684,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
           charge_model: package
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 3000
@@ -11425,6 +12698,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
           charge_model: graduated
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -11442,23 +12716,28 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
           charge_model: standard
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
           properties: {}
           group_properties:
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+            invoice_display_name: Europe
             values:
               amount: "10"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+            invoice_display_name: USA
             values:
               amount: "5"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+            invoice_display_name: Africa
             values:
               amount: "8"
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
           charge_model: volume
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -11476,6 +12755,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
           charge_model: percentage
           invoiceable: false
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
@@ -11486,6 +12766,7 @@ components:
             free_units_per_total_aggregation: "500"
           group_properties: []
         code: startup
+        invoice_display_name: Startup plan
         amount_cents: 10000
         amount_currency: ""
         bill_charges_monthly: true
@@ -11498,6 +12779,12 @@ components:
         name:
           description: The name of the plan.
           example: Startup
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the plan will be used as\
+            \ the default display name."
+          example: Startup plan
           type: string
         code:
           description: "The code of the plan. It serves as a unique identifier associated\
@@ -11566,6 +12853,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -11579,6 +12867,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -11596,23 +12885,28 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -11630,6 +12924,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -11641,6 +12936,58 @@ components:
             group_properties: []
           items:
             $ref: '#/components/schemas/PlanCreateInput_plan_charges_inner'
+          type: array
+      type: object
+    PlanOverridesObject_charges_inner:
+      example:
+        tax_codes:
+        - french_standard_vat
+        invoice_display_name: Setup
+        billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        group_properties:
+        - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          values: null
+        - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          values: null
+        min_amount_cents: 0
+        id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+        properties: null
+      properties:
+        id:
+          description: Unique identifier of the charge created by Lago.
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        billable_metric_id:
+          description: Unique identifier of the billable metric created by Lago.
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup
+          type: string
+        min_amount_cents:
+          description: "The minimum spending amount required for the charge, measured\
+            \ in cents and excluding any applicable taxes. It indicates the minimum\
+            \ amount that needs to be charged for each billing period."
+          example: 0
+          type: integer
+        properties:
+          $ref: '#/components/schemas/ChargeObject_properties'
+        group_properties:
+          description: "All charge information, sorted by groups."
+          items:
+            $ref: '#/components/schemas/PlanCreateInput_plan_charges_inner_group_properties_inner'
+          type: array
+        tax_codes:
+          description: List of unique code used to identify the taxes.
+          example:
+          - french_standard_vat
+          items:
+            type: string
           type: array
       type: object
     PlanUpdateInput_plan_charges_inner:
@@ -11682,6 +13029,12 @@ components:
             \ `true`."
           example: true
           type: boolean
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the actual charge will be\
+            \ used as the default display name."
+          example: Setup
+          type: string
         prorated:
           description: |-
             Specifies whether a charge is prorated based on the remaining number of days in the billing period or billed fully.
@@ -11720,6 +13073,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
           charge_model: package
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 3000
@@ -11733,6 +13087,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
           charge_model: graduated
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -11750,23 +13105,28 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
           charge_model: standard
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
           properties: {}
           group_properties:
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+            invoice_display_name: Europe
             values:
               amount: "10"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+            invoice_display_name: USA
             values:
               amount: "5"
           - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+            invoice_display_name: Africa
             values:
               amount: "8"
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
           charge_model: volume
           invoiceable: true
+          invoice_display_name: Setup
           pay_in_advance: false
           prorated: false
           min_amount_cents: 0
@@ -11784,6 +13144,7 @@ components:
         - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
           charge_model: percentage
           invoiceable: false
+          invoice_display_name: Setup
           pay_in_advance: true
           prorated: false
           min_amount_cents: 0
@@ -11794,6 +13155,7 @@ components:
             free_units_per_total_aggregation: "500"
           group_properties: []
         code: startup
+        invoice_display_name: Startup plan
         amount_cents: 10000
         amount_currency: ""
         bill_charges_monthly: true
@@ -11806,6 +13168,12 @@ components:
         name:
           description: The name of the plan.
           example: Startup
+          type: string
+        invoice_display_name:
+          description: "Specifies the name that will be displayed on an invoice. If\
+            \ no value is set for this field, the name of the plan will be used as\
+            \ the default display name."
+          example: Startup plan
           type: string
         code:
           description: "The code of the plan. It serves as a unique identifier associated\
@@ -11874,6 +13242,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a91
             charge_model: package
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 3000
@@ -11887,6 +13256,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a92
             charge_model: graduated
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -11904,23 +13274,28 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a93
             charge_model: standard
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
             properties: {}
             group_properties:
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a01
+              invoice_display_name: Europe
               values:
                 amount: "10"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a02
+              invoice_display_name: USA
               values:
                 amount: "5"
             - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a03
+              invoice_display_name: Africa
               values:
                 amount: "8"
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a94
             charge_model: volume
             invoiceable: true
+            invoice_display_name: Setup
             pay_in_advance: false
             prorated: false
             min_amount_cents: 0
@@ -11938,6 +13313,7 @@ components:
           - billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a95
             charge_model: percentage
             invoiceable: false
+            invoice_display_name: Setup
             pay_in_advance: true
             prorated: false
             min_amount_cents: 0
@@ -11953,6 +13329,41 @@ components:
       type: object
     SubscriptionCreateInput_subscription:
       example:
+        ending_at: 2022-10-08T00:00:00Z
+        plan_overrides:
+          tax_codes:
+          - french_standard_vat
+          charges:
+          - tax_codes:
+            - french_standard_vat
+            invoice_display_name: Setup
+            billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            group_properties:
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            min_amount_cents: 0
+            id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            properties: null
+          - tax_codes:
+            - french_standard_vat
+            invoice_display_name: Setup
+            billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            group_properties:
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            min_amount_cents: 0
+            id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            properties: null
+          invoice_display_name: Startup plan
+          amount_cents: 10000
+          amount_currency: ""
+          name: Startup
+          description: Plan for early stage startups.
+          trial_period: 5
         external_customer_id: 5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba
         billing_time: anniversary
         name: Repository A
@@ -11997,6 +13408,14 @@ components:
           - anniversary
           example: anniversary
           type: string
+        ending_at:
+          description: "The effective end date of the subscription. If this field\
+            \ is set to null, the subscription will automatically renew. This date\
+            \ should be provided in ISO 8601 datetime format, and use Coordinated\
+            \ Universal Time (UTC)."
+          example: 2022-10-08T00:00:00Z
+          format: date-time
+          type: string
         subscription_at:
           description: "The start date for the subscription, allowing for the creation\
             \ of subscriptions that can begin in the past or future. Please note that\
@@ -12007,6 +13426,8 @@ components:
           example: 2022-08-08T00:00:00Z
           format: date-time
           type: string
+        plan_overrides:
+          $ref: '#/components/schemas/PlanOverridesObject'
       required:
       - external_customer_id
       - external_id
@@ -12014,6 +13435,41 @@ components:
       type: object
     SubscriptionUpdateInput_subscription:
       example:
+        ending_at: 2022-10-08T00:00:00Z
+        plan_overrides:
+          tax_codes:
+          - french_standard_vat
+          charges:
+          - tax_codes:
+            - french_standard_vat
+            invoice_display_name: Setup
+            billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            group_properties:
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            min_amount_cents: 0
+            id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            properties: null
+          - tax_codes:
+            - french_standard_vat
+            invoice_display_name: Setup
+            billable_metric_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            group_properties:
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            - group_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+              values: null
+            min_amount_cents: 0
+            id: 1a901a90-1a90-1a90-1a90-1a901a901a90
+            properties: null
+          invoice_display_name: Startup plan
+          amount_cents: 10000
+          amount_currency: ""
+          name: Startup
+          description: Plan for early stage startups.
+          trial_period: 5
         name: Repository B
         subscription_at: 2022-08-08T00:00:00Z
       properties:
@@ -12025,6 +13481,14 @@ components:
           example: Repository B
           nullable: true
           type: string
+        ending_at:
+          description: "The effective end date of the subscription. If this field\
+            \ is set to null, the subscription will automatically renew. This date\
+            \ should be provided in ISO 8601 datetime format, and use Coordinated\
+            \ Universal Time (UTC)."
+          example: 2022-10-08T00:00:00Z
+          format: date-time
+          type: string
         subscription_at:
           description: The start date and time of the subscription. This field can
             only be modified for pending subscriptions that have not yet started.
@@ -12033,6 +13497,8 @@ components:
           example: 2022-08-08T00:00:00Z
           format: date-time
           type: string
+        plan_overrides:
+          $ref: '#/components/schemas/PlanOverridesObject'
       type: object
     TaxCreateInput_tax:
       allOf:
@@ -12145,6 +13611,26 @@ components:
           format: date-time
           nullable: true
           type: string
+      type: object
+    WebhookEndpointCreateInput_webhook_endpoint:
+      example:
+        webhook_url: https://foo.bar
+        signature_algo: hmac
+      properties:
+        webhook_url:
+          description: The URL of the webhook endpoint.
+          example: https://foo.bar
+          type: string
+        signature_algo:
+          description: "The signature used for the webhook. If no value is passed,"
+          enum:
+          - jwt
+          - hmac
+          example: hmac
+          nullable: true
+          type: string
+      required:
+      - webhook_url
       type: object
   securitySchemes:
     bearerAuth:

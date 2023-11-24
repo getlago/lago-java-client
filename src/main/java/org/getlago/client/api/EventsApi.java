@@ -33,7 +33,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-31T15:04:44.084574Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-11-24T14:41:05.749099654Z[Etc/UTC]")
 public class EventsApi {
     private ApiClient apiClient;
 
@@ -63,7 +63,9 @@ public class EventsApi {
      * <p><b>422</b> - Unprocessable entity error
      * @param eventBatchInput Batch events payload
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     * @deprecated
      */
+    @Deprecated
     private ResponseSpec createBatchEventsRequestCreation(EventBatchInput eventBatchInput) throws WebClientResponseException {
         Object postBody = eventBatchInput;
         // verify the required parameter 'eventBatchInput' is set
@@ -140,11 +142,12 @@ public class EventsApi {
     /**
      * Send usage events
      * This endpoint is used for transmitting usage measurement events to either a designated customer or a specific subscription.
-     * <p><b>200</b> - Event received
+     * <p><b>200</b> - Event
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
      * @param eventInput Event payload
+     * @return Event
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     private ResponseSpec createEventRequestCreation(EventInput eventInput) throws WebClientResponseException {
@@ -172,44 +175,46 @@ public class EventsApi {
 
         String[] localVarAuthNames = new String[] { "bearerAuth" };
 
-        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+        ParameterizedTypeReference<Event> localVarReturnType = new ParameterizedTypeReference<Event>() {};
         return apiClient.invokeAPI("/events", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
     /**
      * Send usage events
      * This endpoint is used for transmitting usage measurement events to either a designated customer or a specific subscription.
-     * <p><b>200</b> - Event received
+     * <p><b>200</b> - Event
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
      * @param eventInput Event payload
+     * @return Event
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<Void> createEvent(EventInput eventInput) throws WebClientResponseException {
-        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+    public Mono<Event> createEvent(EventInput eventInput) throws WebClientResponseException {
+        ParameterizedTypeReference<Event> localVarReturnType = new ParameterizedTypeReference<Event>() {};
         return createEventRequestCreation(eventInput).bodyToMono(localVarReturnType);
     }
 
     /**
      * Send usage events
      * This endpoint is used for transmitting usage measurement events to either a designated customer or a specific subscription.
-     * <p><b>200</b> - Event received
+     * <p><b>200</b> - Event
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error
      * @param eventInput Event payload
+     * @return ResponseEntity&lt;Event&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ResponseEntity<Void>> createEventWithHttpInfo(EventInput eventInput) throws WebClientResponseException {
-        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+    public Mono<ResponseEntity<Event>> createEventWithHttpInfo(EventInput eventInput) throws WebClientResponseException {
+        ParameterizedTypeReference<Event> localVarReturnType = new ParameterizedTypeReference<Event>() {};
         return createEventRequestCreation(eventInput).toEntity(localVarReturnType);
     }
 
     /**
      * Send usage events
      * This endpoint is used for transmitting usage measurement events to either a designated customer or a specific subscription.
-     * <p><b>200</b> - Event received
+     * <p><b>200</b> - Event
      * <p><b>400</b> - Bad Request error
      * <p><b>401</b> - Unauthorized error
      * <p><b>422</b> - Unprocessable entity error

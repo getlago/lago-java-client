@@ -7,9 +7,11 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | [**createCustomer**](CustomersApi.md#createCustomer) | **POST** /customers | Create a customer |
 | [**deleteAppliedCoupon**](CustomersApi.md#deleteAppliedCoupon) | **DELETE** /customers/{external_customer_id}/applied_coupons/{applied_coupon_id} | Delete an applied coupon |
 | [**destroyCustomer**](CustomersApi.md#destroyCustomer) | **DELETE** /customers/{external_id} | Delete a customer |
+| [**findAllCustomerPastUsage**](CustomersApi.md#findAllCustomerPastUsage) | **GET** /customers/{external_customer_id}/past_usage | Retrieve customer past usage |
 | [**findAllCustomers**](CustomersApi.md#findAllCustomers) | **GET** /customers | List all customers |
 | [**findCustomer**](CustomersApi.md#findCustomer) | **GET** /customers/{external_id} | Retrieve a customer |
 | [**findCustomerCurrentUsage**](CustomersApi.md#findCustomerCurrentUsage) | **GET** /customers/{external_customer_id}/current_usage | Retrieve customer current usage |
+| [**generateCustomerCheckoutURL**](CustomersApi.md#generateCustomerCheckoutURL) | **POST** /customers/{external_customer_id}/checkout_url | Generate a Customer Payment Provider Checkout URL |
 | [**getCustomerPortalUrl**](CustomersApi.md#getCustomerPortalUrl) | **GET** /customers/{external_customer_id}/portal_url | Get a customer portal URL |
 
 
@@ -236,6 +238,90 @@ public class Example {
 | **404** | Not Found error |  -  |
 
 
+## findAllCustomerPastUsage
+
+> CustomerPastUsage findAllCustomerPastUsage(externalCustomerId, externalSubscriptionId, page, perPage, billableMetricCode, periodsCount)
+
+Retrieve customer past usage
+
+This endpoint enables the retrieval of the usage-based billing data for a customer within past periods.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
+        String externalSubscriptionId = "sub_1234567890"; // String | The unique identifier of the subscription within your application.
+        Integer page = 1; // Integer | Page number.
+        Integer perPage = 20; // Integer | Number of records per page.
+        String billableMetricCode = "cpu"; // String | Billable metric code filter to apply to the charge usage
+        Integer periodsCount = 5; // Integer | Number of past billing period to returns in the result
+        try {
+            CustomerPastUsage result = apiInstance.findAllCustomerPastUsage(externalCustomerId, externalSubscriptionId, page, perPage, billableMetricCode, periodsCount);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#findAllCustomerPastUsage");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application). | |
+| **externalSubscriptionId** | **String**| The unique identifier of the subscription within your application. | |
+| **page** | **Integer**| Page number. | [optional] |
+| **perPage** | **Integer**| Number of records per page. | [optional] |
+| **billableMetricCode** | **String**| Billable metric code filter to apply to the charge usage | [optional] |
+| **periodsCount** | **Integer**| Number of past billing period to returns in the result | [optional] |
+
+### Return type
+
+[**CustomerPastUsage**](CustomerPastUsage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Customer past usage |  -  |
+| **401** | Unauthorized error |  -  |
+| **404** | Not Found error |  -  |
+| **422** | Unprocessable entity error |  -  |
+
+
 ## findAllCustomers
 
 > CustomersPaginated findAllCustomers(page, perPage)
@@ -456,6 +542,80 @@ public class Example {
 | **200** | Customer usage |  -  |
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
+
+
+## generateCustomerCheckoutURL
+
+> GenerateCustomerCheckoutURL200Response generateCustomerCheckoutURL(externalCustomerId)
+
+Generate a Customer Payment Provider Checkout URL
+
+This endpoint regenerates the Payment Provider Checkout URL of a Customer.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.CustomersApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        CustomersApi apiInstance = new CustomersApi(defaultClient);
+        String externalCustomerId = "5eb02857-a71e-4ea2-bcf9-57d3a41bc6ba"; // String | The customer external unique identifier (provided by your own application).
+        try {
+            GenerateCustomerCheckoutURL200Response result = apiInstance.generateCustomerCheckoutURL(externalCustomerId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersApi#generateCustomerCheckoutURL");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **externalCustomerId** | **String**| The customer external unique identifier (provided by your own application). | |
+
+### Return type
+
+[**GenerateCustomerCheckoutURL200Response**](GenerateCustomerCheckoutURL200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Customer Checkout URL |  -  |
+| **401** | Unauthorized error |  -  |
+| **404** | Not Found error |  -  |
+| **422** | Unprocessable entity error |  -  |
 
 
 ## getCustomerPortalUrl

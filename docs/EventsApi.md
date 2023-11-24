@@ -86,7 +86,7 @@ null (empty response body)
 
 ## createEvent
 
-> createEvent(eventInput)
+> Event createEvent(eventInput)
 
 Send usage events
 
@@ -115,7 +115,8 @@ public class Example {
         EventsApi apiInstance = new EventsApi(defaultClient);
         EventInput eventInput = new EventInput(); // EventInput | Event payload
         try {
-            apiInstance.createEvent(eventInput);
+            Event result = apiInstance.createEvent(eventInput);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling EventsApi#createEvent");
             System.err.println("Status code: " + e.getCode());
@@ -136,7 +137,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**Event**](Event.md)
 
 ### Authorization
 
@@ -151,7 +152,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Event received |  -  |
+| **200** | Event |  -  |
 | **400** | Bad Request error |  -  |
 | **401** | Unauthorized error |  -  |
 | **422** | Unprocessable entity error |  -  |
