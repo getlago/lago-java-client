@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_TOTAL_WITH_FLAT_AMOUNT
 })
 @JsonTypeName("FeeObject_amount_details_allOf_graduated_ranges_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   public static final String JSON_PROPERTY_UNITS = "units";
   private String units;

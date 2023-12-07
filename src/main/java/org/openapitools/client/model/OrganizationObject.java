@@ -61,7 +61,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   OrganizationObject.JSON_PROPERTY_BILLING_CONFIGURATION,
   OrganizationObject.JSON_PROPERTY_TAXES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class OrganizationObject {
   public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;

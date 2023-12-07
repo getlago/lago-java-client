@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   InvoicesPaginated.JSON_PROPERTY_INVOICES,
   InvoicesPaginated.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class InvoicesPaginated {
   public static final String JSON_PROPERTY_INVOICES = "invoices";
   private List<InvoiceObject> invoices = new ArrayList<>();

@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   SubscriptionCreateInputSubscription.JSON_PROPERTY_PLAN_OVERRIDES
 })
 @JsonTypeName("SubscriptionCreateInput_subscription")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class SubscriptionCreateInputSubscription {
   public static final String JSON_PROPERTY_EXTERNAL_CUSTOMER_ID = "external_customer_id";
   private String externalCustomerId;

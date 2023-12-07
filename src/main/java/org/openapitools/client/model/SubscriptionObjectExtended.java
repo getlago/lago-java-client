@@ -54,7 +54,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   SubscriptionObjectExtended.JSON_PROPERTY_DOWNGRADE_PLAN_DATE,
   SubscriptionObjectExtended.JSON_PROPERTY_PLAN
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class SubscriptionObjectExtended {
   public static final String JSON_PROPERTY_LAGO_ID = "lago_id";
   private UUID lagoId;

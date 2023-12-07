@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   InvoiceOneOffCreateInputInvoiceFeesInner.JSON_PROPERTY_TAX_CODES
 })
 @JsonTypeName("InvoiceOneOffCreateInput_invoice_fees_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class InvoiceOneOffCreateInputInvoiceFeesInner {
   public static final String JSON_PROPERTY_ADD_ON_CODE = "add_on_code";
   private String addOnCode;

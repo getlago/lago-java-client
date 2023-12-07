@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WalletTransactionsPaginated.JSON_PROPERTY_WALLET_TRANSACTIONS,
   WalletTransactionsPaginated.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class WalletTransactionsPaginated {
   public static final String JSON_PROPERTY_WALLET_TRANSACTIONS = "wallet_transactions";
   private List<WalletTransactionObject> walletTransactions = new ArrayList<>();

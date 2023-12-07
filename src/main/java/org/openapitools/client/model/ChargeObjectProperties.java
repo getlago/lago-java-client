@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   ChargeObjectProperties.JSON_PROPERTY_VOLUME_RANGES
 })
 @JsonTypeName("ChargeObject_properties")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class ChargeObjectProperties {
   public static final String JSON_PROPERTY_GRADUATED_RANGES = "graduated_ranges";
   private List<ChargePropertiesGraduatedRangesInner> graduatedRanges;

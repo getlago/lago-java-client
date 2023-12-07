@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CreditNoteEstimatedEstimatedCreditNoteItemsInner.JSON_PROPERTY_LAGO_FEE_ID
 })
 @JsonTypeName("CreditNoteEstimated_estimated_credit_note_items_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class CreditNoteEstimatedEstimatedCreditNoteItemsInner {
   public static final String JSON_PROPERTY_AMOUNT_CENTS = "amount_cents";
   private Integer amountCents;

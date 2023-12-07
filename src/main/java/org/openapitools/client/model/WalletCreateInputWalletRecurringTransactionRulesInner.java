@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WalletCreateInputWalletRecurringTransactionRulesInner.JSON_PROPERTY_THRESHOLD_CREDITS
 })
 @JsonTypeName("WalletCreateInput_wallet_recurring_transaction_rules_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class WalletCreateInputWalletRecurringTransactionRulesInner {
   /**
    * The rule type. Possible values are &#x60;interval&#x60; or &#x60;threshold&#x60;.

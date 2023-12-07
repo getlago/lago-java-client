@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WalletTransactionCreateInputWalletTransaction.JSON_PROPERTY_GRANTED_CREDITS
 })
 @JsonTypeName("WalletTransactionCreateInput_wallet_transaction")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class WalletTransactionCreateInputWalletTransaction {
   public static final String JSON_PROPERTY_WALLET_ID = "wallet_id";
   private UUID walletId;

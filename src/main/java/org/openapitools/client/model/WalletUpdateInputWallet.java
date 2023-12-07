@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WalletUpdateInputWallet.JSON_PROPERTY_RECURRING_TRANSACTION_RULES
 })
 @JsonTypeName("WalletUpdateInput_wallet")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class WalletUpdateInputWallet {
   public static final String JSON_PROPERTY_NAME = "name";
   private JsonNullable<String> name = JsonNullable.<String>undefined();

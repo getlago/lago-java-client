@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CustomerBillingConfiguration.JSON_PROPERTY_DOCUMENT_LOCALE,
   CustomerBillingConfiguration.JSON_PROPERTY_PROVIDER_PAYMENT_METHODS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class CustomerBillingConfiguration {
   public static final String JSON_PROPERTY_INVOICE_GRACE_PERIOD = "invoice_grace_period";
   private Integer invoiceGracePeriod;

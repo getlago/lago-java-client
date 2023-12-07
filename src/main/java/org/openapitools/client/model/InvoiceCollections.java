@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonPropertyOrder({
   InvoiceCollections.JSON_PROPERTY_INVOICE_COLLECTIONS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class InvoiceCollections {
   public static final String JSON_PROPERTY_INVOICE_COLLECTIONS = "invoice_collections";
   private List<InvoiceCollectionObject> invoiceCollections = new ArrayList<>();

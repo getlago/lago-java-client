@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TaxesPaginated.JSON_PROPERTY_TAXES,
   TaxesPaginated.JSON_PROPERTY_META
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class TaxesPaginated {
   public static final String JSON_PROPERTY_TAXES = "taxes";
   private List<TaxObject> taxes = new ArrayList<>();

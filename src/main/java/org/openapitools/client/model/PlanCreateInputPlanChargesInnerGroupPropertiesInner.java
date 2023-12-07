@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   PlanCreateInputPlanChargesInnerGroupPropertiesInner.JSON_PROPERTY_VALUES
 })
 @JsonTypeName("PlanCreateInput_plan_charges_inner_group_properties_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class PlanCreateInputPlanChargesInnerGroupPropertiesInner {
   public static final String JSON_PROPERTY_GROUP_ID = "group_id";
   private String groupId;

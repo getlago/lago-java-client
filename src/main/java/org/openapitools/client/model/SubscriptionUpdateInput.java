@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   SubscriptionUpdateInput.JSON_PROPERTY_STATUS,
   SubscriptionUpdateInput.JSON_PROPERTY_SUBSCRIPTION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T15:52:17.625211Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
 public class SubscriptionUpdateInput {
   /**
    * If the field is not defined and multiple &#x60;active&#x60; and &#x60;pending&#x60; subscriptions exists, Lago will update the &#x60;active&#x60; subscription. However, if you wish to update a &#x60;pending&#x60; subscription, please ensure that you include the &#x60;status&#x60; attribute with the &#x60;pending&#x60; value in your request body.
