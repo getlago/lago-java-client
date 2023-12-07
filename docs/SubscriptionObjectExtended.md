@@ -23,7 +23,7 @@
 |**terminatedAt** | **OffsetDateTime** | The termination date of the subscription. This field is not null when the subscription is &#x60;terminated&#x60;. This date should be provided in ISO 8601 datetime format and expressed in Coordinated Universal Time (UTC) |  [optional] |
 |**previousPlanCode** | **String** | The code identifying the previous plan associated with this subscription. |  [optional] |
 |**nextPlanCode** | **String** | The code identifying the next plan in the case of a downgrade. |  [optional] |
-|**downgradePlanDate** | **OffsetDateTime** | The date when the plan will be downgraded, represented in ISO 8601 date format. |  [optional] |
+|**downgradePlanDate** | **LocalDate** | The date when the plan will be downgraded, represented in ISO 8601 date format. |  [optional] |
 |**plan** | [**PlanObject**](PlanObject.md) |  |  [optional] |
 
 

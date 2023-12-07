@@ -52,6 +52,7 @@ docs/CouponCreateInput.md
 docs/CouponCreateInputCoupon.md
 docs/CouponObject.md
 docs/CouponUpdateInput.md
+docs/CouponUpdateInputCoupon.md
 docs/CouponsApi.md
 docs/CouponsPaginated.md
 docs/CreditNote.md
@@ -108,6 +109,9 @@ docs/EventsApi.md
 docs/Fee.md
 docs/FeeAppliedTaxObject.md
 docs/FeeObject.md
+docs/FeeObjectAmountDetails.md
+docs/FeeObjectAmountDetailsAllOfGraduatedRangesInner.md
+docs/FeeObjectAmountDetailsAllOfVolumeRangesInner.md
 docs/FeeObjectItem.md
 docs/FeeUpdateInput.md
 docs/FeeUpdateInputFee.md
@@ -125,6 +129,8 @@ docs/GroupPropertiesObjectValues.md
 docs/GroupsPaginated.md
 docs/Invoice.md
 docs/InvoiceAppliedTaxObject.md
+docs/InvoiceCollectionObject.md
+docs/InvoiceCollections.md
 docs/InvoiceMetadataObject.md
 docs/InvoiceObject.md
 docs/InvoiceObjectCustomer.md
@@ -147,8 +153,6 @@ docs/OrganizationObject.md
 docs/OrganizationUpdateInput.md
 docs/OrganizationUpdateInputOrganization.md
 docs/OrganizationsApi.md
-docs/OutstandingInvoiceObject.md
-docs/OutstandingInvoices.md
 docs/PaginationMeta.md
 docs/Plan.md
 docs/PlanCreateInput.md
@@ -178,13 +182,16 @@ docs/TaxCreateInput.md
 docs/TaxCreateInputTax.md
 docs/TaxObject.md
 docs/TaxUpdateInput.md
+docs/TaxUpdateInputTax.md
 docs/TaxesApi.md
 docs/TaxesPaginated.md
 docs/Timezone.md
 docs/Wallet.md
 docs/WalletCreateInput.md
 docs/WalletCreateInputWallet.md
+docs/WalletCreateInputWalletRecurringTransactionRulesInner.md
 docs/WalletObject.md
+docs/WalletObjectRecurringTransactionRulesInner.md
 docs/WalletTransactionCreateInput.md
 docs/WalletTransactionCreateInputWalletTransaction.md
 docs/WalletTransactionObject.md
@@ -192,6 +199,7 @@ docs/WalletTransactions.md
 docs/WalletTransactionsPaginated.md
 docs/WalletUpdateInput.md
 docs/WalletUpdateInputWallet.md
+docs/WalletUpdateInputWalletRecurringTransactionRulesInner.md
 docs/WalletsApi.md
 docs/WalletsPaginated.md
 docs/WebhookEndpoint.md
@@ -281,6 +289,7 @@ src/main/java/org/openapitools/client/model/CouponCreateInput.java
 src/main/java/org/openapitools/client/model/CouponCreateInputCoupon.java
 src/main/java/org/openapitools/client/model/CouponObject.java
 src/main/java/org/openapitools/client/model/CouponUpdateInput.java
+src/main/java/org/openapitools/client/model/CouponUpdateInputCoupon.java
 src/main/java/org/openapitools/client/model/CouponsPaginated.java
 src/main/java/org/openapitools/client/model/CreditNote.java
 src/main/java/org/openapitools/client/model/CreditNoteAppliedTaxObject.java
@@ -333,6 +342,9 @@ src/main/java/org/openapitools/client/model/EventObjectProperties.java
 src/main/java/org/openapitools/client/model/Fee.java
 src/main/java/org/openapitools/client/model/FeeAppliedTaxObject.java
 src/main/java/org/openapitools/client/model/FeeObject.java
+src/main/java/org/openapitools/client/model/FeeObjectAmountDetails.java
+src/main/java/org/openapitools/client/model/FeeObjectAmountDetailsAllOfGraduatedRangesInner.java
+src/main/java/org/openapitools/client/model/FeeObjectAmountDetailsAllOfVolumeRangesInner.java
 src/main/java/org/openapitools/client/model/FeeObjectItem.java
 src/main/java/org/openapitools/client/model/FeeUpdateInput.java
 src/main/java/org/openapitools/client/model/FeeUpdateInputFee.java
@@ -349,6 +361,8 @@ src/main/java/org/openapitools/client/model/GroupPropertiesObjectValues.java
 src/main/java/org/openapitools/client/model/GroupsPaginated.java
 src/main/java/org/openapitools/client/model/Invoice.java
 src/main/java/org/openapitools/client/model/InvoiceAppliedTaxObject.java
+src/main/java/org/openapitools/client/model/InvoiceCollectionObject.java
+src/main/java/org/openapitools/client/model/InvoiceCollections.java
 src/main/java/org/openapitools/client/model/InvoiceMetadataObject.java
 src/main/java/org/openapitools/client/model/InvoiceObject.java
 src/main/java/org/openapitools/client/model/InvoiceObjectCustomer.java
@@ -369,8 +383,6 @@ src/main/java/org/openapitools/client/model/OrganizationBillingConfiguration.jav
 src/main/java/org/openapitools/client/model/OrganizationObject.java
 src/main/java/org/openapitools/client/model/OrganizationUpdateInput.java
 src/main/java/org/openapitools/client/model/OrganizationUpdateInputOrganization.java
-src/main/java/org/openapitools/client/model/OutstandingInvoiceObject.java
-src/main/java/org/openapitools/client/model/OutstandingInvoices.java
 src/main/java/org/openapitools/client/model/PaginationMeta.java
 src/main/java/org/openapitools/client/model/Plan.java
 src/main/java/org/openapitools/client/model/PlanCreateInput.java
@@ -398,12 +410,15 @@ src/main/java/org/openapitools/client/model/TaxCreateInput.java
 src/main/java/org/openapitools/client/model/TaxCreateInputTax.java
 src/main/java/org/openapitools/client/model/TaxObject.java
 src/main/java/org/openapitools/client/model/TaxUpdateInput.java
+src/main/java/org/openapitools/client/model/TaxUpdateInputTax.java
 src/main/java/org/openapitools/client/model/TaxesPaginated.java
 src/main/java/org/openapitools/client/model/Timezone.java
 src/main/java/org/openapitools/client/model/Wallet.java
 src/main/java/org/openapitools/client/model/WalletCreateInput.java
 src/main/java/org/openapitools/client/model/WalletCreateInputWallet.java
+src/main/java/org/openapitools/client/model/WalletCreateInputWalletRecurringTransactionRulesInner.java
 src/main/java/org/openapitools/client/model/WalletObject.java
+src/main/java/org/openapitools/client/model/WalletObjectRecurringTransactionRulesInner.java
 src/main/java/org/openapitools/client/model/WalletTransactionCreateInput.java
 src/main/java/org/openapitools/client/model/WalletTransactionCreateInputWalletTransaction.java
 src/main/java/org/openapitools/client/model/WalletTransactionObject.java
@@ -411,6 +426,7 @@ src/main/java/org/openapitools/client/model/WalletTransactions.java
 src/main/java/org/openapitools/client/model/WalletTransactionsPaginated.java
 src/main/java/org/openapitools/client/model/WalletUpdateInput.java
 src/main/java/org/openapitools/client/model/WalletUpdateInputWallet.java
+src/main/java/org/openapitools/client/model/WalletUpdateInputWalletRecurringTransactionRulesInner.java
 src/main/java/org/openapitools/client/model/WalletsPaginated.java
 src/main/java/org/openapitools/client/model/WebhookEndpoint.java
 src/main/java/org/openapitools/client/model/WebhookEndpointCreateInput.java
@@ -477,6 +493,7 @@ src/test/java/org/openapitools/client/model/CouponCreateInputCouponTest.java
 src/test/java/org/openapitools/client/model/CouponCreateInputTest.java
 src/test/java/org/openapitools/client/model/CouponObjectTest.java
 src/test/java/org/openapitools/client/model/CouponTest.java
+src/test/java/org/openapitools/client/model/CouponUpdateInputCouponTest.java
 src/test/java/org/openapitools/client/model/CouponUpdateInputTest.java
 src/test/java/org/openapitools/client/model/CouponsPaginatedTest.java
 src/test/java/org/openapitools/client/model/CreditNoteAppliedTaxObjectTest.java
@@ -528,6 +545,9 @@ src/test/java/org/openapitools/client/model/EventObjectPropertiesTest.java
 src/test/java/org/openapitools/client/model/EventObjectTest.java
 src/test/java/org/openapitools/client/model/EventTest.java
 src/test/java/org/openapitools/client/model/FeeAppliedTaxObjectTest.java
+src/test/java/org/openapitools/client/model/FeeObjectAmountDetailsAllOfGraduatedRangesInnerTest.java
+src/test/java/org/openapitools/client/model/FeeObjectAmountDetailsAllOfVolumeRangesInnerTest.java
+src/test/java/org/openapitools/client/model/FeeObjectAmountDetailsTest.java
 src/test/java/org/openapitools/client/model/FeeObjectItemTest.java
 src/test/java/org/openapitools/client/model/FeeObjectTest.java
 src/test/java/org/openapitools/client/model/FeeTest.java
@@ -545,6 +565,8 @@ src/test/java/org/openapitools/client/model/GroupPropertiesObjectTest.java
 src/test/java/org/openapitools/client/model/GroupPropertiesObjectValuesTest.java
 src/test/java/org/openapitools/client/model/GroupsPaginatedTest.java
 src/test/java/org/openapitools/client/model/InvoiceAppliedTaxObjectTest.java
+src/test/java/org/openapitools/client/model/InvoiceCollectionObjectTest.java
+src/test/java/org/openapitools/client/model/InvoiceCollectionsTest.java
 src/test/java/org/openapitools/client/model/InvoiceMetadataObjectTest.java
 src/test/java/org/openapitools/client/model/InvoiceObjectCustomerTest.java
 src/test/java/org/openapitools/client/model/InvoiceObjectExtendedTest.java
@@ -566,8 +588,6 @@ src/test/java/org/openapitools/client/model/OrganizationObjectTest.java
 src/test/java/org/openapitools/client/model/OrganizationTest.java
 src/test/java/org/openapitools/client/model/OrganizationUpdateInputOrganizationTest.java
 src/test/java/org/openapitools/client/model/OrganizationUpdateInputTest.java
-src/test/java/org/openapitools/client/model/OutstandingInvoiceObjectTest.java
-src/test/java/org/openapitools/client/model/OutstandingInvoicesTest.java
 src/test/java/org/openapitools/client/model/PaginationMetaTest.java
 src/test/java/org/openapitools/client/model/PlanCreateInputPlanChargesInnerGroupPropertiesInnerTest.java
 src/test/java/org/openapitools/client/model/PlanCreateInputPlanChargesInnerTest.java
@@ -594,11 +614,14 @@ src/test/java/org/openapitools/client/model/TaxCreateInputTaxTest.java
 src/test/java/org/openapitools/client/model/TaxCreateInputTest.java
 src/test/java/org/openapitools/client/model/TaxObjectTest.java
 src/test/java/org/openapitools/client/model/TaxTest.java
+src/test/java/org/openapitools/client/model/TaxUpdateInputTaxTest.java
 src/test/java/org/openapitools/client/model/TaxUpdateInputTest.java
 src/test/java/org/openapitools/client/model/TaxesPaginatedTest.java
 src/test/java/org/openapitools/client/model/TimezoneTest.java
 src/test/java/org/openapitools/client/model/WalletCreateInputTest.java
+src/test/java/org/openapitools/client/model/WalletCreateInputWalletRecurringTransactionRulesInnerTest.java
 src/test/java/org/openapitools/client/model/WalletCreateInputWalletTest.java
+src/test/java/org/openapitools/client/model/WalletObjectRecurringTransactionRulesInnerTest.java
 src/test/java/org/openapitools/client/model/WalletObjectTest.java
 src/test/java/org/openapitools/client/model/WalletTest.java
 src/test/java/org/openapitools/client/model/WalletTransactionCreateInputTest.java
@@ -607,6 +630,7 @@ src/test/java/org/openapitools/client/model/WalletTransactionObjectTest.java
 src/test/java/org/openapitools/client/model/WalletTransactionsPaginatedTest.java
 src/test/java/org/openapitools/client/model/WalletTransactionsTest.java
 src/test/java/org/openapitools/client/model/WalletUpdateInputTest.java
+src/test/java/org/openapitools/client/model/WalletUpdateInputWalletRecurringTransactionRulesInnerTest.java
 src/test/java/org/openapitools/client/model/WalletUpdateInputWalletTest.java
 src/test/java/org/openapitools/client/model/WalletsPaginatedTest.java
 src/test/java/org/openapitools/client/model/WebhookEndpointCreateInputTest.java

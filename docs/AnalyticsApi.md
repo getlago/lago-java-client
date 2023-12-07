@@ -5,9 +5,9 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**findAllGrossRevenues**](AnalyticsApi.md#findAllGrossRevenues) | **GET** /analytics/gross_revenue | List gross revenue |
+| [**findAllInvoiceCollections**](AnalyticsApi.md#findAllInvoiceCollections) | **GET** /analytics/invoice_collection | List of finalized invoices |
 | [**findAllInvoicedUsages**](AnalyticsApi.md#findAllInvoicedUsages) | **GET** /analytics/invoiced_usage | List usage revenue |
 | [**findAllMrrs**](AnalyticsApi.md#findAllMrrs) | **GET** /analytics/mrr | List MRR |
-| [**findAllOutstandingInvoices**](AnalyticsApi.md#findAllOutstandingInvoices) | **GET** /analytics/outstanding_invoices | List outstanding invoices |
 
 
 
@@ -82,6 +82,78 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Gross revenue |  -  |
+| **401** | Unauthorized error |  -  |
+
+
+## findAllInvoiceCollections
+
+> InvoiceCollections findAllInvoiceCollections(currency)
+
+List of finalized invoices
+
+Represents a monthly aggregation, detailing both the total count and the cumulative amount of invoices that have been marked as &#x60;finalized&#x60;. This report sorts invoices categorically based on their &#x60;payment_status&#x60;.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.AnalyticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        AnalyticsApi apiInstance = new AnalyticsApi(defaultClient);
+        Currency currency = new Currency(); // Currency | The currency of revenue analytics. Format must be ISO 4217.
+        try {
+            InvoiceCollections result = apiInstance.findAllInvoiceCollections(currency);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AnalyticsApi#findAllInvoiceCollections");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **currency** | [**Currency**](.md)| The currency of revenue analytics. Format must be ISO 4217. | [optional] |
+
+### Return type
+
+[**InvoiceCollections**](InvoiceCollections.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Finalized invoice collection |  -  |
 | **401** | Unauthorized error |  -  |
 
 
@@ -186,7 +258,7 @@ public class Example {
         bearerAuth.setBearerToken("BEARER TOKEN");
 
         AnalyticsApi apiInstance = new AnalyticsApi(defaultClient);
-        Currency currency = new Currency(); // Currency | Quantifies the revenue generated from `subscription` fees on a monthly basis. This figure is calculated post-application of applicable taxes and prior to the deduction of any applicable discounts. The method of calculation varies based on the subscription billing cycle:  - Revenue from `monthly` subscription invoices is included in the MRR for the month in which the invoice is issued. - Revenue from `quarterly` subscription invoices is distributed evenly over three months. This distribution applies to fees paid in advance (allocated to the next three months) as well as to fees paid in arrears (allocated to the preceding three months). - Revenue from `yearly` subscription invoices is distributed evenly over twelve months. This allocation is applicable for fees paid in advance (spread over the next twelve months) and for fees paid in arrears (spread over the previous twelve months). - Revenue from `weekly` subscription invoices, the total revenue from all invoices issued within a month is summed up. This total is then divided by the number of invoices issued during that month, and the result is multiplied by 4.33, representing the average number of weeks in a month.
+        Currency currency = new Currency(); // Currency | Quantifies the revenue generated from `subscription` fees on a monthly basis. This figure is calculated post-application of applicable taxes and deduction of any applicable discounts. The method of calculation varies based on the subscription billing cycle:  - Revenue from `monthly` subscription invoices is included in the MRR for the month in which the invoice is issued. - Revenue from `quarterly` subscription invoices is distributed evenly over three months. This distribution applies to fees paid in advance (allocated to the next remaining months depending on calendar or anniversary billing) as well as to fees paid in arrears (allocated to the preceding months depending on calendar or anniversary billing). - Revenue from `yearly` subscription invoices is distributed evenly over twelve months. This allocation is applicable for fees paid in advance (spread over the next  remaining months depending on calendar or anniversary billing) and for fees paid in arrears (spread over the previous months depending on calendar or anniversary billing). - Revenue from `weekly` subscription invoices, the total revenue from all invoices issued within a month is summed up. This total is then divided by the number of invoices issued during that month, and the result is multiplied by 4.33, representing the average number of weeks in a month.
         Integer months = 12; // Integer | Show data only for given number of months.
         try {
             Mrrs result = apiInstance.findAllMrrs(currency, months);
@@ -207,7 +279,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **currency** | [**Currency**](.md)| Quantifies the revenue generated from &#x60;subscription&#x60; fees on a monthly basis. This figure is calculated post-application of applicable taxes and prior to the deduction of any applicable discounts. The method of calculation varies based on the subscription billing cycle:  - Revenue from &#x60;monthly&#x60; subscription invoices is included in the MRR for the month in which the invoice is issued. - Revenue from &#x60;quarterly&#x60; subscription invoices is distributed evenly over three months. This distribution applies to fees paid in advance (allocated to the next three months) as well as to fees paid in arrears (allocated to the preceding three months). - Revenue from &#x60;yearly&#x60; subscription invoices is distributed evenly over twelve months. This allocation is applicable for fees paid in advance (spread over the next twelve months) and for fees paid in arrears (spread over the previous twelve months). - Revenue from &#x60;weekly&#x60; subscription invoices, the total revenue from all invoices issued within a month is summed up. This total is then divided by the number of invoices issued during that month, and the result is multiplied by 4.33, representing the average number of weeks in a month. | [optional] |
+| **currency** | [**Currency**](.md)| Quantifies the revenue generated from &#x60;subscription&#x60; fees on a monthly basis. This figure is calculated post-application of applicable taxes and deduction of any applicable discounts. The method of calculation varies based on the subscription billing cycle:  - Revenue from &#x60;monthly&#x60; subscription invoices is included in the MRR for the month in which the invoice is issued. - Revenue from &#x60;quarterly&#x60; subscription invoices is distributed evenly over three months. This distribution applies to fees paid in advance (allocated to the next remaining months depending on calendar or anniversary billing) as well as to fees paid in arrears (allocated to the preceding months depending on calendar or anniversary billing). - Revenue from &#x60;yearly&#x60; subscription invoices is distributed evenly over twelve months. This allocation is applicable for fees paid in advance (spread over the next  remaining months depending on calendar or anniversary billing) and for fees paid in arrears (spread over the previous months depending on calendar or anniversary billing). - Revenue from &#x60;weekly&#x60; subscription invoices, the total revenue from all invoices issued within a month is summed up. This total is then divided by the number of invoices issued during that month, and the result is multiplied by 4.33, representing the average number of weeks in a month. | [optional] |
 | **months** | **Integer**| Show data only for given number of months. | [optional] |
 
 ### Return type
@@ -228,77 +300,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | MRR |  -  |
-| **401** | Unauthorized error |  -  |
-
-
-## findAllOutstandingInvoices
-
-> OutstandingInvoices findAllOutstandingInvoices(currency)
-
-List outstanding invoices
-
-Represents a monthly aggregation, detailing both the total count and the cumulative amount of invoices that have been marked as &#x60;finalized&#x60;. This report sorts invoices categorically based on their &#x60;payment_status&#x60;.
-
-### Example
-
-```java
-// Import classes:
-import org.getlago.client.ApiClient;
-import org.getlago.client.ApiException;
-import org.getlago.client.Configuration;
-import org.getlago.client.auth.*;
-import org.getlago.client.models.*;
-import org.getlago.client.api.AnalyticsApi;
-
-public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://api.getlago.com/api/v1");
-        
-        // Configure HTTP bearer authorization: bearerAuth
-        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-        bearerAuth.setBearerToken("BEARER TOKEN");
-
-        AnalyticsApi apiInstance = new AnalyticsApi(defaultClient);
-        Currency currency = new Currency(); // Currency | The currency of revenue analytics. Format must be ISO 4217.
-        try {
-            OutstandingInvoices result = apiInstance.findAllOutstandingInvoices(currency);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AnalyticsApi#findAllOutstandingInvoices");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **currency** | [**Currency**](.md)| The currency of revenue analytics. Format must be ISO 4217. | [optional] |
-
-### Return type
-
-[**OutstandingInvoices**](OutstandingInvoices.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Outstanding invoices |  -  |
 | **401** | Unauthorized error |  -  |
 

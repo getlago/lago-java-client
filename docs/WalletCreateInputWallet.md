@@ -14,6 +14,7 @@
 |**grantedCredits** | **String** | The number of free granted credits. Required only if there is no paid credits. |  [optional] |
 |**externalCustomerId** | **String** | The customer external unique identifier (provided by your own application) |  |
 |**expirationAt** | **OffsetDateTime** | The date and time that determines when the wallet will expire. It follows the ISO 8601 datetime format and is expressed in Coordinated Universal Time (UTC). |  [optional] |
+|**recurringTransactionRules** | [**List&lt;WalletCreateInputWalletRecurringTransactionRulesInner&gt;**](WalletCreateInputWalletRecurringTransactionRulesInner.md) | List of recurring transaction rules. Currently, we only allow one recurring rule per wallet. |  [optional] |
 
 
 

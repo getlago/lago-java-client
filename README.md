@@ -2,9 +2,9 @@
 
 Lago API documentation
 
-- API version: 0.52.0-beta
+- API version: 0.52.2-beta
 
-- Build date: 2023-11-24T14:46:07.416771019Z[Etc/UTC]
+- Build date: 2023-12-07T16:08:18.203563Z[Etc/UTC]
 
 Lago API allows your application to push customer information and metrics (events) from your application to the billing application.
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.openapitools</groupId>
   <artifactId>lago-java-client</artifactId>
-  <version>0.52.0-beta</version>
+  <version>0.52.2-beta</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.openapitools:lago-java-client:0.52.0-beta"
+     implementation "org.openapitools:lago-java-client:0.52.2-beta"
   }
 ```
 
@@ -72,7 +72,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/lago-java-client-0.52.0-beta.jar`
+- `target/lago-java-client-0.52.2-beta.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -125,9 +125,9 @@ Class | Method | HTTP request | Description
 *AddOnsApi* | [**findAllAddOns**](docs/AddOnsApi.md#findAllAddOns) | **GET** /add_ons | List all add-ons
 *AddOnsApi* | [**updateAddOn**](docs/AddOnsApi.md#updateAddOn) | **PUT** /add_ons/{code} | Update an add-on
 *AnalyticsApi* | [**findAllGrossRevenues**](docs/AnalyticsApi.md#findAllGrossRevenues) | **GET** /analytics/gross_revenue | List gross revenue
+*AnalyticsApi* | [**findAllInvoiceCollections**](docs/AnalyticsApi.md#findAllInvoiceCollections) | **GET** /analytics/invoice_collection | List of finalized invoices
 *AnalyticsApi* | [**findAllInvoicedUsages**](docs/AnalyticsApi.md#findAllInvoicedUsages) | **GET** /analytics/invoiced_usage | List usage revenue
 *AnalyticsApi* | [**findAllMrrs**](docs/AnalyticsApi.md#findAllMrrs) | **GET** /analytics/mrr | List MRR
-*AnalyticsApi* | [**findAllOutstandingInvoices**](docs/AnalyticsApi.md#findAllOutstandingInvoices) | **GET** /analytics/outstanding_invoices | List outstanding invoices
 *BillableMetricsApi* | [**createBillableMetric**](docs/BillableMetricsApi.md#createBillableMetric) | **POST** /billable_metrics | Create a billable metric
 *BillableMetricsApi* | [**destroyBillableMetric**](docs/BillableMetricsApi.md#destroyBillableMetric) | **DELETE** /billable_metrics/{code} | Delete a billable metric
 *BillableMetricsApi* | [**findAllBillableMetricGroups**](docs/BillableMetricsApi.md#findAllBillableMetricGroups) | **GET** /billable_metrics/{code}/groups | Find a billable metric&#39;s groups
@@ -250,6 +250,7 @@ Class | Method | HTTP request | Description
  - [CouponCreateInputCoupon](docs/CouponCreateInputCoupon.md)
  - [CouponObject](docs/CouponObject.md)
  - [CouponUpdateInput](docs/CouponUpdateInput.md)
+ - [CouponUpdateInputCoupon](docs/CouponUpdateInputCoupon.md)
  - [CouponsPaginated](docs/CouponsPaginated.md)
  - [CreditNote](docs/CreditNote.md)
  - [CreditNoteAppliedTaxObject](docs/CreditNoteAppliedTaxObject.md)
@@ -302,6 +303,9 @@ Class | Method | HTTP request | Description
  - [Fee](docs/Fee.md)
  - [FeeAppliedTaxObject](docs/FeeAppliedTaxObject.md)
  - [FeeObject](docs/FeeObject.md)
+ - [FeeObjectAmountDetails](docs/FeeObjectAmountDetails.md)
+ - [FeeObjectAmountDetailsAllOfGraduatedRangesInner](docs/FeeObjectAmountDetailsAllOfGraduatedRangesInner.md)
+ - [FeeObjectAmountDetailsAllOfVolumeRangesInner](docs/FeeObjectAmountDetailsAllOfVolumeRangesInner.md)
  - [FeeObjectItem](docs/FeeObjectItem.md)
  - [FeeUpdateInput](docs/FeeUpdateInput.md)
  - [FeeUpdateInputFee](docs/FeeUpdateInputFee.md)
@@ -318,6 +322,8 @@ Class | Method | HTTP request | Description
  - [GroupsPaginated](docs/GroupsPaginated.md)
  - [Invoice](docs/Invoice.md)
  - [InvoiceAppliedTaxObject](docs/InvoiceAppliedTaxObject.md)
+ - [InvoiceCollectionObject](docs/InvoiceCollectionObject.md)
+ - [InvoiceCollections](docs/InvoiceCollections.md)
  - [InvoiceMetadataObject](docs/InvoiceMetadataObject.md)
  - [InvoiceObject](docs/InvoiceObject.md)
  - [InvoiceObjectCustomer](docs/InvoiceObjectCustomer.md)
@@ -338,8 +344,6 @@ Class | Method | HTTP request | Description
  - [OrganizationObject](docs/OrganizationObject.md)
  - [OrganizationUpdateInput](docs/OrganizationUpdateInput.md)
  - [OrganizationUpdateInputOrganization](docs/OrganizationUpdateInputOrganization.md)
- - [OutstandingInvoiceObject](docs/OutstandingInvoiceObject.md)
- - [OutstandingInvoices](docs/OutstandingInvoices.md)
  - [PaginationMeta](docs/PaginationMeta.md)
  - [Plan](docs/Plan.md)
  - [PlanCreateInput](docs/PlanCreateInput.md)
@@ -367,12 +371,15 @@ Class | Method | HTTP request | Description
  - [TaxCreateInputTax](docs/TaxCreateInputTax.md)
  - [TaxObject](docs/TaxObject.md)
  - [TaxUpdateInput](docs/TaxUpdateInput.md)
+ - [TaxUpdateInputTax](docs/TaxUpdateInputTax.md)
  - [TaxesPaginated](docs/TaxesPaginated.md)
  - [Timezone](docs/Timezone.md)
  - [Wallet](docs/Wallet.md)
  - [WalletCreateInput](docs/WalletCreateInput.md)
  - [WalletCreateInputWallet](docs/WalletCreateInputWallet.md)
+ - [WalletCreateInputWalletRecurringTransactionRulesInner](docs/WalletCreateInputWalletRecurringTransactionRulesInner.md)
  - [WalletObject](docs/WalletObject.md)
+ - [WalletObjectRecurringTransactionRulesInner](docs/WalletObjectRecurringTransactionRulesInner.md)
  - [WalletTransactionCreateInput](docs/WalletTransactionCreateInput.md)
  - [WalletTransactionCreateInputWalletTransaction](docs/WalletTransactionCreateInputWalletTransaction.md)
  - [WalletTransactionObject](docs/WalletTransactionObject.md)
@@ -380,6 +387,7 @@ Class | Method | HTTP request | Description
  - [WalletTransactionsPaginated](docs/WalletTransactionsPaginated.md)
  - [WalletUpdateInput](docs/WalletUpdateInput.md)
  - [WalletUpdateInputWallet](docs/WalletUpdateInputWallet.md)
+ - [WalletUpdateInputWalletRecurringTransactionRulesInner](docs/WalletUpdateInputWalletRecurringTransactionRulesInner.md)
  - [WalletsPaginated](docs/WalletsPaginated.md)
  - [WebhookEndpoint](docs/WebhookEndpoint.md)
  - [WebhookEndpointCreateInput](docs/WebhookEndpointCreateInput.md)

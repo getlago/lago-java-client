@@ -1,6 +1,6 @@
 
 
-# OutstandingInvoiceObject
+# InvoiceCollectionObject
 
 
 ## Properties

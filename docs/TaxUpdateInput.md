@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**tax** | [**TaxBaseInput**](TaxBaseInput.md) |  |  |
+|**tax** | [**TaxUpdateInputTax**](TaxUpdateInputTax.md) |  |  |
 
 
 
