@@ -36,6 +36,7 @@
 |**failedAt** | **OffsetDateTime** | The date and time when the payment for the fee failed to process. It is provided in Coordinated Universal Time (UTC) format. |  [optional] |
 |**refundedAt** | **OffsetDateTime** | The date and time when the payment for the fee was refunded. It is provided in Coordinated Universal Time (UTC) format |  [optional] |
 |**eventTransactionId** | **String** | Unique identifier assigned to the transaction. This field is specifically displayed when the fee type is &#x60;charge&#x60; and the payment for the fee is made in advance (&#x60;pay_in_advance&#x60; is set to &#x60;true&#x60;). |  [optional] |
+|**amountDetails** | [**FeeObjectAmountDetails**](FeeObjectAmountDetails.md) |  |  [optional] |
 |**item** | [**FeeObjectItem**](FeeObjectItem.md) |  |  |
 |**appliedTaxes** | [**List&lt;FeeAppliedTaxObject&gt;**](FeeAppliedTaxObject.md) | List of fee applied taxes |  [optional] |
 

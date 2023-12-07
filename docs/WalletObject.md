@@ -22,6 +22,7 @@
 |**lastBalanceSyncAt** | **OffsetDateTime** | The date and time of the last balance top-up. It follows the ISO 8601 datetime format and is expressed in Coordinated Universal Time (UTC). |  [optional] |
 |**lastConsumedCreditAt** | **OffsetDateTime** | The date and time of the last credits consumption. It follows the ISO 8601 datetime format and is expressed in Coordinated Universal Time (UTC). |  [optional] |
 |**terminatedAt** | **OffsetDateTime** | The date of terminaison of the wallet. It follows the ISO 8601 datetime format and is expressed in Coordinated Universal Time (UTC). |  [optional] |
+|**recurringTransactionRules** | [**List&lt;WalletObjectRecurringTransactionRulesInner&gt;**](WalletObjectRecurringTransactionRulesInner.md) | List of recurring transaction rules. Currently, we only allow one recurring rule per wallet. |  [optional] |
 
 
 
