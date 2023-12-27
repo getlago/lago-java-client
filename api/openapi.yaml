@@ -7,7 +7,7 @@ info:
   license:
     name: AGPLv3
   title: Lago API documentation
-  version: 0.52.2-beta
+  version: 0.53.0-beta
 externalDocs:
   description: Lago Github
   url: https://github.com/getlago
@@ -2667,6 +2667,48 @@ paths:
                 $ref: '#/components/schemas/ApiErrorNotAllowed'
           description: Not Allowed error
       summary: Retry an invoice payment
+      tags:
+      - invoices
+      x-accepts: application/json
+  /invoices/{lago_id}/void:
+    post:
+      description: "This endpoint is used for voiding an invoice. You can void an\
+        \ invoice only when it's in a `finalized` status, and the payment status is\
+        \ not `succeeded`."
+      operationId: voidInvoice
+      parameters:
+      - description: Unique identifier assigned to the invoice within the Lago application.
+          This ID is exclusively created by Lago and serves as a unique identifier
+          for the invoice’s record within the Lago system.
+        explode: false
+        in: path
+        name: lago_id
+        required: true
+        schema:
+          example: 1a901a90-1a90-1a90-1a90-1a901a901a90
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+          description: Invoice voided
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorUnauthorized'
+          description: Unauthorized error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorNotFound'
+          description: Not Found error
+      summary: Void an invoice
       tags:
       - invoices
       x-accepts: application/json
@@ -5927,10 +5969,11 @@ components:
       type: object
     CouponUpdateInput:
       example:
-        coupon: null
+        coupon: ""
       properties:
         coupon:
-          $ref: '#/components/schemas/CouponUpdateInput_coupon'
+          allOf:
+          - $ref: '#/components/schemas/CouponBaseInput'
       required:
       - coupon
       type: object
@@ -8648,6 +8691,8 @@ components:
           zipcode: "10000"
           address_line2: address_line2
           address_line1: 100 Brex Street
+          document_numbering: per_customer
+          document_number_prefix: ORG-1234
           name: Name1
           net_payment_term: 30
           lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -8730,6 +8775,8 @@ components:
         zipcode: "10000"
         address_line2: address_line2
         address_line1: 100 Brex Street
+        document_numbering: per_customer
+        document_number_prefix: ORG-1234
         name: Name1
         net_payment_term: 30
         lago_id: 1a901a90-1a90-1a90-1a90-1a901a901a90
@@ -8831,6 +8878,26 @@ components:
           nullable: true
           type: string
           example: null
+        document_numbering:
+          description: |-
+            This parameter configures the method of incrementing invoice numbers for your customers.
+
+            - `per_customer`: Invoice numbers are incremented individually for each customer. This means every customer will have their own unique sequence of invoice numbers, separate from other customers. It ensures that each customer's invoice numbers follow a distinct and isolated numbering pattern.
+            - `per_organization`: Invoice number incrementation is made across your entire organization. Rather than individual sequences for each customer, all invoices within the organization follow a single, unified numbering system. This creates a continuous and organization-wide sequence for all invoice numbers. Invoices are incremented per month (dynamic value used is YYYYMM), and invoice numbers are reset at the end of each month.
+
+            The default value for `document_numbering` is set to `per_customer`, meaning that, unless changed, invoice numbers will increment uniquely for each customer.
+          enum:
+          - per_customer
+          - per_organization
+          example: per_customer
+          type: string
+        document_number_prefix:
+          description: "Sets the prefix for invoices and credit notes. Default is\
+            \ the first three letters of your organization name plus the last four\
+            \ digits of your organization ID. Customizable within 1-10 characters,\
+            \ and automatically capitalized by Lago."
+          example: ORG-1234
+          type: string
         net_payment_term:
           description: "The net payment term, expressed in days, specifies the duration\
             \ within which a customer is expected to remit payment after the invoice\
@@ -8858,6 +8925,8 @@ components:
       required:
       - billing_configuration
       - created_at
+      - document_number_prefix
+      - document_numbering
       - email_settings
       - lago_id
       - name
@@ -8880,6 +8949,8 @@ components:
           zipcode: "10000"
           address_line2: address_line2
           address_line1: 100 Brex Street
+          document_numbering: per_customer
+          document_number_prefix: ORG-1234
           net_payment_term: 30
           state: NYC
           legal_name: legal_name
@@ -10519,10 +10590,11 @@ components:
       type: object
     TaxUpdateInput:
       example:
-        tax: null
+        tax: ""
       properties:
         tax:
-          $ref: '#/components/schemas/TaxUpdateInput_tax'
+          allOf:
+          - $ref: '#/components/schemas/TaxBaseInput'
       required:
       - tax
       type: object
@@ -11496,9 +11568,6 @@ components:
         - coupon_type
         - frequency
         - name
-    CouponUpdateInput_coupon:
-      allOf:
-      - $ref: '#/components/schemas/CouponBaseInput'
     CreditNoteEstimateInput_credit_note_items_inner:
       properties:
         fee_id:
@@ -12391,6 +12460,54 @@ components:
       - total_with_flat_amount
       - units
       type: object
+    FeeObject_amount_details_allOf_graduated_percentage_ranges_inner:
+      properties:
+        units:
+          description: Total units received in Lago.
+          example: "10.0"
+          pattern: "^[0-9]+.?[0-9]*$"
+          type: string
+        from_value:
+          description: Lower value of a tier. It is either 0 or the previous range's
+            `to_value + 1`.
+          example: 0
+          type: integer
+        to_value:
+          description: |-
+            Highest value of a tier.
+            - This value is higher than the from_value of the same tier.
+            - This value is null for the last tier.
+          example: 10
+          nullable: true
+          type: integer
+        flat_unit_amount:
+          description: Flat unit amount within a specified tier.
+          example: "1.0"
+          type: string
+        rate:
+          description: Percentage rate applied within a specified tier.
+          example: "1.0"
+          format: "^[0-9]+.?[0-9]*$"
+          type: string
+        per_unit_total_amount:
+          description: Total amount of received units to be charged within a specified
+            tier.
+          example: "10.0"
+          type: string
+        total_with_flat_amount:
+          description: "Total amount to be charged for a specific tier, taking into\
+            \ account the flat_unit_amount and the per_unit_total_amount."
+          example: "11.0"
+          type: string
+      required:
+      - flat_unit_amount
+      - from_value
+      - per_unit_total_amount
+      - rate
+      - to_value
+      - total_with_flat_amount
+      - units
+      type: object
     FeeObject_amount_details_allOf_volume_ranges_inner:
       properties:
         per_unit_amount:
@@ -12427,7 +12544,7 @@ components:
             description: "Graduated percentage ranges, used for a `graduated_percentage`\
               \ charge model."
             items:
-              $ref: '#/components/schemas/FeeObject_amount_details_allOf_graduated_ranges_inner'
+              $ref: '#/components/schemas/FeeObject_amount_details_allOf_graduated_percentage_ranges_inner'
             type: array
           free_units:
             description: The quantity of units that are provided free of charge for
@@ -12463,9 +12580,10 @@ components:
               model.
             example: 10
             type: integer
-          per_unit_amount:
-            description: Amount per unit for the Percentage charge model.
+          rate:
+            description: Percentage rate applied for the Percentage charge model.
             example: "1.0"
+            format: "^[0-9]+.?[0-9]*$"
             type: string
           per_unit_total_amount:
             description: Total amount of received units to be charged for the Percentage
@@ -12746,6 +12864,8 @@ components:
         zipcode: "10000"
         address_line2: address_line2
         address_line1: 100 Brex Street
+        document_numbering: per_customer
+        document_number_prefix: ORG-1234
         net_payment_term: 30
         state: NYC
         legal_name: legal_name
@@ -12814,6 +12934,26 @@ components:
           nullable: true
           type: string
           example: null
+        document_numbering:
+          description: |-
+            This parameter configures the method of incrementing invoice numbers for your customers.
+
+            - `per_customer`: Invoice numbers are incremented individually for each customer. This means every customer will have their own unique sequence of invoice numbers, separate from other customers. It ensures that each customer's invoice numbers follow a distinct and isolated numbering pattern.
+            - `per_organization`: Invoice number incrementation is made across your entire organization. Rather than individual sequences for each customer, all invoices within the organization follow a single, unified numbering system. This creates a continuous and organization-wide sequence for all invoice numbers. Invoices are incremented per month (dynamic value used is YYYYMM), and invoice numbers are reset at the end of each month.
+
+            The default value for `document_numbering` is set to `per_customer`, meaning that, unless changed, invoice numbers will increment uniquely for each customer.
+          enum:
+          - per_customer
+          - per_organization
+          example: per_customer
+          type: string
+        document_number_prefix:
+          description: "Sets the prefix for invoices and credit notes. Default is\
+            \ the first three letters of your organization name plus the last four\
+            \ digits of your organization ID. Customizable within 1-10 characters,\
+            \ and automatically capitalized by Lago."
+          example: ORG-1234
+          type: string
         net_payment_term:
           description: "The net payment term, expressed in days, specifies the duration\
             \ within which a customer is expected to remit payment after the invoice\
@@ -13766,9 +13906,6 @@ components:
         - code
         - name
         - rate
-    TaxUpdateInput_tax:
-      allOf:
-      - $ref: '#/components/schemas/TaxBaseInput'
     WalletCreateInput_wallet_recurring_transaction_rules_inner:
       description: Object that represents rule for wallet recurring transactions.
       example:
@@ -14071,6 +14208,10 @@ components:
             \ one recurring rule per wallet."
           items:
             $ref: '#/components/schemas/WalletUpdateInput_wallet_recurring_transaction_rules_inner'
+          required:
+          - granted_credits
+          - paid_credits
+          - rule_type
           type: array
       type: object
     WebhookEndpointCreateInput_webhook_endpoint:

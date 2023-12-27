@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**coupon** | [**CouponUpdateInputCoupon**](CouponUpdateInputCoupon.md) |  |  |
+|**coupon** | [**CouponBaseInput**](CouponBaseInput.md) |  |  |
 
 
 
