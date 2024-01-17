@@ -2,9 +2,9 @@
 
 Lago API documentation
 
-- API version: 0.52.2-beta
+- API version: 0.53.0-beta
 
-- Build date: 2023-12-07T16:08:18.203563Z[Etc/UTC]
+- Build date: 2023-12-27T14:12:55.372025191Z[Etc/UTC]
 
 Lago API allows your application to push customer information and metrics (events) from your application to the billing application.
 
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.openapitools</groupId>
   <artifactId>lago-java-client</artifactId>
-  <version>0.52.2-beta</version>
+  <version>0.53.0-beta</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.openapitools:lago-java-client:0.52.2-beta"
+     implementation "org.openapitools:lago-java-client:0.53.0-beta"
   }
 ```
 
@@ -72,7 +72,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/lago-java-client-0.52.2-beta.jar`
+- `target/lago-java-client-0.53.0-beta.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -173,6 +173,7 @@ Class | Method | HTTP request | Description
 *InvoicesApi* | [**refreshInvoice**](docs/InvoicesApi.md#refreshInvoice) | **PUT** /invoices/{lago_id}/refresh | Refresh a draft invoice
 *InvoicesApi* | [**retryPayment**](docs/InvoicesApi.md#retryPayment) | **POST** /invoices/{lago_id}/retry_payment | Retry an invoice payment
 *InvoicesApi* | [**updateInvoice**](docs/InvoicesApi.md#updateInvoice) | **PUT** /invoices/{lago_id} | Update an invoice
+*InvoicesApi* | [**voidInvoice**](docs/InvoicesApi.md#voidInvoice) | **POST** /invoices/{lago_id}/void | Void an invoice
 *OrganizationsApi* | [**updateOrganization**](docs/OrganizationsApi.md#updateOrganization) | **PUT** /organizations | Update your organization
 *PlansApi* | [**createPlan**](docs/PlansApi.md#createPlan) | **POST** /plans | Create a plan
 *PlansApi* | [**destroyPlan**](docs/PlansApi.md#destroyPlan) | **DELETE** /plans/{code} | Delete a plan
@@ -250,7 +251,6 @@ Class | Method | HTTP request | Description
  - [CouponCreateInputCoupon](docs/CouponCreateInputCoupon.md)
  - [CouponObject](docs/CouponObject.md)
  - [CouponUpdateInput](docs/CouponUpdateInput.md)
- - [CouponUpdateInputCoupon](docs/CouponUpdateInputCoupon.md)
  - [CouponsPaginated](docs/CouponsPaginated.md)
  - [CreditNote](docs/CreditNote.md)
  - [CreditNoteAppliedTaxObject](docs/CreditNoteAppliedTaxObject.md)
@@ -304,6 +304,7 @@ Class | Method | HTTP request | Description
  - [FeeAppliedTaxObject](docs/FeeAppliedTaxObject.md)
  - [FeeObject](docs/FeeObject.md)
  - [FeeObjectAmountDetails](docs/FeeObjectAmountDetails.md)
+ - [FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner](docs/FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.md)
  - [FeeObjectAmountDetailsAllOfGraduatedRangesInner](docs/FeeObjectAmountDetailsAllOfGraduatedRangesInner.md)
  - [FeeObjectAmountDetailsAllOfVolumeRangesInner](docs/FeeObjectAmountDetailsAllOfVolumeRangesInner.md)
  - [FeeObjectItem](docs/FeeObjectItem.md)
@@ -371,7 +372,6 @@ Class | Method | HTTP request | Description
  - [TaxCreateInputTax](docs/TaxCreateInputTax.md)
  - [TaxObject](docs/TaxObject.md)
  - [TaxUpdateInput](docs/TaxUpdateInput.md)
- - [TaxUpdateInputTax](docs/TaxUpdateInputTax.md)
  - [TaxesPaginated](docs/TaxesPaginated.md)
  - [Timezone](docs/Timezone.md)
  - [Wallet](docs/Wallet.md)

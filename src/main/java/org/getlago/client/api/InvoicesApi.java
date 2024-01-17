@@ -35,7 +35,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-07T16:08:18.203563Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-27T14:12:55.372025191Z[Etc/UTC]")
 public class InvoicesApi {
     private ApiClient apiClient;
 
@@ -756,5 +756,87 @@ public class InvoicesApi {
      */
     public ResponseSpec updateInvoiceWithResponseSpec(UUID lagoId, InvoiceUpdateInput invoiceUpdateInput) throws WebClientResponseException {
         return updateInvoiceRequestCreation(lagoId, invoiceUpdateInput);
+    }
+    /**
+     * Void an invoice
+     * This endpoint is used for voiding an invoice. You can void an invoice only when it&#39;s in a &#x60;finalized&#x60; status, and the payment status is not &#x60;succeeded&#x60;.
+     * <p><b>200</b> - Invoice voided
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param lagoId Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+     * @return Invoice
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec voidInvoiceRequestCreation(UUID lagoId) throws WebClientResponseException {
+        Object postBody = null;
+        // verify the required parameter 'lagoId' is set
+        if (lagoId == null) {
+            throw new WebClientResponseException("Missing the required parameter 'lagoId' when calling voidInvoice", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("lago_id", lagoId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+
+        ParameterizedTypeReference<Invoice> localVarReturnType = new ParameterizedTypeReference<Invoice>() {};
+        return apiClient.invokeAPI("/invoices/{lago_id}/void", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Void an invoice
+     * This endpoint is used for voiding an invoice. You can void an invoice only when it&#39;s in a &#x60;finalized&#x60; status, and the payment status is not &#x60;succeeded&#x60;.
+     * <p><b>200</b> - Invoice voided
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param lagoId Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+     * @return Invoice
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<Invoice> voidInvoice(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<Invoice> localVarReturnType = new ParameterizedTypeReference<Invoice>() {};
+        return voidInvoiceRequestCreation(lagoId).bodyToMono(localVarReturnType);
+    }
+
+    /**
+     * Void an invoice
+     * This endpoint is used for voiding an invoice. You can void an invoice only when it&#39;s in a &#x60;finalized&#x60; status, and the payment status is not &#x60;succeeded&#x60;.
+     * <p><b>200</b> - Invoice voided
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param lagoId Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+     * @return ResponseEntity&lt;Invoice&gt;
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ResponseEntity<Invoice>> voidInvoiceWithHttpInfo(UUID lagoId) throws WebClientResponseException {
+        ParameterizedTypeReference<Invoice> localVarReturnType = new ParameterizedTypeReference<Invoice>() {};
+        return voidInvoiceRequestCreation(lagoId).toEntity(localVarReturnType);
+    }
+
+    /**
+     * Void an invoice
+     * This endpoint is used for voiding an invoice. You can void an invoice only when it&#39;s in a &#x60;finalized&#x60; status, and the payment status is not &#x60;succeeded&#x60;.
+     * <p><b>200</b> - Invoice voided
+     * <p><b>401</b> - Unauthorized error
+     * <p><b>404</b> - Not Found error
+     * @param lagoId Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+     * @return ResponseSpec
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public ResponseSpec voidInvoiceWithResponseSpec(UUID lagoId) throws WebClientResponseException {
+        return voidInvoiceRequestCreation(lagoId);
     }
 }

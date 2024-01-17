@@ -24,20 +24,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * FeeObjectAmountDetailsAllOfGraduatedRangesInner
+ * FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner
  */
 @JsonPropertyOrder({
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_UNITS,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_FROM_VALUE,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_TO_VALUE,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_FLAT_UNIT_AMOUNT,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_PER_UNIT_AMOUNT,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_PER_UNIT_TOTAL_AMOUNT,
-  FeeObjectAmountDetailsAllOfGraduatedRangesInner.JSON_PROPERTY_TOTAL_WITH_FLAT_AMOUNT
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_UNITS,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_FROM_VALUE,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_TO_VALUE,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_FLAT_UNIT_AMOUNT,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_RATE,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_PER_UNIT_TOTAL_AMOUNT,
+  FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.JSON_PROPERTY_TOTAL_WITH_FLAT_AMOUNT
 })
-@JsonTypeName("FeeObject_amount_details_allOf_graduated_ranges_inner")
+@JsonTypeName("FeeObject_amount_details_allOf_graduated_percentage_ranges_inner")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-27T14:12:55.372025191Z[Etc/UTC]")
-public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
+public class FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner {
   public static final String JSON_PROPERTY_UNITS = "units";
   private String units;
 
@@ -50,8 +50,8 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   public static final String JSON_PROPERTY_FLAT_UNIT_AMOUNT = "flat_unit_amount";
   private String flatUnitAmount;
 
-  public static final String JSON_PROPERTY_PER_UNIT_AMOUNT = "per_unit_amount";
-  private String perUnitAmount;
+  public static final String JSON_PROPERTY_RATE = "rate";
+  private String rate;
 
   public static final String JSON_PROPERTY_PER_UNIT_TOTAL_AMOUNT = "per_unit_total_amount";
   private String perUnitTotalAmount;
@@ -59,10 +59,10 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   public static final String JSON_PROPERTY_TOTAL_WITH_FLAT_AMOUNT = "total_with_flat_amount";
   private String totalWithFlatAmount;
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner() {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner() {
   }
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner units(String units) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner units(String units) {
     
     this.units = units;
     return this;
@@ -88,7 +88,7 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner fromValue(Integer fromValue) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner fromValue(Integer fromValue) {
     
     this.fromValue = fromValue;
     return this;
@@ -114,7 +114,7 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner toValue(Integer toValue) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner toValue(Integer toValue) {
     
     this.toValue = toValue;
     return this;
@@ -140,7 +140,7 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner flatUnitAmount(String flatUnitAmount) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner flatUnitAmount(String flatUnitAmount) {
     
     this.flatUnitAmount = flatUnitAmount;
     return this;
@@ -166,33 +166,33 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner perUnitAmount(String perUnitAmount) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner rate(String rate) {
     
-    this.perUnitAmount = perUnitAmount;
+    this.rate = rate;
     return this;
   }
 
    /**
-   * Amount per unit within a specified tier.
-   * @return perUnitAmount
+   * Percentage rate applied within a specified tier.
+   * @return rate
   **/
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_PER_UNIT_AMOUNT)
+  @JsonProperty(JSON_PROPERTY_RATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getPerUnitAmount() {
-    return perUnitAmount;
+  public String getRate() {
+    return rate;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PER_UNIT_AMOUNT)
+  @JsonProperty(JSON_PROPERTY_RATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPerUnitAmount(String perUnitAmount) {
-    this.perUnitAmount = perUnitAmount;
+  public void setRate(String rate) {
+    this.rate = rate;
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner perUnitTotalAmount(String perUnitTotalAmount) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner perUnitTotalAmount(String perUnitTotalAmount) {
     
     this.perUnitTotalAmount = perUnitTotalAmount;
     return this;
@@ -218,7 +218,7 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
   }
 
 
-  public FeeObjectAmountDetailsAllOfGraduatedRangesInner totalWithFlatAmount(String totalWithFlatAmount) {
+  public FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner totalWithFlatAmount(String totalWithFlatAmount) {
     
     this.totalWithFlatAmount = totalWithFlatAmount;
     return this;
@@ -251,30 +251,30 @@ public class FeeObjectAmountDetailsAllOfGraduatedRangesInner {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FeeObjectAmountDetailsAllOfGraduatedRangesInner feeObjectAmountDetailsAllOfGraduatedRangesInner = (FeeObjectAmountDetailsAllOfGraduatedRangesInner) o;
-    return Objects.equals(this.units, feeObjectAmountDetailsAllOfGraduatedRangesInner.units) &&
-        Objects.equals(this.fromValue, feeObjectAmountDetailsAllOfGraduatedRangesInner.fromValue) &&
-        Objects.equals(this.toValue, feeObjectAmountDetailsAllOfGraduatedRangesInner.toValue) &&
-        Objects.equals(this.flatUnitAmount, feeObjectAmountDetailsAllOfGraduatedRangesInner.flatUnitAmount) &&
-        Objects.equals(this.perUnitAmount, feeObjectAmountDetailsAllOfGraduatedRangesInner.perUnitAmount) &&
-        Objects.equals(this.perUnitTotalAmount, feeObjectAmountDetailsAllOfGraduatedRangesInner.perUnitTotalAmount) &&
-        Objects.equals(this.totalWithFlatAmount, feeObjectAmountDetailsAllOfGraduatedRangesInner.totalWithFlatAmount);
+    FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner = (FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner) o;
+    return Objects.equals(this.units, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.units) &&
+        Objects.equals(this.fromValue, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.fromValue) &&
+        Objects.equals(this.toValue, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.toValue) &&
+        Objects.equals(this.flatUnitAmount, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.flatUnitAmount) &&
+        Objects.equals(this.rate, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.rate) &&
+        Objects.equals(this.perUnitTotalAmount, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.perUnitTotalAmount) &&
+        Objects.equals(this.totalWithFlatAmount, feeObjectAmountDetailsAllOfGraduatedPercentageRangesInner.totalWithFlatAmount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(units, fromValue, toValue, flatUnitAmount, perUnitAmount, perUnitTotalAmount, totalWithFlatAmount);
+    return Objects.hash(units, fromValue, toValue, flatUnitAmount, rate, perUnitTotalAmount, totalWithFlatAmount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FeeObjectAmountDetailsAllOfGraduatedRangesInner {\n");
+    sb.append("class FeeObjectAmountDetailsAllOfGraduatedPercentageRangesInner {\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    fromValue: ").append(toIndentedString(fromValue)).append("\n");
     sb.append("    toValue: ").append(toIndentedString(toValue)).append("\n");
     sb.append("    flatUnitAmount: ").append(toIndentedString(flatUnitAmount)).append("\n");
-    sb.append("    perUnitAmount: ").append(toIndentedString(perUnitAmount)).append("\n");
+    sb.append("    rate: ").append(toIndentedString(rate)).append("\n");
     sb.append("    perUnitTotalAmount: ").append(toIndentedString(perUnitTotalAmount)).append("\n");
     sb.append("    totalWithFlatAmount: ").append(toIndentedString(totalWithFlatAmount)).append("\n");
     sb.append("}");

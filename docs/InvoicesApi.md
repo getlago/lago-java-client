@@ -12,6 +12,7 @@ All URIs are relative to *https://api.getlago.com/api/v1*
 | [**refreshInvoice**](InvoicesApi.md#refreshInvoice) | **PUT** /invoices/{lago_id}/refresh | Refresh a draft invoice |
 | [**retryPayment**](InvoicesApi.md#retryPayment) | **POST** /invoices/{lago_id}/retry_payment | Retry an invoice payment |
 | [**updateInvoice**](InvoicesApi.md#updateInvoice) | **PUT** /invoices/{lago_id} | Update an invoice |
+| [**voidInvoice**](InvoicesApi.md#voidInvoice) | **POST** /invoices/{lago_id}/void | Void an invoice |
 
 
 
@@ -613,4 +614,77 @@ public class Example {
 | **401** | Unauthorized error |  -  |
 | **404** | Not Found error |  -  |
 | **422** | Unprocessable entity error |  -  |
+
+
+## voidInvoice
+
+> Invoice voidInvoice(lagoId)
+
+Void an invoice
+
+This endpoint is used for voiding an invoice. You can void an invoice only when it&#39;s in a &#x60;finalized&#x60; status, and the payment status is not &#x60;succeeded&#x60;.
+
+### Example
+
+```java
+// Import classes:
+import org.getlago.client.ApiClient;
+import org.getlago.client.ApiException;
+import org.getlago.client.Configuration;
+import org.getlago.client.auth.*;
+import org.getlago.client.models.*;
+import org.getlago.client.api.InvoicesApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.getlago.com/api/v1");
+        
+        // Configure HTTP bearer authorization: bearerAuth
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+        bearerAuth.setBearerToken("BEARER TOKEN");
+
+        InvoicesApi apiInstance = new InvoicesApi(defaultClient);
+        UUID lagoId = UUID.fromString("1a901a90-1a90-1a90-1a90-1a901a901a90"); // UUID | Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system.
+        try {
+            Invoice result = apiInstance.voidInvoice(lagoId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling InvoicesApi#voidInvoice");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **lagoId** | **UUID**| Unique identifier assigned to the invoice within the Lago application. This ID is exclusively created by Lago and serves as a unique identifier for the invoice’s record within the Lago system. | |
+
+### Return type
+
+[**Invoice**](Invoice.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Invoice voided |  -  |
+| **401** | Unauthorized error |  -  |
+| **404** | Not Found error |  -  |
 
